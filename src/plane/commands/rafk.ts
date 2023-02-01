@@ -1,6 +1,7 @@
 import {
 	ActionRowBuilder,
 	ButtonBuilder,
+	ButtonInteraction,
 	ButtonStyle,
 	ChatInputCommandInteraction,
 	SlashCommandBuilder,
@@ -136,6 +137,7 @@ module.exports = {
 						).toString() as keyof typeof rafkCategory
 					];
 
+				await i.deferUpdate();
 				await getQuestion();
 			});
 		} else {
