@@ -1,0 +1,13 @@
+config.json
+node_modules/
+.history/
+.vscode/
+bot/
+postgres/
+thunder-tests/
+__pycache__/
+
+src/pity/
+src/apollo/
+api/
+
