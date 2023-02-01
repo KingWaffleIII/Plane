@@ -29,7 +29,7 @@
 				},
 				"7": {
 					"question": "What is the motto of the RAF?",
-					"answer": "'Per Ardua Ad Astra' ('Through Stuggles to the Stars')."
+					"answer": "'Per Ardua Ad Astra' ('Through Struggles to the Stars')."
 				},
 				"8": {
 					"question": "What was the role of the RAF and previous forces during WWI?",
@@ -76,7 +76,7 @@
 				},
 				"7": {
 					"question": "What is the job of RAF Strike Command?",
-					"answer": "They control all of the RAF offensive and defensive operations at home and overseas."
+					"answer": "They control all the RAF offensive and defensive operations at home and overseas."
 				},
 				"8": {
 					"question": "What is the job of RAF Personnel and Training Command?",
@@ -128,7 +128,7 @@
 				"max_questions": 6,
 				"1": {
 					"question": "Who administrates the RAF sections of the CCF?",
-					"answer": "The Headquaters Air Cadets (HQAC) at RAF College Cranwell."
+					"answer": "The Headquarters Air Cadets (HQAC) at RAF College Cranwell."
 				},
 				"2": {
 					"question": "Who heads the Air Cadet Organisation?",

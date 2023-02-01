@@ -10,6 +10,8 @@ import {
 } from "discord.js";
 import rafk from "../RAFK.json";
 
+const crypto = require("crypto");
+
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName("rafk")
@@ -36,6 +38,8 @@ module.exports = {
 		// 	Math.floor(Math.random() * 3) + 1;r
 		const part = rafk["1" as keyof typeof rafk];
 		const random = interaction.options.getBoolean("random") ?? true;
+		const buttonId = crypto.randomBytes(12).toString("hex");
+		const selectId = crypto.randomBytes(12).toString("hex");
 
 		await interaction.deferReply();
 
@@ -65,7 +69,7 @@ module.exports = {
 
 			const row = new ActionRowBuilder<ButtonBuilder>().addComponents(
 				new ButtonBuilder()
-					.setCustomId("reveal-answer")
+					.setCustomId(`reveal-answer-${buttonId}`)
 					.setLabel("Reveal answer")
 					.setStyle(ButtonStyle.Primary)
 			);
@@ -75,19 +79,25 @@ module.exports = {
 			});
 
 			const filter = (i: any) =>
-				i.customId === "reveal-answer" &&
-				i.user.id === interaction.user.id;
+				i.customId === `reveal-answer-${buttonId}`;
 			const collector =
 				interaction.channel?.createMessageComponentCollector({
-					max: 1,
-					time: 10000,
+					time: 30000,
 					filter,
 				});
-			collector?.on("collect", () => {
-				interaction.editReply({
-					content: `${question}\n**${answer}**`,
-					components: [],
-				});
+			collector?.on("collect", async (i: ButtonInteraction) => {
+				if (i.user.id !== interaction.user.id) {
+					await i.reply({
+						content:
+							"You can't reveal the answer to this question.",
+						ephemeral: true,
+					});
+				} else {
+					await interaction.editReply({
+						content: `${question}\n**${answer}**`,
+						components: [],
+					});
+				}
 			});
 		};
 
@@ -95,7 +105,7 @@ module.exports = {
 			const row =
 				new ActionRowBuilder<StringSelectMenuBuilder>().addComponents(
 					new StringSelectMenuBuilder()
-						.setCustomId("select-subject")
+						.setCustomId(`select-subject-${selectId}`)
 						.setPlaceholder("Select a subject")
 				);
 			for (const subj in part) {
@@ -107,38 +117,43 @@ module.exports = {
 				}
 			}
 			await interaction.editReply({
-				content: "Select a subject.",
 				components: [row],
 			});
 
 			const filter = (i: any) =>
-				i.customId === "select-subject" &&
-				i.user.id === interaction.user.id;
+				i.customId === `select-subject-${selectId}`;
 			const collector =
 				interaction.channel?.createMessageComponentCollector({
-					max: 1,
 					time: 10000,
 					filter,
 				});
 			collector?.on("collect", async (i: StringSelectMenuInteraction) => {
-				subject = part[i.values[0] as keyof typeof part];
-				rafkCategory =
-					subject[
-						Object.keys(subject)[
-							(Object.keys(subject).length * Math.random()) << 0
-						] as keyof typeof subject
-					];
-				randomQuestion =
-					rafkCategory[
-						(
-							Math.floor(
-								Math.random() * rafkCategory.max_questions
-							) + 1
-						).toString() as keyof typeof rafkCategory
-					];
+				if (i.user.id !== interaction.user.id) {
+					await i.reply({
+						content: "You can't select a subject.",
+						ephemeral: true,
+					});
+				} else {
+					subject = part[i.values[0] as keyof typeof part];
+					rafkCategory =
+						subject[
+							Object.keys(subject)[
+								(Object.keys(subject).length * Math.random()) <<
+									0
+							] as keyof typeof subject
+						];
+					randomQuestion =
+						rafkCategory[
+							(
+								Math.floor(
+									Math.random() * rafkCategory.max_questions
+								) + 1
+							).toString() as keyof typeof rafkCategory
+						];
 
-				await i.deferUpdate();
-				await getQuestion();
+					await i.deferUpdate();
+					await getQuestion();
+				}
 			});
 		} else {
 			await getQuestion();
