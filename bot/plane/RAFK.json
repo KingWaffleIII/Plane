@@ -1,0 +1,156 @@
+{
+    "1": {
+        "The RAF": {
+            "Development": {
+                "max_questions": 11,
+                "1": {
+                    "question": "What was the first 'air force'?",
+                    "answer": "The Royal Balloon School."
+                },
+                "2": {
+                    "question": "When was the Royal Flying Corps formed?",
+                    "answer": "1st January 1910."
+                },
+                "3": {
+                    "question": "When did the Navy Wing split to form the Royal Navy Air Service?",
+                    "answer": "July 1914."
+                },
+                "4": {
+                    "question": "What two corps merged to form the Royal Air Force?",
+                    "answer": "The Royal Flying Corps and the Royal Navy Air Service."
+                },
+                "5": {
+                    "question": "When was the Royal Air Force founded?",
+                    "answer": "1st April 1918."
+                },
+                "6": {
+                    "question": "Who was the Chief of Air Staff upon the formation of the RAF?",
+                    "answer": "Lord Trenchard."
+                },
+                "7": {
+                    "question": "What is the motto of the RAF?",
+                    "answer": "'Per Ardua Ad Astra' ('Through Stuggles to the Stars')."
+                },
+                "8": {
+                    "question": "What was the role of the RAF and previous forces during WWI?",
+                    "answer": "Reconnaissance and bombing with the emergence of fighters."
+                },
+                "9": {
+                    "question": "How was the RAF organised before WWII?",
+                    "answer": "They had 4 commands (formations): Fighter, Bomber, Coastal and Training."
+                },
+                "10": {
+                    "question": "What was the role of the RAF during WWII?",
+                    "answer": "Air power was incredibly important during WWII. The RAF carried out multiple bombing raids on Germany and beat the Luftwaffe in the Battle of Britain, arguably the biggest ever battle for the RAF."
+                },
+                "11": {
+                    "question": "What was the role of the RAF during the Falklands War (1982)?",
+                    "answer": "- 1982 saw the RAF back in operation after little use in peace-time.\n- Hercules and VC10 were used to transport people and equipment.\n- Fighters were placed at the Ascension Islands.\n- A Sea King and Chinook were used for sea rescues.\n- A Victor K.2 were used for air to air refuelling.\n- The Vulcan B.2 was supposed to be retired but their service was extended for the war."
+                }
+            },
+            "Organisation": {
+                "max_questions": 12,
+                "1": {
+                    "question": "Who holds supreme responsibility of the RAF and other armed forces?",
+                    "answer": "The Prime Minister and the Cabinet, via the Defence Council (led by the Secretary of State for Defence)."
+                },
+                "2": {
+                    "question": "Who is the RAF controlled by (under the Defence Council)?",
+                    "answer": "A board of senior officers called the Air Force Board - each of these head a specialist branch of the RAF."
+                },
+                "3": {
+                    "question": "What are the 2 RAF Commands?",
+                    "answer": "Strike Command and Personnel and Training Command."
+                },
+                "4": {
+                    "question": "What is an RAF Station?",
+                    "answer": "A station consisting of around 5000 people that fulfils a certain role (such as Search and Rescue Training or holding a fleet of specialised aircraft)."
+                },
+                "5": {
+                    "question": "What is a unit?",
+                    "answer": "A part of the RAF designated to a particular function."
+                },
+                "6": {
+                    "question": "What is the smallest basic operational unit?",
+                    "answer": "A squadron (roughly 120 people) - this may be divided into flights (roughly 30 people)."
+                },
+                "7": {
+                    "question": "What is the job of RAF Strike Command?",
+                    "answer": "They control all of the RAF offensive and defensive operations at home and overseas."
+                },
+                "8": {
+                    "question": "What is the job of RAF Personnel and Training Command?",
+                    "answer": "They control all aspects of recruitment, training, career management, welfare, pensions, etc. for RAF regular and reserve forces world-wide. They are responsible for over 500 training aircraft."
+                },
+                "9": {
+                    "question": "What is a non-commissioned officer (NCO)?",
+                    "answer": "A military officer who has not earned a commission - they usually obtain their position by promotion through the enlisted ranks."
+                },
+                "10": {
+                    "question": "What is a commissioned officer?",
+                    "answer": "A military officer who has earned a commission - they usually obtain their position by passing a competitive examination. In comparison to NCOs, they earn more money and have more legal responsibilities."
+                },
+                "11": {
+                    "question": "What are the NCO ranks?",
+                    "answer": "Lance Corporal (LCpl), Corporal (Cpl), Sergeant (Sgt), Flight Sergeant (Flt Sgt), (Cadet) Warrant Officer (CWO)."
+                },
+                "12": {
+                    "question": "What are the commissioned officer ranks?",
+                    "answer": "Officer Cadet, Pilot Officer, Flying Officer, Flight Lieutenant (pronounced 'leftenant'), Squadron Leader, Wing Commander, Group Captain, Air Commodore, Air Vice-Marshal, Air Marshal, Air Chief Marshal, Marshal of the RAF."
+                }
+            }
+        },
+        "The CCF": {
+            "Development": {
+                "max_questions": 5,
+                "1": {
+                    "question": "When was the Combined Cadet Force (CCF) officially established?",
+                    "answer": "1948."
+                },
+                "2": {
+                    "question": "What was the initial strength of the RAF section of the CCF?",
+                    "answer": "3000."
+                },
+                "3": {
+                    "question": "Who was the 'father' of the air cadet movement?",
+                    "answer": "Air Commodore J.A Chamier."
+                },
+                "4": {
+                    "question": "What is the Combined Cadet Force (CCF)?",
+                    "answer": "A voluntary youth organisation in schools and colleges, sponsored by the Ministry of Defence. They may comprise of up to three sections: the Royal Navy (RN), Royal Army and the Royal Air Force (RAF)."
+                },
+                "5": {
+                    "question": "What are the aims of the CCF?",
+                    "answer": "- To promote the qualities of responsibilities, self-reliance, resourcefulness, endurance and perseverance.\n- To provide the opportunity for young people to exercise responsibility and leadership and see how they can be developed.\n- Develop a basic understanding of the armed forces.\n- Encourage those who have an interest in the armed forces."
+                }
+            },
+            "Organisation": {
+                "max_questions": 6,
+                "1": {
+                    "question": "Who administrates the RAF sections of the CCF?",
+                    "answer": "The Headquaters Air Cadets (HQAC) at RAF College Cranwell."
+                },
+                "2": {
+                    "question": "Who heads the Air Cadet Organisation?",
+                    "answer": "A serving RAF Air Commodore, their formal title is the Commandant Air Cadets (Comdt AC)."
+                },
+                "3": {
+                    "question": "How is the relationship between the RAF and the CCF maintained?",
+                    "answer": "Cadets attend the annual Easter and summer camps at RAF stations. They provide opportunities to see the daily life of an active station as well as having the opportunity to fly."
+                },
+                "4": {
+                    "question": "What is the purpose of Year 9 training?",
+                    "answer": "To provide an introduction to the RAF and the CCF."
+                },
+                "5": {
+                    "question": "What is the purpose of Year 10 training?",
+                    "answer": "To provide a more in-depth look at specialist ideas such as how to handrail a hill."
+                },
+                "6": {
+                    "question": "What is the purpose of Year 11 training?",
+                    "answer": "To provide a very detailed look at challenging elements of flying (such as the 1 in 60 rule) and how to teach lessons."
+                }
+            }
+        }
+    }
+}
