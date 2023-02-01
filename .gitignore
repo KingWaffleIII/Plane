@@ -17,7 +17,7 @@ bot/package.json
 bot/package-lock.json
 bot/pity/
 bot/apollo/
-bot/RAFK.json
+bot/plane/RAFK.json
 
 src/pity/
 src/apollo/
