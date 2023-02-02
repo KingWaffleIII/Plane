@@ -29,7 +29,7 @@
 				},
 				"7": {
 					"question": "What is the motto of the RAF?",
-					"answer": "'Per Ardua Ad Astra' ('Through Stuggles to the Stars')."
+					"answer": "'Per Ardua Ad Astra' ('Through Struggles to the Stars')."
 				},
 				"8": {
 					"question": "What was the role of the RAF and previous forces during WWI?",
@@ -76,7 +76,7 @@
 				},
 				"7": {
 					"question": "What is the job of RAF Strike Command?",
-					"answer": "They control all of the RAF offensive and defensive operations at home and overseas."
+					"answer": "They control all the RAF offensive and defensive operations at home and overseas."
 				},
 				"8": {
 					"question": "What is the job of RAF Personnel and Training Command?",
@@ -128,7 +128,7 @@
 				"max_questions": 6,
 				"1": {
 					"question": "Who administrates the RAF sections of the CCF?",
-					"answer": "The Headquaters Air Cadets (HQAC) at RAF College Cranwell."
+					"answer": "The Headquarters Air Cadets (HQAC) at RAF College Cranwell."
 				},
 				"2": {
 					"question": "Who heads the Air Cadet Organisation?",
@@ -149,6 +149,245 @@
 				"6": {
 					"question": "What is the purpose of Year 11 training?",
 					"answer": "To provide a very detailed look at challenging elements of flying (such as the 1 in 60 rule) and how to teach lessons."
+				}
+			}
+		},
+		"Airmanship": {
+			"Airfields": {
+				"max_questions": 18,
+				"1": {
+					"question": "What is an airfield?",
+					"answer": "An area (including any buildings and support installations) used for the accommodation, take-off and landing of aircraft."
+				},
+				"2": {
+					"question": "What is an airport?",
+					"answer": "An airfield with additional facilities for freight and passengers (for example customs, money-changing, immigration, baggage areas and restaurants)."
+				},
+				"3": {
+					"question": "What is an aircraft manoeuvring area?",
+					"answer": "Parts an airfield which has been specially prepared for the movement of aircraft on the ground (for example runways, taxiways, aircraft servicing platforms, operational readiness platforms and dispersal hard standings)."
+				},
+				"4": {
+					"question": "What is an Operational Readiness Platform (ORP)?",
+					"answer": "Specially-prepared areas (associated with fighter or strike airfields) built alongside the end of a runway. They are used for parking aircraft, either for rapid take-off with minimal warning (“scramble”) or for final flight preparation."
+				},
+				"5": {
+					"question": "What is an Aircraft Servicing Platform (ASP)?",
+					"answer": "Large paved areas for the servicing and turn-round of aircraft. They also facilitate the speedy handling of passengers and freight."
+				},
+				"6": {
+					"question": "What is a taxiway?",
+					"answer": "Paved roads that connect all the various parts of the aircraft manoeuvring area (e.g. Dispersal to runway, ORP to runway etc) and enable aircraft to move about easily. Minimum of 15m and are marked are in yellow."
+				},
+				"7": {
+					"question": "What does a windsock do?",
+					"answer": "It provides a quick and easy way of indicating wind direction. The main windsock (the one least subject to local effects) has a white ring round its base."
+				},
+				"8": {
+					"question": "What is an airfield identification beacon?",
+					"answer": "An open space on the airfield that flashes the airfield identification letters in Morse code using a high-intensity red light."
+				},
+				"9": {
+					"question": "What is a control tower?",
+					"answer": "A tall windowed structure located on the airfield grounds used to control the immediate airfield environment through visual obvservation. Surveillance displays as well as radar systems are used here for air monitoring assistance."
+				},
+				"10": {
+					"question": "What is an arrester gear?",
+					"answer": "A system that uses a strong hook to engage a cable in the aircraft which triggers cable braking, bringing the aircraft to a stop in a very short distance - this is especially useful for aircraft carriers."
+				},
+				"11": {
+					"question": "What is a sterile area?",
+					"answer": "An area used for security assessment, this is where passenger access to boarding aircraft is monitored and enabled/prevented."
+				},
+				"12": {
+					"question": "What is a terminal building?",
+					"answer": "An area where passengers transfer between ground transportation and the facilities that allow them to board and disembark from an aircraft."
+				},
+				"13": {
+					"question": "What is a runway?",
+					"answer": "A defined rectangular area on a land aerodrome, prepared for the landing and takeoff of aircraft."
+				},
+				"14": {
+					"question": "What coloured markings are used for the runway?",
+					"answer": "White."
+				},
+				"15": {
+					"question": "What is the typical size of a main instrument runway?",
+					"answer": "45 metres wide and greater than 1800 metres long."
+				},
+				"16": {
+					"question": "What do the numbers on the runway mean?",
+					"answer": "They are the magnetic headings of the runway direction, to the nearest 10 degrees."
+				},
+				"17": {
+					"question": "What does the runway threshold look like?",
+					"answer": "Longitudinal white stripes pained symmetrically about the runway centre-line."
+				},
+				"18": {
+					"question": "What does the runway centre-line look like?",
+					"answer": "A broken white line."
+				}
+			},
+			"The Tutor and Air Experience Flying": {
+				"max_questions": 5,
+				"1": {
+					"question": "How many Air Experience Flight (AEF) units are there across the country?",
+					"answer": "12."
+				},
+				"2": {
+					"question": "What is the purpose of Air Experience Flights?",
+					"answer": "To provide cadets with experience flying."
+				},
+				"3": {
+					"question": "What aircraft is used for Air Experience Flights?",
+					"answer": "The Grob Tutor, a small single-engine, low-winged monoplane."
+				},
+				"4": {
+					"question": "What engine is in the Grob Tutor?",
+					"answer": "The Lycoming 180."
+				},
+				"5": {
+					"question": "What is the Grob Tutor made out of?",
+					"answer": "Modern composite materials such as carbon reinforced plastic."
+				}
+			},
+			"Parts of an Aircraft": {
+				"max_questions": 14,
+				"1": {
+					"question": "What radios are in an aircraft?",
+					"answer": "There are two radios, one using the Ultra High Frequency (UHF) band and for air-to-air communication and the other using the Very High Frequency (VHF) band for air-to-ground communication."
+				},
+				"2": {
+					"question": "What is the attitude indicator (AI)?",
+					"answer": "The AI is a gyroscopic instrument that indicates the attitude of the aircraft (position of the nose, if the plane is banked, etc.)."
+				},
+				"3": {
+					"question": "What is the airspeed indicator (ASI)?",
+					"answer": "The ASI tells the pilot the speed the aircraft is travelling through the air (in knots)."
+				},
+				"4": {
+					"question": "What is the altimeter?",
+					"answer": "The altimeter indicates the aircraft's height above the preset datum."
+				},
+				"5": {
+					"question": "What is the rate of climb and decent indicator (RCDI) (also known as the vertical speed indicator (VSI))?",
+					"answer": "This instrument shows the pilot the rate at which the aircraft is climbing or descending."
+				},
+				"6": {
+					"question": "What is the turn and slip indicator?",
+					"answer": "This instrument tells the pilot the rate at which the aircraft is turning, the direction of the turn and whether the aircraft is skidding or slipping."
+				},
+				"7": {
+					"question": "What is the horizontal situation indicator (HSI)?",
+					"answer": "This instrument is a gyroscopic instrument that (after being synchronised with the compass) tells the pilot the heading of the aircraft."
+				},
+				"8": {
+					"question": "What is the control column (or stick)?",
+					"answer": "The control column controls the ailerons and elevators to change the aircraft's pitch and roll. The pitch is inverted (pushing the stick down increases the pitch and vice versa)."
+				},
+				"9": {
+					"question": "What are the rudder pedals?",
+					"answer": "The rudder pedals controls the rudder to change the aircraft's yaw. Rudders are used a lot in aerobatics but in normal flights, they are used to maintain balanced flights and land in crosswinds."
+				},
+				"10": {
+					"question": "What is the RPM gauge?",
+					"answer": "The RPM gauge shows the speed at which the engine is rotating in revolutions per minute (RPM). They typically use a scale of 1:100 (e.g. a reading of 20 means 2000 RPM)."
+				},
+				"11": {
+					"question": "What is the manifold pressure gauge?",
+					"answer": "This instrument indicates how much power is being supplied by the engine. It is calibrated in inches of mercury."
+				},
+				"12": {
+					"question": "What are the temperature and pressure gauges?",
+					"answer": "These are two small instruments that show various temperatures (in degrees Celsius) and the pressures (in pounds per square inch) within the engine."
+				},
+				"13": {
+					"question": "What are the flaps?",
+					"answer": "The flaps are used on approach and takeoff as they give a lower approach speed and a more nose-down attitude. Thry are positioned at the rear of each wing."
+				},
+				"14": {
+					"question": "What is the elevator trimmer?",
+					"answer": "The elevator trimmer allows the pilot to make fine adjustments to the elevator so the aircraft can be flown at selected pitch attitudes without pressure on the stick."
+				}
+			}
+		},
+		"Map Reading": {
+			"What is a Map?": {
+				"max_questions": 4,
+				"1": {
+					"question": "What is a map?",
+					"answer": "A diagrammatic representation of an area of land or sea that shows physical features, citites, roads, etc."
+				},
+				"2": {
+					"question": "What is longitude?",
+					"answer": "A geographic coordinate that specifies the east-west position of a point on the Earth's surface. They are circular and numbered, their starting point is at Greenwich, England (this is known as the prime meridian)."
+				},
+				"3": {
+					"question": "What is latitude?",
+					"answer": "The angular distance of a place north or south of the equator of the Earth or another celestial object."
+				},
+				"4": {
+					"question": "What is the Ordnance Survey?",
+					"answer": "A governmental department based in Southmapton that produces maps for the UK."
+				}
+			},
+			"Map Language": {
+				"max_questions": 14,
+				"1": {
+					"question": "What is true north?",
+					"answer": "The geographic north pole of the Earth."
+				},
+				"2": {
+					"question": "What is grid north?",
+					"answer": "The direction of north on a map."
+				},
+				"3": {
+					"question": "What is magnetic north?",
+					"answer": "The direction of north as indicated by a compass."
+				},
+				"4": {
+					"question": "What is a scale?",
+					"answer": "A ratio of a distance on the map to the corresponding distance on the ground."
+				},
+				"5": {
+					"question": "What is a contour line?",
+					"answer": "A line on a map that connects points of equal elevation."
+				},
+				"6": {
+					"question": "What are gridlines?",
+					"answer": "A series of numbered horizontal and vertical lines that divide a map into squares, forming a grid. They are used by grid references to pinpoint features on a map."
+				},
+				"7": {
+					"question": "What is a grid reference?",
+					"answer": "A way of pinpointing a location on a map using a combination of letters and numbers."
+				},
+				"8": {
+					"question": "What is a relief?",
+					"answer": "The rise and fall of the ground (e.g. hills and valleys)."
+				},
+				"9": {
+					"question": "What is a ridge (also known as a saddle)?",
+					"answer": "A long, narrow stretch of elevated ground. A col is known as the lower part of the ridge between the summits when a ridge has a peak at each end."
+				},
+				"10": {
+					"question": "What is a spur?",
+					"answer": "A piece of high ground that juts from a range of hills into lower ground."
+				},
+				"11": {
+					"question": "What is a re-entrant?",
+					"answer": "A narrow valley, closed at one end, that separates two spurs."
+				},
+				"12": {
+					"question": "What is an escarpment?",
+					"answer": "A landform with sides sloping in opposite directions, consisting of a steep scarp slope and a gentler dip or back slope."
+				},
+				"13": {
+					"question": "What is a knoll?",
+					"answer": "A small isolated hill."
+				},
+				"14": {
+					"question": "What is a gradient?",
+					"answer": "The angle or degree of a slope. it is expressed as a ratio."
 				}
 			}
 		}

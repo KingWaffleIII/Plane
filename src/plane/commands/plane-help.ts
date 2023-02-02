@@ -13,7 +13,7 @@ module.exports = {
 	async execute(interaction: ChatInputCommandInteraction) {
 		const embed = new EmbedBuilder()
 			.setColor(0x0099ff)
-			.setTitle("Plane v0.1.0")
+			.setTitle("Plane v0.1.1")
 			.setURL("https://planetwaffle.net/plane/")
 			.setAuthor({
 				name: "KingWaffleIII#8408 @ Planet Waffle",
@@ -24,21 +24,22 @@ module.exports = {
 				`
 Plane is a plugin for the Plane bot. It focuses on supplementing RAF cadets' knowledge (especially in preparation for (M)RAST).
 It currently supports quizzing the user on their RAFK (RAF Knowledge) and provides a list of RAFK questions.
-If you have any questions, suggestions or find an error, please contact me on Discord or via email (support@planetwaffle.net). 
+**Please note that Plane is in early access and is not yet complete.**
 \n
 __**Source list**__
 - RAFK Part 1 Revision Booklet by Cpl Jheet: https://planetwaffle.net/docs/15/Part_1.pdf
 - MRAST Air Recce Revision Booklet by LCpl Mathews: https://planetwaffle.net/docs/14/Mini_AST_Air_Recce_revision_booklet.pdf
-**Please note that Plane is in early access and is not yet complete.**
 \n
 __**Roadmap and known issues/suggestions**__
 https://gist.github.com/KingWaffleIII/298c39caae02e0ed78eebc314f757817
 \n
 __**Contributing**__
 The bot is maintianed by me only so any help with questions and sources are always appeciated!
-If you would like to contribute, please contact me on Discord or via email.
+If you have any questions, suggestions or find an error, you can contact me by:
+- Discord: DM me or ping me on a server this bot and I am in.
+- Email: support@planetwaffle.net
+- GitHub: leave a comment on the link to the roadmap above.
 Please note that simply using the bot counts as a contribution!
-
 			`
 			)
 			.setThumbnail("https://i.imgur.com/YnUnoQL.png")

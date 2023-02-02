@@ -26,6 +26,7 @@
 		"no-bitwise": "off",
 		"no-plusplus": "off",
 		"no-await-in-loop": "off",
+		"dot-notation": "off",
 		"indent": ["warn", "tab"],
 		"linebreak-style": ["warn", "unix"],
 		"import/extensions": [
