@@ -21,7 +21,7 @@ module.exports = {
     async execute(interaction) {
         // const part =
         // 	interaction.options.getInteger("part") ||
-        // 	Math.floor(Math.random() * 3) + 1;r
+        // 	Math.floor(Math.random() * 3) + 1;
         const part = RAFK_json_1.default["1"];
         const random = interaction.options.getBoolean("random") ?? true;
         const buttonId = crypto.randomBytes(12).toString("hex");
@@ -29,7 +29,8 @@ module.exports = {
         await interaction.deferReply();
         let subject = part[Object.keys(part)[(Object.keys(part).length * Math.random()) << 0]];
         let rafkCategory = subject[Object.keys(subject)[(Object.keys(subject).length * Math.random()) << 0]];
-        let randomQuestion = rafkCategory[(Math.floor(Math.random() * rafkCategory.max_questions) + 1).toString()];
+        let randomQuestion = rafkCategory[(Math.floor(Math.random() * rafkCategory["max_questions"]) +
+            1).toString()];
         const getQuestion = async () => {
             const question = randomQuestion["question"];
             const answer = randomQuestion["answer"];
@@ -54,7 +55,6 @@ module.exports = {
                     });
                 }
                 else {
-                    console.log("you made it!");
                     await interaction.editReply({
                         content: `${question}\n**${answer}**`,
                         components: [],
@@ -95,7 +95,8 @@ module.exports = {
                         subject[Object.keys(subject)[(Object.keys(subject).length * Math.random()) <<
                             0]];
                     randomQuestion =
-                        rafkCategory[(Math.floor(Math.random() * rafkCategory.max_questions) + 1).toString()];
+                        rafkCategory[(Math.floor(Math.random() *
+                            rafkCategory["max_questions"]) + 1).toString()];
                     await i.deferUpdate();
                     await getQuestion();
                 }

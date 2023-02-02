@@ -35,7 +35,7 @@ module.exports = {
 	async execute(interaction: ChatInputCommandInteraction) {
 		// const part =
 		// 	interaction.options.getInteger("part") ||
-		// 	Math.floor(Math.random() * 3) + 1;r
+		// 	Math.floor(Math.random() * 3) + 1;
 		const part = rafk["1" as keyof typeof rafk];
 		const random = interaction.options.getBoolean("random") ?? true;
 		const buttonId = crypto.randomBytes(12).toString("hex");
@@ -58,7 +58,8 @@ module.exports = {
 		let randomQuestion =
 			rafkCategory[
 				(
-					Math.floor(Math.random() * rafkCategory.max_questions) + 1
+					Math.floor(Math.random() * rafkCategory["max_questions"]) +
+					1
 				).toString() as keyof typeof rafkCategory
 			];
 		const getQuestion = async () => {
@@ -146,7 +147,8 @@ module.exports = {
 						rafkCategory[
 							(
 								Math.floor(
-									Math.random() * rafkCategory.max_questions
+									Math.random() *
+										rafkCategory["max_questions"]
 								) + 1
 							).toString() as keyof typeof rafkCategory
 						];

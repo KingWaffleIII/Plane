@@ -8,7 +8,7 @@ module.exports = {
     async execute(interaction) {
         const embed = new discord_js_1.EmbedBuilder()
             .setColor(0x0099ff)
-            .setTitle("Plane v0.1.0")
+            .setTitle("Plane v0.1.1")
             .setURL("https://planetwaffle.net/plane/")
             .setAuthor({
             name: "KingWaffleIII#8408 @ Planet Waffle",
