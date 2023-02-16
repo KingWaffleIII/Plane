@@ -30,6 +30,15 @@ const sequelize_1 = require("sequelize");
 const config_json_1 = require("./config.json");
 const client = new discord_js_1.Client({
     intents: [discord_js_1.GatewayIntentBits.Guilds],
+    presence: {
+        status: "online",
+        activities: [
+            {
+                name: "mRAST",
+                type: discord_js_1.ActivityType.Competing,
+            },
+        ],
+    },
 });
 const commands = new discord_js_1.Collection();
 const guildCommands = {};
@@ -68,6 +77,13 @@ client.on(discord_js_1.Events.ClientReady, (bot) => {
 client.on(discord_js_1.Events.InteractionCreate, async (interaction) => {
     if (!interaction.isChatInputCommand())
         return;
+    if (interaction.guild === null) {
+        await interaction.reply({
+            content: "This command is not available in DMs. Please use it in a server instead.",
+            ephemeral: true,
+        });
+        return;
+    }
     const command = commands.get(interaction.commandName);
     if (!command) {
         console.error(`No command matching ${interaction.commandName} was found.`);
