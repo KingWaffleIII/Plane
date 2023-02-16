@@ -2,8 +2,10 @@ import * as fs from "fs";
 import * as path from "path";
 
 import {
+	ActivityType,
 	Client,
 	Collection,
+	DMChannel,
 	Events,
 	GatewayIntentBits,
 	Interaction,
@@ -16,6 +18,15 @@ import { db, clientId, plugins, token } from "./config.json";
 
 const client: Client = new Client({
 	intents: [GatewayIntentBits.Guilds],
+	presence: {
+		status: "online",
+		activities: [
+			{
+				name: "mRAST",
+				type: ActivityType.Competing,
+			},
+		],
+	},
 });
 
 interface Command {
@@ -73,6 +84,14 @@ client.on(Events.ClientReady, (bot) => {
 
 client.on(Events.InteractionCreate, async (interaction: Interaction) => {
 	if (!interaction.isChatInputCommand()) return;
+	if (interaction.guild === null) {
+		await interaction.reply({
+			content:
+				"This command is not available in DMs. Please use it in a server instead.",
+			ephemeral: true,
+		});
+		return;
+	}
 
 	const command = commands.get(interaction.commandName);
 

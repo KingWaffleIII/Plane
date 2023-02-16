@@ -29,6 +29,15 @@
 		"dot-notation": "off",
 		"indent": ["warn", "tab"],
 		"linebreak-style": ["warn", "unix"],
+		"no-restricted-syntax": "off",
+		"global-require": "off",
+
+		"import/no-dynamic-require": "off",
+		"import/no-import-module-exports": "off",
+		"import/no-extraneous-dependencies": [
+			"error",
+			{ "devDependencies": true }
+		],
 		"import/extensions": [
 			"error",
 			"ignorePackages",
@@ -39,11 +48,7 @@
 				"tsx": "never"
 			}
 		],
-		"no-restricted-syntax": "off",
-		"global-require": "off",
-
-		"import/no-dynamic-require": "off",
-		"import/no-import-module-exports": "off",
+		"import/no-unresolved": "off",
 
 		"@typescript-eslint/no-var-requires": "off",
 		"@typescript-eslint/no-unused-vars": "warn"
