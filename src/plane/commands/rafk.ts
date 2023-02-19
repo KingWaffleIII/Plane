@@ -7,6 +7,7 @@ import {
 	ComponentType,
 	SlashCommandBuilder,
 	StringSelectMenuBuilder,
+	StringSelectMenuInteraction,
 } from "discord.js";
 import * as rafk from "../RAFK.json";
 
@@ -78,7 +79,8 @@ export async function execute(
 			components: [row],
 		});
 
-		const filter = (i: any) => i.customId === `select-subject-${selectId}`;
+		const filter = (i: StringSelectMenuInteraction) =>
+			i.customId === `select-subject-${selectId}`;
 		const selections = await interaction.channel?.awaitMessageComponent({
 			componentType: ComponentType.StringSelect,
 			time: 60000,
@@ -111,7 +113,7 @@ export async function execute(
 
 	const row = new ActionRowBuilder<ButtonBuilder>().addComponents(
 		new ButtonBuilder()
-			.setCustomId(`reveal-answer-${buttonId}`)
+			.setCustomId(`reveal-rafk-${buttonId}`)
 			.setLabel("Reveal answer")
 			.setStyle(ButtonStyle.Primary)
 	);
@@ -120,8 +122,10 @@ export async function execute(
 		components: [row],
 	});
 
-	const filter = (i: any) => i.customId === `reveal-answer-${buttonId}`;
+	const filter = (i: ButtonInteraction) =>
+		i.customId === `reveal-rafk-${buttonId}`;
 	const collector = interaction.channel?.createMessageComponentCollector({
+		componentType: ComponentType.Button,
 		time: 60000,
 		filter,
 	});

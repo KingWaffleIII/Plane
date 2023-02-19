@@ -10,6 +10,7 @@ import {
 	EmbedBuilder,
 	SlashCommandBuilder,
 	StringSelectMenuBuilder,
+	StringSelectMenuInteraction,
 } from "discord.js";
 
 import * as airrec from "../air_rec.json";
@@ -99,7 +100,8 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 			components: [row],
 		});
 
-		const filter = (i: any) => i.customId === `select-type-${selectId}`;
+		const filter = (i: StringSelectMenuInteraction) =>
+			i.customId === `select-type-${selectId}`;
 		const selections = await interaction.channel?.awaitMessageComponent({
 			componentType: ComponentType.StringSelect,
 			time: 60000,
@@ -143,8 +145,10 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 		components: [row],
 	});
 
-	const filter = (i: any) => i.customId === `reveal-answer-${buttonId}`;
+	const filter = (i: ButtonInteraction) =>
+		i.customId === `reveal-aircraft-${buttonId}`;
 	const collector = interaction.channel?.createMessageComponentCollector({
+		componentType: ComponentType.Button,
 		time: 60000,
 		filter,
 	});
@@ -183,6 +187,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 				);
 
 			await interaction.editReply({
+				content: "**The answer was:**",
 				embeds: [answer],
 				components: [],
 			});

@@ -86,15 +86,16 @@ async function execute(interaction) {
     const { question, answer } = randomQuestion;
     const buttonId = crypto.randomBytes(12).toString("hex");
     const row = new discord_js_1.ActionRowBuilder().addComponents(new discord_js_1.ButtonBuilder()
-        .setCustomId(`reveal-answer-${buttonId}`)
+        .setCustomId(`reveal-rafk-${buttonId}`)
         .setLabel("Reveal answer")
         .setStyle(discord_js_1.ButtonStyle.Primary));
     await interaction.editReply({
         content: question,
         components: [row],
     });
-    const filter = (i) => i.customId === `reveal-answer-${buttonId}`;
+    const filter = (i) => i.customId === `reveal-rafk-${buttonId}`;
     const collector = interaction.channel?.createMessageComponentCollector({
+        componentType: discord_js_1.ComponentType.Button,
         time: 60000,
         filter,
     });

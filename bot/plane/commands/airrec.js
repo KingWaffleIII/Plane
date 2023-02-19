@@ -122,8 +122,9 @@ async function execute(interaction) {
         content: `**What is the name of this aircraft?**\n${image}`,
         components: [row],
     });
-    const filter = (i) => i.customId === `reveal-answer-${buttonId}`;
+    const filter = (i) => i.customId === `reveal-aircraft-${buttonId}`;
     const collector = interaction.channel?.createMessageComponentCollector({
+        componentType: discord_js_1.ComponentType.Button,
         time: 60000,
         filter,
     });
@@ -159,6 +160,7 @@ async function execute(interaction) {
                 inline: true,
             });
             await interaction.editReply({
+                content: "**The answer was:**",
                 embeds: [answer],
                 components: [],
             });
