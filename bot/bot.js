@@ -29,7 +29,11 @@ const discord_js_1 = require("discord.js");
 const sequelize_1 = require("sequelize");
 const config_json_1 = require("./config.json");
 const client = new discord_js_1.Client({
-    intents: [discord_js_1.GatewayIntentBits.Guilds],
+    intents: [
+        discord_js_1.GatewayIntentBits.Guilds,
+        discord_js_1.GatewayIntentBits.GuildMessages,
+        discord_js_1.GatewayIntentBits.MessageContent,
+    ],
     presence: {
         status: "online",
         activities: [

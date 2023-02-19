@@ -232,7 +232,7 @@
             "wiki": "https://en.wikipedia.org/wiki/Bombardier_Global_Express"
         },
         {
-            "name": "Emnraer ERJ135",
+            "name": "Embraer ERJ135",
             "role": "Regional jet.",
             "manufacturer": "Embraer",
             "model": "ERJ135",
@@ -243,7 +243,7 @@
             "wiki": "https://en.wikipedia.org/wiki/Embraer_ERJ_family"
         },
         {
-            "name": "Emnraer ERJ145",
+            "name": "Embraer ERJ145",
             "role": "Regional jet.",
             "manufacturer": "Embraer",
             "model": "ERJ145",
@@ -443,7 +443,7 @@
             "wiki": "https://en.wikipedia.org/wiki/BAE_Systems_Hawk"
         },
         {
-            "name": "Eurofigher Typhoon",
+            "name": "Eurofighter Typhoon",
             "role": "Multirole and air superiority fighter.",
             "manufacturer": "Eurofighter",
             "model": "Typhoon",

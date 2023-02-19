@@ -5,7 +5,6 @@ import {
 	ActivityType,
 	Client,
 	Collection,
-	DMChannel,
 	Events,
 	GatewayIntentBits,
 	Interaction,
@@ -17,7 +16,11 @@ import { Sequelize } from "sequelize";
 import { db, clientId, plugins, token } from "./config.json";
 
 const client: Client = new Client({
-	intents: [GatewayIntentBits.Guilds],
+	intents: [
+		GatewayIntentBits.Guilds,
+		GatewayIntentBits.GuildMessages,
+		GatewayIntentBits.MessageContent,
+	],
 	presence: {
 		status: "online",
 		activities: [
