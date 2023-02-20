@@ -136,7 +136,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 	const buttonId = crypto.randomBytes(12).toString("hex");
 	const row = new ActionRowBuilder<ButtonBuilder>().addComponents(
 		new ButtonBuilder()
-			.setCustomId(`reveal-answer-${buttonId}`)
+			.setCustomId(`reveal-airrec-${buttonId}`)
 			.setLabel("Reveal answer")
 			.setStyle(ButtonStyle.Primary)
 	);
@@ -146,7 +146,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 	});
 
 	const filter = (i: ButtonInteraction) =>
-		i.customId === `reveal-aircraft-${buttonId}`;
+		i.customId === `reveal-airrec-${buttonId}`;
 	const collector = interaction.channel?.createMessageComponentCollector({
 		componentType: ComponentType.Button,
 		time: 60000,

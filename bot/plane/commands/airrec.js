@@ -115,14 +115,14 @@ async function execute(interaction) {
     }
     const buttonId = crypto.randomBytes(12).toString("hex");
     const row = new discord_js_1.ActionRowBuilder().addComponents(new discord_js_1.ButtonBuilder()
-        .setCustomId(`reveal-answer-${buttonId}`)
+        .setCustomId(`reveal-airrec-${buttonId}`)
         .setLabel("Reveal answer")
         .setStyle(discord_js_1.ButtonStyle.Primary));
     await interaction.editReply({
         content: `**What is the name of this aircraft?**\n${image}`,
         components: [row],
     });
-    const filter = (i) => i.customId === `reveal-aircraft-${buttonId}`;
+    const filter = (i) => i.customId === `reveal-airrec-${buttonId}`;
     const collector = interaction.channel?.createMessageComponentCollector({
         componentType: discord_js_1.ComponentType.Button,
         time: 60000,
