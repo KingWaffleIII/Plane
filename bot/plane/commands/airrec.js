@@ -160,7 +160,7 @@ async function execute(interaction) {
                 inline: true,
             });
             await interaction.editReply({
-                content: "**The answer was:**",
+                content: `**The answer was ${aircraft.name}!**`,
                 embeds: [answer],
                 components: [],
             });

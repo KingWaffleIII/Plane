@@ -18,6 +18,7 @@ import { db, clientId, plugins, token } from "./config.json";
 const client: Client = new Client({
 	intents: [
 		GatewayIntentBits.Guilds,
+		GatewayIntentBits.GuildMembers,
 		GatewayIntentBits.GuildMessages,
 		GatewayIntentBits.MessageContent,
 	],
@@ -56,11 +57,11 @@ for (const plugin of plugins) {
 		const filePath = path.join(commandsPath, file);
 		const command: Command = require(filePath);
 		if ("data" in command && "execute" in command) {
-			if (fs.existsSync(path.join(__dirname, plugin, "config.json"))) {
+			if (fs.existsSync(path.join(__dirname, plugin, "plugin.json"))) {
 				const config = require(path.join(
 					__dirname,
 					plugin,
-					"config.json"
+					"plugin.json"
 				));
 				guildCommands[config.guildId][command.data.name] = command;
 			} else {

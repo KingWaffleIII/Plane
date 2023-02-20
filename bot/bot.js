@@ -31,6 +31,7 @@ const config_json_1 = require("./config.json");
 const client = new discord_js_1.Client({
     intents: [
         discord_js_1.GatewayIntentBits.Guilds,
+        discord_js_1.GatewayIntentBits.GuildMembers,
         discord_js_1.GatewayIntentBits.GuildMessages,
         discord_js_1.GatewayIntentBits.MessageContent,
     ],
@@ -56,8 +57,8 @@ for (const plugin of config_json_1.plugins) {
         const filePath = path.join(commandsPath, file);
         const command = require(filePath);
         if ("data" in command && "execute" in command) {
-            if (fs.existsSync(path.join(__dirname, plugin, "config.json"))) {
-                const config = require(path.join(__dirname, plugin, "config.json"));
+            if (fs.existsSync(path.join(__dirname, plugin, "plugin.json"))) {
+                const config = require(path.join(__dirname, plugin, "plugin.json"));
                 guildCommands[config.guildId][command.data.name] = command;
             }
             else {
