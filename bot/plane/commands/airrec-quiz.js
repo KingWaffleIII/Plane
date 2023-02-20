@@ -44,8 +44,8 @@ async function execute(interaction) {
     await interaction.reply({
         content: `
 __**Air Recognition Quiz**__
-You will be shown pictures of ${rounds} aircraft and you will have to reply with the name of the aircraft.
-You will be given 10 seconds for an answer (responses after the first will not be accepted so be careful).
+You will be shown pictures of **${rounds}** aircraft and you will have to reply with the name of the aircraft.
+You will be given 15 seconds for an answer (responses after the first will not be accepted so be careful).
 
 __**Scoring:**__
 You will get **2 points** for listing the aircraft manufacturer and model. For example: "Lockheed Martin F-22".
@@ -140,16 +140,17 @@ If you want to play, click the button below.
                 return false;
             };
             const messages = await interaction.channel?.awaitMessages({
-                time: 10000,
+                time: 15000,
                 max: Object.keys(players).length,
                 filter: answerFilter,
                 // errors: ["time"],
             });
+            Object.keys(players).forEach((player) => {
+                players[player].lastScore = players[player].score;
+            });
             if (messages && messages.size > 0) {
                 messages.forEach(async (message) => {
                     const score = checkAnswer(message.content, aircraft);
-                    players[message.author.id].lastScore =
-                        players[message.author.id].score;
                     players[message.author.id].score += score;
                     //! too spammy
                     // await message.reply({
