@@ -4,11 +4,7 @@ An extremely modular Discord bot designed to help RAF students with their RAFK (
 
 ## Changelog
 
--   [x] **v0.1.0:** RAFK Part 1 questions
--   [x] **v0.1.0:** Specific RAFK subject questions
--   [x] **v1.0.0:** Air recce quizzing
-
-For details on patch versions, see [here](https://github.com/KingWaffleIII/plane/issues?q=is%3Aissue+is%3Aclosed).
+See pull requests [here](https://github.com/KingWaffleIII/plane/pulls?q=is%3Apr+is%3Aclosed).
 
 ## Versioning
 
