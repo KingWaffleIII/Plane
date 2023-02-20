@@ -19,9 +19,11 @@ bot/package-lock.json
 bot/pity/
 bot/apollo/
 bot/plane/RAFK.json
+bot/plane/air_rec.json
 
 src/pity/
 src/apollo/
+src/nuke/
 
 api/
 

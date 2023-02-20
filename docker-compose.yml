@@ -34,5 +34,7 @@ services:
 
             # Plugin: plane
             - ./src/plane/RAFK.json:/bot/plane/RAFK.json
+            - ./src/plane/air_rec.json:/bot/plane/air_rec.json
+
         working_dir: /bot
         entrypoint: /bot/entrypoint.sh
