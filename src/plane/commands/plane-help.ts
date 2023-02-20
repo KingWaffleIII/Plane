@@ -13,7 +13,7 @@ module.exports = {
 	async execute(interaction: ChatInputCommandInteraction) {
 		const embed = new EmbedBuilder()
 			.setColor(0x0099ff)
-			.setTitle("Plane v1.1.1")
+			.setTitle('Plane v1.1.2 "Idiotproof"')
 			.setURL("https://github.com/KingWaffleIII/plane")
 			.setAuthor({
 				name: "KingWaffleIII#8408 @ Planet Waffle",
