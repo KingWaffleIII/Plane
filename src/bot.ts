@@ -18,6 +18,7 @@ import { db, clientId, plugins, token } from "./config.json";
 const client: Client = new Client({
 	intents: [
 		GatewayIntentBits.Guilds,
+		GatewayIntentBits.GuildMembers,
 		GatewayIntentBits.GuildMessages,
 		GatewayIntentBits.MessageContent,
 	],

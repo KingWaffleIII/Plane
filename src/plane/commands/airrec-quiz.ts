@@ -73,7 +73,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 		content: `
 __**Air Recognition Quiz**__
 You will be shown pictures of **${rounds}** aircraft and you will have to reply with the name of the aircraft.
-You will be given 15 seconds for an answer (responses after the first will not be accepted so be careful).
+You will be given 15 seconds for an answer (**responses after the first will not be accepted so be careful**).
 
 __**Scoring:**__
 You will get **2 points** for listing the aircraft manufacturer and model. For example: "Lockheed Martin F-22".
@@ -141,6 +141,10 @@ If you want to play, click the button below.
 			});
 			return;
 		}
+
+		await interaction.editReply({
+			components: [],
+		});
 
 		for (let i = 0; i < rounds; i++) {
 			const type: Aircraft[] =

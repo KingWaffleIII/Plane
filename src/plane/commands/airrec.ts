@@ -187,7 +187,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 				);
 
 			await interaction.editReply({
-				content: "**The answer was:**",
+				content: `**The answer was ${aircraft.name}!**`,
 				embeds: [answer],
 				components: [],
 			});
