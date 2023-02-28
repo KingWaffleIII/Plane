@@ -1,32 +1,13 @@
 "use strict";
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.execute = exports.data = void 0;
+const crypto_1 = __importDefault(require("crypto"));
 const discord_js_1 = require("discord.js");
-const rafk = __importStar(require("../RAFK.json"));
-const crypto = require("crypto");
+const RAFK_json_1 = __importDefault(require("../RAFK.json"));
+const wait = require("node:timers/promises").setTimeout;
 exports.data = new discord_js_1.SlashCommandBuilder()
     .setName("rafk")
     .setDescription("Gives you a question about RAFK.")
@@ -44,8 +25,8 @@ async function execute(interaction) {
     // const part =
     // 	interaction.options.getInteger("part") ??
     // 	Math.floor(Math.random() * 3) + 1;
-    const part = rafk[1];
-    const selectId = crypto.randomBytes(12).toString("hex");
+    const part = RAFK_json_1.default[1];
+    const selectId = crypto_1.default.randomBytes(6).toString("hex");
     let subject = part[Object.keys(part)[Math.floor(Math.random() * Object.keys(part).length)]];
     if (!random) {
         const row = new discord_js_1.ActionRowBuilder().addComponents(new discord_js_1.StringSelectMenuBuilder()
@@ -84,7 +65,7 @@ async function execute(interaction) {
     const category = subject[Object.keys(subject)[Math.floor(Math.random() * Object.keys(subject).length)]];
     const randomQuestion = category[Math.floor(Math.random() * category.length)];
     const { question, answer } = randomQuestion;
-    const buttonId = crypto.randomBytes(12).toString("hex");
+    const buttonId = crypto_1.default.randomBytes(6).toString("hex");
     const row = new discord_js_1.ActionRowBuilder().addComponents(new discord_js_1.ButtonBuilder()
         .setCustomId(`reveal-rafk-${buttonId}`)
         .setLabel("Reveal answer")
@@ -112,6 +93,11 @@ async function execute(interaction) {
                 components: [],
             });
         }
+    });
+    await wait(60000);
+    await interaction.editReply({
+        content: `\n${question}\n**${answer}**`,
+        components: [],
     });
 }
 exports.execute = execute;

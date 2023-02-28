@@ -789,7 +789,7 @@
 			"role": "Multirole fighter.",
 			"manufacturer": "McDonnell Douglas",
 			"model": "F/A-18",
-			"aliases": ["Hornet", "F/A18", "F-18", "F18", "F 18"],
+			"aliases": ["Hornet", "F/A18", "F/A 18", "F-18", "F18", "F 18"],
 			"summary": "",
 			"identification": [""],
 			"image": "https://www.airfighters.com/photosearch.php?cra=1126",

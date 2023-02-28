@@ -1,5 +1,6 @@
 import {
 	ActionRowBuilder,
+	BaseGuildTextChannel,
 	ButtonBuilder,
 	ButtonInteraction,
 	ButtonStyle,
@@ -9,9 +10,10 @@ import {
 	Message,
 	SlashCommandBuilder,
 } from "discord.js";
+
+import { Aircraft } from "../interfaces";
+import { getImage } from "./airrec";
 import airrec from "../air_rec.json";
-// eslint-disable-next-line import/extensions
-import { Aircraft, getImage } from "./airrec";
 
 const crypto = require("crypto");
 const wait = require("node:timers/promises").setTimeout;
@@ -57,23 +59,55 @@ export const data = new SlashCommandBuilder()
 export async function execute(interaction: ChatInputCommandInteraction) {
 	const rounds = interaction.options.getInteger("rounds") ?? 10;
 
-	const buttonId = crypto.randomBytes(12).toString("hex");
+	await interaction.reply({
+		content: "Creating a new thread...",
+	});
+
+	const channel = interaction.channel as BaseGuildTextChannel;
+
+	if (
+		channel.threads.cache.find(
+			(t) => t.name === "Air Recognition Quiz" && !t.locked
+		)
+	) {
+		await interaction.editReply({
+			content: "A quiz is already ongoing, please wait for it to finish.",
+		});
+		return;
+	}
+
+	const thread = await channel.threads.create({
+		name: `Air Recognition Quiz`,
+		autoArchiveDuration: 60,
+		reason: "Air Recognition Quiz",
+	});
+
+	await interaction.editReply({
+		content: "Thread created! Click here:",
+	});
+
+	const buttonId = crypto.randomBytes(6).toString("hex");
 	const row = new ActionRowBuilder<ButtonBuilder>().addComponents([
 		new ButtonBuilder()
 			.setCustomId(`play-${buttonId}`)
 			.setLabel("Play")
 			.setStyle(ButtonStyle.Primary),
 		new ButtonBuilder()
+			.setCustomId(`skip-${buttonId}`)
+			.setLabel("Start now")
+			.setStyle(ButtonStyle.Secondary)
+			.setDisabled(true),
+		new ButtonBuilder()
 			.setCustomId(`cancel-${buttonId}`)
 			.setLabel("Cancel")
 			.setStyle(ButtonStyle.Danger),
 	]);
 
-	await interaction.reply({
+	const msg = await thread.send({
 		content: `
 __**Air Recognition Quiz**__
 You will be shown pictures of **${rounds}** aircraft and you will have to reply with the name of the aircraft.
-You will be given 15 seconds for an answer (**responses after the first will not be accepted so be careful**).
+You will be given 15 seconds for an answer (**you will only be allowed one response so don't send any messages unless you are sending an answer**).
 
 __**Scoring:**__
 You will get **2 points** for listing the aircraft manufacturer and model. For example: "Lockheed Martin F-22".
@@ -91,13 +125,14 @@ If you want to play, click the button below.
 
 	const playFilter = (i: ButtonInteraction) =>
 		i.customId === `play-${buttonId}` ||
+		i.customId === `skip-${buttonId}` ||
 		i.customId === `cancel-${buttonId}`;
-	const collector = interaction.channel?.createMessageComponentCollector({
+	const collector = thread.createMessageComponentCollector({
 		componentType: ComponentType.Button,
 		time: 60000,
 		filter: playFilter,
 	});
-	collector?.on("collect", (i: ButtonInteraction) => {
+	collector?.on("collect", async (i: ButtonInteraction) => {
 		if (i.customId === `cancel-${buttonId}`) {
 			if (i.user.id !== interaction.user.id) {
 				i.reply({
@@ -107,11 +142,15 @@ If you want to play, click the button below.
 				return;
 			}
 
-			interaction.editReply({
+			collector?.stop("stop");
+			await interaction.editReply({
 				content: "This game has been cancelled.",
 				components: [],
 			});
-			collector?.stop("stop");
+			return;
+		}
+		if (i.customId === `skip-${buttonId}`) {
+			collector?.stop();
 			return;
 		}
 		if (!Object.keys(players).includes(i.user.id)) {
@@ -129,20 +168,28 @@ If you want to play, click the button below.
 				ephemeral: true,
 			});
 		}
+		if (Object.keys(players).length >= 0) {
+			row.components[1].setDisabled(false);
+			await msg.edit({
+				components: [row],
+			});
+		}
 	});
 
 	collector?.on("end", async (_collected, reason) => {
 		if (reason && reason === "stop") {
+			await thread.delete();
 			return;
 		}
 		if (Object.keys(players).length === 0) {
+			await thread.delete();
 			await interaction.followUp({
 				content: "No one joined the game...",
 			});
 			return;
 		}
 
-		await interaction.editReply({
+		await msg.edit({
 			components: [],
 		});
 
@@ -158,23 +205,22 @@ If you want to play, click the button below.
 				type[Math.floor(Math.random() * type.length)];
 			const image = await getImage(aircraft.image);
 			if (!image) {
-				await interaction.followUp({
+				await thread.send({
 					content:
 						"Sorry, I encountered an issue in retrieving an image. Please try again later.",
 				});
 				return;
 			}
 
-			await interaction.followUp({
+			const question = await thread.send({
 				content: `**Round ${
 					i + 1
 				} of ${rounds}:**\nWhat is the name of this aircraft?\n${image}`,
 				components: [],
-				fetchReply: true,
 			});
 
 			//! cheat mode
-			// await interaction.channel?.send({
+			// await thread.send({
 			// 	content: aircraft.name,
 			// });
 
@@ -187,7 +233,7 @@ If you want to play, click the button below.
 				}
 				return false;
 			};
-			const messages = await interaction.channel?.awaitMessages({
+			const messages = await thread.awaitMessages({
 				time: 15000,
 				max: Object.keys(players).length,
 				filter: answerFilter,
@@ -258,7 +304,7 @@ If you want to play, click the button below.
 					text: `Round ${i + 1} of ${rounds}`,
 				});
 
-			await interaction.followUp({
+			await question.reply({
 				content: `**The answer was ${aircraft.name}!**\nContinuing in 10 seconds...`,
 				embeds: [answer, leaderboard],
 			});
@@ -284,10 +330,12 @@ If you want to play, click the button below.
 			)
 			.setTimestamp();
 
-		await interaction.followUp({
+		await thread.send({
 			content: "The game has ended! Here's the final leaderboard:",
 			embeds: [leaderboard],
 			components: [],
 		});
+
+		await thread.setLocked(true);
 	});
 }

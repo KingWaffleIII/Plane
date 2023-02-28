@@ -1,3 +1,4 @@
+import crypto from "crypto";
 import {
 	ActionRowBuilder,
 	ButtonBuilder,
@@ -9,14 +10,11 @@ import {
 	StringSelectMenuBuilder,
 	StringSelectMenuInteraction,
 } from "discord.js";
-import * as rafk from "../RAFK.json";
 
-const crypto = require("crypto");
+import { Question } from "../interfaces";
+import rafk from "../RAFK.json";
 
-export interface Question {
-	question: string;
-	answer: string;
-}
+const wait = require("node:timers/promises").setTimeout;
 
 export const data = new SlashCommandBuilder()
 	.setName("rafk")
@@ -49,7 +47,7 @@ export async function execute(
 	// 	interaction.options.getInteger("part") ??
 	// 	Math.floor(Math.random() * 3) + 1;
 	const part = rafk[1];
-	const selectId = crypto.randomBytes(12).toString("hex");
+	const selectId = crypto.randomBytes(6).toString("hex");
 
 	let subject: {
 		[category: string]: Question[];
@@ -109,7 +107,7 @@ export async function execute(
 		category[Math.floor(Math.random() * category.length)];
 
 	const { question, answer } = randomQuestion;
-	const buttonId = crypto.randomBytes(12).toString("hex");
+	const buttonId = crypto.randomBytes(6).toString("hex");
 
 	const row = new ActionRowBuilder<ButtonBuilder>().addComponents(
 		new ButtonBuilder()
@@ -141,5 +139,11 @@ export async function execute(
 				components: [],
 			});
 		}
+	});
+
+	await wait(60000);
+	await interaction.editReply({
+		content: `\n${question}\n**${answer}**`,
+		components: [],
 	});
 }

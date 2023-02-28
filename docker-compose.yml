@@ -1,24 +1,4 @@
 services:
-    db:
-        container_name: plane_postgres
-        image: postgres:latest
-        volumes:
-            - ./postgres:/var/lib/postgresql/data
-        environment:
-            - POSTGRES_USER=plane
-            - POSTGRES_PASSWORD=plane
-            - POSTGRES_DB=plane
-    api:
-        container_name: plane_api
-        image: python:bullseye
-        volumes:
-            - ./api:/app
-        working_dir: /app
-        entrypoint: /app/entrypoint.sh
-        depends_on:
-            - db
-        ports:
-            - 8000:80/tcp
     bot:
         container_name: plane_bot
         image: node:slim
@@ -28,16 +8,7 @@ services:
             - ./package.json:/bot/package.json
             - ./package-lock.json:/bot/package-lock.json
             - ./src/config.json:/bot/config.json
-
-            #! FOR PLUGINS: USE THIS FORMAT:
-            #! - ./src/<plugin_name>/<plugin_config_file>:/bot/<plugin_name>/<plugin_config_file>
-
-            # Plugin: plane
-            - ./src/plane/RAFK.json:/bot/plane/RAFK.json
-            - ./src/plane/air_rec.json:/bot/plane/air_rec.json
-
-            # Plugin: nuke
-            - ./src/nuke/nuke.jpg:/bot/nuke/nuke.jpg
-
+            - ./src/RAFK.json:/bot/RAFK.json
+            - ./src/air_rec.json:/bot/air_rec.json
         working_dir: /bot
         entrypoint: /bot/entrypoint.sh

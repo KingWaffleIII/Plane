@@ -1,5 +1,5 @@
 import axios from "axios";
-import * as cheerio from "cheerio";
+import cheerio from "cheerio";
 import {
 	ActionRowBuilder,
 	ButtonBuilder,
@@ -13,21 +13,11 @@ import {
 	StringSelectMenuInteraction,
 } from "discord.js";
 
-import * as airrec from "../air_rec.json";
+import { Aircraft } from "../interfaces";
+import airrec from "../air_rec.json";
 
 const crypto = require("crypto");
-
-export interface Aircraft {
-	readonly name: string;
-	readonly role: string;
-	readonly manufacturer: string;
-	readonly model: string;
-	readonly aliases: string[];
-	readonly summary: string;
-	readonly identification: string[];
-	readonly image: string;
-	readonly wiki: string;
-}
+const wait = require("node:timers/promises").setTimeout;
 
 export async function getImage(url: string): Promise<string | null> {
 	try {
@@ -77,7 +67,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 		];
 
 	if (!random) {
-		const selectId = crypto.randomBytes(12).toString("hex");
+		const selectId = crypto.randomBytes(6).toString("hex");
 		const row =
 			new ActionRowBuilder<StringSelectMenuBuilder>().addComponents(
 				new StringSelectMenuBuilder()
@@ -133,7 +123,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 		return;
 	}
 
-	const buttonId = crypto.randomBytes(12).toString("hex");
+	const buttonId = crypto.randomBytes(6).toString("hex");
 	const row = new ActionRowBuilder<ButtonBuilder>().addComponents(
 		new ButtonBuilder()
 			.setCustomId(`reveal-airrec-${buttonId}`)
@@ -144,6 +134,33 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 		content: `**What is the name of this aircraft?**\n${image}`,
 		components: [row],
 	});
+
+	const answer = new EmbedBuilder()
+		.setColor(0x0099ff)
+		.setTitle(aircraft.name)
+		.setDescription(aircraft.role)
+		.setImage(image)
+		.setTimestamp()
+		.setFooter({
+			text: "Photo credit: https://www.airfighters.com",
+		})
+		.addFields(
+			{
+				name: "Alternative names (aliases for /airrec-quiz):",
+				value: aircraft.aliases.join(", ") || "None",
+			},
+			// { name: "\u200B", value: "\u200B" },
+			{
+				name: "Wikipedia:",
+				value: aircraft.wiki,
+				inline: true,
+			},
+			{
+				name: "See more images:",
+				value: aircraft.image,
+				inline: true,
+			}
+		);
 
 	const filter = (i: ButtonInteraction) =>
 		i.customId === `reveal-airrec-${buttonId}`;
@@ -159,38 +176,18 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 				ephemeral: true,
 			});
 		} else {
-			const answer = new EmbedBuilder()
-				.setColor(0x0099ff)
-				.setTitle(aircraft.name)
-				.setDescription(aircraft.role)
-				.setImage(image)
-				.setTimestamp()
-				.setFooter({
-					text: "Photo credit: https://www.airfighters.com",
-				})
-				.addFields(
-					{
-						name: "Alternative names (aliases for /airrec-quiz):",
-						value: aircraft.aliases.join(", ") || "None",
-					},
-					// { name: "\u200B", value: "\u200B" },
-					{
-						name: "Wikipedia:",
-						value: aircraft.wiki,
-						inline: true,
-					},
-					{
-						name: "See more images:",
-						value: aircraft.image,
-						inline: true,
-					}
-				);
-
 			await interaction.editReply({
 				content: `**The answer was ${aircraft.name}!**`,
 				embeds: [answer],
 				components: [],
 			});
 		}
+	});
+
+	await wait(60000);
+	await interaction.editReply({
+		content: `**The answer was ${aircraft.name}!**`,
+		embeds: [answer],
+		components: [],
 	});
 }
