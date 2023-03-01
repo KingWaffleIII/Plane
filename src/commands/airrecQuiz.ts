@@ -272,7 +272,13 @@ If you want to play, click the button below.
 					},
 					{
 						name: "Aircraft features to help you identify it:",
-						value: aircraft.identification.join(", ") || "None",
+						value:
+							aircraft.identification
+								.map(
+									(identification: string) =>
+										`- ${identification}\n`
+								)
+								.join("") || "None",
 					},
 					// { name: "\u200B", value: "\u200B" },
 					{

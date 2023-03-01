@@ -476,9 +476,11 @@
 			"model": "AW149",
 			"aliases": ["AW-149", "AW 149"],
 			"identification": [
-				"Pointed nose",
-				"Landing gear",
-				"No hook on the bottom of the tail"
+				"Single rotor on top with a dome cover and a vertical rotor on the right side of the vertical stabliser",
+				"3 retractable gears",
+				"Assortment of cameras and other equipment below nose",
+				"A single double window door on either side",
+				"No hook on the tail"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=7568",
 			"wiki": "https://en.wikipedia.org/wiki/AgustaWestland_AW149"
@@ -489,7 +491,11 @@
 			"manufacturer": "Airbus",
 			"model": "A400M",
 			"aliases": ["Atlas"],
-			"identification": [],
+			"identification": [
+				"Has 4 turboprop (propeller) engines",
+				"Unlike C-130 it has a flat, less pointy nose and has a permanent refueling probe on top of airframe",
+				"On top of the rudder, there are raised elevators that sit at the top of the vertical stabliser"
+			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=4099",
 			"wiki": "https://en.wikipedia.org/wiki/Airbus_A400M_Atlas"
 		},
@@ -499,7 +505,11 @@
 			"manufacturer": "Airbus",
 			"model": "A330 MRTT",
 			"aliases": ["A330", "Voyager", "KC-30"],
-			"identification": [],
+			"identification": [
+				"Has 2 jet engines positioned by fuselage",
+				"Has a refueling boom (highlighted in red) at the rear of the aircraft for air to air refueling",
+				"Wing tips are raised on both ends"
+			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=571",
 			"wiki": "https://en.wikipedia.org/wiki/Airbus_A330_MRTT"
 		},
@@ -509,7 +519,12 @@
 			"manufacturer": "Boeing",
 			"model": "CH-47",
 			"aliases": ["Chinook"],
-			"identification": [],
+			"identification": [
+				"Has two rotors on oposite ends of airframe",
+				"Circular windows along the side of the airframe",
+				"On top of the rudder, there are raised elevators that sit at the top of the vertical stabliser",
+				"That's really it, nothing looks like a Chinook except a Chinook"
+			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=4371",
 			"wiki": "https://en.wikipedia.org/wiki/Boeing_CH-47_Chinook"
 		},
@@ -519,7 +534,12 @@
 			"manufacturer": "Boeing",
 			"model": "C-17",
 			"aliases": ["C17", "C 17", "Globemaster III", "Globemaster"],
-			"identification": [],
+			"identification": [
+				"Has 4 jet engines on the wings",
+				"Has elevators raised onto top of vertical stabliser",
+				"Has 2 windows underneath the main canopy",
+				"Has 4 pairs of 2 wheels in the rear landing gear"
+			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=2685",
 			"waifuImage": "./assets/waifus/C-17.jpg",
 			"wiki": "https://en.wikipedia.org/wiki/Boeing_C-17_Globemaster_III"
@@ -530,7 +550,11 @@
 			"manufacturer": "Boeing",
 			"model": "E-3",
 			"aliases": ["E3", "E 3", "Sentry"],
-			"identification": [],
+			"identification": [
+				"4 small-ish, thing jet engines on the wings, further away from the airframe than to the wing tips",
+				"Big radar dish on top op plane that's circular and spins",
+				"Just look for the big circular radar dish"
+			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=665",
 			"waifuImage": "./assets/waifus/E-3.jpg",
 			"wiki": "https://en.wikipedia.org/wiki/Boeing_E-3_Sentry"
@@ -541,7 +565,11 @@
 			"manufacturer": "Boeing",
 			"model": "737 AEW&C",
 			"aliases": ["Wedgetail", "Peace Eagle"],
-			"identification": [],
+			"identification": [
+				"Two jet engines near the airframe, bigger than E-3",
+				"Thing long radar along the airframe and supported by 1 beam not 2, thinner than the airframe",
+				"Again, look for the thing long radar dish"
+			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=7400",
 			"waifuImage": "./assets/waifus/737 AEW&C.jpg",
 			"wiki": "https://en.wikipedia.org/wiki/Boeing_737_AEW%26C"
@@ -552,7 +580,11 @@
 			"manufacturer": "Boeing",
 			"model": "P-8",
 			"aliases": ["P8", "P 8", "Poseidon"],
-			"identification": [],
+			"identification": [
+				"Two jet engines near airframe",
+				"Magnetic detector (Long stick from back of plane) used in detecting submarines",
+				"Many angled spikes along the top of the airframe"
+			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=5111",
 			"waifuImage": "./assets/waifus/P-8.jpg",
 			"wiki": "https://en.wikipedia.org/wiki/Boeing_P-8_Poseidon"
@@ -562,8 +594,13 @@
 			"role": "Attack helicopter.",
 			"manufacturer": "Boeing",
 			"model": "AH-64",
-			"aliases": ["Apache"],
-			"identification": [],
+			"aliases": ["Apache", "AH64", "AH 64"],
+			"identification": [
+				"Singular rotor with a vertical rotor on rudder at the rear",
+				"Long armament racks alongside the side of the airframe with 2 hardpoints (places to fit weaponary)",
+				"Got cheeks that make it look like a dog stung by a bee (Image below)",
+				"Landing gear can't be retracted"
+			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=699",
 			"wiki": "https://en.wikipedia.org/wiki/Boeing_AH-64_Apache"
 		},
@@ -572,8 +609,12 @@
 			"role": "Reconnaissance aircraft.",
 			"manufacturer": "Boeing",
 			"model": "RC-135",
-			"aliases": ["Rivet Joint"],
-			"identification": [],
+			"aliases": ["Rivet Joint", "RC135", "RC 135"],
+			"identification": [
+				"Has 4 engines along side wings",
+				"Has a pointy and round nose at front of the plane",
+				"Has enlared fuselage at the front of the plane making it look like a dog stung by a bee (use `/cheeks`)"
+			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=2179",
 			"wiki": "https://en.wikipedia.org/wiki/Boeing_RC-135"
 		},
@@ -583,7 +624,13 @@
 			"manufacturer": "BAe",
 			"model": "Hawk",
 			"aliases": [],
-			"identification": [],
+			"identification": [
+				"Has 2 engines in the rear",
+				"Has 2 seats so long canopy",
+				"Has 3 landing gears",
+				"Has a single verticle stabiliser",
+				"Very round shape compared to the Yak"
+			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=1878",
 			"wiki": "https://en.wikipedia.org/wiki/BAE_Systems_Hawk"
 		},
@@ -593,7 +640,12 @@
 			"manufacturer": "Eurofighter",
 			"model": "Typhoon",
 			"aliases": [],
-			"identification": [],
+			"identification": [
+				"Twin engines next to each other at the rear, two inlets for the engine under the canopy and are rectangular",
+				"Double delta wing configuration (The wings by the canopy and the wings at the back)",
+				"Two hardpoints on wing tips that stick past the tip",
+				"The inlets are split down the middle"
+			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=2167",
 			"wiki": "https://en.wikipedia.org/wiki/Eurofighter_Typhoon"
 		},
@@ -603,7 +655,12 @@
 			"manufacturer": "GA",
 			"model": "MQ-9",
 			"aliases": ["Reaper", "Predator B"],
-			"identification": [],
+			"identification": [
+				"Has no cockpit",
+				"Has a propeller engine in the back",
+				"Flat, rectangular wings",
+				"Again… it doesn't have a cockpit, it's a drone"
+			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=2873",
 			"waifuImage": "./assets/waifus/MQ-9.jpg",
 			"wiki": "https://en.wikipedia.org/wiki/General_Atomics_MQ-9_Reaper"
@@ -614,7 +671,11 @@
 			"manufacturer": "Grob",
 			"model": "G115",
 			"aliases": ["Tutor"],
-			"identification": [],
+			"identification": [
+				"Singular 3 rotor turboprop engine at front",
+				"3 fixed landing gears all close and not down the tail",
+				"It's ugly"
+			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=2553",
 			"wiki": "https://en.wikipedia.org/wiki/Grob_G_115"
 		},
@@ -624,7 +685,11 @@
 			"manufacturer": "Grob",
 			"model": "G103a",
 			"aliases": ["Twin II", "Viking"],
-			"identification": [],
+			"identification": [
+				"It doesn't have an engine",
+				"It's a 2 seater",
+				"You don't need more, look for the lack of engine"
+			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=2550",
 			"wiki": "https://en.wikipedia.org/wiki/Grob_G103a_Twin_II"
 		},
@@ -634,7 +699,11 @@
 			"manufacturer": "Grob",
 			"model": "G109",
 			"aliases": ["Vigilant"],
-			"identification": [],
+			"identification": [
+				"Unlike G115 it has its rear landing gear all the way at the back of the airframe",
+				"It has the elevators on the top of the vertical stabiliser",
+				"It has 2 propellers unlike G115"
+			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=2555",
 			"wiki": "https://en.wikipedia.org/wiki/Grob_G_109"
 		},
@@ -644,7 +713,12 @@
 			"manufacturer": "Grob",
 			"model": "G120TP",
 			"aliases": ["Prefect"],
-			"identification": [],
+			"identification": [
+				"Has 5 rotors",
+				"Retractable gear which is near the front of the plane like the 115",
+				"Has tipped wings that are raised up",
+				"Has the elevators lower on the stabiliser"
+			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=8187",
 			"wiki": "https://en.wikipedia.org/wiki/Grob_G_120TP"
 		},
@@ -654,7 +728,12 @@
 			"manufacturer": "Lockheed",
 			"model": "C-130",
 			"aliases": ["Hercules"],
-			"identification": [],
+			"identification": [
+				"4 turboprop (propeller) engines all near airframe and close together",
+				"Pointier nose compared to the A400M",
+				"Elevators are lower on the airframe than the A400M",
+				"Has flat rectangular wings"
+			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=2999",
 			"wiki": "https://en.wikipedia.org/wiki/Lockheed_C-130_Hercules"
 		},
@@ -664,7 +743,14 @@
 			"manufacturer": "Lockheed Martin",
 			"model": "F-35",
 			"aliases": ["F35", "F 35", "Lightning II", "Lightning"],
-			"identification": [],
+			"identification": [
+				"Single engine with 2 air inlets on the sides of the canopy",
+				"No hard points on the wings to increase stealth",
+				"Its chonky af around the engine (US Navy has nickname for it: \"Fat Amy\")",
+				"Thick cockpit",
+				"Very shape edges around nose of plane",
+				"2 angled verticle stabilisers"
+			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=2992",
 			"waifuImage": "./assets/waifus/F-35.jpg",
 			"wiki": "https://en.wikipedia.org/wiki/Lockheed_Martin_F-35_Lightning_II"
@@ -675,7 +761,12 @@
 			"manufacturer": "Panavia",
 			"model": "Tornado",
 			"aliases": [],
-			"identification": [],
+			"identification": [
+				"Has 2 big af engines with chonky and square air inlets on the sides of canopy",
+				"Has 2 pilots in the cockpit so look for long canopy and 2 people",
+				"Has big elevators, I mean massive ones",
+				"Has variable sweep wings so the wings can sweep back and forth, there is gonna be a small gap by the wing and the airframe"
+			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=1477",
 			"wiki": "https://en.wikipedia.org/wiki/Panavia_Tornado"
 		},
@@ -685,7 +776,13 @@
 			"manufacturer": "Raytheon",
 			"model": "Sentinel",
 			"aliases": [],
-			"identification": [],
+			"identification": [
+				"WHAT THE FUCK IS THAT",
+				"It looks like a discord mod with no neck",
+				"Looks like a chicken with that head and a fat neck",
+				"Has 2 jet engines on the side of the airframe",
+				"Has elevators at top of the Vertical stabiliser"
+			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=1811",
 			"wiki": "https://en.wikipedia.org/wiki/Raytheon_Sentinel"
 		},
@@ -695,7 +792,11 @@
 			"manufacturer": "Short",
 			"model": "Tucano",
 			"aliases": [],
-			"identification": [],
+			"identification": [
+				"Has 4 propellers on the nose of aircraft",
+				"3 retractable landing gear which are near the front of the plane",
+				"Distinct slope of cockpit for the two seats"
+			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=1628",
 			"wiki": "https://en.wikipedia.org/wiki/Short_Tucano"
 		},
@@ -705,7 +806,11 @@
 			"manufacturer": "Aerospatiale",
 			"model": "SA330",
 			"aliases": ["Puma"],
-			"identification": [],
+			"identification": [
+				"Two \"projections\" above the cockpit",
+				"6 landing gears - 3 pairs of 2",
+				"Tail rotor has 5 blades"
+			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=3145",
 			"wiki": "https://en.wikipedia.org/wiki/A%C3%A9rospatiale_SA_330_Puma"
 		},
@@ -715,7 +820,10 @@
 			"manufacturer": "Aerospatiale",
 			"model": "SA332",
 			"aliases": ["Super Puma"],
-			"identification": [],
+			"identification": [
+				"Longer than the Puma",
+				"Nose is sharper than the Puma and cockpit extends out more"
+			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=1778",
 			"wiki": "https://en.wikipedia.org/wiki/Eurocopter_AS332_Super_Puma"
 		},
@@ -725,7 +833,12 @@
 			"manufacturer": "Aerospatiale",
 			"model": "SA340",
 			"aliases": ["Gazelle"],
-			"identification": [],
+			"identification": [
+				"Has the back rotors inside a thingy (it looks cool)",
+				"Small af like Zor",
+				"Has a weird tube thing at the back of the rotor",
+				"Has a massive glass frontal view (main use is for recconassiance)"
+			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=1784",
 			"wiki": "https://en.wikipedia.org/wiki/A%C3%A9rospatiale_Gazelle"
 		},
@@ -735,7 +848,11 @@
 			"manufacturer": "Eurocopter",
 			"model": "EC135",
 			"aliases": [],
-			"identification": [],
+			"identification": [
+				"Big glass cockpit like the Gazelle",
+				"Nose is pointier than the Gazelle",
+				"No weird tube thing at the back of the rotor"
+			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=1853",
 			"wiki": "https://en.wikipedia.org/wiki/Eurocopter_EC135"
 		},
@@ -745,7 +862,11 @@
 			"manufacturer": "Eurocopter",
 			"model": "AS365",
 			"aliases": ["Dauphin"],
-			"identification": [],
+			"identification": [
+				"Similar to the AW109/AW149",
+				"Back rotors inside a thingy and not exposed",
+				"Has winglet-like things extending out the rear"
+			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=3219",
 			"wiki": "https://en.wikipedia.org/wiki/Eurocopter_AS365_Dauphin"
 		},
@@ -755,7 +876,11 @@
 			"manufacturer": "Eurocopter",
 			"model": "AS350",
 			"aliases": ["Ecureuil", "Squirrel"],
-			"identification": [],
+			"identification": [
+				"Really long tail",
+				"Pipe coming out of the back of the rotor",
+				"Tail is like the AW109"
+			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=2352",
 			"wiki": "https://en.wikipedia.org/wiki/Eurocopter_AS350_%C3%89cureuil"
 		},
@@ -765,7 +890,12 @@
 			"manufacturer": "Avro",
 			"model": "Lancaster",
 			"aliases": [],
-			"identification": [],
+			"identification": [
+				"4 propeller engines with 3 propellers each situated on the wings near the airframe ",
+				"Gunner ball turret mid way through the airframe",
+				"Vertical stabilisers are outside the elevators and situated on the tip of them",
+				"Has 2 gunner turrets on nose"
+			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=610",
 			"wiki": "https://en.wikipedia.org/wiki/Avro_Lancaster"
 		},
@@ -775,7 +905,11 @@
 			"manufacturer": "de Havilland Canada",
 			"model": "DHC-1",
 			"aliases": ["Chipmunk", "DHC 1", "DHC!"],
-			"identification": [],
+			"identification": [
+				"It has 2 propellers on the front",
+				"Retractable gear on the front of plane and a singular wheel on the back",
+				"Two seater so long canopy and two seats"
+			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=2770",
 			"wiki": "https://en.wikipedia.org/wiki/De_Havilland_Canada_DHC-1_Chipmunk"
 		},
@@ -785,7 +919,12 @@
 			"manufacturer": "Hawker",
 			"model": "Hurricane",
 			"aliases": [],
-			"identification": [],
+			"identification": [
+				"Has propeller engine with 3 propellers on nose",
+				"Bottom of nose has a steep curve into point",
+				"Wings are straight and like an arch shape",
+				"Roof of nose is curved unlike spitfire's which is more square"
+			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=2010",
 			"wiki": "https://en.wikipedia.org/wiki/Hawker_Hurricane"
 		},
@@ -795,7 +934,12 @@
 			"manufacturer": "Supermarine",
 			"model": "Spitfire",
 			"aliases": [],
-			"identification": [],
+			"identification": [
+				"Has propeller engine on nose with 3 propellers ",
+				"Wings are flatter and wider than a Hurricane's and ends in a rounded point",
+				"Spitfire is much sleeker than the Hurricane ",
+				"Spitfire's wings are much thinner height wise than the Hurricane's"
+			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=1461",
 			"wiki": "https://en.wikipedia.org/wiki/Supermarine_Spitfire"
 		},
@@ -805,7 +949,13 @@
 			"manufacturer": "Grumman",
 			"model": "F4F",
 			"aliases": ["Wildcat"],
-			"identification": [],
+			"identification": [
+				"Nose has propeller engine with 3 propellers",
+				"Nose is flat and has the engine exposed ",
+				"Airframe is chunky and round ",
+				"Landing gear is tucked into airframe and isn't covered up but fits sleekly into it",
+				"Wings are rectangular and have a flat tip"
+			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=3410",
 			"wiki": "https://en.wikipedia.org/wiki/Grumman_F4F_Wildcat"
 		},
@@ -815,7 +965,11 @@
 			"manufacturer": "AgustaWestland",
 			"model": "AW101",
 			"aliases": ["Merlin"],
-			"identification": [],
+			"identification": [
+				"Rotor has 5 blades",
+				"Rear rotor has 4 blades",
+				"Longer than the other AgustaWestland helicopters"
+			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=7571",
 			"wiki": "https://en.wikipedia.org/wiki/AgustaWestland_AW101"
 		},
@@ -825,7 +979,13 @@
 			"manufacturer": "BAe",
 			"model": "Harrier",
 			"aliases": ["Harrier II", "Harrier 2", "AV-8B", "AV8B", "AV 8B"],
-			"identification": [],
+			"identification": [
+				"No rear exhaust for engines, it has 4 smaller ports that can swivel on either side on both ends of aircraft",
+				"Has 4 hard points on either wing",
+				"Has 2 semi-circle air intakes on either side of canopy",
+				"It has 1 large verticle stabilister",
+				"It is chonk"
+			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=734",
 			"waifuImage": "./assets/waifus/Harrier.jpg",
 			"wiki": "https://en.wikipedia.org/wiki/Harrier_jump_jet"
@@ -836,7 +996,11 @@
 			"manufacturer": "McDonnell Douglas",
 			"model": "KC-10",
 			"aliases": ["Extender", "KC10", "KC 10", "DC-10", "DC10", "DC 10"],
-			"identification": [],
+			"identification": [
+				"Has 2 jet engines on either wing which are close to the airframe, has 1 engine on the vertical stabiliser",
+				"Has a refueling boom on the rear than can extend or retract",
+				"It has 3 landing gears, 1 at the front and 2 at the middle-rear"
+			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=1150",
 			"wiki": "https://en.wikipedia.org/wiki/McDonnell_Douglas_KC-10_Extender"
 		},
@@ -846,7 +1010,11 @@
 			"manufacturer": "Douglas",
 			"model": "C-47",
 			"aliases": ["Skytrain", "Dakota", "C47", "C 47"],
-			"identification": [],
+			"identification": [
+				"Has two propeller engines with 3 propellers each",
+				"Has windows across the airframe",
+				"Has two landings gears at the front of plane and singular wheel at the rear"
+			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=856",
 			"wiki": "https://en.wikipedia.org/wiki/Douglas_C-47_Skytrain"
 		},
@@ -856,7 +1024,11 @@
 			"manufacturer": "Bell",
 			"model": "UH-1",
 			"aliases": ["Iroquois", "Huey", "UH1", "UH 1"],
-			"identification": [],
+			"identification": [
+				"Really long tail like the Squirrel",
+				"Rotor only has 2 blades",
+				"Rear rotor only has 2 blades"
+			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=1949",
 			"wiki": "https://en.wikipedia.org/wiki/Bell_UH-1_Iroquois"
 		},
@@ -866,7 +1038,12 @@
 			"manufacturer": "Antonov",
 			"model": "An-124",
 			"aliases": ["Ruslan", "Condor", "An124", "An 124"],
-			"identification": [],
+			"identification": [
+				"It has 4 jet engines along the two wings which are close to airframe",
+				"It has 5 sets of 2 wheels for its landing gear on both sides and a singular pair of wheels on the front",
+				"It has a singular vertical stabliser with the elevators at the level of the airframe",
+				"Will always have a livery of either Russian (red and blue) or Ukrainian (blue and yellow)"
+			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=5403",
 			"wiki": "https://en.wikipedia.org/wiki/Antonov_An-124_Ruslan"
 		},
@@ -882,7 +1059,13 @@
 				"A10",
 				"A 10"
 			],
-			"identification": [],
+			"identification": [
+				"Big gun in nose of plane",
+				"Rectangular straight wings",
+				"Wheels visible on wings even when folded",
+				"2 engines on top of the airframe",
+				"Vertical stabilisers are outside the elevators and situated on the tip of them"
+			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=1470",
 			"waifuImage": "./assets/waifus/A-10.jpg",
 			"wiki": "https://en.wikipedia.org/wiki/Fairchild_Republic_A-10_Thunderbolt_II"
@@ -893,7 +1076,16 @@
 			"manufacturer": "Grumman",
 			"model": "F-14",
 			"aliases": ["Tomcat", "F14", "F 14"],
-			"identification": [],
+			"identification": [
+				"Top Gun",
+				"Maverick",
+				"Tom Cruise",
+				"Looks pretty aged",
+				"Has variable sweep wings so the wings can sweep back and forth, there is gonna be a small gap by the wing and the airframe",
+				"2 afterburning engines",
+				"2 straight verticle stabilisers",
+				"Top Gun"
+			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=978",
 			"waifuImage": "./assets/waifus/F-14.jpg",
 			"wiki": "https://en.wikipedia.org/wiki/Grumman_F-14_Tomcat"
@@ -904,7 +1096,14 @@
 			"manufacturer": "Lockheed Martin",
 			"model": "F-22",
 			"aliases": ["Raptor", "F22", "F 22"],
-			"identification": [],
+			"identification": [
+				"Has two engines with thrust vectoring capabilites, exhaust looks like a sandwhich",
+				"Has two angular air inlets by the canopy",
+				"Has a tinted canopy (It increases stealth)",
+				"Has no hardpoints due to stealth but external fuel bags can be fitted",
+				"Has angled verticle stabilisers",
+				"Unlike F-35 it is thin and very manuverable"
+			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=2997",
 			"wiki": "https://en.wikipedia.org/wiki/Lockheed_Martin_F-22_Raptor"
 		},
@@ -914,7 +1113,13 @@
 			"manufacturer": "General Dynamics",
 			"model": "F-16",
 			"aliases": ["Fighting Falcon", "Viper", "F16", "F 16"],
-			"identification": [],
+			"identification": [
+				"Has a singular engine with a singular air intake bellow the canopy",
+				"Has a singular vertical stabiliser with two elevators at the level of the airframe",
+				"Has hardpoints for missiles on the wing tips",
+				"Has a bubble canopy that is completely clear and has no metal over it",
+				"Has 3 landing gears which have the rear ones placed on the air intake and very close together"
+			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=954",
 			"waifuImage": "./assets/waifus/F-16.jpg",
 			"wiki": "https://en.wikipedia.org/wiki/General_Dynamics_F-16_Fighting_Falcon"
@@ -925,7 +1130,14 @@
 			"manufacturer": "McDonnell Douglas",
 			"model": "F-15",
 			"aliases": ["Strike Eagle", "Eagle", "F15", "F 15"],
-			"identification": [],
+			"identification": [
+				"Has two engines in the rear",
+				"Has two completely straight vertical stabilisers",
+				"Has rectangular air intakes by the canopy",
+				"Has metal across the canopy",
+				"The wings are very flat and wide",
+				"Has 3 thin landing gears which have the rear ones in the middle and spaced out from each other"
+			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=1133",
 			"waifuImage": "./assets/waifus/F-15.jpg",
 			"wiki": "https://en.wikipedia.org/wiki/McDonnell_Douglas_F-15_Eagle"
@@ -935,8 +1147,21 @@
 			"role": "Multirole fighter.",
 			"manufacturer": "McDonnell Douglas",
 			"model": "F/A-18",
-			"aliases": ["Hornet", "F/A18", "F/A 18", "F-18", "F18", "F 18"],
-			"identification": [],
+			"aliases": [
+				"Hornet",
+				"Super Hornet",
+				"F/A18",
+				"F/A 18",
+				"F-18",
+				"F18",
+				"F 18"
+			],
+			"identification": [
+				"Have two engines which are close",
+				"Has two angled vertical stabilisers",
+				"Has slits along the wings near the tips for the wings to fold",
+				"Has parts of the airframe thin and long by the canopy"
+			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=1126",
 			"wiki": "https://en.wikipedia.org/wiki/McDonnell_Douglas_F/A-18_Hornet"
 		},
@@ -946,7 +1171,12 @@
 			"manufacturer": "Sukhoi",
 			"model": "Su-27",
 			"aliases": ["Flanker", "Su27", "Su 27"],
-			"identification": [],
+			"identification": [
+				"Has two engines which are spaces by a tail",
+				"Has a nose antenna",
+				"Has 2 straight verticle stablilisers",
+				"Has 3 hardpoints on each wing"
+			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=1346",
 			"waifuImage": "./assets/waifus/Su-35.jpg",
 			"wiki": "https://en.wikipedia.org/wiki/Sukhoi_Su-27"
@@ -957,7 +1187,13 @@
 			"manufacturer": "Sukhoi",
 			"model": "Su-35",
 			"aliases": ["Flanker-E", "Su35", "Su 35"],
-			"identification": [],
+			"identification": [
+				"Has 2 engines sepperated by a tail",
+				"Has 2 straight verticle stabilisers",
+				"Does not have a nose antenna like the SU-27",
+				"Sharper nose and longer than the SU-27",
+				"Has 4 hardpoints on each wing"
+			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=3211",
 			"wiki": "https://en.wikipedia.org/wiki/Sukhoi_Su-35"
 		},
@@ -967,7 +1203,14 @@
 			"manufacturer": "Sukhoi",
 			"model": "Su-57",
 			"aliases": ["Felon", "Su57", "Su 57"],
-			"identification": [],
+			"identification": [
+				"Has 2 engines seperated by a tail",
+				"Has a delta wing configuration",
+				"Has angled verticle stabilisers",
+				"Has no external hardpoints for stealth",
+				"Has angled down flaps above the air inlets",
+				"Has 2 air intakes on both sides of the airframe"
+			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=6057",
 			"wiki": "https://en.wikipedia.org/wiki/Sukhoi_Su-57"
 		},
@@ -977,7 +1220,12 @@
 			"manufacturer": "Mikoyan",
 			"model": "MiG-21",
 			"aliases": ["Fishbed", "MiG21", "MiG 21"],
-			"identification": [],
+			"identification": [
+				"Has 1 large engine at the rear",
+				"Has that is open with a cone inside it",
+				"Has a curved leading edge wing design",
+				"Has a single verticle stabiliser"
+			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=1444",
 			"waifuImage": "./assets/waifus/MiG-21.jpg",
 			"wiki": "https://en.wikipedia.org/wiki/Mikoyan_MiG-21"
@@ -988,7 +1236,13 @@
 			"manufacturer": "Mikoyan",
 			"model": "MiG-29",
 			"aliases": ["Fulcrum", "MiG29", "MiG 29"],
-			"identification": [],
+			"identification": [
+				"2 engines next to each other",
+				"2 straight verticle stabilisers",
+				"3 hardpoints on each wing",
+				"Has a nose antenna",
+				"Has two rectangular air intakes on both sides of airframe"
+			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=1175",
 			"waifuImage": "./assets/waifus/MiG-29.jpg",
 			"wiki": "https://en.wikipedia.org/wiki/Mikoyan_MiG-29"
@@ -999,7 +1253,14 @@
 			"manufacturer": "Mikoyan",
 			"model": "MiG-31",
 			"aliases": ["Foxhound", "MiG31", "MiG 31"],
-			"identification": [],
+			"identification": [
+				"2 massive engines at the rear",
+				"Has 2 rectangular air intakes",
+				"Extremely straight and rectangular body",
+				"Nose antenna",
+				"Canopy has lots of metal around it and its very form with the airframe",
+				"Wings have 1 hardpoint and are quite short"
+			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=2136",
 			"waifuImage": "./assets/waifus/MiG-31.jpg",
 			"wiki": "https://en.wikipedia.org/wiki/Mikoyan_MiG-31"
@@ -1010,7 +1271,14 @@
 			"manufacturer": "Saab",
 			"model": "JAS39",
 			"aliases": ["Gripen", "JAS-39", "JAS 39"],
-			"identification": [],
+			"identification": [
+				"Has single engine at the rear",
+				"2 air intakes on the side of cockpit",
+				"Has double delta wing configuration",
+				"Has hardpoint along wings which are much longer than eurofighters",
+				"Has pointy nose",
+				"Has a single verticle stabiliser"
+			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=2022",
 			"waifuImage": "./assets/waifus/JAS39.jpg",
 			"wiki": "https://en.wikipedia.org/wiki/Saab_JAS_39_Gripen"
@@ -1021,7 +1289,13 @@
 			"manufacturer": "Dassault",
 			"model": "Rafale",
 			"aliases": [],
-			"identification": [],
+			"identification": [
+				"Has 2 engines in the rear",
+				"Has double delta configuration",
+				"Has rounded air intakes on both sides of cockpit",
+				"Has a hardpoint on sides of wings that aren't very long",
+				"Single verticle stabiliser"
+			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=823",
 			"wiki": "https://en.wikipedia.org/wiki/Dassault_Rafale"
 		},
@@ -1031,7 +1305,15 @@
 			"manufacturer": "McDonnell Douglas",
 			"model": "F-4",
 			"aliases": ["Phantom", "Phantom II", "F4", "F 4"],
-			"identification": [],
+			"identification": [
+				"2 engines underneath the tail and elevators",
+				"Wings are angled at upwards near the tips",
+				"Is a two seater so there is a long canopy",
+				"Has two air intakes along the sides of the airframe",
+				"Sexy",
+				"Has a long and pointy nose",
+				"Elevators are angled downwards"
+			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=1541",
 			"waifuImage": "./assets/waifus/F-4.jpg",
 			"wiki": "https://en.wikipedia.org/wiki/McDonnell_Douglas_F-4_Phantom_II"
@@ -1042,7 +1324,12 @@
 			"manufacturer": "Xian",
 			"model": "H-6",
 			"aliases": ["H6", "H 6", "Tu-16", "Tu16", "Tu 16"],
-			"identification": [],
+			"identification": [
+				"Has two engines at the rear and seperated by the tail",
+				"Has 4 hardpoints across each wing",
+				"Has 2 pairs of wheel on each of the rear landing gears",
+				"Pointy nose that points down"
+			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=5375",
 			"wiki": "https://en.wikipedia.org/wiki/Xian_H-6"
 		},
@@ -1052,7 +1339,12 @@
 			"manufacturer": "Xian",
 			"model": "JH-7",
 			"aliases": ["Flounder", "Flying Leopard", "JH7", "JH 7"],
-			"identification": [],
+			"identification": [
+				"Has 2 engines in the rear",
+				"Is a 2 seater so long canopy",
+				"Has nose antenna",
+				"Has large verticle stabiliser"
+			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=5505",
 			"wiki": "https://en.wikipedia.org/wiki/Xi%27an_JH-7"
 		},
@@ -1061,8 +1353,14 @@
 			"role": "Fighter aircraft.",
 			"manufacturer": "Chengdu",
 			"model": "J-7",
-			"aliases": ["Fishcan", "MiG-27", "MiG27", "J7", "J 7"],
-			"identification": [],
+			"aliases": ["Fishcan", "MiG-21", "MiG21", "J7", "J 7"],
+			"identification": [
+				"Basically a repainted MiG-21",
+				"Has 1 large engine at the rear",
+				"Has that is open with a cone inside it, like the MiG-21",
+				"Has a curved leading edge wing design",
+				"Has a single verticle stabiliser"
+			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=3642",
 			"wiki": "https://en.wikipedia.org/wiki/Chengdu_J-7"
 		},
@@ -1072,7 +1370,12 @@
 			"manufacturer": "Chengdu",
 			"model": "J-10",
 			"aliases": ["Firebird", "Vigorous Dragon", "J10", "J 10"],
-			"identification": [],
+			"identification": [
+				"Singular engine at the rear",
+				"Chinese knock off of Eurofighter",
+				"Double delta wing configuration",
+				"Has no divider in air intake unlike the Eurofighter"
+			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=5150",
 			"wiki": "https://en.wikipedia.org/wiki/Chengdu_J-10"
 		},
@@ -1082,7 +1385,14 @@
 			"manufacturer": "Chengdu",
 			"model": "J-20",
 			"aliases": ["Mighty Dragon", "J20"],
-			"identification": [],
+			"identification": [
+				"Has 2 engines at the rear",
+				"Has a canards at the wing tip",
+				"2 angled stabilisers",
+				"Has a flat airframe like F-22",
+				"Has a stealth coating so very dark and grey",
+				"No external hardpoints"
+			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=7971",
 			"wiki": "https://en.wikipedia.org/wiki/Chengdu_J-20"
 		},
@@ -1092,7 +1402,11 @@
 			"manufacturer": "Xian",
 			"model": "Y-20",
 			"aliases": ["Kunpeng", "Y20", "Y 20"],
-			"identification": [],
+			"identification": [
+				"4 jet engines near to the airframe",
+				"Has elevators at the top of the stabiliser like C-17",
+				"Unlike C-17 it has a pointier nose and engines are further back into the wing than sticking out as much"
+			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=7279",
 			"wiki": "https://en.wikipedia.org/wiki/Xi%27an_Y-20"
 		},
@@ -1102,7 +1416,13 @@
 			"manufacturer": "English Electric",
 			"model": "Lightning",
 			"aliases": [],
-			"identification": [],
+			"identification": [
+				"Has 2 engines above each other at the rear",
+				"Wings are very swept and very square",
+				"Has small elevators at the bottom of the airframe",
+				"Has a nose that has a hollow hole with a cone for air intake",
+				"Has radar antenna on nose"
+			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=1932",
 			"wiki": "https://en.wikipedia.org/wiki/English_Electric_Lightning"
 		},
@@ -1112,7 +1432,14 @@
 			"manufacturer": "Yakolev",
 			"model": "Yak-130",
 			"aliases": ["Mitten", "Yak130", "Yak 130"],
-			"identification": [],
+			"identification": [
+				"Has 2 engines under the tail",
+				"Has 2 seats so longer canopy",
+				"Has 3 hardpoints oneither wing",
+				"Has single verticle stabiliser",
+				"Has an angular nose",
+				"Hardpoints on wing tips that extend forward"
+			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=2242",
 			"wiki": "https://en.wikipedia.org/wiki/Yakovlev_Yak-130"
 		}
