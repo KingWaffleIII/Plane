@@ -16,16 +16,9 @@ config.json
 
 bot/package.json
 bot/package-lock.json
-bot/pity/
-bot/apollo/
-bot/nuke/
-bot/plane/RAFK.json
-bot/plane/air_rec.json
+bot/RAFK.json
+bot/air_rec.json
+bot/assets/
 
-src/pity/
-src/apollo/
-src/nuke/
-
-api/
 
 

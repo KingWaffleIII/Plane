@@ -1,5 +1,6 @@
 import axios from "axios";
-import * as cheerio from "cheerio";
+import cheerio from "cheerio";
+import crypto from "crypto";
 import {
 	ActionRowBuilder,
 	ButtonBuilder,
@@ -9,25 +10,12 @@ import {
 	ComponentType,
 	EmbedBuilder,
 	SlashCommandBuilder,
-	StringSelectMenuBuilder,
-	StringSelectMenuInteraction,
 } from "discord.js";
 
-import * as airrec from "../air_rec.json";
+import { Aircraft } from "../interfaces";
+import airrec from "../air_rec.json";
 
-const crypto = require("crypto");
-
-export interface Aircraft {
-	readonly name: string;
-	readonly role: string;
-	readonly manufacturer: string;
-	readonly model: string;
-	readonly aliases: string[];
-	readonly summary: string;
-	readonly identification: string[];
-	readonly image: string;
-	readonly wiki: string;
-}
+const wait = require("node:timers/promises").setTimeout;
 
 export async function getImage(url: string): Promise<string | null> {
 	try {
@@ -61,10 +49,21 @@ export const data = new SlashCommandBuilder()
 			.setDescription(
 				"Whether to show a specific aircraft type or a random aircraft. Leave blank for a random aircraft."
 			)
+	)
+	.addStringOption((option) =>
+		option
+			.setName("type")
+			.setDescription(
+				"The type of aircraft you want to be shown. Leave blank for a random aircraft."
+			)
+			.addChoices(
+				{ name: "Civilian", value: "civilian" },
+				{ name: "Military", value: "military" }
+			)
 	);
 
 export async function execute(interaction: ChatInputCommandInteraction) {
-	const random = interaction.options.getBoolean("random") ?? true;
+	const requestedType = interaction.options.getString("type") ?? false;
 
 	await interaction.deferReply();
 
@@ -76,55 +75,21 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 			] as keyof typeof airrec
 		];
 
-	if (!random) {
-		const selectId = crypto.randomBytes(12).toString("hex");
-		const row =
-			new ActionRowBuilder<StringSelectMenuBuilder>().addComponents(
-				new StringSelectMenuBuilder()
-					.setCustomId(`select-type-${selectId}`)
-					.setPlaceholder("Select a type")
-			);
-		for (const aircraftType in airrec) {
-			if (aircraftType === "military" || aircraftType === "civilian") {
-				row.components[0].addOptions({
-					label:
-						aircraftType.charAt(0).toUpperCase() +
-						aircraftType.slice(1),
-					value:
-						aircraftType.charAt(0).toUpperCase() +
-						aircraftType.slice(1),
-				});
-			}
-		}
-		await interaction.editReply({
-			components: [row],
-		});
-
-		const filter = (i: StringSelectMenuInteraction) =>
-			i.customId === `select-type-${selectId}`;
-		const selections = await interaction.channel?.awaitMessageComponent({
-			componentType: ComponentType.StringSelect,
-			time: 60000,
-			filter,
-		});
-		if (selections) {
-			if (selections.user.id !== interaction.user.id) {
-				await selections.reply({
-					content: "You can't select a type.",
-					ephemeral: true,
-				});
-			} else {
-				type =
-					airrec[
-						selections.values[0].toLowerCase() as keyof typeof airrec
-					];
-				await selections.deferUpdate();
-			}
-		}
+	if (requestedType) {
+		type = airrec[requestedType as keyof typeof airrec];
 	}
 
 	const aircraft: Aircraft = type[Math.floor(Math.random() * type.length)];
 	const image = await getImage(aircraft.image);
+
+	let waifuImage = false;
+	if (aircraft.waifuImage) {
+		// easter egg
+		if (Math.floor(Math.random() * 2) === 0) {
+			waifuImage = true;
+		}
+	}
+
 	if (!image) {
 		await interaction.editReply({
 			content:
@@ -133,23 +98,67 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 		return;
 	}
 
-	const buttonId = crypto.randomBytes(12).toString("hex");
+	const buttonId = crypto.randomBytes(6).toString("hex");
 	const row = new ActionRowBuilder<ButtonBuilder>().addComponents(
 		new ButtonBuilder()
 			.setCustomId(`reveal-airrec-${buttonId}`)
 			.setLabel("Reveal answer")
 			.setStyle(ButtonStyle.Primary)
 	);
+
 	await interaction.editReply({
 		content: `**What is the name of this aircraft?**\n${image}`,
 		components: [row],
 	});
+	// }
+
+	const answer = new EmbedBuilder()
+		.setColor(0x0099ff)
+		.setTitle(aircraft.name)
+		.setDescription(aircraft.role)
+		.setTimestamp()
+		.addFields(
+			{
+				name: "Alternative names (aliases for /airrec-quiz):",
+				value: aircraft.aliases.join(", ") || "None",
+			},
+			{
+				name: "Aircraft features to help you identify it:",
+				value:
+					aircraft.identification
+						.map(
+							(identification: string) => `- ${identification}\n`
+						)
+						.join("") || "None",
+			},
+			// { name: "\u200B", value: "\u200B" },
+			{
+				name: "Wikipedia:",
+				value: aircraft.wiki,
+				inline: true,
+			},
+			{
+				name: "See more images:",
+				value: aircraft.image,
+				inline: true,
+			}
+		);
+
+	if (waifuImage) {
+		answer.setImage(`attachment://${aircraft.model}.jpg`).setFooter({
+			text: "You found an easter egg! Image credit: Atamonica",
+		});
+	} else {
+		answer.setImage(image).setFooter({
+			text: "Photo credit: https://www.airfighters.com",
+		});
+	}
 
 	const filter = (i: ButtonInteraction) =>
 		i.customId === `reveal-airrec-${buttonId}`;
 	const collector = interaction.channel?.createMessageComponentCollector({
 		componentType: ComponentType.Button,
-		time: 60000,
+		time: 30000,
 		filter,
 	});
 	collector?.on("collect", async (i: ButtonInteraction) => {
@@ -158,34 +167,14 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 				content: "You can't reveal this answer.",
 				ephemeral: true,
 			});
+		} else if (waifuImage) {
+			await interaction.editReply({
+				content: `**The answer was ${aircraft.name}!**`,
+				embeds: [answer],
+				components: [],
+				files: [`./assets/waifus/${aircraft.model}.jpg`],
+			});
 		} else {
-			const answer = new EmbedBuilder()
-				.setColor(0x0099ff)
-				.setTitle(aircraft.name)
-				.setDescription(aircraft.role)
-				.setImage(image)
-				.setTimestamp()
-				.setFooter({
-					text: "Photo credit: https://www.airfighters.com",
-				})
-				.addFields(
-					{
-						name: "Alternative names (aliases for /airrec-quiz):",
-						value: aircraft.aliases.join(", ") || "None",
-					},
-					// { name: "\u200B", value: "\u200B" },
-					{
-						name: "Wikipedia:",
-						value: aircraft.wiki,
-						inline: true,
-					},
-					{
-						name: "See more images:",
-						value: aircraft.image,
-						inline: true,
-					}
-				);
-
 			await interaction.editReply({
 				content: `**The answer was ${aircraft.name}!**`,
 				embeds: [answer],
@@ -193,4 +182,20 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 			});
 		}
 	});
+
+	await wait(30000);
+	if (waifuImage) {
+		await interaction.editReply({
+			content: `**The answer was ${aircraft.name}!**`,
+			embeds: [answer],
+			components: [],
+			files: [`./assets/waifus/${aircraft.model}.jpg`],
+		});
+	} else {
+		await interaction.editReply({
+			content: `**The answer was ${aircraft.name}!**`,
+			embeds: [answer],
+			components: [],
+		});
+	}
 }

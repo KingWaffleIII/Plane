@@ -1,3 +1,4 @@
+import crypto from "crypto";
 import {
 	ActionRowBuilder,
 	ButtonBuilder,
@@ -6,17 +7,12 @@ import {
 	ChatInputCommandInteraction,
 	ComponentType,
 	SlashCommandBuilder,
-	StringSelectMenuBuilder,
-	StringSelectMenuInteraction,
 } from "discord.js";
-import * as rafk from "../RAFK.json";
 
-const crypto = require("crypto");
+import { Question } from "../interfaces";
+import rafk from "../RAFK.json";
 
-export interface Question {
-	question: string;
-	answer: string;
-}
+const wait = require("node:timers/promises").setTimeout;
 
 export const data = new SlashCommandBuilder()
 	.setName("rafk")
@@ -30,18 +26,24 @@ export const data = new SlashCommandBuilder()
 			.setMinValue(1)
 			.setMaxValue(3)
 	)
-	.addBooleanOption((option) =>
+	.addStringOption((option) =>
 		option
-			.setName("random")
+			.setName("subject")
 			.setDescription(
-				"Whether to use a specific RAFK subject or a random question. Leave blank for a random question."
+				"The subject you want to be asked about. Leave blank for a random subject."
+			)
+			.addChoices(
+				{ name: "The RAF", value: "The RAF" },
+				{ name: "The CCF", value: "The CCF" },
+				{ name: "Airmanship", value: "Airmanship" },
+				{ name: "Map Reading", value: "Map Reading" }
 			)
 	);
 
 export async function execute(
 	interaction: ChatInputCommandInteraction
 ): Promise<void> {
-	const random = interaction.options.getBoolean("random") ?? true;
+	const requestedSubject = interaction.options.getString("subject") ?? false;
 
 	await interaction.deferReply();
 
@@ -49,7 +51,6 @@ export async function execute(
 	// 	interaction.options.getInteger("part") ??
 	// 	Math.floor(Math.random() * 3) + 1;
 	const part = rafk[1];
-	const selectId = crypto.randomBytes(12).toString("hex");
 
 	let subject: {
 		[category: string]: Question[];
@@ -60,43 +61,8 @@ export async function execute(
 			] as keyof typeof part
 		];
 
-	if (!random) {
-		const row =
-			new ActionRowBuilder<StringSelectMenuBuilder>().addComponents(
-				new StringSelectMenuBuilder()
-					.setCustomId(`select-subject-${selectId}`)
-					.setPlaceholder("Select a subject")
-			);
-		for (const subj in part) {
-			if (Object.prototype.hasOwnProperty.call(part, subj)) {
-				row.components[0].addOptions({
-					label: subj,
-					value: subj,
-				});
-			}
-		}
-		await interaction.editReply({
-			components: [row],
-		});
-
-		const filter = (i: StringSelectMenuInteraction) =>
-			i.customId === `select-subject-${selectId}`;
-		const selections = await interaction.channel?.awaitMessageComponent({
-			componentType: ComponentType.StringSelect,
-			time: 60000,
-			filter,
-		});
-		if (selections) {
-			if (selections.user.id !== interaction.user.id) {
-				await selections.reply({
-					content: "You can't select a subject.",
-					ephemeral: true,
-				});
-			} else {
-				subject = part[selections.values[0] as keyof typeof part];
-				await selections.deferUpdate();
-			}
-		}
+	if (requestedSubject) {
+		subject = part[requestedSubject as keyof typeof part];
 	}
 
 	const category: Question[] =
@@ -109,7 +75,7 @@ export async function execute(
 		category[Math.floor(Math.random() * category.length)];
 
 	const { question, answer } = randomQuestion;
-	const buttonId = crypto.randomBytes(12).toString("hex");
+	const buttonId = crypto.randomBytes(6).toString("hex");
 
 	const row = new ActionRowBuilder<ButtonBuilder>().addComponents(
 		new ButtonBuilder()
@@ -126,7 +92,7 @@ export async function execute(
 		i.customId === `reveal-rafk-${buttonId}`;
 	const collector = interaction.channel?.createMessageComponentCollector({
 		componentType: ComponentType.Button,
-		time: 60000,
+		time: 30000,
 		filter,
 	});
 	collector?.on("collect", async (i: ButtonInteraction) => {
@@ -141,5 +107,11 @@ export async function execute(
 				components: [],
 			});
 		}
+	});
+
+	await wait(30000);
+	await interaction.editReply({
+		content: `\n${question}\n**${answer}**`,
+		components: [],
 	});
 }
