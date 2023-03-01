@@ -1,5 +1,6 @@
 import axios from "axios";
 import cheerio from "cheerio";
+import crypto from "crypto";
 import {
 	ActionRowBuilder,
 	ButtonBuilder,
@@ -9,14 +10,11 @@ import {
 	ComponentType,
 	EmbedBuilder,
 	SlashCommandBuilder,
-	StringSelectMenuBuilder,
-	StringSelectMenuInteraction,
 } from "discord.js";
 
 import { Aircraft } from "../interfaces";
 import airrec from "../air_rec.json";
 
-const crypto = require("crypto");
 const wait = require("node:timers/promises").setTimeout;
 
 export async function getImage(url: string): Promise<string | null> {
@@ -51,10 +49,21 @@ export const data = new SlashCommandBuilder()
 			.setDescription(
 				"Whether to show a specific aircraft type or a random aircraft. Leave blank for a random aircraft."
 			)
+	)
+	.addStringOption((option) =>
+		option
+			.setName("type")
+			.setDescription(
+				"The type of aircraft you want to be shown. Leave blank for a random aircraft."
+			)
+			.addChoices(
+				{ name: "Civilian", value: "civilian" },
+				{ name: "Military", value: "military" }
+			)
 	);
 
 export async function execute(interaction: ChatInputCommandInteraction) {
-	const random = interaction.options.getBoolean("random") ?? true;
+	const requestedType = interaction.options.getString("type") ?? false;
 
 	await interaction.deferReply();
 
@@ -66,51 +75,8 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 			] as keyof typeof airrec
 		];
 
-	if (!random) {
-		const selectId = crypto.randomBytes(6).toString("hex");
-		const row =
-			new ActionRowBuilder<StringSelectMenuBuilder>().addComponents(
-				new StringSelectMenuBuilder()
-					.setCustomId(`select-type-${selectId}`)
-					.setPlaceholder("Select a type")
-			);
-		for (const aircraftType in airrec) {
-			if (aircraftType === "military" || aircraftType === "civilian") {
-				row.components[0].addOptions({
-					label:
-						aircraftType.charAt(0).toUpperCase() +
-						aircraftType.slice(1),
-					value:
-						aircraftType.charAt(0).toUpperCase() +
-						aircraftType.slice(1),
-				});
-			}
-		}
-		await interaction.editReply({
-			components: [row],
-		});
-
-		const filter = (i: StringSelectMenuInteraction) =>
-			i.customId === `select-type-${selectId}`;
-		const selections = await interaction.channel?.awaitMessageComponent({
-			componentType: ComponentType.StringSelect,
-			time: 30000,
-			filter,
-		});
-		if (selections) {
-			if (selections.user.id !== interaction.user.id) {
-				await selections.reply({
-					content: "You can't select a type.",
-					ephemeral: true,
-				});
-			} else {
-				type =
-					airrec[
-						selections.values[0].toLowerCase() as keyof typeof airrec
-					];
-				await selections.deferUpdate();
-			}
-		}
+	if (requestedType) {
+		type = airrec[requestedType as keyof typeof airrec];
 	}
 
 	const aircraft: Aircraft = type[Math.floor(Math.random() * type.length)];
@@ -149,6 +115,15 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 				name: "Alternative names (aliases for /airrec-quiz):",
 				value: aircraft.aliases.join(", ") || "None",
 			},
+			{
+				name: "Aircraft features to help you identify it:",
+				value:
+					aircraft.identification
+						.map(
+							(identification: string) => `- ${identification}\n`
+						)
+						.join("") || "None",
+			},
 			// { name: "\u200B", value: "\u200B" },
 			{
 				name: "Wikipedia:",
@@ -166,7 +141,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 		i.customId === `reveal-airrec-${buttonId}`;
 	const collector = interaction.channel?.createMessageComponentCollector({
 		componentType: ComponentType.Button,
-		time: 60000,
+		time: 30000,
 		filter,
 	});
 	collector?.on("collect", async (i: ButtonInteraction) => {

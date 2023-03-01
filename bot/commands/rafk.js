@@ -16,51 +16,20 @@ exports.data = new discord_js_1.SlashCommandBuilder()
     .setDescription("The part of RAFK you want to be asked about (1-3). Leave blank for a random part.")
     .setMinValue(1)
     .setMaxValue(3))
-    .addBooleanOption((option) => option
-    .setName("random")
-    .setDescription("Whether to use a specific RAFK subject or a random question. Leave blank for a random question."));
+    .addStringOption((option) => option
+    .setName("subject")
+    .setDescription("The subject you want to be asked about. Leave blank for a random subject.")
+    .addChoices({ name: "The RAF", value: "The RAF" }, { name: "The CCF", value: "The CCF" }, { name: "Airmanship", value: "Airmanship" }, { name: "Map Reading", value: "Map Reading" }));
 async function execute(interaction) {
-    const random = interaction.options.getBoolean("random") ?? true;
+    const requestedSubject = interaction.options.getString("subject") ?? false;
     await interaction.deferReply();
     // const part =
     // 	interaction.options.getInteger("part") ??
     // 	Math.floor(Math.random() * 3) + 1;
     const part = RAFK_json_1.default[1];
-    const selectId = crypto_1.default.randomBytes(6).toString("hex");
     let subject = part[Object.keys(part)[Math.floor(Math.random() * Object.keys(part).length)]];
-    if (!random) {
-        const row = new discord_js_1.ActionRowBuilder().addComponents(new discord_js_1.StringSelectMenuBuilder()
-            .setCustomId(`select-subject-${selectId}`)
-            .setPlaceholder("Select a subject"));
-        for (const subj in part) {
-            if (Object.prototype.hasOwnProperty.call(part, subj)) {
-                row.components[0].addOptions({
-                    label: subj,
-                    value: subj,
-                });
-            }
-        }
-        await interaction.editReply({
-            components: [row],
-        });
-        const filter = (i) => i.customId === `select-subject-${selectId}`;
-        const selections = await interaction.channel?.awaitMessageComponent({
-            componentType: discord_js_1.ComponentType.StringSelect,
-            time: 30000,
-            filter,
-        });
-        if (selections) {
-            if (selections.user.id !== interaction.user.id) {
-                await selections.reply({
-                    content: "You can't select a subject.",
-                    ephemeral: true,
-                });
-            }
-            else {
-                subject = part[selections.values[0]];
-                await selections.deferUpdate();
-            }
-        }
+    if (requestedSubject) {
+        subject = part[requestedSubject];
     }
     const category = subject[Object.keys(subject)[Math.floor(Math.random() * Object.keys(subject).length)]];
     const randomQuestion = category[Math.floor(Math.random() * category.length)];
@@ -77,7 +46,7 @@ async function execute(interaction) {
     const filter = (i) => i.customId === `reveal-rafk-${buttonId}`;
     const collector = interaction.channel?.createMessageComponentCollector({
         componentType: discord_js_1.ComponentType.Button,
-        time: 60000,
+        time: 30000,
         filter,
     });
     collector?.on("collect", async (i) => {

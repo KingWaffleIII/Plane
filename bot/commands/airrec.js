@@ -6,9 +6,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.execute = exports.data = exports.getImage = void 0;
 const axios_1 = __importDefault(require("axios"));
 const cheerio_1 = __importDefault(require("cheerio"));
+const crypto_1 = __importDefault(require("crypto"));
 const discord_js_1 = require("discord.js");
 const air_rec_json_1 = __importDefault(require("../air_rec.json"));
-const crypto = require("crypto");
 const wait = require("node:timers/promises").setTimeout;
 async function getImage(url) {
     try {
@@ -37,51 +37,20 @@ exports.data = new discord_js_1.SlashCommandBuilder()
     .setDescription("Gives you an aircraft image for you to identify.")
     .addBooleanOption((option) => option
     .setName("random")
-    .setDescription("Whether to show a specific aircraft type or a random aircraft. Leave blank for a random aircraft."));
+    .setDescription("Whether to show a specific aircraft type or a random aircraft. Leave blank for a random aircraft."))
+    .addStringOption((option) => option
+    .setName("type")
+    .setDescription("The type of aircraft you want to be shown. Leave blank for a random aircraft.")
+    .addChoices({ name: "Civilian", value: "civilian" }, { name: "Military", value: "military" }));
 async function execute(interaction) {
-    const random = interaction.options.getBoolean("random") ?? true;
+    const requestedType = interaction.options.getString("type") ?? false;
     await interaction.deferReply();
     let type = air_rec_json_1.default[Object.keys(air_rec_json_1.default)[
     // Math.floor(Math.random() * Object.keys(airrec).length)
     Math.floor(Math.random() * 2) // for some reason there's a key called "default" in the object?? setting max to 2
     ]];
-    if (!random) {
-        const selectId = crypto.randomBytes(6).toString("hex");
-        const row = new discord_js_1.ActionRowBuilder().addComponents(new discord_js_1.StringSelectMenuBuilder()
-            .setCustomId(`select-type-${selectId}`)
-            .setPlaceholder("Select a type"));
-        for (const aircraftType in air_rec_json_1.default) {
-            if (aircraftType === "military" || aircraftType === "civilian") {
-                row.components[0].addOptions({
-                    label: aircraftType.charAt(0).toUpperCase() +
-                        aircraftType.slice(1),
-                    value: aircraftType.charAt(0).toUpperCase() +
-                        aircraftType.slice(1),
-                });
-            }
-        }
-        await interaction.editReply({
-            components: [row],
-        });
-        const filter = (i) => i.customId === `select-type-${selectId}`;
-        const selections = await interaction.channel?.awaitMessageComponent({
-            componentType: discord_js_1.ComponentType.StringSelect,
-            time: 30000,
-            filter,
-        });
-        if (selections) {
-            if (selections.user.id !== interaction.user.id) {
-                await selections.reply({
-                    content: "You can't select a type.",
-                    ephemeral: true,
-                });
-            }
-            else {
-                type =
-                    air_rec_json_1.default[selections.values[0].toLowerCase()];
-                await selections.deferUpdate();
-            }
-        }
+    if (requestedType) {
+        type = air_rec_json_1.default[requestedType];
     }
     const aircraft = type[Math.floor(Math.random() * type.length)];
     const image = await getImage(aircraft.image);
@@ -91,7 +60,7 @@ async function execute(interaction) {
         });
         return;
     }
-    const buttonId = crypto.randomBytes(6).toString("hex");
+    const buttonId = crypto_1.default.randomBytes(6).toString("hex");
     const row = new discord_js_1.ActionRowBuilder().addComponents(new discord_js_1.ButtonBuilder()
         .setCustomId(`reveal-airrec-${buttonId}`)
         .setLabel("Reveal answer")
@@ -112,6 +81,11 @@ async function execute(interaction) {
         .addFields({
         name: "Alternative names (aliases for /airrec-quiz):",
         value: aircraft.aliases.join(", ") || "None",
+    }, {
+        name: "Aircraft features to help you identify it:",
+        value: aircraft.identification
+            .map((identification) => `- ${identification}\n`)
+            .join("") || "None",
     }, 
     // { name: "\u200B", value: "\u200B" },
     {
@@ -126,7 +100,7 @@ async function execute(interaction) {
     const filter = (i) => i.customId === `reveal-airrec-${buttonId}`;
     const collector = interaction.channel?.createMessageComponentCollector({
         componentType: discord_js_1.ComponentType.Button,
-        time: 60000,
+        time: 30000,
         filter,
     });
     collector?.on("collect", async (i) => {

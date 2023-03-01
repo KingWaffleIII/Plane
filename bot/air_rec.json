@@ -6,7 +6,11 @@
             "manufacturer": "AgustaWestland",
             "model": "AW109",
             "aliases": ["AW-109", "AW 109"],
-            "identification": [""],
+            "identification": [
+                "Pointed nose",
+                "Landing gear",
+                "Hook on the bottom of the tail"
+            ],
             "image": "https://www.airfighters.com/photosearch.php?cra=7975",
             "wiki": "https://en.wikipedia.org/wiki/AgustaWestland_AW109"
         },
@@ -16,7 +20,7 @@
             "manufacturer": "Beechcraft",
             "model": "Super King Air",
             "aliases": ["King Air"],
-            "identification": [""],
+            "identification": ["Short length", "2 propeller engines"],
             "image": "https://www.airfighters.com/photosearch.php?cra=1670",
             "wiki": "https://en.wikipedia.org/wiki/Beechcraft_Super_King_Air"
         },
@@ -26,7 +30,11 @@
             "manufacturer": "Bell",
             "model": "412",
             "aliases": ["Griffin"],
-            "identification": [""],
+            "identification": [
+                "No landing gear",
+                "Rounded pointed nose",
+                "Two identical square windows in the middle"
+            ],
             "image": "https://www.airfighters.com/photosearch.php?cra=1945",
             "wiki": "https://en.wikipedia.org/wiki/Bell_412"
         },
@@ -36,7 +44,11 @@
             "manufacturer": "BAe",
             "model": "146",
             "aliases": ["Avro RJ"],
-            "identification": [""],
+            "identification": [
+                "Short length",
+                "Wings are at the top of the fuselage",
+                "Four jet engines"
+            ],
             "image": "https://www.airfighters.com/photosearch.php?cra=2945",
             "wiki": "https://en.wikipedia.org/wiki/British_Aerospace_146"
         },
@@ -46,7 +58,13 @@
             "manufacturer": "Airbus",
             "model": "A300",
             "aliases": [],
-            "identification": [""],
+            "identification": [
+                "Medium length",
+                "No winglets",
+                "Pointed nose",
+                "8 rear landing gear wheels",
+                "Two jet engines"
+            ],
             "image": "https://www.airfighters.com/photosearch.php?cra=4856",
             "wiki": "https://en.wikipedia.org/wiki/Airbus_A300"
         },
@@ -56,7 +74,13 @@
             "manufacturer": "Airbus",
             "model": "A310",
             "aliases": [],
-            "identification": [""],
+            "identification": [
+                "Medium length",
+                "Y-shaped winglets",
+                "Pointed nose",
+                "8 rear landing gear wheels",
+                "Two jet engines"
+            ],
             "image": "https://www.airfighters.com/photosearch.php?cra=565",
             "wiki": "https://en.wikipedia.org/wiki/Airbus_A310"
         },
@@ -66,7 +90,13 @@
             "manufacturer": "",
             "model": "",
             "aliases": [],
-            "identification": [""],
+            "identification": [
+                "Short length",
+                "Y-shaped winglets",
+                "Rounded pointed nose",
+                "4 rear landing gear wheels",
+                "Two jet engines"
+            ],
             "image": "https://www.airfighters.com/photosearch.php?cra=568",
             "wiki": "https://en.wikipedia.org/wiki/Airbus_A319"
         },
@@ -76,7 +106,13 @@
             "manufacturer": "Airbus",
             "model": "A320",
             "aliases": [],
-            "identification": [""],
+            "identification": [
+                "Medium length",
+                "Tall winglets pointing upwards (sometimes may have Y-shaped winglets)",
+                "Rounded pointed nose",
+                "4 rear landing gear wheels",
+                "Two jet engines"
+            ],
             "image": "https://www.airfighters.com/photosearch.php?cra=6454",
             "wiki": "https://en.wikipedia.org/wiki/Airbus_A320"
         },
@@ -86,7 +122,14 @@
             "manufacturer": "Airbus",
             "model": "A321",
             "aliases": [],
-            "identification": [""],
+            "identification": [
+                "Long length",
+                "Winglets pointing upwards",
+                "Rounded pointed nose",
+                "4 rear landing gear wheels",
+                "'Superhero goggle' cockpit windows",
+                "Two jet engines"
+            ],
             "image": "https://www.airfighters.com/photosearch.php?cra=7091",
             "wiki": "https://en.wikipedia.org/wiki/Airbus_A321"
         },
@@ -96,7 +139,13 @@
             "manufacturer": "Airbus",
             "model": "A330",
             "aliases": [],
-            "identification": [""],
+            "identification": [
+                "Medium-long length",
+                "Winglets pointing upwards",
+                "Pointed nose",
+                "8 rear landing gear wheels",
+                "Two jet engines"
+            ],
             "image": "https://www.airfighters.com/photosearch.php?cra=571",
             "wiki": "https://en.wikipedia.org/wiki/Airbus_A330"
         },
@@ -106,7 +155,13 @@
             "manufacturer": "Airbus",
             "model": "A340",
             "aliases": [],
-            "identification": [""],
+            "identification": [
+                "Long length",
+                "Winglets pointing upwards",
+                "Pointed nose",
+                "8 rear landing gear wheels",
+                "4 jet engines"
+            ],
             "image": "https://www.airfighters.com/photosearch.php?cra=573",
             "wiki": "https://en.wikipedia.org/wiki/Airbus_A340"
         },
@@ -116,7 +171,14 @@
             "manufacturer": "Airbus",
             "model": "A350",
             "aliases": [],
-            "identification": [""],
+            "identification": [
+                "Long length",
+                "Winglets pointing upwards",
+                "Pointed nose",
+                "8 rear landing gear wheels",
+                "'Superhero goggle' cockpit windows",
+                "Two jet engines"
+            ],
             "image": "https://www.airfighters.com/photosearch.php?cra=8423",
             "wiki": "https://en.wikipedia.org/wiki/Airbus_A350"
         },
@@ -126,7 +188,14 @@
             "manufacturer": "Boeing",
             "model": "707",
             "aliases": [],
-            "identification": [""],
+            "identification": [
+                "Medium length",
+                "No winglets",
+                "Pointed nose",
+                "8 rear landing gear wheels",
+                "Four jet engines - built into the wing and not below",
+                "Commonly seen with AWACS radar dome on top"
+            ],
             "image": "https://www.airfighters.com/photosearch.php?cra=656",
             "wiki": "https://en.wikipedia.org/wiki/Boeing_707"
         },
@@ -136,7 +205,15 @@
             "manufacturer": "Boeing",
             "model": "727",
             "aliases": [],
-            "identification": [""],
+            "identification": [
+                "Medium length",
+                "No winglets",
+                "Pointed nose",
+                "4 rear landing gear wheels",
+                "Really wide rudder and tail",
+                "Elevator is at the top of the tail",
+                "3 jet engines at the rear - one built into the tail"
+            ],
             "image": "https://www.airfighters.com/photosearch.php?cra=678",
             "wiki": "https://en.wikipedia.org/wiki/Boeing_727"
         },
@@ -146,7 +223,13 @@
             "manufacturer": "Boeing",
             "model": "737",
             "aliases": [],
-            "identification": [""],
+            "identification": [
+                "Medium length",
+                "Tall winglets pointing upwards",
+                "Pointed nose",
+                "4 rear landing gear wheels",
+                "Two jet engines"
+            ],
             "image": "https://www.airfighters.com/photosearch.php?cra=681",
             "wiki": "https://en.wikipedia.org/wiki/Boeing_737"
         },
@@ -156,7 +239,14 @@
             "manufacturer": "Boeing",
             "model": "747",
             "aliases": [],
-            "identification": [""],
+            "identification": [
+                "Long with a hump (incomplete 2nd deck) towards the front",
+                "No winglets",
+                "Pointed nose",
+                "16 rear landing gear wheels",
+                "Cockpit windows on the 2nd deck",
+                "4 jet engines"
+            ],
             "image": "https://www.airfighters.com/photosearch.php?cra=689",
             "wiki": "https://en.wikipedia.org/wiki/Boeing_747"
         },
@@ -166,7 +256,13 @@
             "manufacturer": "Boeing",
             "model": "757",
             "aliases": [],
-            "identification": [""],
+            "identification": [
+                "Medium-long length",
+                "Tall winglets pointing upwards",
+                "Rounded pointed nose",
+                "8 rear landing gear wheels",
+                "Two jet engines"
+            ],
             "image": "https://www.airfighters.com/photosearch.php?cra=694",
             "wiki": "https://www.airfighters.com/photosearch.php?cra=694"
         },
@@ -176,7 +272,13 @@
             "manufacturer": "Boeing",
             "model": "767",
             "aliases": [],
-            "identification": [""],
+            "identification": [
+                "Medium length",
+                "No winglets",
+                "Rounded pointed nose",
+                "8 rear landing gear wheels",
+                "Two jet engines"
+            ],
             "image": "https://www.airfighters.com/photosearch.php?cra=697",
             "wiki": "https://en.wikipedia.org/wiki/Boeing_767"
         },
@@ -186,7 +288,13 @@
             "manufacturer": "Boeing",
             "model": "777",
             "aliases": [],
-            "identification": [""],
+            "identification": [
+                "Long length",
+                "No winglets",
+                "Rounded pointed nose",
+                "12 rear landing gear wheels",
+                "Two jet engines"
+            ],
             "image": "https://www.airfighters.com/photosearch.php?cra=8223",
             "wiki": "https://en.wikipedia.org/wiki/Boeing_777"
         },
@@ -196,7 +304,13 @@
             "manufacturer": "Boeing",
             "model": "787",
             "aliases": ["Dreamliner"],
-            "identification": [""],
+            "identification": [
+                "Medium length",
+                "No winglets",
+                "Rounded pointed nose",
+                "8 rear landing gear wheels",
+                "Two jet engines"
+            ],
             "image": "https://www.airfighters.com/photosearch.php?cra=7530",
             "wiki": "https://en.wikipedia.org/wiki/Boeing_787_Dreamliner"
         },
@@ -206,7 +320,14 @@
             "manufacturer": "Bombardier",
             "model": "Global Express",
             "aliases": [],
-            "identification": [""],
+            "identification": [
+                "Short length",
+                "Winglets pointing upwards",
+                "Pointed nose",
+                "4 rear landing gear wheels",
+                "Elevator is at the top of the tail",
+                "2 jet engines at the rear"
+            ],
             "image": "https://www.airfighters.com/photosearch.php?cra=1810",
             "wiki": "https://en.wikipedia.org/wiki/Bombardier_Global_Express"
         },
@@ -216,7 +337,14 @@
             "manufacturer": "Embraer",
             "model": "ERJ135",
             "aliases": ["ERJ-135", "ERJ 135"],
-            "identification": [""],
+            "identification": [
+                "Short length",
+                "Winglets pointing upwards",
+                "Very pointed nose",
+                "4 rear landing gear wheels",
+                "Elevator is at the top of the tail",
+                "2 jet engines at the rear"
+            ],
             "image": "https://www.airfighters.com/photosearch.php?cra=3988",
             "wiki": "https://en.wikipedia.org/wiki/Embraer_ERJ_family"
         },
@@ -226,7 +354,14 @@
             "manufacturer": "Embraer",
             "model": "ERJ145",
             "aliases": ["ERJ-145", "ERJ 145"],
-            "identification": [""],
+            "identification": [
+                "Short-medium length",
+                "Winglets pointing upwards",
+                "Very pointed nose",
+                "4 rear landing gear wheels",
+                "Elevator is at the top of the tail",
+                "2 jet engines at the rear"
+            ],
             "image": "https://www.airfighters.com/photosearch.php?cra=5856",
             "wiki": "https://en.wikipedia.org/wiki/Embraer_ERJ_family"
         },
@@ -236,7 +371,14 @@
             "manufacturer": "Embraer",
             "model": "EMB500",
             "aliases": ["EMB-500", "EMB 500", "Phenom", "Phenom 100"],
-            "identification": [""],
+            "identification": [
+                "Really short length",
+                "No winglets",
+                "Pointed nose",
+                "2 rear landing gear wheels",
+                "Elevator is at the top of the tail",
+                "2 jet engines at the rear"
+            ],
             "image": "https://www.airfighters.com/photosearch.php?cra=8005",
             "wiki": "https://en.wikipedia.org/wiki/Embraer_Phenom_100"
         },
@@ -246,7 +388,14 @@
             "manufacturer": "Dassault",
             "model": "Falcon 20",
             "aliases": [],
-            "identification": [""],
+            "identification": [
+                "Short-medium length",
+                "Winglets pointing upwards",
+                "Pointed nose",
+                "4 rear landing gear wheels",
+                "Elevator is in the middle of the tail",
+                "3 jet engines at the rear - one is in the tail"
+            ],
             "image": "https://www.airfighters.com/photosearch.php?cra=802",
             "wiki": "https://en.wikipedia.org/wiki/Dassault_Falcon_20"
         },
@@ -256,7 +405,14 @@
             "manufacturer": "Britten-Norman",
             "model": "BN-2",
             "aliases": ["BN2", "BN 2", "Islander"],
-            "identification": [""],
+            "identification": [
+                "Short length",
+                "No winglets",
+                "Very pointed nose",
+                "4 rear landing gear wheels - non retractable",
+                "Wings are at the top of the fuselage",
+                "2 propeller engines"
+            ],
             "image": "https://www.airfighters.com/photosearch.php?cra=750",
             "wiki": "https://en.wikipedia.org/wiki/Britten-Norman_BN-2_Islander"
         },
@@ -266,7 +422,13 @@
             "manufacturer": "Saab",
             "model": "340",
             "aliases": [],
-            "identification": [""],
+            "identification": [
+                "Short length",
+                "No winglets",
+                "Rounded pointed nose",
+                "4 rear landing gear wheels",
+                "2 propeller engines"
+            ],
             "image": "https://www.airfighters.com/photosearch.php?cra=2749",
             "wiki": "https://en.wikipedia.org/wiki/Saab_340"
         },
@@ -276,7 +438,14 @@
             "manufacturer": "Fokker",
             "model": "100",
             "aliases": [],
-            "identification": [""],
+            "identification": [
+                "Medium length",
+                "No winglets",
+                "Rounded pointed nose",
+                "4 rear landing gear wheels",
+                "Elevator is at the top of the tail",
+                "2 jet engines at the rear"
+            ],
             "image": "https://www.airfighters.com/photosearch.php?cra=7223",
             "wiki": "https://en.wikipedia.org/wiki/Fokker_100"
         },
@@ -286,7 +455,15 @@
             "manufacturer": "Dornier",
             "model": "328",
             "aliases": [],
-            "identification": [""],
+            "identification": [
+                "Short length",
+                "No winglets",
+                "Pointed nose",
+                "4 rear landing gear wheels",
+                "Wings are at the top of the fuselage",
+                "Elevator is at the top of the tail",
+                "2 propeller engines"
+            ],
             "image": "https://www.airfighters.com/photosearch.php?cra=6700",
             "wiki": "https://en.wikipedia.org/wiki/Dornier_328"
         }
@@ -298,7 +475,11 @@
             "manufacturer": "AgustaWestland",
             "model": "AW149",
             "aliases": ["AW-149", "AW 149"],
-            "identification": [""],
+            "identification": [
+                "Pointed nose",
+                "Landing gear",
+                "No hook on the bottom of the tail"
+            ],
             "image": "https://www.airfighters.com/photosearch.php?cra=7568",
             "wiki": "https://en.wikipedia.org/wiki/AgustaWestland_AW149"
         },
@@ -308,7 +489,7 @@
             "manufacturer": "Airbus",
             "model": "A400M",
             "aliases": ["Atlas"],
-            "identification": [""],
+            "identification": [],
             "image": "https://www.airfighters.com/photosearch.php?cra=4099",
             "wiki": "https://en.wikipedia.org/wiki/Airbus_A400M_Atlas"
         },
@@ -318,7 +499,7 @@
             "manufacturer": "Airbus",
             "model": "A330 MRTT",
             "aliases": ["A330", "Voyager", "KC-30"],
-            "identification": [""],
+            "identification": [],
             "image": "https://www.airfighters.com/photosearch.php?cra=571",
             "wiki": "https://en.wikipedia.org/wiki/Airbus_A330_MRTT"
         },
@@ -328,7 +509,7 @@
             "manufacturer": "Boeing",
             "model": "CH-47",
             "aliases": ["Chinook"],
-            "identification": [""],
+            "identification": [],
             "image": "https://www.airfighters.com/photosearch.php?cra=4371",
             "wiki": "https://en.wikipedia.org/wiki/Boeing_CH-47_Chinook"
         },
@@ -338,7 +519,7 @@
             "manufacturer": "Boeing",
             "model": "C-17",
             "aliases": ["Globemaster III", "Globemaster"],
-            "identification": [""],
+            "identification": [],
             "image": "https://www.airfighters.com/photosearch.php?cra=2685",
             "wiki": "https://en.wikipedia.org/wiki/Boeing_C-17_Globemaster_III"
         },
@@ -348,7 +529,7 @@
             "manufacturer": "Boeing",
             "model": "E-3",
             "aliases": ["Sentry"],
-            "identification": [""],
+            "identification": [],
             "image": "https://www.airfighters.com/photosearch.php?cra=665",
             "wiki": "https://en.wikipedia.org/wiki/Boeing_E-3_Sentry"
         },
@@ -358,7 +539,7 @@
             "manufacturer": "Boeing",
             "model": "737 AEW&C",
             "aliases": ["Wedgetail", "Peace Eagle"],
-            "identification": [""],
+            "identification": [],
             "image": "https://www.airfighters.com/photosearch.php?cra=7400",
             "wiki": "https://en.wikipedia.org/wiki/Boeing_737_AEW%26C"
         },
@@ -368,7 +549,7 @@
             "manufacturer": "Boeing",
             "model": "P-8",
             "aliases": ["Poseidon"],
-            "identification": [""],
+            "identification": [],
             "image": "https://www.airfighters.com/photosearch.php?cra=5111",
             "wiki": "https://en.wikipedia.org/wiki/Boeing_P-8_Poseidon"
         },
@@ -378,7 +559,7 @@
             "manufacturer": "Boeing",
             "model": "AH-64",
             "aliases": ["Apache"],
-            "identification": [""],
+            "identification": [],
             "image": "https://www.airfighters.com/photosearch.php?cra=699",
             "wiki": "https://en.wikipedia.org/wiki/Boeing_AH-64_Apache"
         },
@@ -388,7 +569,7 @@
             "manufacturer": "Boeing",
             "model": "RC-135",
             "aliases": ["Rivet Joint"],
-            "identification": [""],
+            "identification": [],
             "image": "https://www.airfighters.com/photosearch.php?cra=2179",
             "wiki": "https://en.wikipedia.org/wiki/Boeing_RC-135"
         },
@@ -398,7 +579,7 @@
             "manufacturer": "BAe",
             "model": "Hawk",
             "aliases": [],
-            "identification": [""],
+            "identification": [],
             "image": "https://www.airfighters.com/photosearch.php?cra=1878",
             "wiki": "https://en.wikipedia.org/wiki/BAE_Systems_Hawk"
         },
@@ -408,7 +589,7 @@
             "manufacturer": "Eurofighter",
             "model": "Typhoon",
             "aliases": [],
-            "identification": [""],
+            "identification": [],
             "image": "https://www.airfighters.com/photosearch.php?cra=2167",
             "wiki": "https://en.wikipedia.org/wiki/Eurofighter_Typhoon"
         },
@@ -418,7 +599,7 @@
             "manufacturer": "GA",
             "model": "MQ-9",
             "aliases": ["Reaper", "Predator B"],
-            "identification": [""],
+            "identification": [],
             "image": "https://www.airfighters.com/photosearch.php?cra=2873",
             "wiki": "https://en.wikipedia.org/wiki/General_Atomics_MQ-9_Reaper"
         },
@@ -428,7 +609,7 @@
             "manufacturer": "Grob",
             "model": "G115",
             "aliases": ["Tutor"],
-            "identification": [""],
+            "identification": [],
             "image": "https://www.airfighters.com/photosearch.php?cra=2553",
             "wiki": "https://en.wikipedia.org/wiki/Grob_G_115"
         },
@@ -438,7 +619,7 @@
             "manufacturer": "Grob",
             "model": "G103a",
             "aliases": ["Twin II", "Viking"],
-            "identification": [""],
+            "identification": [],
             "image": "https://www.airfighters.com/photosearch.php?cra=2550",
             "wiki": "https://en.wikipedia.org/wiki/Grob_G103a_Twin_II"
         },
@@ -448,7 +629,7 @@
             "manufacturer": "Grob",
             "model": "G109",
             "aliases": ["Vigilant"],
-            "identification": [""],
+            "identification": [],
             "image": "https://www.airfighters.com/photosearch.php?cra=2555",
             "wiki": "https://en.wikipedia.org/wiki/Grob_G_109"
         },
@@ -458,7 +639,7 @@
             "manufacturer": "Grob",
             "model": "G120TP",
             "aliases": ["Prefect"],
-            "identification": [""],
+            "identification": [],
             "image": "https://www.airfighters.com/photosearch.php?cra=8187",
             "wiki": "https://en.wikipedia.org/wiki/Grob_G_120TP"
         },
@@ -468,7 +649,7 @@
             "manufacturer": "Lockheed",
             "model": "C-130",
             "aliases": ["Hercules"],
-            "identification": [""],
+            "identification": [],
             "image": "https://www.airfighters.com/photosearch.php?cra=2999",
             "wiki": "https://en.wikipedia.org/wiki/Lockheed_C-130_Hercules"
         },
@@ -478,7 +659,7 @@
             "manufacturer": "Lockheed Martin",
             "model": "F-35",
             "aliases": ["Lightning II", "Lightning"],
-            "identification": [""],
+            "identification": [],
             "image": "https://www.airfighters.com/photosearch.php?cra=2992",
             "wiki": "https://en.wikipedia.org/wiki/Lockheed_Martin_F-35_Lightning_II"
         },
@@ -488,7 +669,7 @@
             "manufacturer": "Panavia",
             "model": "Tornado",
             "aliases": [],
-            "identification": [""],
+            "identification": [],
             "image": "https://www.airfighters.com/photosearch.php?cra=1477",
             "wiki": "https://en.wikipedia.org/wiki/Panavia_Tornado"
         },
@@ -498,7 +679,7 @@
             "manufacturer": "Raytheon",
             "model": "Sentinel",
             "aliases": [],
-            "identification": [""],
+            "identification": [],
             "image": "https://www.airfighters.com/photosearch.php?cra=1811",
             "wiki": "https://en.wikipedia.org/wiki/Raytheon_Sentinel"
         },
@@ -508,7 +689,7 @@
             "manufacturer": "Short",
             "model": "Tucano",
             "aliases": [],
-            "identification": [""],
+            "identification": [],
             "image": "https://www.airfighters.com/photosearch.php?cra=1628",
             "wiki": "https://en.wikipedia.org/wiki/Short_Tucano"
         },
@@ -518,7 +699,7 @@
             "manufacturer": "Aerospatiale",
             "model": "SA330",
             "aliases": ["Puma"],
-            "identification": [""],
+            "identification": [],
             "image": "https://www.airfighters.com/photosearch.php?cra=3145",
             "wiki": "https://en.wikipedia.org/wiki/A%C3%A9rospatiale_SA_330_Puma"
         },
@@ -528,7 +709,7 @@
             "manufacturer": "Aerospatiale",
             "model": "SA332",
             "aliases": ["Super Puma"],
-            "identification": [""],
+            "identification": [],
             "image": "https://www.airfighters.com/photosearch.php?cra=1778",
             "wiki": "https://en.wikipedia.org/wiki/Eurocopter_AS332_Super_Puma"
         },
@@ -538,7 +719,7 @@
             "manufacturer": "Aerospatiale",
             "model": "SA340",
             "aliases": ["Gazelle"],
-            "identification": [""],
+            "identification": [],
             "image": "https://www.airfighters.com/photosearch.php?cra=1784",
             "wiki": "https://en.wikipedia.org/wiki/A%C3%A9rospatiale_Gazelle"
         },
@@ -548,7 +729,7 @@
             "manufacturer": "Eurocopter",
             "model": "EC135",
             "aliases": [],
-            "identification": [""],
+            "identification": [],
             "image": "https://www.airfighters.com/photosearch.php?cra=1853",
             "wiki": "https://en.wikipedia.org/wiki/Eurocopter_EC135"
         },
@@ -558,7 +739,7 @@
             "manufacturer": "Eurocopter",
             "model": "AS365",
             "aliases": ["Dauphin"],
-            "identification": [""],
+            "identification": [],
             "image": "https://www.airfighters.com/photosearch.php?cra=3219",
             "wiki": "https://en.wikipedia.org/wiki/Eurocopter_AS365_Dauphin"
         },
@@ -568,7 +749,7 @@
             "manufacturer": "Eurocopter",
             "model": "AS350",
             "aliases": ["Ecureuil", "Squirrel"],
-            "identification": [""],
+            "identification": [],
             "image": "https://www.airfighters.com/photosearch.php?cra=2352",
             "wiki": "https://en.wikipedia.org/wiki/Eurocopter_AS350_%C3%89cureuil"
         },
@@ -578,7 +759,7 @@
             "manufacturer": "Avro",
             "model": "Lancaster",
             "aliases": [],
-            "identification": [""],
+            "identification": [],
             "image": "https://www.airfighters.com/photosearch.php?cra=610",
             "wiki": "https://en.wikipedia.org/wiki/Avro_Lancaster"
         },
@@ -588,7 +769,7 @@
             "manufacturer": "de Havilland Canada",
             "model": "DHC-1",
             "aliases": ["Chipmunk", "DHC 1", "DHC!"],
-            "identification": [""],
+            "identification": [],
             "image": "https://www.airfighters.com/photosearch.php?cra=2770",
             "wiki": "https://en.wikipedia.org/wiki/De_Havilland_Canada_DHC-1_Chipmunk"
         },
@@ -598,7 +779,7 @@
             "manufacturer": "Hawker",
             "model": "Hurricane",
             "aliases": [],
-            "identification": [""],
+            "identification": [],
             "image": "https://www.airfighters.com/photosearch.php?cra=2010",
             "wiki": "https://en.wikipedia.org/wiki/Hawker_Hurricane"
         },
@@ -608,7 +789,7 @@
             "manufacturer": "Supermarine",
             "model": "Spitfire",
             "aliases": [],
-            "identification": [""],
+            "identification": [],
             "image": "https://www.airfighters.com/photosearch.php?cra=1461",
             "wiki": "https://en.wikipedia.org/wiki/Supermarine_Spitfire"
         },
@@ -618,7 +799,7 @@
             "manufacturer": "Grumman",
             "model": "F4F",
             "aliases": ["Wildcat"],
-            "identification": [""],
+            "identification": [],
             "image": "https://www.airfighters.com/photosearch.php?cra=3410",
             "wiki": "https://en.wikipedia.org/wiki/Grumman_F4F_Wildcat"
         },
@@ -628,7 +809,7 @@
             "manufacturer": "AgustaWestland",
             "model": "AW101",
             "aliases": ["Merlin"],
-            "identification": [""],
+            "identification": [],
             "image": "https://www.airfighters.com/photosearch.php?cra=7571",
             "wiki": "https://en.wikipedia.org/wiki/AgustaWestland_AW101"
         },
@@ -638,7 +819,7 @@
             "manufacturer": "BAe",
             "model": "Harrier",
             "aliases": ["Harrier II", "Harrier 2", "AV-8B", "AV8B", "AV 8B"],
-            "identification": [""],
+            "identification": [],
             "image": "https://www.airfighters.com/photosearch.php?cra=734",
             "wiki": "https://en.wikipedia.org/wiki/Harrier_jump_jet"
         },
@@ -648,7 +829,7 @@
             "manufacturer": "McDonnell Douglas",
             "model": "KC-10",
             "aliases": ["Extender", "KC10", "KC 10", "DC-10", "DC10", "DC 10"],
-            "identification": [""],
+            "identification": [],
             "image": "https://www.airfighters.com/photosearch.php?cra=1150",
             "wiki": "https://en.wikipedia.org/wiki/McDonnell_Douglas_KC-10_Extender"
         },
@@ -658,7 +839,7 @@
             "manufacturer": "Douglas",
             "model": "C-47",
             "aliases": ["Skytrain", "Dakota", "C47", "C 47"],
-            "identification": [""],
+            "identification": [],
             "image": "https://www.airfighters.com/photosearch.php?cra=856",
             "wiki": "https://en.wikipedia.org/wiki/Douglas_C-47_Skytrain"
         },
@@ -668,7 +849,7 @@
             "manufacturer": "Bell",
             "model": "UH-1",
             "aliases": ["Iroquois", "Huey", "UH1", "UH 1"],
-            "identification": [""],
+            "identification": [],
             "image": "https://www.airfighters.com/photosearch.php?cra=1949",
             "wiki": "https://en.wikipedia.org/wiki/Bell_UH-1_Iroquois"
         },
@@ -678,7 +859,7 @@
             "manufacturer": "Antonov",
             "model": "An-124",
             "aliases": ["Ruslan", "Condor", "An124", "An 124"],
-            "identification": [""],
+            "identification": [],
             "image": "https://www.airfighters.com/photosearch.php?cra=5403",
             "wiki": "https://en.wikipedia.org/wiki/Antonov_An-124_Ruslan"
         },
@@ -688,7 +869,7 @@
             "manufacturer": "Lockheed Martin",
             "model": "F-22",
             "aliases": ["Raptor", "F22", "F 22"],
-            "identification": [""],
+            "identification": [],
             "image": "https://www.airfighters.com/photosearch.php?cra=2997",
             "wiki": "https://en.wikipedia.org/wiki/Lockheed_Martin_F-22_Raptor"
         },
@@ -698,7 +879,7 @@
             "manufacturer": "General Dynamics",
             "model": "F-16",
             "aliases": ["Fighting Falcon", "Viper", "F16", "F 16"],
-            "identification": [""],
+            "identification": [],
             "image": "https://www.airfighters.com/photosearch.php?cra=954",
             "wiki": "https://en.wikipedia.org/wiki/General_Dynamics_F-16_Fighting_Falcon"
         },
@@ -708,7 +889,7 @@
             "manufacturer": "McDonnell Douglas",
             "model": "F-15",
             "aliases": ["Eagle", "F15", "F 15"],
-            "identification": [""],
+            "identification": [],
             "image": "https://www.airfighters.com/photosearch.php?cra=1133",
             "wiki": "https://en.wikipedia.org/wiki/McDonnell_Douglas_F-15_Eagle"
         },
@@ -718,7 +899,7 @@
             "manufacturer": "McDonnell Douglas",
             "model": "F/A-18",
             "aliases": ["Hornet", "F/A18", "F/A 18", "F-18", "F18", "F 18"],
-            "identification": [""],
+            "identification": [],
             "image": "https://www.airfighters.com/photosearch.php?cra=1126",
             "wiki": "https://en.wikipedia.org/wiki/McDonnell_Douglas_F/A-18_Hornet"
         },
@@ -728,7 +909,7 @@
             "manufacturer": "Sukhoi",
             "model": "Su-27",
             "aliases": ["Flanker", "Su27", "Su 27"],
-            "identification": [""],
+            "identification": [],
             "image": "https://www.airfighters.com/photosearch.php?cra=1346",
             "wiki": "https://en.wikipedia.org/wiki/Sukhoi_Su-27"
         },
@@ -738,7 +919,7 @@
             "manufacturer": "Sukhoi",
             "model": "Su-35",
             "aliases": ["Flanker-E", "Su35", "Su 35"],
-            "identification": [""],
+            "identification": [],
             "image": "https://www.airfighters.com/photosearch.php?cra=3211",
             "wiki": "https://en.wikipedia.org/wiki/Sukhoi_Su-35"
         },
@@ -748,7 +929,7 @@
             "manufacturer": "Sukhoi",
             "model": "Su-57",
             "aliases": ["Felon", "Su57", "Su 57"],
-            "identification": [""],
+            "identification": [],
             "image": "https://www.airfighters.com/photosearch.php?cra=6057",
             "wiki": "https://en.wikipedia.org/wiki/Sukhoi_Su-57"
         },
@@ -758,7 +939,7 @@
             "manufacturer": "Mikoyan",
             "model": "MiG-29",
             "aliases": ["Fulcrum", "MiG29", "MiG 29"],
-            "identification": [""],
+            "identification": [],
             "image": "https://www.airfighters.com/photosearch.php?cra=1175",
             "wiki": "https://en.wikipedia.org/wiki/Mikoyan_MiG-29"
         },
@@ -768,7 +949,7 @@
             "manufacturer": "Mikoyan",
             "model": "MiG-31",
             "aliases": ["Foxhound", "MiG31", "MiG 31"],
-            "identification": [""],
+            "identification": [],
             "image": "https://www.airfighters.com/photosearch.php?cra=2136",
             "wiki": "https://en.wikipedia.org/wiki/Mikoyan_MiG-31"
         },
@@ -778,7 +959,7 @@
             "manufacturer": "Saab",
             "model": "JAS39",
             "aliases": ["Gripen", "JAS-39", "JAS 39"],
-            "identification": [""],
+            "identification": [],
             "image": "https://www.airfighters.com/photosearch.php?cra=2022",
             "wiki": "https://en.wikipedia.org/wiki/Saab_JAS_39_Gripen"
         },
@@ -788,7 +969,7 @@
             "manufacturer": "Dassault",
             "model": "Rafale",
             "aliases": [],
-            "identification": [""],
+            "identification": [],
             "image": "https://www.airfighters.com/photosearch.php?cra=823",
             "wiki": "https://en.wikipedia.org/wiki/Dassault_Rafale"
         },
@@ -798,7 +979,7 @@
             "manufacturer": "McDonnell Douglas",
             "model": "F-4",
             "aliases": ["Phantom", "Phantom II", "F4", "F 4"],
-            "identification": [""],
+            "identification": [],
             "image": "https://www.airfighters.com/photosearch.php?cra=1541",
             "wiki": "https://en.wikipedia.org/wiki/McDonnell_Douglas_F-4_Phantom_II"
         },
@@ -808,7 +989,7 @@
             "manufacturer": "Xian",
             "model": "H-6",
             "aliases": ["H6", "H 6", "Tu-16", "Tu16", "Tu 16"],
-            "identification": [""],
+            "identification": [],
             "image": "https://www.airfighters.com/photosearch.php?cra=5375",
             "wiki": "https://en.wikipedia.org/wiki/Xian_H-6"
         },
@@ -818,7 +999,7 @@
             "manufacturer": "Xian",
             "model": "JH-7",
             "aliases": ["Flounder", "Flying Leopard", "JH7", "JH 7"],
-            "identification": [""],
+            "identification": [],
             "image": "https://www.airfighters.com/photosearch.php?cra=5505",
             "wiki": "https://en.wikipedia.org/wiki/Xi%27an_JH-7"
         },
@@ -828,7 +1009,7 @@
             "manufacturer": "Chengdu",
             "model": "J-7",
             "aliases": ["Fishcan", "MiG-27", "MiG27", "J7", "J 7"],
-            "identification": [""],
+            "identification": [],
             "image": "https://www.airfighters.com/photosearch.php?cra=3642",
             "wiki": "https://en.wikipedia.org/wiki/Chengdu_J-7"
         },
@@ -838,7 +1019,7 @@
             "manufacturer": "Chengdu",
             "model": "J-10",
             "aliases": ["Firebird", "Vigorous Dragon", "J10", "J 10"],
-            "identification": [""],
+            "identification": [],
             "image": "https://www.airfighters.com/photosearch.php?cra=5150",
             "wiki": "https://en.wikipedia.org/wiki/Chengdu_J-10"
         },
@@ -848,7 +1029,7 @@
             "manufacturer": "Chengdu",
             "model": "J-20",
             "aliases": ["Mighty Dragon", "J20"],
-            "identification": [""],
+            "identification": [],
             "image": "https://www.airfighters.com/photosearch.php?cra=7971",
             "wiki": "https://en.wikipedia.org/wiki/Chengdu_J-20"
         },
@@ -858,7 +1039,7 @@
             "manufacturer": "Xian",
             "model": "Y-20",
             "aliases": ["Kunpeng", "Y20", "Y 20"],
-            "identification": [""],
+            "identification": [],
             "image": "https://www.airfighters.com/photosearch.php?cra=7279",
             "wiki": "https://en.wikipedia.org/wiki/Xi%27an_Y-20"
         },
@@ -868,7 +1049,7 @@
             "manufacturer": "English Electric",
             "model": "Lightning",
             "aliases": [],
-            "identification": [""],
+            "identification": [],
             "image": "https://www.airfighters.com/photosearch.php?cra=1932",
             "wiki": "https://en.wikipedia.org/wiki/English_Electric_Lightning"
         },
@@ -878,7 +1059,7 @@
             "manufacturer": "Yakolev",
             "model": "Yak-130",
             "aliases": ["Mitten", "Yak130", "Yak 130"],
-            "identification": [""],
+            "identification": [],
             "image": "https://www.airfighters.com/photosearch.php?cra=2242",
             "wiki": "https://en.wikipedia.org/wiki/Yakovlev_Yak-130"
         }

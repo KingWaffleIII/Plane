@@ -4,10 +4,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.execute = exports.data = void 0;
+const crypto_1 = __importDefault(require("crypto"));
 const discord_js_1 = require("discord.js");
 const airrec_1 = require("./airrec");
 const air_rec_json_1 = __importDefault(require("../air_rec.json"));
-const crypto = require("crypto");
 const wait = require("node:timers/promises").setTimeout;
 function checkAnswer(message, aircraft) {
     if (message.toLowerCase() === aircraft.name.toLowerCase()) {
@@ -47,7 +47,7 @@ async function execute(interaction) {
     await interaction.editReply({
         content: "Thread created! Click here:",
     });
-    const buttonId = crypto.randomBytes(6).toString("hex");
+    const buttonId = crypto_1.default.randomBytes(6).toString("hex");
     const row = new discord_js_1.ActionRowBuilder().addComponents([
         new discord_js_1.ButtonBuilder()
             .setCustomId(`play-${buttonId}`)
@@ -207,6 +207,9 @@ If you want to play, click the button below.
                 .addFields({
                 name: "Alternative names (aliases for /airrec-quiz):",
                 value: aircraft.aliases.join(", ") || "None",
+            }, {
+                name: "Aircraft features to help you identify it:",
+                value: aircraft.identification.join(", ") || "None",
             }, 
             // { name: "\u200B", value: "\u200B" },
             {

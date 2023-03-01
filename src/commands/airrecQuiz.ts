@@ -1,3 +1,4 @@
+import crypto from "crypto";
 import {
 	ActionRowBuilder,
 	BaseGuildTextChannel,
@@ -15,7 +16,6 @@ import { Aircraft } from "../interfaces";
 import { getImage } from "./airrec";
 import airrec from "../air_rec.json";
 
-const crypto = require("crypto");
 const wait = require("node:timers/promises").setTimeout;
 
 interface Players {
@@ -269,6 +269,10 @@ If you want to play, click the button below.
 					{
 						name: "Alternative names (aliases for /airrec-quiz):",
 						value: aircraft.aliases.join(", ") || "None",
+					},
+					{
+						name: "Aircraft features to help you identify it:",
+						value: aircraft.identification.join(", ") || "None",
 					},
 					// { name: "\u200B", value: "\u200B" },
 					{
