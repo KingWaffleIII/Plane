@@ -87,8 +87,8 @@
 		{
 			"name": "Airbus A319",
 			"role": "Narrow-body airliner.",
-			"manufacturer": "",
-			"model": "",
+			"manufacturer": "Airbus",
+			"model": "A319",
 			"aliases": [],
 			"identification": [
 				"Short length",
@@ -127,7 +127,7 @@
 				"Winglets pointing upwards",
 				"Rounded pointed nose",
 				"4 rear landing gear wheels",
-				"'Superhero goggle' cockpit windows",
+				"'Superhero goggles' cockpit windows (sometimes it has normal windows)",
 				"Two jet engines"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=7091",
