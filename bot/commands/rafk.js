@@ -46,7 +46,7 @@ async function execute(interaction) {
         const filter = (i) => i.customId === `select-subject-${selectId}`;
         const selections = await interaction.channel?.awaitMessageComponent({
             componentType: discord_js_1.ComponentType.StringSelect,
-            time: 60000,
+            time: 30000,
             filter,
         });
         if (selections) {
@@ -94,7 +94,7 @@ async function execute(interaction) {
             });
         }
     });
-    await wait(60000);
+    await wait(30000);
     await interaction.editReply({
         content: `\n${question}\n**${answer}**`,
         components: [],

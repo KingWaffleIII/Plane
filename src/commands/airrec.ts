@@ -94,7 +94,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 			i.customId === `select-type-${selectId}`;
 		const selections = await interaction.channel?.awaitMessageComponent({
 			componentType: ComponentType.StringSelect,
-			time: 60000,
+			time: 30000,
 			filter,
 		});
 		if (selections) {
@@ -184,7 +184,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 		}
 	});
 
-	await wait(60000);
+	await wait(30000);
 	await interaction.editReply({
 		content: `**The answer was ${aircraft.name}!**`,
 		embeds: [answer],

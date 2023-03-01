@@ -81,7 +81,7 @@ export async function execute(
 			i.customId === `select-subject-${selectId}`;
 		const selections = await interaction.channel?.awaitMessageComponent({
 			componentType: ComponentType.StringSelect,
-			time: 60000,
+			time: 30000,
 			filter,
 		});
 		if (selections) {
@@ -141,7 +141,7 @@ export async function execute(
 		}
 	});
 
-	await wait(60000);
+	await wait(30000);
 	await interaction.editReply({
 		content: `\n${question}\n**${answer}**`,
 		components: [],

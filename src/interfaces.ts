@@ -15,7 +15,6 @@ export interface Aircraft {
 	readonly manufacturer: string;
 	readonly model: string;
 	readonly aliases: string[];
-	readonly summary: string;
 	readonly identification: string[];
 	readonly image: string;
 	readonly wiki: string;
