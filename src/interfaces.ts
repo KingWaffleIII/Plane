@@ -17,5 +17,6 @@ export interface Aircraft {
 	readonly aliases: string[];
 	readonly identification: string[];
 	readonly image: string;
+	readonly waifuImage?: string;
 	readonly wiki: string;
 }

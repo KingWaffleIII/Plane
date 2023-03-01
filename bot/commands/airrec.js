@@ -54,6 +54,13 @@ async function execute(interaction) {
     }
     const aircraft = type[Math.floor(Math.random() * type.length)];
     const image = await getImage(aircraft.image);
+    let waifuImage = false;
+    if (aircraft.waifuImage) {
+        // easter egg
+        if (Math.floor(Math.random() * 2) === 0) {
+            waifuImage = true;
+        }
+    }
     if (!image) {
         await interaction.editReply({
             content: "Sorry, I encountered an issue in retrieving an image. Please try again later.",
@@ -69,15 +76,12 @@ async function execute(interaction) {
         content: `**What is the name of this aircraft?**\n${image}`,
         components: [row],
     });
+    // }
     const answer = new discord_js_1.EmbedBuilder()
         .setColor(0x0099ff)
         .setTitle(aircraft.name)
         .setDescription(aircraft.role)
-        .setImage(image)
         .setTimestamp()
-        .setFooter({
-        text: "Photo credit: https://www.airfighters.com",
-    })
         .addFields({
         name: "Alternative names (aliases for /airrec-quiz):",
         value: aircraft.aliases.join(", ") || "None",
@@ -97,6 +101,16 @@ async function execute(interaction) {
         value: aircraft.image,
         inline: true,
     });
+    if (waifuImage) {
+        answer.setImage(`attachment://${aircraft.model}.jpg`).setFooter({
+            text: "You found an easter egg! Image credit: Atamonica",
+        });
+    }
+    else {
+        answer.setImage(image).setFooter({
+            text: "Photo credit: https://www.airfighters.com",
+        });
+    }
     const filter = (i) => i.customId === `reveal-airrec-${buttonId}`;
     const collector = interaction.channel?.createMessageComponentCollector({
         componentType: discord_js_1.ComponentType.Button,
@@ -110,6 +124,14 @@ async function execute(interaction) {
                 ephemeral: true,
             });
         }
+        else if (waifuImage) {
+            await interaction.editReply({
+                content: `**The answer was ${aircraft.name}!**`,
+                embeds: [answer],
+                components: [],
+                files: [`./assets/waifus/${aircraft.model}.jpg`],
+            });
+        }
         else {
             await interaction.editReply({
                 content: `**The answer was ${aircraft.name}!**`,
@@ -119,10 +141,20 @@ async function execute(interaction) {
         }
     });
     await wait(30000);
-    await interaction.editReply({
-        content: `**The answer was ${aircraft.name}!**`,
-        embeds: [answer],
-        components: [],
-    });
+    if (waifuImage) {
+        await interaction.editReply({
+            content: `**The answer was ${aircraft.name}!**`,
+            embeds: [answer],
+            components: [],
+            files: [`./assets/waifus/${aircraft.model}.jpg`],
+        });
+    }
+    else {
+        await interaction.editReply({
+            content: `**The answer was ${aircraft.name}!**`,
+            embeds: [answer],
+            components: [],
+        });
+    }
 }
 exports.execute = execute;

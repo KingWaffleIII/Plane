@@ -518,9 +518,10 @@
 			"role": "Strategic and tactical airlifter.",
 			"manufacturer": "Boeing",
 			"model": "C-17",
-			"aliases": ["Globemaster III", "Globemaster"],
+			"aliases": ["C17", "C 17", "Globemaster III", "Globemaster"],
 			"identification": [],
 			"image": "https://www.airfighters.com/photosearch.php?cra=2685",
+			"waifuImage": "./assets/waifus/C-17.jpg",
 			"wiki": "https://en.wikipedia.org/wiki/Boeing_C-17_Globemaster_III"
 		},
 		{
@@ -528,9 +529,10 @@
 			"role": "Airborne early warning and control (AEW&C) aircraft.",
 			"manufacturer": "Boeing",
 			"model": "E-3",
-			"aliases": ["Sentry"],
+			"aliases": ["E3", "E 3", "Sentry"],
 			"identification": [],
 			"image": "https://www.airfighters.com/photosearch.php?cra=665",
+			"waifuImage": "./assets/waifus/E-3.jpg",
 			"wiki": "https://en.wikipedia.org/wiki/Boeing_E-3_Sentry"
 		},
 		{
@@ -541,6 +543,7 @@
 			"aliases": ["Wedgetail", "Peace Eagle"],
 			"identification": [],
 			"image": "https://www.airfighters.com/photosearch.php?cra=7400",
+			"waifuImage": "./assets/waifus/737 AEW&C.jpg",
 			"wiki": "https://en.wikipedia.org/wiki/Boeing_737_AEW%26C"
 		},
 		{
@@ -548,9 +551,10 @@
 			"role": "Maritime patrol aircraft.",
 			"manufacturer": "Boeing",
 			"model": "P-8",
-			"aliases": ["Poseidon"],
+			"aliases": ["P8", "P 8", "Poseidon"],
 			"identification": [],
 			"image": "https://www.airfighters.com/photosearch.php?cra=5111",
+			"waifuImage": "./assets/waifus/P-8.jpg",
 			"wiki": "https://en.wikipedia.org/wiki/Boeing_P-8_Poseidon"
 		},
 		{
@@ -601,6 +605,7 @@
 			"aliases": ["Reaper", "Predator B"],
 			"identification": [],
 			"image": "https://www.airfighters.com/photosearch.php?cra=2873",
+			"waifuImage": "./assets/waifus/MQ-9.jpg",
 			"wiki": "https://en.wikipedia.org/wiki/General_Atomics_MQ-9_Reaper"
 		},
 		{
@@ -658,9 +663,10 @@
 			"role": "Multirole fighter.",
 			"manufacturer": "Lockheed Martin",
 			"model": "F-35",
-			"aliases": ["Lightning II", "Lightning"],
+			"aliases": ["F35", "F 35", "Lightning II", "Lightning"],
 			"identification": [],
 			"image": "https://www.airfighters.com/photosearch.php?cra=2992",
+			"waifuImage": "./assets/waifus/F-35.jpg",
 			"wiki": "https://en.wikipedia.org/wiki/Lockheed_Martin_F-35_Lightning_II"
 		},
 		{
@@ -821,6 +827,7 @@
 			"aliases": ["Harrier II", "Harrier 2", "AV-8B", "AV8B", "AV 8B"],
 			"identification": [],
 			"image": "https://www.airfighters.com/photosearch.php?cra=734",
+			"waifuImage": "./assets/waifus/Harrier.jpg",
 			"wiki": "https://en.wikipedia.org/wiki/Harrier_jump_jet"
 		},
 		{
@@ -864,6 +871,34 @@
 			"wiki": "https://en.wikipedia.org/wiki/Antonov_An-124_Ruslan"
 		},
 		{
+			"name": "Fairchild Republic A-10 Thunderbolt II",
+			"role": "Close air support attack aircraft.",
+			"manufacturer": "Fairchild Republic",
+			"model": "A-10",
+			"aliases": [
+				"Thunderbolt II",
+				"Thunderbolt",
+				"Warthog",
+				"A10",
+				"A 10"
+			],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=1470",
+			"waifuImage": "./assets/waifus/A-10.jpg",
+			"wiki": "https://en.wikipedia.org/wiki/Fairchild_Republic_A-10_Thunderbolt_II"
+		},
+		{
+			"name": "Grumman F-14 Tomcat",
+			"role": "Multirole air superiority fighter.",
+			"manufacturer": "Grumman",
+			"model": "F-14",
+			"aliases": ["Tomcat", "F14", "F 14"],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=978",
+			"waifuImage": "./assets/waifus/F-14.jpg",
+			"wiki": "https://en.wikipedia.org/wiki/Grumman_F-14_Tomcat"
+		},
+		{
 			"name": "Lockheed Martin F-22 Raptor",
 			"role": "Stealth air superiority fighter.",
 			"manufacturer": "Lockheed Martin",
@@ -881,6 +916,7 @@
 			"aliases": ["Fighting Falcon", "Viper", "F16", "F 16"],
 			"identification": [],
 			"image": "https://www.airfighters.com/photosearch.php?cra=954",
+			"waifuImage": "./assets/waifus/F-16.jpg",
 			"wiki": "https://en.wikipedia.org/wiki/General_Dynamics_F-16_Fighting_Falcon"
 		},
 		{
@@ -888,9 +924,10 @@
 			"role": "Air superiority fighter.",
 			"manufacturer": "McDonnell Douglas",
 			"model": "F-15",
-			"aliases": ["Eagle", "F15", "F 15"],
+			"aliases": ["Strike Eagle", "Eagle", "F15", "F 15"],
 			"identification": [],
 			"image": "https://www.airfighters.com/photosearch.php?cra=1133",
+			"waifuImage": "./assets/waifus/F-15.jpg",
 			"wiki": "https://en.wikipedia.org/wiki/McDonnell_Douglas_F-15_Eagle"
 		},
 		{
@@ -911,6 +948,7 @@
 			"aliases": ["Flanker", "Su27", "Su 27"],
 			"identification": [],
 			"image": "https://www.airfighters.com/photosearch.php?cra=1346",
+			"waifuImage": "./assets/waifus/Su-35.jpg",
 			"wiki": "https://en.wikipedia.org/wiki/Sukhoi_Su-27"
 		},
 		{
@@ -934,6 +972,17 @@
 			"wiki": "https://en.wikipedia.org/wiki/Sukhoi_Su-57"
 		},
 		{
+			"name": "Mikoyan MiG-21",
+			"role": "Fighter and interceptor aircraft.",
+			"manufacturer": "Mikoyan",
+			"model": "MiG-21",
+			"aliases": ["Fishbed", "MiG21", "MiG 21"],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=1444",
+			"waifuImage": "./assets/waifus/MiG-21.jpg",
+			"wiki": "https://en.wikipedia.org/wiki/Mikoyan_MiG-21"
+		},
+		{
 			"name": "Mikoyan MiG-29",
 			"role": "Multirole and air superiority fighter.",
 			"manufacturer": "Mikoyan",
@@ -941,6 +990,7 @@
 			"aliases": ["Fulcrum", "MiG29", "MiG 29"],
 			"identification": [],
 			"image": "https://www.airfighters.com/photosearch.php?cra=1175",
+			"waifuImage": "./assets/waifus/MiG-29.jpg",
 			"wiki": "https://en.wikipedia.org/wiki/Mikoyan_MiG-29"
 		},
 		{
@@ -951,16 +1001,18 @@
 			"aliases": ["Foxhound", "MiG31", "MiG 31"],
 			"identification": [],
 			"image": "https://www.airfighters.com/photosearch.php?cra=2136",
+			"waifuImage": "./assets/waifus/MiG-31.jpg",
 			"wiki": "https://en.wikipedia.org/wiki/Mikoyan_MiG-31"
 		},
 		{
-			"name": "Saab JAS 39 Gripen",
+			"name": "Saab JAS39 Gripen",
 			"role": "Multirole fighter.",
 			"manufacturer": "Saab",
 			"model": "JAS39",
 			"aliases": ["Gripen", "JAS-39", "JAS 39"],
 			"identification": [],
 			"image": "https://www.airfighters.com/photosearch.php?cra=2022",
+			"waifuImage": "./assets/waifus/JAS39.jpg",
 			"wiki": "https://en.wikipedia.org/wiki/Saab_JAS_39_Gripen"
 		},
 		{
@@ -981,6 +1033,7 @@
 			"aliases": ["Phantom", "Phantom II", "F4", "F 4"],
 			"identification": [],
 			"image": "https://www.airfighters.com/photosearch.php?cra=1541",
+			"waifuImage": "./assets/waifus/F-4.jpg",
 			"wiki": "https://en.wikipedia.org/wiki/McDonnell_Douglas_F-4_Phantom_II"
 		},
 		{

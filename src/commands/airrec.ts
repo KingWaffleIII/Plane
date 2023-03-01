@@ -81,6 +81,15 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 
 	const aircraft: Aircraft = type[Math.floor(Math.random() * type.length)];
 	const image = await getImage(aircraft.image);
+
+	let waifuImage = false;
+	if (aircraft.waifuImage) {
+		// easter egg
+		if (Math.floor(Math.random() * 2) === 0) {
+			waifuImage = true;
+		}
+	}
+
 	if (!image) {
 		await interaction.editReply({
 			content:
@@ -96,20 +105,18 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 			.setLabel("Reveal answer")
 			.setStyle(ButtonStyle.Primary)
 	);
+
 	await interaction.editReply({
 		content: `**What is the name of this aircraft?**\n${image}`,
 		components: [row],
 	});
+	// }
 
 	const answer = new EmbedBuilder()
 		.setColor(0x0099ff)
 		.setTitle(aircraft.name)
 		.setDescription(aircraft.role)
-		.setImage(image)
 		.setTimestamp()
-		.setFooter({
-			text: "Photo credit: https://www.airfighters.com",
-		})
 		.addFields(
 			{
 				name: "Alternative names (aliases for /airrec-quiz):",
@@ -137,6 +144,16 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 			}
 		);
 
+	if (waifuImage) {
+		answer.setImage(`attachment://${aircraft.model}.jpg`).setFooter({
+			text: "You found an easter egg! Image credit: Atamonica",
+		});
+	} else {
+		answer.setImage(image).setFooter({
+			text: "Photo credit: https://www.airfighters.com",
+		});
+	}
+
 	const filter = (i: ButtonInteraction) =>
 		i.customId === `reveal-airrec-${buttonId}`;
 	const collector = interaction.channel?.createMessageComponentCollector({
@@ -150,6 +167,13 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 				content: "You can't reveal this answer.",
 				ephemeral: true,
 			});
+		} else if (waifuImage) {
+			await interaction.editReply({
+				content: `**The answer was ${aircraft.name}!**`,
+				embeds: [answer],
+				components: [],
+				files: [`./assets/waifus/${aircraft.model}.jpg`],
+			});
 		} else {
 			await interaction.editReply({
 				content: `**The answer was ${aircraft.name}!**`,
@@ -160,9 +184,18 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 	});
 
 	await wait(30000);
-	await interaction.editReply({
-		content: `**The answer was ${aircraft.name}!**`,
-		embeds: [answer],
-		components: [],
-	});
+	if (waifuImage) {
+		await interaction.editReply({
+			content: `**The answer was ${aircraft.name}!**`,
+			embeds: [answer],
+			components: [],
+			files: [`./assets/waifus/${aircraft.model}.jpg`],
+		});
+	} else {
+		await interaction.editReply({
+			content: `**The answer was ${aircraft.name}!**`,
+			embeds: [answer],
+			components: [],
+		});
+	}
 }
