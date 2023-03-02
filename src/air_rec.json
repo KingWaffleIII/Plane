@@ -541,7 +541,7 @@
 				"Has 4 pairs of 2 wheels in the rear landing gear"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=2685",
-			"waifuImage": "./assets/waifus/C-17.jpg",
+			"waifuImage": "Globemaster",
 			"wiki": "https://en.wikipedia.org/wiki/Boeing_C-17_Globemaster_III"
 		},
 		{
@@ -556,7 +556,7 @@
 				"Just look for the big circular radar dish"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=665",
-			"waifuImage": "./assets/waifus/E-3.jpg",
+			"waifuImage": "Sentry",
 			"wiki": "https://en.wikipedia.org/wiki/Boeing_E-3_Sentry"
 		},
 		{
@@ -564,14 +564,14 @@
 			"role": "Airborne early warning and control (AEW&C) aircraft.",
 			"manufacturer": "Boeing",
 			"model": "737 AEW&C",
-			"aliases": ["Wedgetail", "Peace Eagle"],
+			"aliases": ["Wedgetail", "Peace Eagle", "Peace Eye"],
 			"identification": [
 				"Two jet engines near the airframe, bigger than E-3",
 				"Thing long radar along the airframe and supported by 1 beam not 2, thinner than the airframe",
 				"Again, look for the thing long radar dish"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=7400",
-			"waifuImage": "./assets/waifus/737 AEW&C.jpg",
+			"waifuImage": "Peace Eye",
 			"wiki": "https://en.wikipedia.org/wiki/Boeing_737_AEW%26C"
 		},
 		{
@@ -586,7 +586,7 @@
 				"Many angled spikes along the top of the airframe"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=5111",
-			"waifuImage": "./assets/waifus/P-8.jpg",
+			"waifuImage": "Poseidon",
 			"wiki": "https://en.wikipedia.org/wiki/Boeing_P-8_Poseidon"
 		},
 		{
@@ -662,7 +662,7 @@
 				"Again… it doesn't have a cockpit, it's a drone"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=2873",
-			"waifuImage": "./assets/waifus/MQ-9.jpg",
+			"waifuImage": "Reaper",
 			"wiki": "https://en.wikipedia.org/wiki/General_Atomics_MQ-9_Reaper"
 		},
 		{
@@ -752,7 +752,7 @@
 				"2 angled verticle stabilisers"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=2992",
-			"waifuImage": "./assets/waifus/F-35.jpg",
+			"waifuImage": "Lightning II",
 			"wiki": "https://en.wikipedia.org/wiki/Lockheed_Martin_F-35_Lightning_II"
 		},
 		{
@@ -987,7 +987,7 @@
 				"It is chonk"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=734",
-			"waifuImage": "./assets/waifus/Harrier.jpg",
+			"waifuImage": "Harrier",
 			"wiki": "https://en.wikipedia.org/wiki/Harrier_jump_jet"
 		},
 		{
@@ -1067,7 +1067,7 @@
 				"Vertical stabilisers are outside the elevators and situated on the tip of them"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=1470",
-			"waifuImage": "./assets/waifus/A-10.jpg",
+			"waifuImage": "Warthog",
 			"wiki": "https://en.wikipedia.org/wiki/Fairchild_Republic_A-10_Thunderbolt_II"
 		},
 		{
@@ -1087,7 +1087,7 @@
 				"Top Gun"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=978",
-			"waifuImage": "./assets/waifus/F-14.jpg",
+			"waifuImage": "Tomcat",
 			"wiki": "https://en.wikipedia.org/wiki/Grumman_F-14_Tomcat"
 		},
 		{
@@ -1121,7 +1121,7 @@
 				"Has 3 landing gears which have the rear ones placed on the air intake and very close together"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=954",
-			"waifuImage": "./assets/waifus/F-16.jpg",
+			"waifuImage": "Falcon",
 			"wiki": "https://en.wikipedia.org/wiki/General_Dynamics_F-16_Fighting_Falcon"
 		},
 		{
@@ -1139,7 +1139,7 @@
 				"Has 3 thin landing gears which have the rear ones in the middle and spaced out from each other"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=1133",
-			"waifuImage": "./assets/waifus/F-15.jpg",
+			"waifuImage": "Eagle",
 			"wiki": "https://en.wikipedia.org/wiki/McDonnell_Douglas_F-15_Eagle"
 		},
 		{
@@ -1163,6 +1163,7 @@
 				"Has parts of the airframe thin and long by the canopy"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=1126",
+			"waifuImage": "Hornet",
 			"wiki": "https://en.wikipedia.org/wiki/McDonnell_Douglas_F/A-18_Hornet"
 		},
 		{
@@ -1178,7 +1179,7 @@
 				"Has 3 hardpoints on each wing"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=1346",
-			"waifuImage": "./assets/waifus/Su-35.jpg",
+			"waifuImage": "Flanker",
 			"wiki": "https://en.wikipedia.org/wiki/Sukhoi_Su-27"
 		},
 		{
@@ -1227,7 +1228,7 @@
 				"Has a single verticle stabiliser"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=1444",
-			"waifuImage": "./assets/waifus/MiG-21.jpg",
+			"waifuImage": "Fishbed",
 			"wiki": "https://en.wikipedia.org/wiki/Mikoyan_MiG-21"
 		},
 		{
@@ -1244,7 +1245,7 @@
 				"Has two rectangular air intakes on both sides of airframe"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=1175",
-			"waifuImage": "./assets/waifus/MiG-29.jpg",
+			"waifuImage": "Fulcrum",
 			"wiki": "https://en.wikipedia.org/wiki/Mikoyan_MiG-29"
 		},
 		{
@@ -1262,7 +1263,7 @@
 				"Wings have 1 hardpoint and are quite short"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=2136",
-			"waifuImage": "./assets/waifus/MiG-31.jpg",
+			"waifuImage": "Foxhound",
 			"wiki": "https://en.wikipedia.org/wiki/Mikoyan_MiG-31"
 		},
 		{
@@ -1280,7 +1281,7 @@
 				"Has a single verticle stabiliser"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=2022",
-			"waifuImage": "./assets/waifus/JAS39.jpg",
+			"waifuImage": "Gripen",
 			"wiki": "https://en.wikipedia.org/wiki/Saab_JAS_39_Gripen"
 		},
 		{
@@ -1315,7 +1316,7 @@
 				"Elevators are angled downwards"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=1541",
-			"waifuImage": "./assets/waifus/F-4.jpg",
+			"waifuImage": "Phantom",
 			"wiki": "https://en.wikipedia.org/wiki/McDonnell_Douglas_F-4_Phantom_II"
 		},
 		{

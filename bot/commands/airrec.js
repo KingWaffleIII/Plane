@@ -3,12 +3,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.execute = exports.data = exports.getImage = void 0;
+exports.execute = exports.data = exports.spawnWaifu = exports.getImage = void 0;
 const axios_1 = __importDefault(require("axios"));
 const cheerio_1 = __importDefault(require("cheerio"));
 const crypto_1 = __importDefault(require("crypto"));
 const discord_js_1 = require("discord.js");
 const air_rec_json_1 = __importDefault(require("../air_rec.json"));
+const waifus_json_1 = __importDefault(require("../waifus.json"));
 const wait = require("node:timers/promises").setTimeout;
 async function getImage(url) {
     try {
@@ -32,6 +33,39 @@ async function getImage(url) {
     }
 }
 exports.getImage = getImage;
+function spawnWaifu(aircraft) {
+    if (Math.floor(Math.random() * 1) === 0) {
+        if (aircraft) {
+            if (Object.keys(waifus_json_1.default).includes(aircraft)) {
+                const waifu = waifus_json_1.default[aircraft];
+                const path = waifu.path[Math.floor(Math.random() * waifu.path.length)];
+                if (waifu.urlFriendlyName) {
+                    return {
+                        urlFriendlyName: waifu.urlFriendlyName,
+                        path,
+                    };
+                }
+                return { urlFriendlyName: aircraft, path };
+            }
+            return null;
+        }
+        const waifuName = Object.keys(waifus_json_1.default)[Math.floor(Math.random() * Object.keys(waifus_json_1.default).length)];
+        const waifu = waifus_json_1.default[waifuName];
+        const path = waifu.path[Math.floor(Math.random() * waifu.path.length)];
+        if (waifu.urlFriendlyName) {
+            return {
+                urlFriendlyName: waifu.urlFriendlyName,
+                path,
+            };
+        }
+        return {
+            urlFriendlyName: waifuName,
+            path,
+        };
+    }
+    return null;
+}
+exports.spawnWaifu = spawnWaifu;
 exports.data = new discord_js_1.SlashCommandBuilder()
     .setName("airrec")
     .setDescription("Gives you an aircraft image for you to identify.")
@@ -54,11 +88,15 @@ async function execute(interaction) {
     }
     const aircraft = type[Math.floor(Math.random() * type.length)];
     const image = await getImage(aircraft.image);
-    let waifuImage = false;
+    let waifu = false;
+    let waifuName = "";
+    let waifuImage = "";
     if (aircraft.waifuImage) {
-        // easter egg
-        if (Math.floor(Math.random() * 2) === 0) {
-            waifuImage = true;
+        const doSpawnWaifu = spawnWaifu(aircraft.waifuImage);
+        if (doSpawnWaifu) {
+            waifu = true;
+            waifuName = doSpawnWaifu.urlFriendlyName;
+            waifuImage = doSpawnWaifu.path;
         }
     }
     if (!image) {
@@ -76,7 +114,6 @@ async function execute(interaction) {
         content: `**What is the name of this aircraft?**\n${image}`,
         components: [row],
     });
-    // }
     const answer = new discord_js_1.EmbedBuilder()
         .setColor(0x0099ff)
         .setTitle(aircraft.name)
@@ -101,9 +138,9 @@ async function execute(interaction) {
         value: aircraft.image,
         inline: true,
     });
-    if (waifuImage) {
-        answer.setImage(`attachment://${aircraft.model}.jpg`).setFooter({
-            text: "You found an easter egg! Image credit: Atamonica",
+    if (waifu) {
+        answer.setImage(`attachment://${waifuName}.jpg`).setFooter({
+            text: "You found an waifu! Image credit: Atamonica",
         });
     }
     else {
@@ -124,12 +161,12 @@ async function execute(interaction) {
                 ephemeral: true,
             });
         }
-        else if (waifuImage) {
+        else if (waifu) {
             await interaction.editReply({
                 content: `**The answer was ${aircraft.name}!**`,
                 embeds: [answer],
                 components: [],
-                files: [`./assets/waifus/${aircraft.model}.jpg`],
+                files: [waifuImage],
             });
         }
         else {
@@ -141,12 +178,12 @@ async function execute(interaction) {
         }
     });
     await wait(30000);
-    if (waifuImage) {
+    if (waifu) {
         await interaction.editReply({
             content: `**The answer was ${aircraft.name}!**`,
             embeds: [answer],
             components: [],
-            files: [`./assets/waifus/${aircraft.model}.jpg`],
+            files: [waifuImage],
         });
     }
     else {

@@ -12,8 +12,9 @@ import {
 	SlashCommandBuilder,
 } from "discord.js";
 
-import { Aircraft } from "../interfaces";
+import { Aircraft, Waifu } from "../interfaces";
 import airrec from "../air_rec.json";
+import waifus from "../waifus.json";
 
 const wait = require("node:timers/promises").setTimeout;
 
@@ -38,6 +39,47 @@ export async function getImage(url: string): Promise<string | null> {
 		console.error(error);
 		return null;
 	}
+}
+
+export function spawnWaifu(
+	aircraft: string | null
+): { urlFriendlyName: string; path: string } | null {
+	if (Math.floor(Math.random() * 1) === 0) {
+		if (aircraft) {
+			if (Object.keys(waifus).includes(aircraft)) {
+				const waifu: Waifu = waifus[aircraft as keyof typeof waifus];
+				const path =
+					waifu.path[Math.floor(Math.random() * waifu.path.length)];
+
+				if (waifu.urlFriendlyName) {
+					return {
+						urlFriendlyName: waifu.urlFriendlyName,
+						path,
+					};
+				}
+				return { urlFriendlyName: aircraft, path };
+			}
+			return null;
+		}
+
+		const waifuName = Object.keys(waifus)[
+			Math.floor(Math.random() * Object.keys(waifus).length)
+		] as keyof typeof waifus;
+		const waifu: Waifu = waifus[waifuName];
+		const path = waifu.path[Math.floor(Math.random() * waifu.path.length)];
+
+		if (waifu.urlFriendlyName) {
+			return {
+				urlFriendlyName: waifu.urlFriendlyName,
+				path,
+			};
+		}
+		return {
+			urlFriendlyName: waifuName,
+			path,
+		};
+	}
+	return null;
 }
 
 export const data = new SlashCommandBuilder()
@@ -82,11 +124,15 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 	const aircraft: Aircraft = type[Math.floor(Math.random() * type.length)];
 	const image = await getImage(aircraft.image);
 
-	let waifuImage = false;
+	let waifu = false;
+	let waifuName = "";
+	let waifuImage = "";
 	if (aircraft.waifuImage) {
-		// easter egg
-		if (Math.floor(Math.random() * 2) === 0) {
-			waifuImage = true;
+		const doSpawnWaifu = spawnWaifu(aircraft.waifuImage);
+		if (doSpawnWaifu) {
+			waifu = true;
+			waifuName = doSpawnWaifu.urlFriendlyName;
+			waifuImage = doSpawnWaifu.path;
 		}
 	}
 
@@ -110,7 +156,6 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 		content: `**What is the name of this aircraft?**\n${image}`,
 		components: [row],
 	});
-	// }
 
 	const answer = new EmbedBuilder()
 		.setColor(0x0099ff)
@@ -144,9 +189,9 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 			}
 		);
 
-	if (waifuImage) {
-		answer.setImage(`attachment://${aircraft.model}.jpg`).setFooter({
-			text: "You found an easter egg! Image credit: Atamonica",
+	if (waifu) {
+		answer.setImage(`attachment://${waifuName}.jpg`).setFooter({
+			text: "You found an waifu! Image credit: Atamonica",
 		});
 	} else {
 		answer.setImage(image).setFooter({
@@ -167,12 +212,12 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 				content: "You can't reveal this answer.",
 				ephemeral: true,
 			});
-		} else if (waifuImage) {
+		} else if (waifu) {
 			await interaction.editReply({
 				content: `**The answer was ${aircraft.name}!**`,
 				embeds: [answer],
 				components: [],
-				files: [`./assets/waifus/${aircraft.model}.jpg`],
+				files: [waifuImage],
 			});
 		} else {
 			await interaction.editReply({
@@ -184,12 +229,12 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 	});
 
 	await wait(30000);
-	if (waifuImage) {
+	if (waifu) {
 		await interaction.editReply({
 			content: `**The answer was ${aircraft.name}!**`,
 			embeds: [answer],
 			components: [],
-			files: [`./assets/waifus/${aircraft.model}.jpg`],
+			files: [waifuImage],
 		});
 	} else {
 		await interaction.editReply({

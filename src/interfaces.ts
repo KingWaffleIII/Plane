@@ -20,3 +20,8 @@ export interface Aircraft {
 	readonly waifuImage?: string;
 	readonly wiki: string;
 }
+
+export interface Waifu {
+	readonly path: string[];
+	readonly urlFriendlyName?: string;
+}

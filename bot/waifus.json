@@ -1,0 +1,166 @@
+{
+    "Aardvark": {
+        "path": ["./assets/waifus/Aardvark.jpg"]
+    },
+    "Adder": {
+        "path": ["./assets/waifus/Adder.jpg"]
+    },
+    "AMRAAM": {
+        "path": [
+            "./assets/waifus/AMRAAM.jpg",
+            "./assets/waifus/AMRAAM_alt.jpg",
+            "./assets/waifus/AMRAAM_alt2.jpg",
+            "./assets/waifus/AMRAAM_alt3.jpg",
+            "./assets/waifus/AMRAAM_alt4.jpg"
+        ]
+    },
+    "Black Hawk": {
+        "urlFriendlyName": "Black_Hawk",
+        "path": ["./assets/waifus/Black_Hawk.jpg"]
+    },
+    "Demon": {
+        "path": ["./assets/waifus/Demon.jpg"]
+    },
+    "Eagle": {
+        "path": [
+            "./assets/waifus/Eagle.jpg",
+            "./assets/waifus/Strike_Eagle.jpg"
+        ]
+    },
+    "Falcon": {
+        "path": ["./assets/waifus/Falcon.jpg"]
+    },
+    "Fishbed": {
+        "path": ["./assets/waifus/Fishbed.jpg"]
+    },
+    "Flanker": {
+        "path": ["./assets/waifus/Flanker.jpg"]
+    },
+    "Foxhound": {
+        "path": ["./assets/waifus/Foxhound.jpg"]
+    },
+    "Freestyle": {
+        "path": ["./assets/waifus/Freestyle.jpg"]
+    },
+    "Fulcrum": {
+        "path": ["./assets/waifus/Fulcrum.jpg"]
+    },
+    "Globemaster": {
+        "path": ["./assets/waifus/Globemaster.jpg"]
+    },
+    "Gripen": {
+        "path": ["./assets/waifus/Gripen.jpg"]
+    },
+    "Harrier": {
+        "path": ["./assets/waifus/Harrier.jpg"]
+    },
+    "Hawkeye": {
+        "path": ["./assets/waifus/Hawkeye.jpg"]
+    },
+    "Hellfire": {
+        "path": ["./assets/waifus/Hellfire.jpg"]
+    },
+    "Hornet": {
+        "path": ["./assets/waifus/Hornet.jpg"]
+    },
+    "Invasion Stripes": {
+        "urlFriendlyName": "Invasion_Stripes",
+        "path": ["./assets/waifus/Invasion_Stripes.jpg"]
+    },
+    "LaGG-3": {
+        "path": ["./assets/waifus/LaGG-3.jpg"]
+    },
+    "Lancer": {
+        "path": ["./assets/waifus/Lancer.jpg"]
+    },
+    "Lightning II": {
+        "urlFriendlyName": "Lightning II",
+        "path": ["./assets/waifus/Lightning_II.jpg"]
+    },
+    "Lightning": {
+        "path": ["./assets/waifus/Lightning.jpg"]
+    },
+    "Mainstay": {
+        "path": ["./assets/waifus/Mainstay.jpg"]
+    },
+    "Marshalling": {
+        "path": ["./assets/waifus/Marshalling.jpg"]
+    },
+    "Mustang": {
+        "path": ["./assets/waifus/Mustang.jpg"]
+    },
+    "Nighthawk": {
+        "path": ["./assets/waifus/Nighthawk.jpg"]
+    },
+    "Peace Eye": {
+        "urlFriendlyName": "Peace_Eye",
+        "path": ["./assets/waifus/Peace_Eye.jpg"]
+    },
+    "Paveway II": {
+        "urlFriendlyName": "Paveway_II",
+        "path": [
+            "./assets/waifus/Paveway_II.jpg",
+            "./assets/waifus/Paveway_II_alt.jpg"
+        ]
+    },
+    "Pegasus": {
+        "path": ["./assets/waifus/Pegasus.jpg"]
+    },
+    "Phantom": {
+        "path": ["./assets/waifus/Phantom.jpg"]
+    },
+    "Phoenix": {
+        "path": ["./assets/waifus/Phoenix.jpg"]
+    },
+    "Poseidon": {
+        "path": ["./assets/waifus/Poseidon.jpg"]
+    },
+    "Raider": {
+        "path": ["./assets/waifus/Raider.jpg"]
+    },
+    "Reaper": {
+        "path": ["./assets/waifus/Reaper.jpg"]
+    },
+    "SBD Dauntless": {
+        "urlFriendlyName": "SBD_Dauntless",
+        "path": ["./assets/waifus/SBD_Dauntless.jpg"]
+    },
+    "Sentry": {
+        "path": ["./assets/waifus/Sentry.jpg", "./assets/waifus/Sentry_alt.jpg"]
+    },
+    "Sidewinder": {
+        "path": [
+            "./assets/waifus/Sidewinder.jpg",
+            "./assets/waifus/Sidewinder_alt.jpg"
+        ]
+    },
+    "Skyhawk": {
+        "path": ["./assets/waifus/Skyhawk.jpg"]
+    },
+    "Sparrow": {
+        "path": ["./assets/waifus/Sparrow.jpg"]
+    },
+    "Spirit": {
+        "path": ["./assets/waifus/Spirit.jpg"]
+    },
+    "Talon": {
+        "path": ["./assets/waifus/Talon.jpg"]
+    },
+    "Tiger II": {
+        "urlFriendlyName": "Tiger_II",
+        "path": ["./assets/waifus/Tiger_II.jpg"]
+    },
+    "Tomcat": {
+        "path": ["./assets/waifus/Tomcat.jpg"]
+    },
+    "Trident II": {
+        "urlFriendlyName": "Trident_II",
+        "path": ["./assets/waifus/Trident_II.jpg"]
+    },
+    "Warthog": {
+        "path": [
+            "./assets/waifus/Warthog.jpg",
+            "./assets/waifus/Warthog_alt.jpg"
+        ]
+    }
+}

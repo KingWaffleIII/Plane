@@ -209,7 +209,9 @@ If you want to play, click the button below.
                 value: aircraft.aliases.join(", ") || "None",
             }, {
                 name: "Aircraft features to help you identify it:",
-                value: aircraft.identification.join(", ") || "None",
+                value: aircraft.identification
+                    .map((identification) => `- ${identification}\n`)
+                    .join("") || "None",
             }, 
             // { name: "\u200B", value: "\u200B" },
             {
