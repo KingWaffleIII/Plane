@@ -86,7 +86,25 @@ async function execute(interaction) {
     if (requestedType) {
         type = air_rec_json_1.default[requestedType];
     }
-    const aircraft = type[Math.floor(Math.random() * type.length)];
+    // const aircraft: Aircraft = type[Math.floor(Math.random() * type.length)];
+    const aircraft = {
+        name: "Fairchild Republic A-10 Thunderbolt II",
+        role: "Close air support attack aircraft.",
+        manufacturer: "Fairchild Republic",
+        model: "A-10",
+        aliases: ["Thunderbolt II", "Thunderbolt", "Warthog", "A10", "A 10"],
+        identification: [
+            "Big gun in nose of plane",
+            "Big af like James and they both have 30mm cannons",
+            "Rectangular straight wings",
+            "Wheels visible on wings even when folded",
+            "2 engines on top of the airframe",
+            "Vertical stabilisers are outside the elevators and situated on the tip of them",
+        ],
+        image: "https://www.airfighters.com/photosearch.php?cra=1470",
+        waifuImage: "Warthog",
+        wiki: "https://en.wikipedia.org/wiki/Fairchild_Republic_A-10_Thunderbolt_II",
+    };
     const image = await getImage(aircraft.image);
     let waifu = false;
     let waifuName = "";

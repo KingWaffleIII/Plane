@@ -24,4 +24,6 @@ export interface Aircraft {
 export interface Waifu {
 	readonly path: string[];
 	readonly urlFriendlyName?: string;
+	readonly type: string;
+	readonly spec: boolean; // if the aircraft is on mrast spec
 }

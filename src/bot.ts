@@ -11,6 +11,7 @@ import {
 	REST,
 	Routes,
 } from "discord.js";
+import { db, init } from "./models";
 import { clientId, token } from "./config.json";
 import { Command } from "./interfaces";
 
