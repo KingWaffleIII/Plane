@@ -22,8 +22,14 @@ export interface Aircraft {
 }
 
 export interface Waifu {
-	readonly path: string[];
+	readonly path: string;
 	readonly urlFriendlyName?: string;
 	readonly type: string;
-	readonly spec: boolean; // if the aircraft is on mrast spec
+	readonly spec: boolean; // if the aircraft is obtainable via /airrec
+}
+
+export interface WaifuEmbedData {
+	name: string;
+	urlFriendlyName: string;
+	path: string;
 }

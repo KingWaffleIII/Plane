@@ -21,6 +21,6 @@ See pull requests [here](https://github.com/KingWaffleIII/plane/pulls?q=is%3Apr+
 
 https://github.com/KingWaffleIII/plane/issues
 
-## Licene
+## Licence
 
 This project is licensed under the GNU General Public Licence 3.0 - see the [LICENCE](LICENCE) file for details

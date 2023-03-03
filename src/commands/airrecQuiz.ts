@@ -13,7 +13,7 @@ import {
 } from "discord.js";
 
 import { Aircraft } from "../interfaces";
-import { getImage } from "./airrec";
+import { getImage, spawnWaifu } from "./airrec";
 import airrec from "../air_rec.json";
 
 const wait = require("node:timers/promises").setTimeout;
@@ -150,6 +150,14 @@ If you want to play, click the button below.
 			return;
 		}
 		if (i.customId === `skip-${buttonId}`) {
+			if (i.user.id !== interaction.user.id) {
+				i.reply({
+					content: "You can't start this game.",
+					ephemeral: true,
+				});
+				return;
+			}
+
 			collector?.stop();
 			return;
 		}
@@ -298,6 +306,7 @@ If you want to play, click the button below.
 			);
 
 			const leaderboard = new EmbedBuilder()
+				.setColor(0x00ffff)
 				.setTitle("Leaderboard")
 				.setTimestamp()
 				.setDescription(
@@ -327,6 +336,7 @@ If you want to play, click the button below.
 		);
 
 		const leaderboard = new EmbedBuilder()
+			.setColor(0xff0000)
 			.setTitle("Final Leaderboard")
 			.setDescription(
 				sortedPlayers
@@ -345,6 +355,26 @@ If you want to play, click the button below.
 			embeds: [leaderboard],
 			components: [],
 		});
+
+		const waifu = spawnWaifu();
+		if (waifu) {
+			const waifuEmbed = new EmbedBuilder()
+				.setColor(0xff00ff)
+				.setTitle(waifu.name)
+				.setImage(`attachment://${waifu.urlFriendlyName}.jpg`)
+				.setDescription(
+					`You can view your waifu collection by using \`/waifus\`!`
+				)
+				// .addFields({ name: "Name", value: waifu.name, inline: true })
+				.setFooter({
+					text: "You unlocked an waifu! Image credit: Atamonica",
+				});
+			await thread.send({
+				content: `<@${sortedPlayers[0]}> has unlocked a new waifu!`,
+				embeds: [waifuEmbed],
+				files: [waifu.path],
+			});
+		}
 
 		await thread.setLocked(true);
 	});

@@ -1,260 +1,242 @@
 {
 	"Aardvark": {
-		"path": ["./assets/waifus/Aardvark.jpg"],
+		"path": "./assets/waifus/Aardvark.jpg",
 		"type": "aircraft",
 		"spec": false
 	},
 	"Adder": {
-		"path": ["./assets/waifus/Adder.jpg"],
+		"path": "./assets/waifus/Adder.jpg",
 		"type": "aircraft",
 		"spec": false
 	},
 	"AMRAAM": {
-		"path": [
-			"./assets/waifus/AMRAAM.jpg",
-			"./assets/waifus/AMRAAM_alt.jpg",
-			"./assets/waifus/AMRAAM_alt2.jpg",
-			"./assets/waifus/AMRAAM_alt3.jpg",
-			"./assets/waifus/AMRAAM_alt4.jpg"
-		],
+		"path": "./assets/waifus/AMRAAM.jpg",
 		"type": "weapon",
 		"spec": false
 	},
 	"Black Hawk": {
 		"urlFriendlyName": "Black_Hawk",
-		"path": ["./assets/waifus/Black_Hawk.jpg"],
+		"path": "./assets/waifus/Black_Hawk.jpg",
 		"type": "aircraft",
 		"spec": false
 	},
 	"Demon": {
-		"path": ["./assets/waifus/Demon.jpg"],
+		"path": "./assets/waifus/Demon.jpg",
 		"type": "weapon",
 		"spec": false
 	},
 	"Eagle": {
-		"path": [
-			"./assets/waifus/Eagle.jpg",
-			"./assets/waifus/Strike_Eagle.jpg"
-		],
+		"path": "./assets/waifus/Eagle.jpg",
 		"type": "aircraft",
 		"spec": true
 	},
 	"Falcon": {
-		"path": ["./assets/waifus/Falcon.jpg"],
+		"path": "./assets/waifus/Falcon.jpg",
 		"type": "aircraft",
 		"spec": true
 	},
 	"Fishbed": {
-		"path": ["./assets/waifus/Fishbed.jpg"],
+		"path": "./assets/waifus/Fishbed.jpg",
 		"type": "aircraft",
 		"spec": true
 	},
 	"Flanker": {
-		"path": ["./assets/waifus/Flanker.jpg"],
+		"path": "./assets/waifus/Flanker.jpg",
 		"type": "aircraft",
 		"spec": true
 	},
 	"Foxhound": {
-		"path": ["./assets/waifus/Foxhound.jpg"],
+		"path": "./assets/waifus/Foxhound.jpg",
 		"type": "aircraft",
 		"spec": true
 	},
 	"Freestyle": {
-		"path": ["./assets/waifus/Freestyle.jpg"],
+		"path": "./assets/waifus/Freestyle.jpg",
 		"type": "aircraft",
 		"spec": false
 	},
 	"Fulcrum": {
-		"path": ["./assets/waifus/Fulcrum.jpg"],
+		"path": "./assets/waifus/Fulcrum.jpg",
 		"type": "aircraft",
 		"spec": true
 	},
 	"Globemaster": {
-		"path": ["./assets/waifus/Globemaster.jpg"],
+		"path": "./assets/waifus/Globemaster.jpg",
 		"type": "aircraft",
 		"spec": true
 	},
 	"Gripen": {
-		"path": ["./assets/waifus/Gripen.jpg"],
+		"path": "./assets/waifus/Gripen.jpg",
 		"type": "aircraft",
 		"spec": true
 	},
 	"Harrier": {
-		"path": ["./assets/waifus/Harrier.jpg"],
+		"path": "./assets/waifus/Harrier.jpg",
 		"type": "aircraft",
 		"spec": true
 	},
 	"Hawkeye": {
-		"path": ["./assets/waifus/Hawkeye.jpg"],
+		"path": "./assets/waifus/Hawkeye.jpg",
 		"type": "aircraft",
 		"spec": false
 	},
 	"Hellfire": {
-		"path": ["./assets/waifus/Hellfire.jpg"],
+		"path": "./assets/waifus/Hellfire.jpg",
 		"type": "weapon",
 		"spec": false
 	},
 	"Hornet": {
-		"path": ["./assets/waifus/Hornet.jpg"],
+		"path": "./assets/waifus/Hornet.jpg",
 		"type": "aircraft",
 		"spec": true
 	},
 	"Invasion Stripes": {
 		"urlFriendlyName": "Invasion_Stripes",
-		"path": ["./assets/waifus/Invasion_Stripes.jpg"],
+		"path": "./assets/waifus/Invasion_Stripes.jpg",
 		"type": "other",
 		"spec": false
 	},
 	"LaGG-3": {
-		"path": ["./assets/waifus/LaGG-3.jpg"],
+		"path": "./assets/waifus/LaGG-3.jpg",
 		"type": "aircraft",
 		"spec": false
 	},
 	"Lancer": {
-		"path": ["./assets/waifus/Lancer.jpg"],
+		"path": "./assets/waifus/Lancer.jpg",
 		"type": "aircraft",
 		"spec": false
 	},
 	"Lightning II": {
 		"urlFriendlyName": "Lightning II",
-		"path": ["./assets/waifus/Lightning_II.jpg"],
+		"path": "./assets/waifus/Lightning_II.jpg",
 		"type": "aircraft",
 		"spec": true
 	},
 	"Lightning": {
-		"path": ["./assets/waifus/Lightning.jpg"],
+		"path": "./assets/waifus/Lightning.jpg",
 		"type": "aircraft",
 		"spec": false
 	},
 	"Mainstay": {
-		"path": ["./assets/waifus/Mainstay.jpg"],
+		"path": "./assets/waifus/Mainstay.jpg",
 		"type": "aircraft",
 		"spec": false
 	},
 	"Marshalling": {
-		"path": ["./assets/waifus/Marshalling.jpg"],
+		"path": "./assets/waifus/Marshalling.jpg",
 		"type": "other",
 		"spec": false
 	},
 	"Mustang": {
-		"path": ["./assets/waifus/Mustang.jpg"],
+		"path": "./assets/waifus/Mustang.jpg",
 		"type": "aircraft",
 		"spec": false
 	},
 	"Nighthawk": {
-		"path": ["./assets/waifus/Nighthawk.jpg"],
+		"path": "./assets/waifus/Nighthawk.jpg",
 		"type": "aircraft",
 		"spec": false
 	},
 	"Peace Eye": {
 		"urlFriendlyName": "Peace_Eye",
-		"path": ["./assets/waifus/Peace_Eye.jpg"],
+		"path": "./assets/waifus/Peace_Eye.jpg",
 		"type": "aircraft",
 		"spec": true
 	},
 	"Paveway II": {
 		"urlFriendlyName": "Paveway_II",
-		"path": [
-			"./assets/waifus/Paveway_II.jpg",
-			"./assets/waifus/Paveway_II_alt.jpg"
-		],
+		"path": "./assets/waifus/Paveway_II.jpg",
+
 		"type": "weapon",
 		"spec": false
 	},
 	"Pegasus": {
-		"path": ["./assets/waifus/Pegasus.jpg"],
+		"path": "./assets/waifus/Pegasus.jpg",
 		"type": "aircraft",
 		"spec": false
 	},
 	"Phantom": {
-		"path": ["./assets/waifus/Phantom.jpg"],
+		"path": "./assets/waifus/Phantom.jpg",
 		"type": "aircraft",
 		"spec": true
 	},
 	"Phoenix": {
-		"path": ["./assets/waifus/Phoenix.jpg"],
+		"path": "./assets/waifus/Phoenix.jpg",
 		"type": "aircraft",
 		"spec": false
 	},
 	"Poseidon": {
-		"path": ["./assets/waifus/Poseidon.jpg"],
+		"path": "./assets/waifus/Poseidon.jpg",
 		"type": "aircraft",
 		"spec": true
 	},
 	"Raider": {
-		"path": ["./assets/waifus/Raider.jpg"],
+		"path": "./assets/waifus/Raider.jpg",
 		"type": "aircraft",
 		"spec": false
 	},
 	"Reaper": {
-		"path": ["./assets/waifus/Reaper.jpg"],
+		"path": "./assets/waifus/Reaper.jpg",
 		"type": "aircraft",
 		"spec": true
 	},
 	"SBD Dauntless": {
 		"urlFriendlyName": "SBD_Dauntless",
-		"path": ["./assets/waifus/SBD_Dauntless.jpg"],
+		"path": "./assets/waifus/SBD_Dauntless.jpg",
 		"type": "aircraft",
 		"spec": false
 	},
 	"Sentry": {
-		"path": [
-			"./assets/waifus/Sentry.jpg",
-			"./assets/waifus/Sentry_alt.jpg"
-		],
+		"path": "./assets/waifus/Sentry.jpg",
+
 		"type": "aircraft",
 		"spec": true
 	},
 	"Sidewinder": {
-		"path": [
-			"./assets/waifus/Sidewinder.jpg",
-			"./assets/waifus/Sidewinder_alt.jpg"
-		],
+		"path": "./assets/waifus/Sidewinder.jpg",
+
 		"type": "weapon",
 		"spec": false
 	},
 	"Skyhawk": {
-		"path": ["./assets/waifus/Skyhawk.jpg"],
+		"path": "./assets/waifus/Skyhawk.jpg",
 		"type": "aircraft",
 		"spec": false
 	},
 	"Sparrow": {
-		"path": ["./assets/waifus/Sparrow.jpg"],
+		"path": "./assets/waifus/Sparrow.jpg",
 		"type": "aircraft",
 		"spec": false
 	},
 	"Spirit": {
-		"path": ["./assets/waifus/Spirit.jpg"],
+		"path": "./assets/waifus/Spirit.jpg",
 		"type": "aircraft",
 		"spec": false
 	},
 	"Talon": {
-		"path": ["./assets/waifus/Talon.jpg"],
+		"path": "./assets/waifus/Talon.jpg",
 		"type": "aircraft",
 		"spec": false
 	},
 	"Tiger II": {
 		"urlFriendlyName": "Tiger_II",
-		"path": ["./assets/waifus/Tiger_II.jpg"],
+		"path": "./assets/waifus/Tiger_II.jpg",
 		"type": "aircraft",
 		"spec": false
 	},
 	"Tomcat": {
-		"path": ["./assets/waifus/Tomcat.jpg"],
+		"path": "./assets/waifus/Tomcat.jpg",
 		"type": "aircraft",
 		"spec": true
 	},
 	"Trident II": {
 		"urlFriendlyName": "Trident_II",
-		"path": ["./assets/waifus/Trident_II.jpg"],
+		"path": "./assets/waifus/Trident_II.jpg",
 		"type": "weapon",
 		"spec": true
 	},
 	"Warthog": {
-		"path": [
-			"./assets/waifus/Warthog.jpg",
-			"./assets/waifus/Warthog_alt.jpg"
-		],
+		"path": "./assets/waifus/Warthog.jpg",
 		"type": "aircraft",
 		"spec": true
 	}

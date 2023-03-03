@@ -11,7 +11,7 @@ import {
 	REST,
 	Routes,
 } from "discord.js";
-import { db, init } from "./models";
+import { init } from "./models";
 import { clientId, token } from "./config.json";
 import { Command } from "./interfaces";
 
@@ -103,6 +103,8 @@ const rest = new REST({ version: "10" }).setToken(token);
 	} catch (error) {
 		console.error(error);
 	}
+
+	await init();
 
 	client.login(token);
 })();

@@ -106,6 +106,13 @@ If you want to play, click the button below.
             return;
         }
         if (i.customId === `skip-${buttonId}`) {
+            if (i.user.id !== interaction.user.id) {
+                i.reply({
+                    content: "You can't start this game.",
+                    ephemeral: true,
+                });
+                return;
+            }
             collector?.stop();
             return;
         }
@@ -225,6 +232,7 @@ If you want to play, click the button below.
             });
             const sortedPlayers = Object.keys(players).sort((a, b) => players[b].score - players[a].score);
             const leaderboard = new discord_js_1.EmbedBuilder()
+                .setColor(0x00ffff)
                 .setTitle("Leaderboard")
                 .setTimestamp()
                 .setDescription(sortedPlayers
@@ -244,6 +252,7 @@ If you want to play, click the button below.
         }
         const sortedPlayers = Object.keys(players).sort((a, b) => players[b].score - players[a].score);
         const leaderboard = new discord_js_1.EmbedBuilder()
+            .setColor(0xff0000)
             .setTitle("Final Leaderboard")
             .setDescription(sortedPlayers
             .map((userId) => {
@@ -257,6 +266,23 @@ If you want to play, click the button below.
             embeds: [leaderboard],
             components: [],
         });
+        const waifu = (0, airrec_1.spawnWaifu)();
+        if (waifu) {
+            const waifuEmbed = new discord_js_1.EmbedBuilder()
+                .setColor(0xff00ff)
+                .setTitle(waifu.name)
+                .setImage(`attachment://${waifu.urlFriendlyName}.jpg`)
+                .setDescription(`You can view your waifu collection by using \`/waifus\`!`)
+                // .addFields({ name: "Name", value: waifu.name, inline: true })
+                .setFooter({
+                text: "You unlocked an waifu! Image credit: Atamonica",
+            });
+            await thread.send({
+                content: `<@${sortedPlayers[0]}> has unlocked a new waifu!`,
+                embeds: [waifuEmbed],
+                files: [waifu.path],
+            });
+        }
         await thread.setLocked(true);
     });
 }

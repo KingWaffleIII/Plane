@@ -10,9 +10,12 @@ __pycache__/
 
 # DB
 postgres/
+db.sqlite3
+db.sqlite
 
 # Project
 config.json
+src/assets/waifus/Unused/
 
 bot/package.json
 bot/package-lock.json

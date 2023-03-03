@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const fs_1 = __importDefault(require("fs"));
 const path_1 = __importDefault(require("path"));
 const discord_js_1 = require("discord.js");
+const models_1 = require("./models");
 const config_json_1 = require("./config.json");
 const client = new discord_js_1.Client({
     intents: [
@@ -80,5 +81,6 @@ const rest = new discord_js_1.REST({ version: "10" }).setToken(config_json_1.tok
     catch (error) {
         console.error(error);
     }
+    await (0, models_1.init)();
     client.login(config_json_1.token);
 })();
