@@ -67,7 +67,7 @@ export async function getImage(url: string): Promise<string | null> {
 export function spawnWaifu(
 	aircraft?: string
 ): { name: string; urlFriendlyName: string; path: string } | null {
-	if (Math.floor(Math.random() * 1) === 0) {
+	if (Math.floor(Math.random() * 3) === 0) {
 		if (aircraft) {
 			if (Object.keys(waifus).includes(aircraft)) {
 				const waifu: Waifu = waifus[aircraft as keyof typeof waifus];
@@ -237,7 +237,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 			const waifu: WaifuEmbedData | null = spawnWaifu(
 				aircraft.waifuImage
 			);
-			if (waifu) {
+			if (waifu && !user!.unlockedWaifus!.includes(waifu.name)) {
 				const waifuEmbed = new EmbedBuilder()
 					.setColor(0xff00ff)
 					.setTitle(waifu.name)

@@ -34,7 +34,7 @@ async function getImage(url) {
 }
 exports.getImage = getImage;
 function spawnWaifu(aircraft) {
-    if (Math.floor(Math.random() * 1) === 0) {
+    if (Math.floor(Math.random() * 3) === 0) {
         if (aircraft) {
             if (Object.keys(waifus_json_1.default).includes(aircraft)) {
                 const waifu = waifus_json_1.default[aircraft];
@@ -161,7 +161,7 @@ async function execute(interaction) {
         }
         else if (aircraft.waifuImage) {
             const waifu = spawnWaifu(aircraft.waifuImage);
-            if (waifu) {
+            if (waifu && !user.unlockedWaifus.includes(waifu.name)) {
                 const waifuEmbed = new discord_js_1.EmbedBuilder()
                     .setColor(0xff00ff)
                     .setTitle(waifu.name)

@@ -364,7 +364,7 @@ If you want to play, click the button below.
 			});
 		} else {
 			const waifu: WaifuEmbedData | null = spawnWaifu();
-			if (waifu) {
+			if (waifu && !user!.unlockedWaifus!.includes(waifu.name)) {
 				const waifuEmbed = new EmbedBuilder()
 					.setColor(0xff00ff)
 					.setTitle(waifu.name)

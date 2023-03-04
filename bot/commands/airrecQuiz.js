@@ -276,7 +276,7 @@ If you want to play, click the button below.
         }
         else {
             const waifu = (0, airrec_1.spawnWaifu)();
-            if (waifu) {
+            if (waifu && !user.unlockedWaifus.includes(waifu.name)) {
                 const waifuEmbed = new discord_js_1.EmbedBuilder()
                     .setColor(0xff00ff)
                     .setTitle(waifu.name)
