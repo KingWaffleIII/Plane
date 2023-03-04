@@ -12,9 +12,34 @@ import {
 	SlashCommandBuilder,
 } from "discord.js";
 
-import { Aircraft, Waifu, WaifuEmbedData } from "../interfaces";
+import { User } from "../models";
 import airrec from "../air_rec.json";
 import waifus from "../waifus.json";
+
+export interface Aircraft {
+	readonly name: string;
+	readonly role: string;
+	readonly manufacturer: string;
+	readonly model: string;
+	readonly aliases: string[];
+	readonly identification: string[];
+	readonly image: string;
+	readonly waifuImage?: string;
+	readonly wiki: string;
+}
+
+export interface Waifu {
+	readonly path: string;
+	readonly urlFriendlyName?: string;
+	readonly type: string;
+	readonly spec: boolean; // if the aircraft is obtainable via /airrec
+}
+
+export interface WaifuEmbedData {
+	name: string;
+	urlFriendlyName: string;
+	path: string;
+}
 
 export async function getImage(url: string): Promise<string | null> {
 	try {
@@ -42,7 +67,7 @@ export async function getImage(url: string): Promise<string | null> {
 export function spawnWaifu(
 	aircraft?: string
 ): { name: string; urlFriendlyName: string; path: string } | null {
-	if (Math.floor(Math.random() * 3) === 0) {
+	if (Math.floor(Math.random() * 1) === 0) {
 		if (aircraft) {
 			if (Object.keys(waifus).includes(aircraft)) {
 				const waifu: Waifu = waifus[aircraft as keyof typeof waifus];
@@ -202,7 +227,13 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 			components: [],
 		});
 
-		if (aircraft.waifuImage) {
+		// check if user exists in db
+		const user = await User.findByPk(interaction.user.id);
+		if (!user) {
+			await interaction.followUp({
+				content: `**<@${interaction.user.id}>, you don't have waifu collection yet! Use \`/waifus\` to create one!**`,
+			});
+		} else if (aircraft.waifuImage) {
 			const waifu: WaifuEmbedData | null = spawnWaifu(
 				aircraft.waifuImage
 			);
@@ -223,6 +254,12 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 					embeds: [waifuEmbed],
 					files: [waifu.path],
 				});
+
+				user.unlockedWaifus! = user.unlockedWaifus!.concat(waifu.name);
+				user.lockedWaifus! = user.lockedWaifus!.filter(
+					(w) => w !== waifu.name
+				);
+				await user.save();
 			}
 		}
 	};

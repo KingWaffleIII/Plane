@@ -10,10 +10,15 @@ import {
 	Interaction,
 	REST,
 	Routes,
+	SlashCommandBuilder,
 } from "discord.js";
-import { init } from "./models";
+import { db, Guild } from "./models";
 import { clientId, token } from "./config.json";
-import { Command } from "./interfaces";
+
+interface Command {
+	data: SlashCommandBuilder;
+	execute: (interaction: unknown) => Promise<void>;
+}
 
 const client: Client = new Client({
 	intents: [
@@ -104,7 +109,17 @@ const rest = new REST({ version: "10" }).setToken(token);
 		console.error(error);
 	}
 
-	await init();
+	await db.sync();
 
 	client.login(token);
+
+	const guilds = await client.guilds.fetch();
+	guilds.forEach(async (guild) => {
+		const guildModel = await Guild.findByPk(guild.id);
+		if (guildModel) return;
+		await Guild.create({
+			id: guild.id,
+			name: guild.name,
+		});
+	});
 })();

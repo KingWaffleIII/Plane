@@ -27,10 +27,17 @@
 		"no-plusplus": "off",
 		"no-await-in-loop": "off",
 		"dot-notation": "off",
-		"indent": ["warn", "tab"],
+		"indent": ["warn", "tab", { "ignoredNodes": ["PropertyDefinition"] }],
 		"linebreak-style": ["warn", "unix"],
 		"no-restricted-syntax": "off",
 		"global-require": "off",
+		"max-classes-per-file": "off",
+		// "no-use-before-define": [
+		// 	"error",
+		// 	{ "functions": false, "classes": false }
+		// ],
+		"no-use-before-define": "off",
+		"lines-between-class-members": "off",
 
 		"import/no-dynamic-require": "off",
 		"import/no-import-module-exports": "off",
@@ -52,6 +59,7 @@
 		"import/no-unresolved": "off",
 
 		"@typescript-eslint/no-var-requires": "off",
-		"@typescript-eslint/no-unused-vars": "warn"
+		"@typescript-eslint/no-unused-vars": "warn",
+		"@typescript-eslint/no-non-null-assertion": "off"
 	}
 }

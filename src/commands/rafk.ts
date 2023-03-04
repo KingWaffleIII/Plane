@@ -9,10 +9,14 @@ import {
 	SlashCommandBuilder,
 } from "discord.js";
 
-import { Question } from "../interfaces";
 import rafk from "../RAFK.json";
 
 const wait = require("node:timers/promises").setTimeout;
+
+interface Question {
+	question: string;
+	answer: string;
+}
 
 export const data = new SlashCommandBuilder()
 	.setName("rafk")

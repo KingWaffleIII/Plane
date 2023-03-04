@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.execute = exports.data = void 0;
 const crypto_1 = __importDefault(require("crypto"));
 const discord_js_1 = require("discord.js");
+const models_1 = require("../models");
 const airrec_1 = require("./airrec");
 const air_rec_json_1 = __importDefault(require("../air_rec.json"));
 const wait = require("node:timers/promises").setTimeout;
@@ -252,7 +253,7 @@ If you want to play, click the button below.
         }
         const sortedPlayers = Object.keys(players).sort((a, b) => players[b].score - players[a].score);
         const leaderboard = new discord_js_1.EmbedBuilder()
-            .setColor(0xff0000)
+            .setColor(0x00ffff)
             .setTitle("Final Leaderboard")
             .setDescription(sortedPlayers
             .map((userId) => {
@@ -266,22 +267,34 @@ If you want to play, click the button below.
             embeds: [leaderboard],
             components: [],
         });
-        const waifu = (0, airrec_1.spawnWaifu)();
-        if (waifu) {
-            const waifuEmbed = new discord_js_1.EmbedBuilder()
-                .setColor(0xff00ff)
-                .setTitle(waifu.name)
-                .setImage(`attachment://${waifu.urlFriendlyName}.jpg`)
-                .setDescription(`You can view your waifu collection by using \`/waifus\`!`)
-                // .addFields({ name: "Name", value: waifu.name, inline: true })
-                .setFooter({
-                text: "You unlocked an waifu! Image credit: Atamonica",
-            });
+        // check if user exists in db
+        const user = await models_1.User.findByPk(sortedPlayers[0]);
+        if (!user) {
             await thread.send({
-                content: `<@${sortedPlayers[0]}> has unlocked a new waifu!`,
-                embeds: [waifuEmbed],
-                files: [waifu.path],
+                content: `**<@${sortedPlayers[0]}>, you don't have waifu collection yet! Use \`/waifus\` to create one!**`,
             });
+        }
+        else {
+            const waifu = (0, airrec_1.spawnWaifu)();
+            if (waifu) {
+                const waifuEmbed = new discord_js_1.EmbedBuilder()
+                    .setColor(0xff00ff)
+                    .setTitle(waifu.name)
+                    .setImage(`attachment://${waifu.urlFriendlyName}.jpg`)
+                    .setDescription(`You can view your waifu collection by using \`/waifus\`!`)
+                    // .addFields({ name: "Name", value: waifu.name, inline: true })
+                    .setFooter({
+                    text: "You unlocked an waifu! Image credit: Atamonica",
+                });
+                await thread.send({
+                    content: `<@${sortedPlayers[0]}> has unlocked a new waifu!`,
+                    embeds: [waifuEmbed],
+                    files: [waifu.path],
+                });
+                user.unlockedWaifus = user.unlockedWaifus.concat(waifu.name);
+                user.lockedWaifus = user.lockedWaifus.filter((w) => w !== waifu.name);
+                await user.save();
+            }
         }
         await thread.setLocked(true);
     });

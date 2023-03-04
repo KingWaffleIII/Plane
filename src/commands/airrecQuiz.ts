@@ -12,8 +12,8 @@ import {
 	SlashCommandBuilder,
 } from "discord.js";
 
-import { Aircraft } from "../interfaces";
-import { getImage, spawnWaifu } from "./airrec";
+import { User } from "../models";
+import { Aircraft, getImage, spawnWaifu, WaifuEmbedData } from "./airrec";
 import airrec from "../air_rec.json";
 
 const wait = require("node:timers/promises").setTimeout;
@@ -336,7 +336,7 @@ If you want to play, click the button below.
 		);
 
 		const leaderboard = new EmbedBuilder()
-			.setColor(0xff0000)
+			.setColor(0x00ffff)
 			.setTitle("Final Leaderboard")
 			.setDescription(
 				sortedPlayers
@@ -356,24 +356,38 @@ If you want to play, click the button below.
 			components: [],
 		});
 
-		const waifu = spawnWaifu();
-		if (waifu) {
-			const waifuEmbed = new EmbedBuilder()
-				.setColor(0xff00ff)
-				.setTitle(waifu.name)
-				.setImage(`attachment://${waifu.urlFriendlyName}.jpg`)
-				.setDescription(
-					`You can view your waifu collection by using \`/waifus\`!`
-				)
-				// .addFields({ name: "Name", value: waifu.name, inline: true })
-				.setFooter({
-					text: "You unlocked an waifu! Image credit: Atamonica",
-				});
+		// check if user exists in db
+		const user = await User.findByPk(sortedPlayers[0]);
+		if (!user) {
 			await thread.send({
-				content: `<@${sortedPlayers[0]}> has unlocked a new waifu!`,
-				embeds: [waifuEmbed],
-				files: [waifu.path],
+				content: `**<@${sortedPlayers[0]}>, you don't have waifu collection yet! Use \`/waifus\` to create one!**`,
 			});
+		} else {
+			const waifu: WaifuEmbedData | null = spawnWaifu();
+			if (waifu) {
+				const waifuEmbed = new EmbedBuilder()
+					.setColor(0xff00ff)
+					.setTitle(waifu.name)
+					.setImage(`attachment://${waifu.urlFriendlyName}.jpg`)
+					.setDescription(
+						`You can view your waifu collection by using \`/waifus\`!`
+					)
+					// .addFields({ name: "Name", value: waifu.name, inline: true })
+					.setFooter({
+						text: "You unlocked an waifu! Image credit: Atamonica",
+					});
+				await thread.send({
+					content: `<@${sortedPlayers[0]}> has unlocked a new waifu!`,
+					embeds: [waifuEmbed],
+					files: [waifu.path],
+				});
+
+				user.unlockedWaifus! = user.unlockedWaifus!.concat(waifu.name);
+				user.lockedWaifus! = user.lockedWaifus!.filter(
+					(w) => w !== waifu.name
+				);
+				await user.save();
+			}
 		}
 
 		await thread.setLocked(true);

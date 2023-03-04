@@ -81,6 +81,16 @@ const rest = new discord_js_1.REST({ version: "10" }).setToken(config_json_1.tok
     catch (error) {
         console.error(error);
     }
-    await (0, models_1.init)();
+    await models_1.db.sync();
     client.login(config_json_1.token);
+    const guilds = await client.guilds.fetch();
+    guilds.forEach(async (guild) => {
+        const guildModel = await models_1.Guild.findByPk(guild.id);
+        if (guildModel)
+            return;
+        await models_1.Guild.create({
+            id: guild.id,
+            name: guild.name,
+        });
+    });
 })();

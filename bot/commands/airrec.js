@@ -8,6 +8,7 @@ const axios_1 = __importDefault(require("axios"));
 const cheerio_1 = __importDefault(require("cheerio"));
 const crypto_1 = __importDefault(require("crypto"));
 const discord_js_1 = require("discord.js");
+const models_1 = require("../models");
 const air_rec_json_1 = __importDefault(require("../air_rec.json"));
 const waifus_json_1 = __importDefault(require("../waifus.json"));
 async function getImage(url) {
@@ -33,7 +34,7 @@ async function getImage(url) {
 }
 exports.getImage = getImage;
 function spawnWaifu(aircraft) {
-    if (Math.floor(Math.random() * 3) === 0) {
+    if (Math.floor(Math.random() * 1) === 0) {
         if (aircraft) {
             if (Object.keys(waifus_json_1.default).includes(aircraft)) {
                 const waifu = waifus_json_1.default[aircraft];
@@ -151,7 +152,14 @@ async function execute(interaction) {
             embeds: [answer],
             components: [],
         });
-        if (aircraft.waifuImage) {
+        // check if user exists in db
+        const user = await models_1.User.findByPk(interaction.user.id);
+        if (!user) {
+            await interaction.followUp({
+                content: `**<@${interaction.user.id}>, you don't have waifu collection yet! Use \`/waifus\` to create one!**`,
+            });
+        }
+        else if (aircraft.waifuImage) {
             const waifu = spawnWaifu(aircraft.waifuImage);
             if (waifu) {
                 const waifuEmbed = new discord_js_1.EmbedBuilder()
@@ -168,6 +176,9 @@ async function execute(interaction) {
                     embeds: [waifuEmbed],
                     files: [waifu.path],
                 });
+                user.unlockedWaifus = user.unlockedWaifus.concat(waifu.name);
+                user.lockedWaifus = user.lockedWaifus.filter((w) => w !== waifu.name);
+                await user.save();
             }
         }
     };
