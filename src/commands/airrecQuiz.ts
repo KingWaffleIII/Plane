@@ -13,7 +13,7 @@ import {
 } from "discord.js";
 
 import { User } from "../models";
-import { Aircraft, getImage, spawnWaifu, WaifuEmbedData } from "./airrec";
+import { Aircraft, getImage, spawnWaifu, WaifuData } from "./airrec";
 import airrec from "../air_rec.json";
 
 const wait = require("node:timers/promises").setTimeout;
@@ -50,7 +50,7 @@ export const data = new SlashCommandBuilder()
 		option
 			.setName("rounds")
 			.setDescription(
-				"The number of rounds you want to play. Leave blank for 10 rounds."
+				"The number of rounds you want to play. Defaults to 10 rounds."
 			)
 			.setMinValue(1)
 			.setMaxValue(20)
@@ -363,8 +363,11 @@ If you want to play, click the button below.
 				content: `**<@${sortedPlayers[0]}>, you don't have waifu collection yet! Use \`/waifus\` to create one!**`,
 			});
 		} else {
-			const waifu: WaifuEmbedData | null = spawnWaifu();
-			if (waifu && !user!.unlockedWaifus!.includes(waifu.name)) {
+			const waifu: WaifuData | null = spawnWaifu();
+			if (
+				waifu &&
+				(await user!.countWaifus({ where: { name: waifu.name } })) <= 5
+			) {
 				const waifuEmbed = new EmbedBuilder()
 					.setColor(0xff00ff)
 					.setTitle(waifu.name)
@@ -382,7 +385,13 @@ If you want to play, click the button below.
 					files: [waifu.path],
 				});
 
-				user.unlockedWaifus! = user.unlockedWaifus!.concat(waifu.name);
+				await user.createWaifu({
+					name: waifu.name,
+					atk: Math.ceil(Math.random() * 10),
+					hp: Math.ceil(Math.random() * 20),
+					spd: Math.ceil(Math.random() * 10),
+					spec: waifu.spec,
+				});
 				user.lockedWaifus! = user.lockedWaifus!.filter(
 					(w) => w !== waifu.name
 				);

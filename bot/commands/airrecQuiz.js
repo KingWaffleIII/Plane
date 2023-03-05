@@ -25,7 +25,7 @@ exports.data = new discord_js_1.SlashCommandBuilder()
     .setDescription("Gives you a series of aircraft images for you and others to identify with scoring.")
     .addIntegerOption((option) => option
     .setName("rounds")
-    .setDescription("The number of rounds you want to play. Leave blank for 10 rounds.")
+    .setDescription("The number of rounds you want to play. Defaults to 10 rounds.")
     .setMinValue(1)
     .setMaxValue(20));
 async function execute(interaction) {
@@ -276,7 +276,8 @@ If you want to play, click the button below.
         }
         else {
             const waifu = (0, airrec_1.spawnWaifu)();
-            if (waifu && !user.unlockedWaifus.includes(waifu.name)) {
+            if (waifu &&
+                (await user.countWaifus({ where: { name: waifu.name } })) <= 5) {
                 const waifuEmbed = new discord_js_1.EmbedBuilder()
                     .setColor(0xff00ff)
                     .setTitle(waifu.name)
@@ -291,7 +292,13 @@ If you want to play, click the button below.
                     embeds: [waifuEmbed],
                     files: [waifu.path],
                 });
-                user.unlockedWaifus = user.unlockedWaifus.concat(waifu.name);
+                await user.createWaifu({
+                    name: waifu.name,
+                    atk: Math.ceil(Math.random() * 10),
+                    hp: Math.ceil(Math.random() * 20),
+                    spd: Math.ceil(Math.random() * 10),
+                    spec: waifu.spec,
+                });
                 user.lockedWaifus = user.lockedWaifus.filter((w) => w !== waifu.name);
                 await user.save();
             }

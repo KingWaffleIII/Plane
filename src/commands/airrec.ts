@@ -28,17 +28,16 @@ export interface Aircraft {
 	readonly wiki: string;
 }
 
-export interface Waifu {
+export interface WaifuBaseData {
 	readonly path: string;
-	readonly urlFriendlyName?: string;
 	readonly type: string;
 	readonly spec: boolean; // if the aircraft is obtainable via /airrec
+	readonly urlFriendlyName?: string;
 }
 
-export interface WaifuEmbedData {
-	name: string;
-	urlFriendlyName: string;
-	path: string;
+export interface WaifuData extends WaifuBaseData {
+	readonly name: string;
+	readonly urlFriendlyName: string;
 }
 
 export async function getImage(url: string): Promise<string | null> {
@@ -64,25 +63,28 @@ export async function getImage(url: string): Promise<string | null> {
 	}
 }
 
-export function spawnWaifu(
-	aircraft?: string
-): { name: string; urlFriendlyName: string; path: string } | null {
+export function spawnWaifu(aircraft?: string): WaifuData | null {
 	if (Math.floor(Math.random() * 3) === 0) {
 		if (aircraft) {
 			if (Object.keys(waifus).includes(aircraft)) {
-				const waifu: Waifu = waifus[aircraft as keyof typeof waifus];
+				const waifu: WaifuBaseData =
+					waifus[aircraft as keyof typeof waifus];
 
 				if (waifu.urlFriendlyName) {
 					return {
 						name: aircraft,
 						urlFriendlyName: waifu.urlFriendlyName,
 						path: waifu.path,
+						type: waifu.type,
+						spec: waifu.spec,
 					};
 				}
 				return {
 					name: aircraft,
 					urlFriendlyName: aircraft,
 					path: waifu.path,
+					type: waifu.type,
+					spec: waifu.spec,
 				};
 			}
 			return null;
@@ -95,19 +97,23 @@ export function spawnWaifu(
 		const waifuName = nonSpecWaifus[
 			Math.floor(Math.random() * Object.keys(nonSpecWaifus).length)
 		] as keyof typeof waifus;
-		const waifu: Waifu = waifus[waifuName];
+		const waifu: WaifuBaseData = waifus[waifuName];
 
 		if (waifu.urlFriendlyName) {
 			return {
 				name: waifuName,
 				urlFriendlyName: waifu.urlFriendlyName,
 				path: waifu.path,
+				type: waifu.type,
+				spec: waifu.spec,
 			};
 		}
 		return {
 			name: waifuName,
 			urlFriendlyName: waifuName,
 			path: waifu.path,
+			type: waifu.type,
+			spec: waifu.spec,
 		};
 	}
 	return null;
@@ -120,14 +126,14 @@ export const data = new SlashCommandBuilder()
 		option
 			.setName("random")
 			.setDescription(
-				"Whether to show a specific aircraft type or a random aircraft. Leave blank for a random aircraft."
+				"Whether to show a specific aircraft type or a random aircraft. Defaults to a random aircraft."
 			)
 	)
 	.addStringOption((option) =>
 		option
 			.setName("type")
 			.setDescription(
-				"The type of aircraft you want to be shown. Leave blank for a random aircraft."
+				"The type of aircraft you want to be shown. Defaults to a random aircraft."
 			)
 			.addChoices(
 				{ name: "Civilian", value: "civilian" },
@@ -234,10 +240,11 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 				content: `**<@${interaction.user.id}>, you don't have waifu collection yet! Use \`/waifus\` to create one!**`,
 			});
 		} else if (aircraft.waifuImage) {
-			const waifu: WaifuEmbedData | null = spawnWaifu(
-				aircraft.waifuImage
-			);
-			if (waifu && !user!.unlockedWaifus!.includes(waifu.name)) {
+			const waifu: WaifuData | null = spawnWaifu(aircraft.waifuImage);
+			if (
+				waifu &&
+				(await user!.countWaifus({ where: { name: waifu.name } })) <= 5
+			) {
 				const waifuEmbed = new EmbedBuilder()
 					.setColor(0xff00ff)
 					.setTitle(waifu.name)
@@ -255,7 +262,13 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 					files: [waifu.path],
 				});
 
-				user.unlockedWaifus! = user.unlockedWaifus!.concat(waifu.name);
+				await user.createWaifu({
+					name: waifu.name,
+					atk: Math.ceil(Math.random() * 10),
+					hp: Math.ceil(Math.random() * 20),
+					spd: Math.ceil(Math.random() * 10),
+					spec: waifu.spec,
+				});
 				user.lockedWaifus! = user.lockedWaifus!.filter(
 					(w) => w !== waifu.name
 				);

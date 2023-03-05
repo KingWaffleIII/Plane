@@ -4,27 +4,36 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.execute = exports.data = void 0;
-const crypto_1 = __importDefault(require("crypto"));
 const discord_js_1 = require("discord.js");
 const models_1 = require("../models");
 const waifus_json_1 = __importDefault(require("../waifus.json"));
 exports.data = new discord_js_1.SlashCommandBuilder()
     .setName("waifus")
     .setDescription("View your waifu collection.")
-    .addBooleanOption((option) => option
-    .setName("select")
-    .setDescription("Whether or not you want to pick a waifu you've unlocked or see your general collection."));
+    .addStringOption((option) => option
+    .setName("name")
+    .setDescription("The name of the waifu you want to view. Defaults to all your waifus."))
+    .addUserOption((option) => option
+    .setName("user")
+    .setDescription("The user to view the waifu collection of. Defaults to you."));
 async function execute(interaction) {
-    const select = interaction.options.getBoolean("select") ?? false;
+    const name = interaction.options.getString("name") ?? null;
+    const targetUser = interaction.options.getUser("user") ?? interaction.user;
     await interaction.deferReply();
     const guild = await models_1.Guild.findByPk(interaction.guildId);
-    let user = await models_1.User.findByPk(interaction.user.id);
-    if (!user) {
+    let user = await models_1.User.findByPk(targetUser.id);
+    if (!user && targetUser.id === interaction.user.id) {
         await guild.createUser({
             id: interaction.user.id,
             username: interaction.user.username,
         });
         user = await models_1.User.findByPk(interaction.user.id);
+    }
+    else if (!user && targetUser.id !== interaction.user.id) {
+        await interaction.editReply({
+            content: "This user doesn't have a waifu collection yet. They need to run `/waifus` first.",
+        });
+        return;
     }
     const specWaifus = Object.keys(waifus_json_1.default).filter((w) => {
         const waifuData = waifus_json_1.default[w];
@@ -34,46 +43,32 @@ async function execute(interaction) {
         const waifuData = waifus_json_1.default[w];
         return !waifuData.spec;
     });
-    const unlockedSpecWaifus = specWaifus.filter((w) => user.unlockedWaifus.includes(w));
-    const unlockedNonSpecWaifus = nonSpecWaifus.filter((w) => user.unlockedWaifus.includes(w));
-    if (select) {
-        const selectId = crypto_1.default.randomBytes(12).toString("hex");
-        const row = new discord_js_1.ActionRowBuilder().addComponents(new discord_js_1.StringSelectMenuBuilder()
-            .setCustomId(`select-waifu-${selectId}`)
-            .setPlaceholder("Select a waifu"));
-        user.unlockedWaifus.forEach((waifu) => {
-            row.components[0].addOptions({
-                label: waifu,
-                value: waifu,
+    const unlockedSpecWaifus = await user.countWaifus({
+        where: {
+            spec: true,
+        },
+    });
+    const unlockedNonSpecWaifus = await user.countWaifus({
+        where: {
+            spec: false,
+        },
+    });
+    if (name) {
+        const waifusLowerCase = Object.keys(waifus_json_1.default).map((w) => w.toLowerCase());
+        if (!waifusLowerCase.includes(name.toLowerCase())) {
+            await interaction.editReply({
+                content: "That waifu doesn't exist!",
             });
-        });
-        await interaction.editReply({
-            components: [row],
-        });
-        const filter = (i) => i.customId === `select-waifu-${selectId}`;
-        const selections = await interaction.channel?.awaitMessageComponent({
-            componentType: discord_js_1.ComponentType.StringSelect,
-            time: 30000,
-            filter,
-        });
-        let waifu = null;
-        let waifuData = null;
-        if (selections) {
-            if (selections.user.id !== interaction.user.id) {
-                await selections.reply({
-                    content: "You can't select a waifu.",
-                    ephemeral: true,
-                });
-            }
-            else {
-                // eslint-disable-next-line prefer-destructuring
-                waifu = selections.values[0];
-                waifuData =
-                    waifus_json_1.default[selections.values[0]];
-                await selections.deferUpdate();
-            }
+            return;
         }
-        if (!user.unlockedWaifus.includes(waifu)) {
+        const waifuName = Object.keys(waifus_json_1.default)[waifusLowerCase.indexOf(name.toLowerCase())];
+        const waifuData = waifus_json_1.default[waifuName];
+        const userWaifus = await user.getWaifus({
+            where: {
+                name: waifuName,
+            },
+        });
+        if (userWaifus.length === 0) {
             if (waifuData.spec) {
                 await interaction.editReply({
                     content: "You don't have this waifu unlocked! You can unlock her by using `/airrec`.",
@@ -85,20 +80,32 @@ async function execute(interaction) {
             });
             return;
         }
-        console.log(waifuData.urlFriendlyName, waifuData.path);
         const waifuEmbed = new discord_js_1.EmbedBuilder()
             .setColor(0xff00ff)
-            .setTitle(waifu)
-            .setImage(`attachment://${waifuData.urlFriendlyName ?? waifu}.jpg`)
+            .setTitle(waifuName)
+            .setImage(`attachment://${waifuData.urlFriendlyName ?? waifuName}.jpg`)
             .setFooter({
-            text: `You can unlock ${specWaifus.length - unlockedSpecWaifus.length} more waifus with /airrec and ${nonSpecWaifus.length - unlockedNonSpecWaifus.length} more waifus by winning airrec quizzes!`,
+            text: `You can unlock ${specWaifus.length - unlockedSpecWaifus} more waifus with /airrec and ${nonSpecWaifus.length - unlockedNonSpecWaifus} more waifus by winning airrec quizzes!`,
         });
-        if (waifuData.spec) {
-            waifuEmbed.setDescription("You unlocked this waifu with `/airrec`!");
-        }
-        else {
-            waifuEmbed.setDescription("You unlocked this waifu by winning an airrec quiz!");
-        }
+        waifuEmbed.setDescription(`
+You have ${userWaifus.length} cop${userWaifus.length === 1 ? "y" : "ies"} of this waifu!\n
+${userWaifus.some((w) => w.generated)
+            ? "One or more of this waifu was generated."
+            : ""}
+${userWaifus.some((w) => waifus_json_1.default[w.name].spec && !w.generated)
+            ? "One or more of this waifu was unlocked with `/airrec`!"
+            : ""}
+${userWaifus.some((w) => !waifus_json_1.default[w.name].spec && !w.generated)
+            ? "One or more of this waifu was unlocked by winning an airrec quiz!"
+            : ""}
+			`);
+        userWaifus.forEach((w) => {
+            waifuEmbed.addFields({
+                name: `Copy #${userWaifus.indexOf(w) + 1}`,
+                value: `ATK: ${w.atk}\nHP: ${w.hp}\nSPD: ${w.spd}\n`,
+                inline: true,
+            });
+        });
         await interaction.editReply({
             embeds: [waifuEmbed],
             files: [waifuData.path],
@@ -106,6 +113,18 @@ async function execute(interaction) {
         });
         return;
     }
+    const waifuCopies = {};
+    const waifuList = [];
+    const userWaifus = await user.getWaifus();
+    userWaifus.forEach((w) => {
+        if (!waifuList.includes(`\\*${w.name}`)) {
+            waifuList.push(`\\*${w.name}`);
+            waifuCopies[w.name] = 1;
+        }
+        else {
+            waifuCopies[w.name]++;
+        }
+    });
     const embed = new discord_js_1.EmbedBuilder()
         .setColor(0xff00ff)
         .setTitle(`${interaction.user.username}'s Waifu Collection`)
@@ -114,10 +133,12 @@ async function execute(interaction) {
         iconURL: interaction.user.avatarURL(),
     })
         .setThumbnail(interaction.user.avatarURL())
-        .setDescription(`You have ${user.unlockedWaifus.length}/${Object.keys(waifus_json_1.default).length} waifus unlocked!`)
+        .setDescription(`You have ${waifuList.length}/${Object.keys(waifus_json_1.default).length} waifus unlocked!`)
         .addFields({
         name: "Unlocked Waifus",
-        value: user.unlockedWaifus.join(", ") || "None",
+        value: waifuList
+            .map((w) => `**${w} (${waifuCopies[w.replace("\\*", "")]})**`)
+            .join(", ") || "None",
         inline: true,
     }, {
         name: "Locked Waifus",
@@ -125,7 +146,9 @@ async function execute(interaction) {
         inline: true,
     })
         .setFooter({
-        text: `You can unlock ${specWaifus.length - unlockedSpecWaifus.length} more waifus with /airrec and ${nonSpecWaifus.length - unlockedNonSpecWaifus.length} more waifus by winning airrec quizzes!`,
+        text: `${(await user.hasWaifu(1, { where: { generated: true } }))
+            ? "*This waifu was generated."
+            : ""}\nYou can unlock ${specWaifus.length - unlockedSpecWaifus} more waifus with /airrec and ${nonSpecWaifus.length - unlockedNonSpecWaifus} more waifus by winning airrec quizzes!`,
     });
     await interaction.editReply({
         embeds: [embed],

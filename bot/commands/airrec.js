@@ -43,12 +43,16 @@ function spawnWaifu(aircraft) {
                         name: aircraft,
                         urlFriendlyName: waifu.urlFriendlyName,
                         path: waifu.path,
+                        type: waifu.type,
+                        spec: waifu.spec,
                     };
                 }
                 return {
                     name: aircraft,
                     urlFriendlyName: aircraft,
                     path: waifu.path,
+                    type: waifu.type,
+                    spec: waifu.spec,
                 };
             }
             return null;
@@ -64,12 +68,16 @@ function spawnWaifu(aircraft) {
                 name: waifuName,
                 urlFriendlyName: waifu.urlFriendlyName,
                 path: waifu.path,
+                type: waifu.type,
+                spec: waifu.spec,
             };
         }
         return {
             name: waifuName,
             urlFriendlyName: waifuName,
             path: waifu.path,
+            type: waifu.type,
+            spec: waifu.spec,
         };
     }
     return null;
@@ -80,10 +88,10 @@ exports.data = new discord_js_1.SlashCommandBuilder()
     .setDescription("Gives you an aircraft image for you to identify.")
     .addBooleanOption((option) => option
     .setName("random")
-    .setDescription("Whether to show a specific aircraft type or a random aircraft. Leave blank for a random aircraft."))
+    .setDescription("Whether to show a specific aircraft type or a random aircraft. Defaults to a random aircraft."))
     .addStringOption((option) => option
     .setName("type")
-    .setDescription("The type of aircraft you want to be shown. Leave blank for a random aircraft.")
+    .setDescription("The type of aircraft you want to be shown. Defaults to a random aircraft.")
     .addChoices({ name: "Civilian", value: "civilian" }, { name: "Military", value: "military" }));
 async function execute(interaction) {
     const requestedType = interaction.options.getString("type") ?? false;
@@ -161,7 +169,8 @@ async function execute(interaction) {
         }
         else if (aircraft.waifuImage) {
             const waifu = spawnWaifu(aircraft.waifuImage);
-            if (waifu && !user.unlockedWaifus.includes(waifu.name)) {
+            if (waifu &&
+                (await user.countWaifus({ where: { name: waifu.name } })) <= 5) {
                 const waifuEmbed = new discord_js_1.EmbedBuilder()
                     .setColor(0xff00ff)
                     .setTitle(waifu.name)
@@ -176,7 +185,13 @@ async function execute(interaction) {
                     embeds: [waifuEmbed],
                     files: [waifu.path],
                 });
-                user.unlockedWaifus = user.unlockedWaifus.concat(waifu.name);
+                await user.createWaifu({
+                    name: waifu.name,
+                    atk: Math.ceil(Math.random() * 10),
+                    hp: Math.ceil(Math.random() * 20),
+                    spd: Math.ceil(Math.random() * 10),
+                    spec: waifu.spec,
+                });
                 user.lockedWaifus = user.lockedWaifus.filter((w) => w !== waifu.name);
                 await user.save();
             }
