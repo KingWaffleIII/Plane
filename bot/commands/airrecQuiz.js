@@ -34,12 +34,6 @@ async function execute(interaction) {
         content: "Creating a new thread...",
     });
     const channel = interaction.channel;
-    if (channel.threads.cache.find((t) => t.name === "Air Recognition Quiz" && !t.locked)) {
-        await interaction.editReply({
-            content: "A quiz is already ongoing, please wait for it to finish.",
-        });
-        return;
-    }
     const thread = await channel.threads.create({
         name: `Air Recognition Quiz`,
         autoArchiveDuration: 60,
@@ -321,7 +315,7 @@ If you want to play, click the button below.
                 await user.save();
             }
         }
-        await thread.setLocked(true);
+        await thread.setArchived(true);
     });
 }
 exports.execute = execute;

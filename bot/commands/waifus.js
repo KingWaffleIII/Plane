@@ -83,12 +83,17 @@ async function execute(interaction) {
         const waifuEmbed = new discord_js_1.EmbedBuilder()
             .setColor(0xff00ff)
             .setTitle(waifuName)
+            .setAuthor({
+            name: targetUser.username,
+            iconURL: targetUser.avatarURL(),
+        })
+            .setThumbnail(targetUser.avatarURL())
             .setImage(`attachment://${waifuData.urlFriendlyName ?? waifuName}.jpg`)
             .setFooter({
             text: `You can unlock ${specWaifus.length - unlockedSpecWaifus} more waifus with /airrec and ${nonSpecWaifus.length - unlockedNonSpecWaifus} more waifus by winning airrec quizzes!`,
         });
         waifuEmbed.setDescription(`
-You have ${userWaifus.length} cop${userWaifus.length === 1 ? "y" : "ies"} of this waifu!\n
+This user has ${userWaifus.length} cop${userWaifus.length === 1 ? "y" : "ies"} of this waifu!\n
 ${userWaifus.some((w) => w.generated)
             ? "One or more of this waifu was generated."
             : ""}
@@ -127,12 +132,12 @@ ${userWaifus.some((w) => !waifus_json_1.default[w.name].spec && !w.generated)
     });
     const embed = new discord_js_1.EmbedBuilder()
         .setColor(0xff00ff)
-        .setTitle(`${interaction.user.username}'s Waifu Collection`)
+        .setTitle(`${targetUser.username}'s Waifu Collection`)
         .setAuthor({
-        name: interaction.user.username,
-        iconURL: interaction.user.avatarURL(),
+        name: targetUser.username,
+        iconURL: targetUser.avatarURL(),
     })
-        .setThumbnail(interaction.user.avatarURL())
+        .setThumbnail(targetUser.avatarURL())
         .setDescription(`You have ${waifuList.length}/${Object.keys(waifus_json_1.default).length} waifus unlocked!`)
         .addFields({
         name: "Unlocked Waifus",

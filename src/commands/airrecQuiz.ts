@@ -65,17 +65,6 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 
 	const channel = interaction.channel as BaseGuildTextChannel;
 
-	if (
-		channel.threads.cache.find(
-			(t) => t.name === "Air Recognition Quiz" && !t.locked
-		)
-	) {
-		await interaction.editReply({
-			content: "A quiz is already ongoing, please wait for it to finish.",
-		});
-		return;
-	}
-
 	const thread = await channel.threads.create({
 		name: `Air Recognition Quiz`,
 		autoArchiveDuration: 60,
@@ -424,6 +413,6 @@ If you want to play, click the button below.
 			}
 		}
 
-		await thread.setLocked(true);
+		await thread.setArchived(true);
 	});
 }

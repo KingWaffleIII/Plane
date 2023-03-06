@@ -40,21 +40,23 @@ async function execute(interaction) {
     const spd = interaction.options.getInteger("spd") ?? null;
     const waifusLowerCase = Object.keys(waifus_json_1.default).map((w) => w.toLowerCase());
     if (!waifusLowerCase.includes(name.toLowerCase())) {
-        await interaction.editReply({
+        await interaction.reply({
             content: "That waifu doesn't exist!",
         });
+        return;
     }
     const waifuName = Object.keys(waifus_json_1.default)[waifusLowerCase.indexOf(name.toLowerCase())];
     const waifuData = waifus_json_1.default[waifuName];
     await interaction.client.application.fetch();
     if (interaction.user !== interaction.client.application.owner) {
-        await interaction.editReply({
+        await interaction.reply({
             content: `Successfully generated ${amount} ${waifuName} waifu(s) (use \`/waifus user:${targetUser}\`) for ${targetUser.username}!`,
         });
         await wait(3000);
-        await interaction.editReply({
+        await interaction.followUp({
             content: "https://media.tenor.com/KjXLIHAAeRkAAAAd/wakey-wakey-time-for-scoo.gif",
         });
+        return;
     }
     await interaction.reply({
         content: "Generating waifu...",

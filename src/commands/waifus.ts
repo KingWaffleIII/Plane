@@ -107,6 +107,11 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 		const waifuEmbed = new EmbedBuilder()
 			.setColor(0xff00ff)
 			.setTitle(waifuName)
+			.setAuthor({
+				name: targetUser.username,
+				iconURL: targetUser.avatarURL() as string,
+			})
+			.setThumbnail(targetUser.avatarURL() as string)
 			.setImage(
 				`attachment://${waifuData!.urlFriendlyName ?? waifuName}.jpg`
 			)
@@ -120,7 +125,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 
 		waifuEmbed.setDescription(
 			`
-You have ${userWaifus.length} cop${
+This user has ${userWaifus.length} cop${
 				userWaifus.length === 1 ? "y" : "ies"
 			} of this waifu!\n
 ${
@@ -180,12 +185,12 @@ ${
 
 	const embed = new EmbedBuilder()
 		.setColor(0xff00ff)
-		.setTitle(`${interaction.user.username}'s Waifu Collection`)
+		.setTitle(`${targetUser.username}'s Waifu Collection`)
 		.setAuthor({
-			name: interaction.user.username,
-			iconURL: interaction.user.avatarURL() as string,
+			name: targetUser.username,
+			iconURL: targetUser.avatarURL() as string,
 		})
-		.setThumbnail(interaction.user.avatarURL() as string)
+		.setThumbnail(targetUser.avatarURL() as string)
 		.setDescription(
 			`You have ${waifuList.length}/${
 				Object.keys(waifus).length

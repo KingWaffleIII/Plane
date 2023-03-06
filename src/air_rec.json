@@ -387,7 +387,7 @@
 			"role": "Business jet.",
 			"manufacturer": "Dassault",
 			"model": "Falcon 20",
-			"aliases": [],
+			"aliases": ["Falcon"],
 			"identification": [
 				"Short-medium length",
 				"Winglets pointing upwards",
