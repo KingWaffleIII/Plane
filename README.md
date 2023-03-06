@@ -63,7 +63,7 @@ Dogfighting is a 3 round duel between users (both users must have at least 3 air
 
 This continues for 3 times, and the user with the most rounds won wins the dogfight. If both users win 2 rounds, the dogfight is a draw.
 
-Note: due to Discord limitations, only 25 items can be in a dropdown menu at once. This means that if a user has more than 25 waifus, they will only be able to fight with the 25 waifus with the highest ATK stat.
+Note: due to Discord limitations, only 25 items can be in a dropdown menu at once. This means that if a user has more than 25 waifus, they will only be able to fight with the 25 waifus (copies) with the highest ATK stat.
 
 ## Changelog
 

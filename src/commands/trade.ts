@@ -29,18 +29,11 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 	await interaction.deferReply();
 
 	const initialUserModel = await User.findByPk(interaction.user.id);
-	if (!initialUserModel) {
-		await interaction.followUp({
-			content:
-				"**You don't have waifu collection yet! Use `/waifus` to create one!**",
-		});
-	}
-
 	const targetUserModel = await User.findByPk(targetUser.id);
-	if (!targetUserModel) {
+	if (!initialUserModel || !targetUserModel) {
 		await interaction.followUp({
 			content:
-				"This user doesn't have a waifu collection yet! They need to run `/waifus` first.",
+				"**Either you or the user you want to trade with don't have waifu collections yet! Use `/waifus` to create one!**",
 		});
 		return;
 	}

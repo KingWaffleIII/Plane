@@ -18,15 +18,10 @@ async function execute(interaction) {
     const targetUser = interaction.options.getUser("user");
     await interaction.deferReply();
     const initialUserModel = await models_1.User.findByPk(interaction.user.id);
-    if (!initialUserModel) {
-        await interaction.followUp({
-            content: "**You don't have waifu collection yet! Use `/waifus` to create one!**",
-        });
-    }
     const targetUserModel = await models_1.User.findByPk(targetUser.id);
-    if (!targetUserModel) {
+    if (!initialUserModel || !targetUserModel) {
         await interaction.followUp({
-            content: "This user doesn't have a waifu collection yet! They need to run `/waifus` first.",
+            content: "**Either you or the user you want to trade with don't have waifu collections yet! Use `/waifus` to create one!**",
         });
         return;
     }
