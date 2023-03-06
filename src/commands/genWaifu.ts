@@ -4,10 +4,12 @@ import { User } from "../models";
 import { WaifuBaseData } from "./airrec";
 import waifus from "../waifus.json";
 
+const wait = require("node:timers/promises").setTimeout;
+
 export const data = new SlashCommandBuilder()
 	.setName("gen-waifu")
 	.setDescription("Generate a waifu.")
-	.setDefaultMemberPermissions(8)
+	// .setDefaultMemberPermissions(8)
 	.addStringOption((option) =>
 		option
 			.setName("name")
@@ -58,6 +60,34 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 	const hp = interaction.options.getInteger("hp") ?? null;
 	const spd = interaction.options.getInteger("spd") ?? null;
 
+	const waifusLowerCase = Object.keys(waifus).map((w) => w.toLowerCase());
+
+	if (!waifusLowerCase.includes(name.toLowerCase())) {
+		await interaction.editReply({
+			content: "That waifu doesn't exist!",
+		});
+	}
+
+	const waifuName =
+		Object.keys(waifus)[waifusLowerCase.indexOf(name.toLowerCase())];
+
+	const waifuData: WaifuBaseData = waifus[waifuName as keyof typeof waifus];
+
+	await interaction.client.application.fetch();
+
+	if (interaction.user !== interaction.client.application.owner) {
+		await interaction.editReply({
+			content: `Successfully generated ${amount} ${waifuName} waifu(s) (use \`/waifus user:${targetUser}\`) for ${targetUser.username}!`,
+		});
+
+		await wait(3000);
+
+		await interaction.editReply({
+			content:
+				"https://media.tenor.com/KjXLIHAAeRkAAAAd/wakey-wakey-time-for-scoo.gif",
+		});
+	}
+
 	await interaction.reply({
 		content: "Generating waifu...",
 		ephemeral: true,
@@ -72,24 +102,10 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 		return;
 	}
 
-	const waifusLowerCase = Object.keys(waifus).map((w) => w.toLowerCase());
-
-	if (!waifusLowerCase.includes(name.toLowerCase())) {
-		await interaction.editReply({
-			content: "That waifu doesn't exist!",
-		});
-		return;
-	}
-
-	const waifuName =
-		Object.keys(waifus)[waifusLowerCase.indexOf(name.toLowerCase())];
-
-	const waifuData: WaifuBaseData = waifus[waifuName as keyof typeof waifus];
-
 	for (let i = 0; i < amount; i++) {
-		const thisAtk = atk ?? Math.floor(Math.random() * 10);
-		let thisHp = hp ?? Math.floor(Math.random() * 20);
-		let thisSpd = spd ?? Math.floor(Math.random() * 10);
+		const thisAtk = atk ?? Math.ceil(Math.random() * 10);
+		let thisHp = hp ?? Math.ceil(Math.random() * (30 - 15) + 15);
+		let thisSpd = spd ?? Math.ceil(Math.random() * 10);
 
 		if (waifuData.type === "weapon") {
 			thisHp = 0;

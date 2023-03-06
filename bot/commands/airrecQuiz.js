@@ -274,29 +274,47 @@ If you want to play, click the button below.
                 content: `**<@${sortedPlayers[0]}>, you don't have waifu collection yet! Use \`/waifus\` to create one!**`,
             });
         }
-        else {
+        else if (rounds >= 5 &&
+            players[sortedPlayers[0]].score >= 0.25 * rounds) {
             const waifu = (0, airrec_1.spawnWaifu)();
             if (waifu &&
-                (await user.countWaifus({ where: { name: waifu.name } })) <= 5) {
+                (await user.countWaifus({
+                    where: { name: waifu.name },
+                })) <= 5) {
+                const atk = Math.ceil(Math.random() * 10);
+                const hp = Math.ceil(Math.random() * (30 - 15) + 15);
+                const spd = Math.ceil(Math.random() * 10);
                 const waifuEmbed = new discord_js_1.EmbedBuilder()
                     .setColor(0xff00ff)
                     .setTitle(waifu.name)
                     .setImage(`attachment://${waifu.urlFriendlyName}.jpg`)
                     .setDescription(`You can view your waifu collection by using \`/waifus\`!`)
-                    // .addFields({ name: "Name", value: waifu.name, inline: true })
+                    .addFields({
+                    name: "ATK",
+                    value: atk.toString(),
+                    inline: true,
+                }, {
+                    name: "HP",
+                    value: hp.toString(),
+                    inline: true,
+                }, {
+                    name: "SPD",
+                    value: spd.toString(),
+                    inline: true,
+                })
                     .setFooter({
                     text: "You unlocked an waifu! Image credit: Atamonica",
                 });
-                await thread.send({
-                    content: `<@${sortedPlayers[0]}> has unlocked a new waifu!`,
+                await interaction.followUp({
+                    content: `<@${interaction.user.id}> has unlocked a new waifu!`,
                     embeds: [waifuEmbed],
                     files: [waifu.path],
                 });
                 await user.createWaifu({
                     name: waifu.name,
-                    atk: Math.ceil(Math.random() * 10),
-                    hp: Math.ceil(Math.random() * 20),
-                    spd: Math.ceil(Math.random() * 10),
+                    atk,
+                    hp,
+                    spd,
                     spec: waifu.spec,
                 });
                 user.lockedWaifus = user.lockedWaifus.filter((w) => w !== waifu.name);

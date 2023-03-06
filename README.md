@@ -29,7 +29,7 @@ There are two types of waifus: **aircraft** and **weapon**.
 
 ### Aircraft waifus
 
-Aircraft waifus are the main type of waifu. They have an **ATK** (1-10), **HP** (1-20), and **SPD** (1-10) stat, which are randomly generated and use for [dogfighting](#Dogfighting). There is no bias for the stats - fighters can have high DEF stats but low ATK/SPD and freighters can have high ATK/SPD but low DEF.
+Aircraft waifus are the main type of waifu. They have an **ATK** (1-10), **HP** (15-30), and **SPD** (1-10) stat, which are randomly generated and use for [dogfighting](#Dogfighting). There is no bias for the stats - fighters can have high DEF stats but low ATK/SPD and freighters can have high ATK/SPD but low DEF.
 
 ### Weapon waifus
 
@@ -43,7 +43,7 @@ Waifus can be obtained in two ways depending on her type:
 -   winning airrec quizzes (**non-spec** aircraft waifus and weapon waifus)
 
 With `/airrec`, there is a **~21% chance** of getting an **eligible** aircraft, and a further **33% chance** of a waifu spawning from that eligible aircraft. This means that there is a **~7% chance** of getting a waifu from `/airrec`.
-With airrec quizzes, there is a **~33% chance** of getting a waifu **when you win a quiz**. To stop people spamming quizzes with just themselves, the quiz must have at least **3 players** and **5 rounds** to be eligible for a waifu.
+With airrec quizzes, there is a **~33% chance** of getting a waifu **when you win a quiz**. To stop people spamming quizzes with just themselves, the quiz must have at least **5 rounds** and the winner needs to have gained at least **1/4 of the total points** (e.g. if there are 10 rounds, there are 20 points available and 2.5 are needed) to be eligible for a waifu.
 
 ### Trading & Duplicates
 

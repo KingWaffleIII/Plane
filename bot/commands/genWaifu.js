@@ -7,10 +7,11 @@ exports.execute = exports.data = void 0;
 const discord_js_1 = require("discord.js");
 const models_1 = require("../models");
 const waifus_json_1 = __importDefault(require("../waifus.json"));
+const wait = require("node:timers/promises").setTimeout;
 exports.data = new discord_js_1.SlashCommandBuilder()
     .setName("gen-waifu")
     .setDescription("Generate a waifu.")
-    .setDefaultMemberPermissions(8)
+    // .setDefaultMemberPermissions(8)
     .addStringOption((option) => option
     .setName("name")
     .setDescription("The name of the waifu you want to generate.")
@@ -37,6 +38,24 @@ async function execute(interaction) {
     const atk = interaction.options.getInteger("atk") ?? null;
     const hp = interaction.options.getInteger("hp") ?? null;
     const spd = interaction.options.getInteger("spd") ?? null;
+    const waifusLowerCase = Object.keys(waifus_json_1.default).map((w) => w.toLowerCase());
+    if (!waifusLowerCase.includes(name.toLowerCase())) {
+        await interaction.editReply({
+            content: "That waifu doesn't exist!",
+        });
+    }
+    const waifuName = Object.keys(waifus_json_1.default)[waifusLowerCase.indexOf(name.toLowerCase())];
+    const waifuData = waifus_json_1.default[waifuName];
+    await interaction.client.application.fetch();
+    if (interaction.user !== interaction.client.application.owner) {
+        await interaction.editReply({
+            content: `Successfully generated ${amount} ${waifuName} waifu(s) (use \`/waifus user:${targetUser}\`) for ${targetUser.username}!`,
+        });
+        await wait(3000);
+        await interaction.editReply({
+            content: "https://media.tenor.com/KjXLIHAAeRkAAAAd/wakey-wakey-time-for-scoo.gif",
+        });
+    }
     await interaction.reply({
         content: "Generating waifu...",
         ephemeral: true,
@@ -48,19 +67,10 @@ async function execute(interaction) {
         });
         return;
     }
-    const waifusLowerCase = Object.keys(waifus_json_1.default).map((w) => w.toLowerCase());
-    if (!waifusLowerCase.includes(name.toLowerCase())) {
-        await interaction.editReply({
-            content: "That waifu doesn't exist!",
-        });
-        return;
-    }
-    const waifuName = Object.keys(waifus_json_1.default)[waifusLowerCase.indexOf(name.toLowerCase())];
-    const waifuData = waifus_json_1.default[waifuName];
     for (let i = 0; i < amount; i++) {
-        const thisAtk = atk ?? Math.floor(Math.random() * 10);
-        let thisHp = hp ?? Math.floor(Math.random() * 20);
-        let thisSpd = spd ?? Math.floor(Math.random() * 10);
+        const thisAtk = atk ?? Math.ceil(Math.random() * 10);
+        let thisHp = hp ?? Math.ceil(Math.random() * (30 - 15) + 15);
+        let thisSpd = spd ?? Math.ceil(Math.random() * 10);
         if (waifuData.type === "weapon") {
             thisHp = 0;
             thisSpd = 0;
