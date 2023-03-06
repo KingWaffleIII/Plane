@@ -1,6 +1,9 @@
 import crypto from "crypto";
 import {
 	ActionRowBuilder,
+	ButtonBuilder,
+	ButtonInteraction,
+	ButtonStyle,
 	ChatInputCommandInteraction,
 	ComponentType,
 	SlashCommandBuilder,
@@ -9,7 +12,6 @@ import {
 } from "discord.js";
 
 import { User, Waifu } from "../models";
-import waifus from "../waifus.json";
 
 export const data = new SlashCommandBuilder()
 	.setName("trade")
@@ -19,26 +21,18 @@ export const data = new SlashCommandBuilder()
 			.setName("user")
 			.setDescription("The user you want to trade with.")
 			.setRequired(true)
-	)
-	.addStringOption((option) =>
-		option
-			.setName("name")
-			.setDescription(
-				"The name of the waifu you want to trade (you can select a copy after)."
-			)
-			.setRequired(true)
 	);
 
 export async function execute(interaction: ChatInputCommandInteraction) {
-	const name = interaction.options.getString("name")!;
 	const targetUser = interaction.options.getUser("user")!;
 
 	await interaction.deferReply();
 
-	const user = await User.findByPk(interaction.user.id);
-	if (!user) {
+	const initialUserModel = await User.findByPk(interaction.user.id);
+	if (!initialUserModel) {
 		await interaction.followUp({
-			content: `**You don't have waifu collection yet! Use \`/waifus\` to create one!**`,
+			content:
+				"**You don't have waifu collection yet! Use `/waifus` to create one!**",
 		});
 	}
 
@@ -46,216 +40,425 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 	if (!targetUserModel) {
 		await interaction.followUp({
 			content:
-				"This user doesn't have a waifu collection yet. They need to run `/waifus` first.",
+				"This user doesn't have a waifu collection yet! They need to run `/waifus` first.",
 		});
 		return;
 	}
 
-	const waifusLowerCase = Object.keys(waifus).map((w) => w.toLowerCase());
-
-	if (!waifusLowerCase.includes(name.toLowerCase())) {
-		await interaction.editReply({
-			content: "That waifu doesn't exist!",
-		});
-		return;
-	}
-
-	const waifuName =
-		Object.keys(waifus)[waifusLowerCase.indexOf(name.toLowerCase())];
-
-	const userWaifus = await user!.getWaifus({
-		where: {
-			name: waifuName,
-		},
-	});
-	userWaifus.sort((a, b) => a.atk! - b.atk!).splice(25); // discord only allows 25 items
+	let initialUserWaifus = await initialUserModel!.getWaifus();
+	initialUserWaifus.sort((a, b) => a.atk! - b.atk!).splice(25); // discord only allows 25 items
+	let initialWaifu: Waifu;
 
 	let targetUserWaifus = await targetUserModel!.getWaifus();
 	targetUserWaifus.sort((a, b) => a.atk! - b.atk!).splice(25); // discord only allows 25 items
+	let targetWaifu: Waifu;
 
-	if (userWaifus.length === 0) {
-		await interaction.editReply({
-			content: `You don't have a copy of ${waifuName}!`,
+	if (initialUserWaifus.length === 0 || targetUserWaifus.length === 0) {
+		await interaction.followUp({
+			content:
+				"Either you or the user you want to trade with don't have any waifus!",
 		});
 		return;
 	}
 
-	const initialSelectId = crypto.randomBytes(6).toString("hex");
-	const initialRow =
+	const initialWaifuSelectId = crypto.randomBytes(6).toString("hex");
+	const initialWaifuSelectRow =
 		new ActionRowBuilder<StringSelectMenuBuilder>().addComponents(
 			new StringSelectMenuBuilder()
-				.setCustomId(`trade-waifu-${initialSelectId}`)
-				.setPlaceholder("Select a copy to trade")
+				.setCustomId(`trade-select-waifu-${initialWaifuSelectId}`)
+				.setPlaceholder("Select a waifu to trade")
 		);
 
-	userWaifus.forEach((waifu) => {
-		initialRow.components[0].addOptions({
-			label: `ATK:${waifu.atk} | HP:${waifu.hp} | SPD:${waifu.spd}`,
-			value: waifu.id!.toString(),
+	const initialWaifuList: string[] = [];
+
+	initialUserWaifus.forEach((waifu) => {
+		if (!initialWaifuList.includes(waifu.name))
+			initialWaifuList.push(waifu.name!);
+	});
+
+	initialWaifuList.forEach((waifu) => {
+		initialWaifuSelectRow.components[0].addOptions({
+			label: waifu,
+			value: waifu,
 		});
 	});
 
 	await interaction.editReply({
-		content: `<@${interaction.user.id}>, which copy of ${waifuName} do you want to trade? **You will not be able to confirm after!**`,
-		components: [initialRow],
+		content: `<@${interaction.user.id}>, which waifu do you want to trade? **You will be able to confirm after.**`,
+		components: [initialWaifuSelectRow],
 	});
 
-	const initialFilter = (i: StringSelectMenuInteraction) =>
-		i.customId === `trade-waifu-${initialSelectId}`;
-	const initialCollector =
+	const initialWaifuSelectFilter = (i: StringSelectMenuInteraction) =>
+		i.customId === `trade-select-waifu-${initialWaifuSelectId}`;
+	const initialWaifuSelectCollector =
 		interaction.channel!.createMessageComponentCollector({
 			componentType: ComponentType.StringSelect,
-			filter: initialFilter,
+			filter: initialWaifuSelectFilter,
 			time: 30000,
 		});
 
-	let initialWaifu: Waifu;
-	initialCollector!.on("collect", async (initialI) => {
-		if (initialI.user.id !== interaction.user.id) {
-			await initialI.reply({
-				content: "You can't trade this waifu.",
-				ephemeral: true,
-			});
-			return;
-		}
-
-		initialWaifu = (await Waifu.findByPk(initialI.values[0])) as Waifu;
-		await initialI.deferUpdate();
-
-		const targetSelectWaifuId = crypto.randomBytes(6).toString("hex");
-		const targetSelectWaifuRow =
-			new ActionRowBuilder<StringSelectMenuBuilder>().addComponents(
-				new StringSelectMenuBuilder()
-					.setCustomId(`trade-waifu-${targetSelectWaifuId}`)
-					.setPlaceholder("Select a waifu to trade")
-			);
-
-		const waifuList: string[] = [];
-
-		targetUserWaifus.forEach((waifu) => {
-			if (!waifuList.includes(waifu.name)) waifuList.push(waifu.name!);
-		});
-
-		waifuList.forEach((waifu) => {
-			targetSelectWaifuRow.components[0].addOptions({
-				label: waifu,
-				value: waifu,
-			});
-		});
-
-		await interaction.editReply({
-			content: `<@${targetUser.id}>, <@${interaction.user.id}> wants to trade **${initialWaifu.name} (ATK: ${initialWaifu.atk} | HP: ${initialWaifu.hp} | SPD: ${initialWaifu.spd})**! Which waifu do you want to trade? **You will not be able to confirm after!** If you don't want to trade, ignore this message.`,
-			components: [targetSelectWaifuRow],
-		});
-
-		const targetFilter = (select: StringSelectMenuInteraction) =>
-			select.customId === `trade-waifu-${targetSelectWaifuId}`;
-		const targetCollector =
-			interaction.channel!.createMessageComponentCollector({
-				componentType: ComponentType.StringSelect,
-				filter: targetFilter,
-				time: 30000,
-			});
-
-		let targetWaifu: Waifu;
-		targetCollector!.on("collect", async (targetI) => {
-			if (targetI.user.id !== targetUser.id) {
-				await targetI.reply({
-					content: "You can't trade this waifu.",
+	initialWaifuSelectCollector!.on(
+		"collect",
+		async (initialWaifuSelectInteraction) => {
+			if (initialWaifuSelectInteraction.user.id !== interaction.user.id) {
+				await initialWaifuSelectInteraction.reply({
+					content: "You can't select this waifu.",
 					ephemeral: true,
 				});
 				return;
 			}
 
-			await targetI.deferUpdate();
+			await initialWaifuSelectInteraction.deferUpdate();
 
-			const targetSelectCopyId = crypto.randomBytes(6).toString("hex");
-			const targetSelectCopyRow =
+			const initialCopySelectId = crypto.randomBytes(6).toString("hex");
+			const initialCopySelectRow =
 				new ActionRowBuilder<StringSelectMenuBuilder>().addComponents(
 					new StringSelectMenuBuilder()
-						.setCustomId(`trade-waifu-${targetSelectCopyId}`)
+						.setCustomId(`trade-select-copy-${initialCopySelectId}`)
 						.setPlaceholder("Select a copy to trade")
 				);
 
-			targetUserWaifus = await targetUserModel!.getWaifus({
+			initialUserWaifus = await initialUserModel!.getWaifus({
 				where: {
-					name: targetI.values[0],
+					name: initialWaifuSelectInteraction.values[0],
 				},
 			});
-			targetUserWaifus.sort((a, b) => a.atk! - b.atk!).splice(25); // discord only allows 25 items
+			initialUserWaifus.sort((a, b) => a.atk! - b.atk!).splice(25); // discord only allows 25 items
 
-			targetUserWaifus.forEach((waifu) => {
-				console.log(
-					`ATK:${waifu.atk} | HP:${waifu.hp} | SPD:${waifu.spd}`
-				);
-				targetSelectCopyRow.components[0].addOptions({
-					label: `ATK:${waifu.atk} | HP:${waifu.hp} | SPD:${waifu.spd}`,
+			initialUserWaifus.forEach((waifu) => {
+				initialCopySelectRow.components[0].addOptions({
+					label: `${waifu.name} (ATK:${waifu.atk} | HP:${waifu.hp} | SPD:${waifu.spd})`,
 					value: waifu.id!.toString(),
 				});
 			});
 
 			await interaction.editReply({
-				content: `<@${targetUser.id}>, <@${interaction.user.id}> wants to trade **${initialWaifu.name} (ATK: ${initialWaifu.atk} | HP: ${initialWaifu.hp} | SPD: ${initialWaifu.spd})**! Which copy of ${targetI.values[0]} do you want to trade! **You will not be able to confirm after!** If you don't want to trade, ignore this message.`,
-				components: [targetSelectCopyRow],
+				content: `<@${interaction.user.id}>, which copy of **${initialWaifuSelectInteraction.values[0]}** do you want to trade? **You will be able to confirm after.**`,
+				components: [initialCopySelectRow],
 			});
 
-			const finalFilter = (i: StringSelectMenuInteraction) =>
-				i.customId === `trade-waifu-${targetSelectCopyId}`;
-			const finalCollector =
+			const initialCopySelectFilter = (i: StringSelectMenuInteraction) =>
+				i.customId === `trade-select-copy-${initialCopySelectId}`;
+			const initialCopySelectCollector =
 				interaction.channel!.createMessageComponentCollector({
 					componentType: ComponentType.StringSelect,
-					filter: finalFilter,
+					filter: initialCopySelectFilter,
 					time: 30000,
 				});
 
-			finalCollector!.on("collect", async (finalI) => {
-				if (finalI.user.id !== targetUser.id) {
-					await finalI.reply({
-						content: "You can't trade this waifu.",
-						ephemeral: true,
+			initialCopySelectCollector!.on(
+				"collect",
+				async (initialCopySelectInteraction) => {
+					if (
+						initialCopySelectInteraction.user.id !==
+						interaction.user.id
+					) {
+						await initialCopySelectInteraction.reply({
+							content: "You can't select this waifu.",
+							ephemeral: true,
+						});
+						return;
+					}
+
+					await initialCopySelectInteraction.deferUpdate();
+
+					initialWaifu = (await Waifu.findByPk(
+						initialCopySelectInteraction.values[0]
+					)) as Waifu;
+
+					const targetWaifuSelectId = crypto
+						.randomBytes(6)
+						.toString("hex");
+					const targetWaifuSelectRow =
+						new ActionRowBuilder<StringSelectMenuBuilder>().addComponents(
+							new StringSelectMenuBuilder()
+								.setCustomId(
+									`trade-select-waifu-${targetWaifuSelectId}`
+								)
+								.setPlaceholder("Select a waifu to trade")
+						);
+
+					const targetWaifuList: string[] = [];
+
+					targetUserWaifus.forEach((waifu) => {
+						if (!targetWaifuList.includes(waifu.name))
+							targetWaifuList.push(waifu.name!);
 					});
-					return;
-				}
 
-				await finalI.deferUpdate();
+					targetWaifuList.forEach((waifu) => {
+						targetWaifuSelectRow.components[0].addOptions({
+							label: waifu,
+							value: waifu,
+						});
+					});
 
-				targetWaifu = (await Waifu.findByPk(finalI.values[0])) as Waifu;
-
-				await user!.removeWaifu(initialWaifu);
-				await targetUserModel!.removeWaifu(targetWaifu);
-				await user!.addWaifu(targetWaifu);
-				await targetUserModel!.addWaifu(initialWaifu);
-
-				await interaction.editReply({
-					content: `<@${interaction.user.id}>'s **${initialWaifu.name} (ATK: ${initialWaifu.atk} | HP: ${initialWaifu.hp} | SPD: ${initialWaifu.spd})** was traded for <@${targetUser.id}>'s **${targetWaifu.name} (ATK: ${targetWaifu.atk} | HP: ${targetWaifu.hp} | SPD: ${targetWaifu.spd})**!`,
-					components: [],
-				});
-			});
-
-			finalCollector!.on("end", async () => {
-				if (finalCollector!.collected.size === 0) {
 					await interaction.editReply({
-						content: `The trade was cancelled.`,
+						content: `<@${targetUser.id}>, <@${interaction.user.id}> wants to trade **${initialWaifu.name} (ATK: ${initialWaifu.atk} | HP: ${initialWaifu.hp} | SPD: ${initialWaifu.spd})**! Which waifu do you want to trade? **You will not be able to confirm after!** If you don't want to trade, ignore this message.`,
+						components: [targetWaifuSelectRow],
+					});
+
+					const targetWaifuSelectFilter = (
+						select: StringSelectMenuInteraction
+					) =>
+						select.customId ===
+						`trade-select-waifu-${targetWaifuSelectId}`;
+					const targetWaifuSelectCollector =
+						interaction.channel!.createMessageComponentCollector({
+							componentType: ComponentType.StringSelect,
+							filter: targetWaifuSelectFilter,
+							time: 30000,
+						});
+
+					targetWaifuSelectCollector!.on(
+						"collect",
+						async (targetWaifuSelectInteraction) => {
+							if (
+								targetWaifuSelectInteraction.user.id !==
+								targetUser.id
+							) {
+								await targetWaifuSelectInteraction.reply({
+									content: "You can't select this waifu.",
+									ephemeral: true,
+								});
+								return;
+							}
+
+							await targetWaifuSelectInteraction.deferUpdate();
+
+							const targetCopySelectId = crypto
+								.randomBytes(6)
+								.toString("hex");
+							const targetCopySelectRow =
+								new ActionRowBuilder<StringSelectMenuBuilder>().addComponents(
+									new StringSelectMenuBuilder()
+										.setCustomId(
+											`trade-select-copy-${targetCopySelectId}`
+										)
+										.setPlaceholder(
+											"Select a copy to trade"
+										)
+								);
+
+							targetUserWaifus = await targetUserModel!.getWaifus(
+								{
+									where: {
+										name: targetWaifuSelectInteraction
+											.values[0],
+									},
+								}
+							);
+							targetUserWaifus
+								.sort((a, b) => a.atk! - b.atk!)
+								.splice(25); // discord only allows 25 items
+
+							targetUserWaifus.forEach((waifu) => {
+								targetCopySelectRow.components[0].addOptions({
+									label: `${waifu.name} (ATK:${waifu.atk} | HP:${waifu.hp} | SPD:${waifu.spd})`,
+									value: waifu.id!.toString(),
+								});
+							});
+
+							await interaction.editReply({
+								content: `<@${targetUser.id}>, <@${interaction.user.id}> wants to trade **${initialWaifu.name} (ATK: ${initialWaifu.atk} | HP: ${initialWaifu.hp} | SPD: ${initialWaifu.spd})**! Which copy of **${targetWaifuSelectInteraction.values[0]}** do you want to trade? **You will not be able to confirm after!** If you don't want to trade, ignore this message.`,
+								components: [targetCopySelectRow],
+							});
+
+							const targetCopySelectFilter = (
+								i: StringSelectMenuInteraction
+							) =>
+								i.customId ===
+								`trade-select-copy-${targetCopySelectId}`;
+							const targetCopySelectCollector =
+								interaction.channel!.createMessageComponentCollector(
+									{
+										componentType:
+											ComponentType.StringSelect,
+										filter: targetCopySelectFilter,
+										time: 30000,
+									}
+								);
+
+							targetCopySelectCollector!.on(
+								"collect",
+								async (targetCopySelectInteraction) => {
+									if (
+										targetCopySelectInteraction.user.id !==
+										targetUser.id
+									) {
+										await targetCopySelectInteraction.reply(
+											{
+												content:
+													"You can't select this waifu.",
+												ephemeral: true,
+											}
+										);
+									}
+									await targetCopySelectInteraction.deferUpdate();
+
+									targetWaifu = (await Waifu.findByPk(
+										targetCopySelectInteraction.values[0]
+									)) as Waifu;
+
+									const confirmTradeId = crypto
+										.randomBytes(6)
+										.toString("hex");
+									const confirmTradeRow =
+										new ActionRowBuilder<ButtonBuilder>().addComponents(
+											new ButtonBuilder()
+												.setCustomId(
+													`trade-confirm-${confirmTradeId}`
+												)
+												.setLabel("Confirm")
+												.setStyle(ButtonStyle.Success),
+											new ButtonBuilder()
+												.setCustomId(
+													`trade-cancel-${confirmTradeId}`
+												)
+												.setLabel("Cancel")
+												.setStyle(ButtonStyle.Danger)
+										);
+
+									await interaction.editReply({
+										content: `<@${interaction.user.id}>, <@${targetUser.id}> wants to trade **${targetWaifu.name} (ATK: ${targetWaifu.atk} | HP: ${targetWaifu.hp} | SPD: ${targetWaifu.spd})** for **${initialWaifu.name} (ATK: ${initialWaifu.atk} | HP: ${initialWaifu.hp} | SPD: ${initialWaifu.spd})**! Do you want to confirm this trade? **This is irreversible!**`,
+										components: [confirmTradeRow],
+									});
+
+									const confirmTradeFilter = (
+										i: ButtonInteraction
+									) =>
+										i.customId ===
+											`trade-confirm-${confirmTradeId}` ||
+										i.customId ===
+											`trade-cancel-${confirmTradeId}`;
+
+									const confirmTradeCollector =
+										interaction.channel!.createMessageComponentCollector(
+											{
+												componentType:
+													ComponentType.Button,
+												filter: confirmTradeFilter,
+												time: 30000,
+											}
+										);
+
+									confirmTradeCollector!.on(
+										"collect",
+										async (confirmTradeInteraction) => {
+											if (
+												confirmTradeInteraction.user
+													.id !== interaction.user.id
+											) {
+												await confirmTradeInteraction.reply(
+													{
+														content:
+															"You can't confirm this trade.",
+														ephemeral: true,
+													}
+												);
+												return;
+											}
+
+											await confirmTradeInteraction.deferUpdate();
+
+											if (
+												confirmTradeInteraction.customId ===
+												`trade-confirm-${confirmTradeId}`
+											) {
+												await initialUserModel!.removeWaifu(
+													initialWaifu
+												);
+												await targetUserModel!.removeWaifu(
+													targetWaifu
+												);
+												await initialUserModel!.addWaifu(
+													targetWaifu
+												);
+												await targetUserModel!.addWaifu(
+													initialWaifu
+												);
+
+												await interaction.editReply({
+													content: `<@${interaction.user.id}> has successfully traded their **${initialWaifu.name} (ATK: ${initialWaifu.atk} | HP: ${initialWaifu.hp} | SPD: ${initialWaifu.spd})** for <@${targetUser.id}>'s **${targetWaifu.name} (ATK: ${targetWaifu.atk} | HP: ${targetWaifu.hp} | SPD: ${targetWaifu.spd})**!`,
+													components: [],
+												});
+
+												confirmTradeCollector!.stop();
+												targetCopySelectCollector!.stop();
+												targetWaifuSelectCollector!.stop();
+												initialCopySelectCollector!.stop();
+												initialWaifuSelectCollector!.stop();
+											} else {
+												await interaction.editReply({
+													content:
+														"This trade has been cancelled.",
+													components: [],
+												});
+
+												confirmTradeCollector!.stop();
+												targetCopySelectCollector!.stop();
+												targetWaifuSelectCollector!.stop();
+												initialCopySelectCollector!.stop();
+												initialWaifuSelectCollector!.stop();
+											}
+										}
+									);
+
+									confirmTradeCollector!.on(
+										"end",
+										async (collected) => {
+											if (collected.size === 0) {
+												await interaction.editReply({
+													content:
+														"This trade has been cancelled.",
+													components: [],
+												});
+											}
+										}
+									);
+								}
+							);
+
+							targetCopySelectCollector!.on(
+								"end",
+								async (collected) => {
+									if (collected.size === 0) {
+										await interaction.editReply({
+											content:
+												"This trade has been cancelled.",
+											components: [],
+										});
+									}
+								}
+							);
+						}
+					);
+
+					targetWaifuSelectCollector!.on("end", async (collected) => {
+						if (collected.size === 0) {
+							await interaction.editReply({
+								content: "This trade has been cancelled.",
+								components: [],
+							});
+						}
+					});
+				}
+			);
+
+			initialCopySelectCollector!.on("end", async (collected) => {
+				if (collected.size === 0) {
+					await interaction.editReply({
+						content: "This trade has been cancelled.",
 						components: [],
 					});
 				}
 			});
-		});
+		}
+	);
 
-		targetCollector!.on("end", async () => {
-			if (targetCollector!.collected.size === 0) {
-				await interaction.editReply({
-					content: `The trade was cancelled.`,
-					components: [],
-				});
-			}
-		});
-	});
-
-	initialCollector!.on("end", async () => {
-		if (initialCollector!.collected.size === 0) {
+	initialWaifuSelectCollector!.on("end", async (collected) => {
+		if (collected.size === 0) {
 			await interaction.editReply({
-				content: `The trade was cancelled.`,
+				content: "This trade has been cancelled.",
 				components: [],
 			});
 		}
