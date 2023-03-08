@@ -268,9 +268,9 @@ If you want to play, click the button below.
                 content: `**<@${sortedPlayers[0]}>, you don't have waifu collection yet! Use \`/waifus\` to create one!**`,
             });
         }
-        const isGuaranteed = user.guaranteeWaifu && user.guaranteeCounter >= 1;
+        const isGuaranteed = user.guaranteeWaifu && user.guaranteeCounter > 10;
         if (isGuaranteed ||
-            (rounds >= 1 && players[sortedPlayers[0]].score >= 0 * rounds)) {
+            (rounds >= 5 && players[sortedPlayers[0]].score >= 0.25 * rounds)) {
             const waifu = await (0, airrec_1.spawnWaifu)(user);
             if (waifu &&
                 (await user.countWaifus({

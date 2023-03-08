@@ -35,12 +35,11 @@ async function getImage(url) {
 }
 exports.getImage = getImage;
 async function spawnWaifu(user, aircraft) {
-    console.log(`spawn ${user.guaranteeCounter}`);
-    const isGuaranteed = user.guaranteeWaifu && user.guaranteeCounter > 1;
-    if (isGuaranteed || Math.floor(Math.random() * 1) === 0) {
+    const isGuaranteed = user.guaranteeWaifu && user.guaranteeCounter > 10;
+    if (isGuaranteed || Math.floor(Math.random() * 3) === 0) {
         if (isGuaranteed) {
             user.guaranteeWaifu = undefined;
-            user.guaranteeCounter = 0;
+            user.guaranteeCounter = undefined;
             await user.save();
         }
         else if (user.guaranteeWaifu) {
@@ -125,7 +124,7 @@ async function execute(interaction) {
     }
     let aircraft = type[Math.floor(Math.random() * type.length)];
     if (user.guaranteeWaifu &&
-        user.guaranteeCounter >= 1 &&
+        user.guaranteeCounter > 10 &&
         waifus_json_1.default[user.guaranteeWaifu].spec)
         aircraft = type[user.guaranteeWaifu];
     const image = await getImage(aircraft.image);
