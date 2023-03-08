@@ -107,7 +107,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 
 	for (let i = 0; i < amount; i++) {
 		const thisAtk = atk ?? Math.ceil(Math.random() * 10);
-		let thisHp = hp ?? Math.ceil(Math.random() * (30 - 15) + 15);
+		let thisHp = hp ?? Math.ceil(Math.random() * (100 - 50) + 50);
 		let thisSpd = spd ?? Math.ceil(Math.random() * 10);
 
 		if (waifuData.type === "weapon") {

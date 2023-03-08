@@ -227,7 +227,7 @@ If you want to play, click the button below.
             });
             const sortedPlayers = Object.keys(players).sort((a, b) => players[b].score - players[a].score);
             const leaderboard = new discord_js_1.EmbedBuilder()
-                .setColor(0x00ffff)
+                .setColor(0x0099ff)
                 .setTitle("Leaderboard")
                 .setTimestamp()
                 .setDescription(sortedPlayers
@@ -247,7 +247,7 @@ If you want to play, click the button below.
         }
         const sortedPlayers = Object.keys(players).sort((a, b) => players[b].score - players[a].score);
         const leaderboard = new discord_js_1.EmbedBuilder()
-            .setColor(0x00ffff)
+            .setColor(0x0099ff)
             .setTitle("Final Leaderboard")
             .setDescription(sortedPlayers
             .map((userId) => {
@@ -268,15 +268,16 @@ If you want to play, click the button below.
                 content: `**<@${sortedPlayers[0]}>, you don't have waifu collection yet! Use \`/waifus\` to create one!**`,
             });
         }
-        else if (rounds >= 5 &&
-            players[sortedPlayers[0]].score >= 0.25 * rounds) {
-            const waifu = (0, airrec_1.spawnWaifu)();
+        const isGuaranteed = user.guaranteeWaifu && user.guaranteeCounter >= 1;
+        if (isGuaranteed ||
+            (rounds >= 1 && players[sortedPlayers[0]].score >= 0 * rounds)) {
+            const waifu = await (0, airrec_1.spawnWaifu)(user);
             if (waifu &&
                 (await user.countWaifus({
                     where: { name: waifu.name },
                 })) <= 5) {
                 const atk = Math.ceil(Math.random() * 10);
-                const hp = Math.ceil(Math.random() * (30 - 15) + 15);
+                const hp = Math.ceil(Math.random() * (100 - 50) + 50);
                 const spd = Math.ceil(Math.random() * 10);
                 const waifuEmbed = new discord_js_1.EmbedBuilder()
                     .setColor(0xff00ff)
@@ -299,7 +300,7 @@ If you want to play, click the button below.
                     .setFooter({
                     text: "You unlocked an waifu! Image credit: Atamonica",
                 });
-                await interaction.followUp({
+                await thread.send({
                     content: `<@${interaction.user.id}> has unlocked a new waifu!`,
                     embeds: [waifuEmbed],
                     files: [waifu.path],

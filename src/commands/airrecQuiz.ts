@@ -295,7 +295,7 @@ If you want to play, click the button below.
 			);
 
 			const leaderboard = new EmbedBuilder()
-				.setColor(0x00ffff)
+				.setColor(0x0099ff)
 				.setTitle("Leaderboard")
 				.setTimestamp()
 				.setDescription(
@@ -325,7 +325,7 @@ If you want to play, click the button below.
 		);
 
 		const leaderboard = new EmbedBuilder()
-			.setColor(0x00ffff)
+			.setColor(0x0099ff)
 			.setTitle("Final Leaderboard")
 			.setDescription(
 				sortedPlayers
@@ -351,11 +351,16 @@ If you want to play, click the button below.
 			await thread.send({
 				content: `**<@${sortedPlayers[0]}>, you don't have waifu collection yet! Use \`/waifus\` to create one!**`,
 			});
-		} else if (
-			rounds >= 5 &&
-			players[sortedPlayers[0]].score >= 0.25 * rounds
+		}
+
+		const isGuaranteed =
+			user!.guaranteeWaifu && user!.guaranteeCounter! > 10;
+
+		if (
+			isGuaranteed ||
+			(rounds >= 5 && players[sortedPlayers[0]].score >= 0.25 * rounds)
 		) {
-			const waifu: WaifuData | null = spawnWaifu();
+			const waifu: WaifuData | null = await spawnWaifu(user!);
 			if (
 				waifu &&
 				(await user!.countWaifus({
@@ -363,7 +368,7 @@ If you want to play, click the button below.
 				})) <= 5
 			) {
 				const atk = Math.ceil(Math.random() * 10);
-				const hp = Math.ceil(Math.random() * (30 - 15) + 15);
+				const hp = Math.ceil(Math.random() * (100 - 50) + 50);
 				const spd = Math.ceil(Math.random() * 10);
 
 				const waifuEmbed = new EmbedBuilder()
@@ -393,23 +398,23 @@ If you want to play, click the button below.
 					.setFooter({
 						text: "You unlocked an waifu! Image credit: Atamonica",
 					});
-				await interaction.followUp({
+				await thread.send({
 					content: `<@${interaction.user.id}> has unlocked a new waifu!`,
 					embeds: [waifuEmbed],
 					files: [waifu.path],
 				});
 
-				await user.createWaifu({
+				await user!.createWaifu({
 					name: waifu.name,
 					atk,
 					hp,
 					spd,
 					spec: waifu.spec,
 				});
-				user.lockedWaifus! = user.lockedWaifus!.filter(
+				user!.lockedWaifus! = user!.lockedWaifus!.filter(
 					(w) => w !== waifu.name
 				);
-				await user.save();
+				await user!.save();
 			}
 		}
 

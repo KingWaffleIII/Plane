@@ -4,6 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.execute = exports.data = exports.spawnWaifu = exports.getImage = void 0;
+/* eslint-disable no-param-reassign */
 const axios_1 = __importDefault(require("axios"));
 const cheerio_1 = __importDefault(require("cheerio"));
 const crypto_1 = __importDefault(require("crypto"));
@@ -33,8 +34,19 @@ async function getImage(url) {
     }
 }
 exports.getImage = getImage;
-function spawnWaifu(aircraft) {
-    if (Math.floor(Math.random() * 3) === 0) {
+async function spawnWaifu(user, aircraft) {
+    console.log(`spawn ${user.guaranteeCounter}`);
+    const isGuaranteed = user.guaranteeWaifu && user.guaranteeCounter > 1;
+    if (isGuaranteed || Math.floor(Math.random() * 1) === 0) {
+        if (isGuaranteed) {
+            user.guaranteeWaifu = undefined;
+            user.guaranteeCounter = 0;
+            await user.save();
+        }
+        else if (user.guaranteeWaifu) {
+            user.guaranteeCounter += 1;
+            await user.save();
+        }
         if (aircraft) {
             if (Object.keys(waifus_json_1.default).includes(aircraft)) {
                 const waifu = waifus_json_1.default[aircraft];
@@ -57,8 +69,8 @@ function spawnWaifu(aircraft) {
             }
             return null;
         }
-        const nonSpecWaifus = Object.keys(waifus_json_1.default).filter((waifu) => {
-            const waifuData = waifus_json_1.default[waifu];
+        const nonSpecWaifus = Object.keys(waifus_json_1.default).filter((w) => {
+            const waifuData = waifus_json_1.default[w];
             return !waifuData.spec;
         });
         const waifuName = nonSpecWaifus[Math.floor(Math.random() * Object.keys(nonSpecWaifus).length)];
@@ -96,6 +108,14 @@ exports.data = new discord_js_1.SlashCommandBuilder()
 async function execute(interaction) {
     const requestedType = interaction.options.getString("type") ?? false;
     await interaction.deferReply();
+    // check if user exists in db
+    const user = await models_1.User.findByPk(interaction.user.id);
+    if (!user) {
+        await interaction.followUp({
+            content: `**<@${interaction.user.id}>, you don't have waifu collection yet! Use \`/waifus\` to create one!**`,
+        });
+        return;
+    }
     let type = air_rec_json_1.default[Object.keys(air_rec_json_1.default)[
     // Math.floor(Math.random() * Object.keys(airrec).length)
     Math.floor(Math.random() * 2) // for some reason there's a key called "default" in the object?? setting max to 2
@@ -103,7 +123,11 @@ async function execute(interaction) {
     if (requestedType) {
         type = air_rec_json_1.default[requestedType];
     }
-    const aircraft = type[Math.floor(Math.random() * type.length)];
+    let aircraft = type[Math.floor(Math.random() * type.length)];
+    if (user.guaranteeWaifu &&
+        user.guaranteeCounter >= 1 &&
+        waifus_json_1.default[user.guaranteeWaifu].spec)
+        aircraft = type[user.guaranteeWaifu];
     const image = await getImage(aircraft.image);
     if (!image) {
         await interaction.editReply({
@@ -160,19 +184,12 @@ async function execute(interaction) {
             embeds: [answer],
             components: [],
         });
-        // check if user exists in db
-        const user = await models_1.User.findByPk(interaction.user.id);
-        if (!user) {
-            await interaction.followUp({
-                content: `**<@${interaction.user.id}>, you don't have waifu collection yet! Use \`/waifus\` to create one!**`,
-            });
-        }
-        else if (aircraft.waifuImage) {
-            const waifu = spawnWaifu(aircraft.waifuImage);
+        if (aircraft.waifuImage) {
+            const waifu = await spawnWaifu(user, aircraft.waifuImage);
             if (waifu &&
                 (await user.countWaifus({ where: { name: waifu.name } })) <= 5) {
                 const atk = Math.ceil(Math.random() * 10);
-                const hp = Math.ceil(Math.random() * (30 - 15) + 15);
+                const hp = Math.ceil(Math.random() * (100 - 50) + 50);
                 const spd = Math.ceil(Math.random() * 10);
                 const waifuEmbed = new discord_js_1.EmbedBuilder()
                     .setColor(0xff00ff)

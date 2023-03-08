@@ -130,6 +130,7 @@ ${userWaifus.some((w) => !waifus_json_1.default[w.name].spec && !w.generated)
             waifuCopies[w.name]++;
         }
     });
+    console.log(`waifus ${user.guaranteeCounter}`);
     const embed = new discord_js_1.EmbedBuilder()
         .setColor(0xff00ff)
         .setTitle(`${targetUser.username}'s Waifu Collection`)
@@ -138,7 +139,9 @@ ${userWaifus.some((w) => !waifus_json_1.default[w.name].spec && !w.generated)
         iconURL: targetUser.avatarURL(),
     })
         .setThumbnail(targetUser.avatarURL())
-        .setDescription(`You have ${waifuList.length}/${Object.keys(waifus_json_1.default).length} waifus unlocked!`)
+        .setDescription(`You have ${waifuList.length}/${Object.keys(waifus_json_1.default).length} waifus unlocked! ${user.guaranteeWaifu
+        ? `You need to obtain ${15 - user.guaranteeCounter} more waifus to get a guaranteed waifu.`
+        : "You are not currently targetting a waifu."}`)
         .addFields({
         name: "Unlocked Waifus",
         value: waifuList

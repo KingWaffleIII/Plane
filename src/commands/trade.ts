@@ -39,11 +39,11 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 	}
 
 	let initialUserWaifus = await initialUserModel!.getWaifus();
-	initialUserWaifus.sort((a, b) => a.atk! - b.atk!).splice(25); // discord only allows 25 items
+	initialUserWaifus.sort((a, b) => b.atk! - a.atk!).splice(25); // discord only allows 25 items
 	let initialWaifu: Waifu;
 
 	let targetUserWaifus = await targetUserModel!.getWaifus();
-	targetUserWaifus.sort((a, b) => a.atk! - b.atk!).splice(25); // discord only allows 25 items
+	targetUserWaifus.sort((a, b) => b.atk! - a.atk!).splice(25); // discord only allows 25 items
 	let targetWaifu: Waifu;
 
 	if (initialUserWaifus.length === 0 || targetUserWaifus.length === 0) {
@@ -116,7 +116,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 					name: initialWaifuSelectInteraction.values[0],
 				},
 			});
-			initialUserWaifus.sort((a, b) => a.atk! - b.atk!).splice(25); // discord only allows 25 items
+			initialUserWaifus.sort((a, b) => b.atk! - a.atk!).splice(25); // discord only allows 25 items
 
 			initialUserWaifus.forEach((waifu) => {
 				initialCopySelectRow.components[0].addOptions({
@@ -241,7 +241,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 								}
 							);
 							targetUserWaifus
-								.sort((a, b) => a.atk! - b.atk!)
+								.sort((a, b) => b.atk! - a.atk!)
 								.splice(25); // discord only allows 25 items
 
 							targetUserWaifus.forEach((waifu) => {

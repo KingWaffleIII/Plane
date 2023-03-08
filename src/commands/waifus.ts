@@ -183,6 +183,8 @@ ${
 		}
 	});
 
+	console.log(`waifus ${user!.guaranteeCounter}`);
+
 	const embed = new EmbedBuilder()
 		.setColor(0xff00ff)
 		.setTitle(`${targetUser.username}'s Waifu Collection`)
@@ -194,7 +196,13 @@ ${
 		.setDescription(
 			`You have ${waifuList.length}/${
 				Object.keys(waifus).length
-			} waifus unlocked!`
+			} waifus unlocked! ${
+				user!.guaranteeWaifu
+					? `You need to obtain ${
+							15 - user!.guaranteeCounter!
+					  } more waifus to get a guaranteed waifu.`
+					: "You are not currently targetting a waifu."
+			}`
 		)
 		.addFields(
 			{

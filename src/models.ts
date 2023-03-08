@@ -95,6 +95,8 @@ export class User extends Model<
 	declare createWaifu: HasManyCreateAssociationMixin<Waifu, "userId">;
 
 	declare lockedWaifus?: string[];
+	declare guaranteeWaifu?: string;
+	declare guaranteeCounter?: number;
 
 	// You can also pre-declare possible inclusions, these will only be populated if you
 	// actively include a relation.
@@ -125,9 +127,7 @@ export class Waifu extends Model<
 	declare atk: number;
 	declare hp: number;
 	declare spd: number;
-
 	declare spec: boolean;
-
 	declare generated?: boolean; // if the waifu was generated in by an admin
 
 	// `user` is an eagerly-loaded association.
@@ -175,6 +175,15 @@ User.init(
 			type: DataTypes.JSON,
 			allowNull: false,
 			defaultValue: Object.keys(waifus),
+		},
+		guaranteeWaifu: {
+			type: DataTypes.STRING,
+			allowNull: true,
+		},
+		guaranteeCounter: {
+			type: DataTypes.INTEGER,
+			allowNull: true,
+			defaultValue: 0,
 		},
 		createdAt: DataTypes.DATE,
 		updatedAt: DataTypes.DATE,

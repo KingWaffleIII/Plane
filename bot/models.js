@@ -52,6 +52,15 @@ User.init({
         allowNull: false,
         defaultValue: Object.keys(waifus_json_1.default),
     },
+    guaranteeWaifu: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: true,
+    },
+    guaranteeCounter: {
+        type: sequelize_1.DataTypes.INTEGER,
+        allowNull: true,
+        defaultValue: 0,
+    },
     createdAt: sequelize_1.DataTypes.DATE,
     updatedAt: sequelize_1.DataTypes.DATE,
 }, {

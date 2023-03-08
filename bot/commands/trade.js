@@ -26,10 +26,10 @@ async function execute(interaction) {
         return;
     }
     let initialUserWaifus = await initialUserModel.getWaifus();
-    initialUserWaifus.sort((a, b) => a.atk - b.atk).splice(25); // discord only allows 25 items
+    initialUserWaifus.sort((a, b) => b.atk - a.atk).splice(25); // discord only allows 25 items
     let initialWaifu;
     let targetUserWaifus = await targetUserModel.getWaifus();
-    targetUserWaifus.sort((a, b) => a.atk - b.atk).splice(25); // discord only allows 25 items
+    targetUserWaifus.sort((a, b) => b.atk - a.atk).splice(25); // discord only allows 25 items
     let targetWaifu;
     if (initialUserWaifus.length === 0 || targetUserWaifus.length === 0) {
         await interaction.followUp({
@@ -80,7 +80,7 @@ async function execute(interaction) {
                 name: initialWaifuSelectInteraction.values[0],
             },
         });
-        initialUserWaifus.sort((a, b) => a.atk - b.atk).splice(25); // discord only allows 25 items
+        initialUserWaifus.sort((a, b) => b.atk - a.atk).splice(25); // discord only allows 25 items
         initialUserWaifus.forEach((waifu) => {
             initialCopySelectRow.components[0].addOptions({
                 label: `${waifu.name} (ATK:${waifu.atk} | HP:${waifu.hp} | SPD:${waifu.spd})`,
@@ -159,7 +159,7 @@ async function execute(interaction) {
                     },
                 });
                 targetUserWaifus
-                    .sort((a, b) => a.atk - b.atk)
+                    .sort((a, b) => b.atk - a.atk)
                     .splice(25); // discord only allows 25 items
                 targetUserWaifus.forEach((waifu) => {
                     targetCopySelectRow.components[0].addOptions({

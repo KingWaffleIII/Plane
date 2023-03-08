@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import axios from "axios";
 import cheerio from "cheerio";
 import crypto from "crypto";
@@ -63,8 +64,21 @@ export async function getImage(url: string): Promise<string | null> {
 	}
 }
 
-export function spawnWaifu(aircraft?: string): WaifuData | null {
-	if (Math.floor(Math.random() * 3) === 0) {
+export async function spawnWaifu(
+	user: User,
+	aircraft?: string
+): Promise<WaifuData | null> {
+	const isGuaranteed = user!.guaranteeWaifu && user!.guaranteeCounter! > 10;
+	if (isGuaranteed || Math.floor(Math.random() * 3) === 0) {
+		if (isGuaranteed) {
+			user!.guaranteeWaifu = undefined;
+			user!.guaranteeCounter = undefined;
+			await user!.save();
+		} else if (user!.guaranteeWaifu) {
+			user!.guaranteeCounter! += 1;
+			await user!.save();
+		}
+
 		if (aircraft) {
 			if (Object.keys(waifus).includes(aircraft)) {
 				const waifu: WaifuBaseData =
@@ -90,8 +104,8 @@ export function spawnWaifu(aircraft?: string): WaifuData | null {
 			return null;
 		}
 
-		const nonSpecWaifus = Object.keys(waifus).filter((waifu) => {
-			const waifuData = waifus[waifu as keyof typeof waifus];
+		const nonSpecWaifus = Object.keys(waifus).filter((w) => {
+			const waifuData = waifus[w as keyof typeof waifus];
 			return !waifuData.spec;
 		});
 		const waifuName = nonSpecWaifus[
@@ -146,6 +160,15 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 
 	await interaction.deferReply();
 
+	// check if user exists in db
+	const user = await User.findByPk(interaction.user.id);
+	if (!user) {
+		await interaction.followUp({
+			content: `**<@${interaction.user.id}>, you don't have waifu collection yet! Use \`/waifus\` to create one!**`,
+		});
+		return;
+	}
+
 	let type: Aircraft[] =
 		airrec[
 			Object.keys(airrec)[
@@ -158,7 +181,15 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 		type = airrec[requestedType as keyof typeof airrec];
 	}
 
-	const aircraft: Aircraft = type[Math.floor(Math.random() * type.length)];
+	let aircraft: Aircraft = type[Math.floor(Math.random() * type.length)];
+
+	if (
+		user!.guaranteeWaifu &&
+		user!.guaranteeCounter! > 10 &&
+		waifus[user!.guaranteeWaifu! as keyof typeof waifus].spec
+	)
+		aircraft = type[user!.guaranteeWaifu! as keyof typeof type] as Aircraft;
+
 	const image = await getImage(aircraft.image);
 
 	if (!image) {
@@ -233,20 +264,17 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 			components: [],
 		});
 
-		// check if user exists in db
-		const user = await User.findByPk(interaction.user.id);
-		if (!user) {
-			await interaction.followUp({
-				content: `**<@${interaction.user.id}>, you don't have waifu collection yet! Use \`/waifus\` to create one!**`,
-			});
-		} else if (aircraft.waifuImage) {
-			const waifu: WaifuData | null = spawnWaifu(aircraft.waifuImage);
+		if (aircraft.waifuImage) {
+			const waifu: WaifuData | null = await spawnWaifu(
+				user,
+				aircraft.waifuImage
+			);
 			if (
 				waifu &&
 				(await user!.countWaifus({ where: { name: waifu.name } })) <= 5
 			) {
 				const atk = Math.ceil(Math.random() * 10);
-				const hp = Math.ceil(Math.random() * (30 - 15) + 15);
+				const hp = Math.ceil(Math.random() * (100 - 50) + 50);
 				const spd = Math.ceil(Math.random() * 10);
 
 				const waifuEmbed = new EmbedBuilder()
