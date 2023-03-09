@@ -96,11 +96,11 @@ async function execute(interaction) {
 This user has ${userWaifus.length} cop${userWaifus.length === 1 ? "y" : "ies"} of this waifu!\n
 ${userWaifus.some((w) => w.generated)
             ? "One or more of this waifu was generated."
-            : ""}
-${userWaifus.some((w) => waifus_json_1.default[w.name].spec && !w.generated)
+            : ""}${userWaifus.some((w) => waifus_json_1.default[w.name].spec &&
+            !w.generated)
             ? "One or more of this waifu was unlocked with `/airrec`!"
-            : ""}
-${userWaifus.some((w) => !waifus_json_1.default[w.name].spec && !w.generated)
+            : ""}${userWaifus.some((w) => !waifus_json_1.default[w.name].spec &&
+            !w.generated)
             ? "One or more of this waifu was unlocked by winning an airrec quiz!"
             : ""}
 			`);
@@ -122,15 +122,23 @@ ${userWaifus.some((w) => !waifus_json_1.default[w.name].spec && !w.generated)
     const waifuList = [];
     const userWaifus = await user.getWaifus();
     userWaifus.forEach((w) => {
-        if (!waifuList.includes(`\\*${w.name}`)) {
-            waifuList.push(`\\*${w.name}`);
+        if (w.generated) {
+            if (!waifuList.includes(`\\*${w.name}`)) {
+                waifuList.push(`\\*${w.name}`);
+                waifuCopies[w.name] = 1;
+            }
+            else {
+                waifuCopies[w.name]++;
+            }
+        }
+        else if (!waifuList.includes(w.name)) {
+            waifuList.push(w.name);
             waifuCopies[w.name] = 1;
         }
         else {
             waifuCopies[w.name]++;
         }
     });
-    console.log(`waifus ${user.guaranteeCounter}`);
     const embed = new discord_js_1.EmbedBuilder()
         .setColor(0xff00ff)
         .setTitle(`${targetUser.username}'s Waifu Collection`)
@@ -140,7 +148,8 @@ ${userWaifus.some((w) => !waifus_json_1.default[w.name].spec && !w.generated)
     })
         .setThumbnail(targetUser.avatarURL())
         .setDescription(`You have ${waifuList.length}/${Object.keys(waifus_json_1.default).length} waifus unlocked! ${user.guaranteeWaifu
-        ? `You need to obtain ${15 - user.guaranteeCounter} more waifus to get a guaranteed waifu.`
+        ? `You need to obtain ${0 + 1 - user.guaranteeCounter} more waifus before you get a guaranteed ${user
+            .guaranteeWaifu}.`
         : "You are not currently targetting a waifu."}`)
         .addFields({
         name: "Unlocked Waifus",

@@ -66,27 +66,37 @@ export async function getImage(url: string): Promise<string | null> {
 
 export async function spawnWaifu(
 	user: User,
-	aircraft?: string
+	name?: string
 ): Promise<WaifuData | null> {
-	const isGuaranteed = user!.guaranteeWaifu && user!.guaranteeCounter! > 10;
+	let isGuaranteed = false;
+	if (user.guaranteeWaifu) {
+		isGuaranteed =
+			user.guaranteeWaifu !== undefined && user.guaranteeCounter! >= 10;
+	}
 	if (isGuaranteed || Math.floor(Math.random() * 3) === 0) {
-		if (isGuaranteed) {
-			user!.guaranteeWaifu = undefined;
-			user!.guaranteeCounter = undefined;
-			await user!.save();
-		} else if (user!.guaranteeWaifu) {
-			user!.guaranteeCounter! += 1;
-			await user!.save();
+		if (isGuaranteed || name === user.guaranteeWaifu) {
+			await user!.update({
+				guaranteeWaifu: null,
+				guaranteeCounter: null,
+			});
+			User.findByPk(user!.id).then((u) => {
+				console.log(u!.guaranteeWaifu);
+				console.log(u!.guaranteeCounter);
+			});
+		} else if (user.guaranteeWaifu) {
+			await user!.update({
+				guaranteeCounter: user.guaranteeCounter! + 1,
+			});
 		}
 
-		if (aircraft) {
-			if (Object.keys(waifus).includes(aircraft)) {
+		if (name) {
+			if (Object.keys(waifus).includes(name)) {
 				const waifu: WaifuBaseData =
-					waifus[aircraft as keyof typeof waifus];
+					waifus[name as keyof typeof waifus];
 
 				if (waifu.urlFriendlyName) {
 					return {
-						name: aircraft,
+						name,
 						urlFriendlyName: waifu.urlFriendlyName,
 						path: waifu.path,
 						type: waifu.type,
@@ -94,8 +104,8 @@ export async function spawnWaifu(
 					};
 				}
 				return {
-					name: aircraft,
-					urlFriendlyName: aircraft,
+					name,
+					urlFriendlyName: name,
 					path: waifu.path,
 					type: waifu.type,
 					spec: waifu.spec,
@@ -185,10 +195,10 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 
 	if (
 		user!.guaranteeWaifu &&
-		user!.guaranteeCounter! > 10 &&
+		user!.guaranteeCounter! >= 10 &&
 		waifus[user!.guaranteeWaifu! as keyof typeof waifus].spec
 	)
-		aircraft = type[user!.guaranteeWaifu! as keyof typeof type] as Aircraft;
+		aircraft = type.find((a) => a.waifuImage === user!.guaranteeWaifu!)!;
 
 	const image = await getImage(aircraft.image);
 

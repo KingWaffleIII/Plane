@@ -268,10 +268,14 @@ If you want to play, click the button below.
                 content: `**<@${sortedPlayers[0]}>, you don't have waifu collection yet! Use \`/waifus\` to create one!**`,
             });
         }
-        const isGuaranteed = user.guaranteeWaifu && user.guaranteeCounter > 10;
+        const isGuaranteed = user.guaranteeWaifu && user.guaranteeCounter >= 10;
         if (isGuaranteed ||
             (rounds >= 5 && players[sortedPlayers[0]].score >= 0.25 * rounds)) {
-            const waifu = await (0, airrec_1.spawnWaifu)(user);
+            let waifuName;
+            if (isGuaranteed) {
+                waifuName = user.guaranteeWaifu;
+            }
+            const waifu = await (0, airrec_1.spawnWaifu)(user, waifuName);
             if (waifu &&
                 (await user.countWaifus({
                     where: { name: waifu.name },
@@ -312,8 +316,9 @@ If you want to play, click the button below.
                     spd,
                     spec: waifu.spec,
                 });
-                user.lockedWaifus = user.lockedWaifus.filter((w) => w !== waifu.name);
-                await user.save();
+                await user.update({
+                    lockedWaifus: user.lockedWaifus.filter((w) => w !== waifu.name),
+                });
             }
         }
         await thread.setArchived(true);

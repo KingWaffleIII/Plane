@@ -22,6 +22,7 @@ async function execute(interaction) {
         await interaction.editReply({
             content: `You don't have waifu collection yet! Use \`/waifus\` to create one!`,
         });
+        return;
     }
     const waifusLowerCase = Object.keys(waifus_json_1.default).map((w) => w.toLowerCase());
     if (!waifusLowerCase.includes(name.toLowerCase())) {
@@ -45,9 +46,8 @@ async function execute(interaction) {
         guaranteeWaifu: waifuName,
         guaranteeCounter: user.guaranteeCounter ?? 0,
     });
-    console.log(`target ${user.guaranteeCounter}`);
     await interaction.editReply({
-        content: `You have successfully targeted ${waifuName}! You will get this waifu within 15 waifus, if not earlier. This has not reset your counter.`,
+        content: `You have successfully targeted ${waifuName}! You will be guaranteed get this waifu after 10 waifus, if not earlier. This has not reset your counter.`,
     });
 }
 exports.execute = execute;

@@ -27,13 +27,18 @@
 		"no-plusplus": "off",
 		"no-await-in-loop": "off",
 		"dot-notation": "off",
-		"indent": [
-			"warn",
-			"tab",
-			{
-				"ignoredNodes": ["PropertyDefinition", "TemplateLiteral > *"]
-			}
-		],
+		// "indent": [
+		// 	"warn",
+		// 	"tab",
+		// 	{
+		// 		"ignoredNodes": [
+		// 			"PropertyDefinition",
+		// 			"TemplateLiteral > *",
+		// 			"TernaryExpressions"
+		// 		]
+		// 	}
+		// ],
+		"indent": "off",
 		"linebreak-style": ["warn", "unix"],
 		"no-restricted-syntax": "off",
 		"global-require": "off",

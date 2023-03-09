@@ -132,21 +132,23 @@ ${
 	userWaifus.some((w) => w.generated)
 		? "One or more of this waifu was generated."
 		: ""
-}
-${
-	userWaifus.some(
-		(w) => waifus[w.name as keyof typeof waifus].spec && !w.generated
-	)
-		? "One or more of this waifu was unlocked with `/airrec`!"
-		: ""
-}
-${
-	userWaifus.some(
-		(w) => !waifus[w.name as keyof typeof waifus].spec && !w.generated
-	)
-		? "One or more of this waifu was unlocked by winning an airrec quiz!"
-		: ""
-}
+}${
+				userWaifus.some(
+					(w) =>
+						waifus[w.name as keyof typeof waifus].spec &&
+						!w.generated
+				)
+					? "One or more of this waifu was unlocked with `/airrec`!"
+					: ""
+			}${
+				userWaifus.some(
+					(w) =>
+						!waifus[w.name as keyof typeof waifus].spec &&
+						!w.generated
+				)
+					? "One or more of this waifu was unlocked by winning an airrec quiz!"
+					: ""
+			}
 			`
 		);
 
@@ -175,15 +177,20 @@ ${
 	const userWaifus = await user!.getWaifus();
 
 	userWaifus.forEach((w) => {
-		if (!waifuList.includes(`\\*${w.name}`)) {
-			waifuList.push(`\\*${w.name}`);
+		if (w.generated) {
+			if (!waifuList.includes(`\\*${w.name}`)) {
+				waifuList.push(`\\*${w.name}`);
+				waifuCopies[w.name] = 1;
+			} else {
+				waifuCopies[w.name]++;
+			}
+		} else if (!waifuList.includes(w.name)) {
+			waifuList.push(w.name);
 			waifuCopies[w.name] = 1;
 		} else {
 			waifuCopies[w.name]++;
 		}
 	});
-
-	console.log(`waifus ${user!.guaranteeCounter}`);
 
 	const embed = new EmbedBuilder()
 		.setColor(0xff00ff)
@@ -199,8 +206,9 @@ ${
 			} waifus unlocked! ${
 				user!.guaranteeWaifu
 					? `You need to obtain ${
-							15 - user!.guaranteeCounter!
-					  } more waifus to get a guaranteed waifu.`
+							0 + 1 - user!.guaranteeCounter!
+					  } more waifus before you get a guaranteed ${user!
+							.guaranteeWaifu!}.`
 					: "You are not currently targetting a waifu."
 			}`
 		)

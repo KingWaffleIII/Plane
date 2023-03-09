@@ -354,13 +354,17 @@ If you want to play, click the button below.
 		}
 
 		const isGuaranteed =
-			user!.guaranteeWaifu && user!.guaranteeCounter! > 10;
+			user!.guaranteeWaifu && user!.guaranteeCounter! >= 10;
 
 		if (
 			isGuaranteed ||
 			(rounds >= 5 && players[sortedPlayers[0]].score >= 0.25 * rounds)
 		) {
-			const waifu: WaifuData | null = await spawnWaifu(user!);
+			let waifuName;
+			if (isGuaranteed) {
+				waifuName = user!.guaranteeWaifu!;
+			}
+			const waifu: WaifuData | null = await spawnWaifu(user!, waifuName);
 			if (
 				waifu &&
 				(await user!.countWaifus({
@@ -411,10 +415,12 @@ If you want to play, click the button below.
 					spd,
 					spec: waifu.spec,
 				});
-				user!.lockedWaifus! = user!.lockedWaifus!.filter(
-					(w) => w !== waifu.name
-				);
-				await user!.save();
+
+				await user!.update({
+					lockedWaifus: user!.lockedWaifus!.filter(
+						(w) => w !== waifu.name
+					),
+				});
 			}
 		}
 

@@ -95,8 +95,8 @@ export class User extends Model<
 	declare createWaifu: HasManyCreateAssociationMixin<Waifu, "userId">;
 
 	declare lockedWaifus?: string[];
-	declare guaranteeWaifu?: string;
-	declare guaranteeCounter?: number;
+	declare guaranteeWaifu?: string | null;
+	declare guaranteeCounter?: number | null;
 
 	// You can also pre-declare possible inclusions, these will only be populated if you
 	// actively include a relation.

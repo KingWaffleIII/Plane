@@ -34,24 +34,34 @@ async function getImage(url) {
     }
 }
 exports.getImage = getImage;
-async function spawnWaifu(user, aircraft) {
-    const isGuaranteed = user.guaranteeWaifu && user.guaranteeCounter > 10;
+async function spawnWaifu(user, name) {
+    let isGuaranteed = false;
+    if (user.guaranteeWaifu) {
+        isGuaranteed =
+            user.guaranteeWaifu !== undefined && user.guaranteeCounter >= 10;
+    }
     if (isGuaranteed || Math.floor(Math.random() * 3) === 0) {
-        if (isGuaranteed) {
-            user.guaranteeWaifu = undefined;
-            user.guaranteeCounter = undefined;
-            await user.save();
+        if (isGuaranteed || name === user.guaranteeWaifu) {
+            await user.update({
+                guaranteeWaifu: null,
+                guaranteeCounter: null,
+            });
+            models_1.User.findByPk(user.id).then((u) => {
+                console.log(u.guaranteeWaifu);
+                console.log(u.guaranteeCounter);
+            });
         }
         else if (user.guaranteeWaifu) {
-            user.guaranteeCounter += 1;
-            await user.save();
+            await user.update({
+                guaranteeCounter: user.guaranteeCounter + 1,
+            });
         }
-        if (aircraft) {
-            if (Object.keys(waifus_json_1.default).includes(aircraft)) {
-                const waifu = waifus_json_1.default[aircraft];
+        if (name) {
+            if (Object.keys(waifus_json_1.default).includes(name)) {
+                const waifu = waifus_json_1.default[name];
                 if (waifu.urlFriendlyName) {
                     return {
-                        name: aircraft,
+                        name,
                         urlFriendlyName: waifu.urlFriendlyName,
                         path: waifu.path,
                         type: waifu.type,
@@ -59,8 +69,8 @@ async function spawnWaifu(user, aircraft) {
                     };
                 }
                 return {
-                    name: aircraft,
-                    urlFriendlyName: aircraft,
+                    name,
+                    urlFriendlyName: name,
                     path: waifu.path,
                     type: waifu.type,
                     spec: waifu.spec,
@@ -124,9 +134,9 @@ async function execute(interaction) {
     }
     let aircraft = type[Math.floor(Math.random() * type.length)];
     if (user.guaranteeWaifu &&
-        user.guaranteeCounter > 10 &&
+        user.guaranteeCounter >= 10 &&
         waifus_json_1.default[user.guaranteeWaifu].spec)
-        aircraft = type[user.guaranteeWaifu];
+        aircraft = type.find((a) => a.waifuImage === user.guaranteeWaifu);
     const image = await getImage(aircraft.image);
     if (!image) {
         await interaction.editReply({
