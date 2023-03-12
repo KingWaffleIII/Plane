@@ -349,88 +349,92 @@ If you want to play, click the button below.
 		const user = await User.findByPk(sortedPlayers[0]);
 		if (!user) {
 			await thread.send({
-				content: `**<@${sortedPlayers[0]}>, you don't have waifu collection yet! Use \`/waifus\` to create one!**`,
+				content: `<@${sortedPlayers[0]}>, you don't have waifu collection yet! Use \`/waifus\` to create one!`,
 			});
-		}
+		} else {
+			const isGuaranteed =
+				user!.guaranteeWaifu && user!.guaranteeCounter! >= 10;
 
-		const isGuaranteed =
-			user!.guaranteeWaifu && user!.guaranteeCounter! >= 10;
-
-		if (
-			isGuaranteed ||
-			(rounds >= 5 && players[sortedPlayers[0]].score >= 0.25 * rounds)
-		) {
-			let waifuName;
-			if (isGuaranteed) {
-				waifuName = user!.guaranteeWaifu!;
-			}
-			const waifu: WaifuData | null = await spawnWaifu(user!, waifuName);
 			if (
-				waifu &&
-				(await user!.countWaifus({
-					where: { name: waifu.name },
-				})) <= 5
+				isGuaranteed ||
+				(rounds >= 5 &&
+					players[sortedPlayers[0]].score >= 0.25 * rounds)
 			) {
-				const atk = Math.ceil(Math.random() * 10);
-				const hp = Math.ceil(Math.random() * (100 - 50) + 50);
-				const spd = Math.ceil(Math.random() * 10);
+				let waifuName;
+				if (isGuaranteed) {
+					waifuName = user!.guaranteeWaifu!;
+				}
+				const waifu: WaifuData | null = await spawnWaifu(
+					user!,
+					waifuName
+				);
+				if (
+					waifu &&
+					(await user!.countWaifus({
+						where: { name: waifu.name },
+					})) <= 5
+				) {
+					const atk = Math.ceil(Math.random() * 10);
+					const hp = Math.ceil(Math.random() * (100 - 50) + 50);
+					const spd = Math.ceil(Math.random() * 10);
 
-				const waifuEmbed = new EmbedBuilder()
-					.setColor(0xff00ff)
-					.setTitle(waifu.name)
-					.setImage(`attachment://${waifu.urlFriendlyName}.jpg`)
-					.setDescription(
-						`You can view your waifu collection by using \`/waifus\`!`
-					)
-					.addFields(
-						{
-							name: "ATK",
-							value: atk.toString(),
-							inline: true,
-						},
-						{
-							name: "HP",
-							value: hp.toString(),
-							inline: true,
-						},
-						{
-							name: "SPD",
-							value: spd.toString(),
-							inline: true,
-						}
-					)
-					.setFooter({
-						text: "You unlocked an waifu! Image credit: Atamonica",
+					const waifuEmbed = new EmbedBuilder()
+						.setColor(0xff00ff)
+						.setTitle(waifu.name)
+						.setImage(`attachment://${waifu.urlFriendlyName}.jpg`)
+						.setDescription(
+							`You can view your waifu collection by using \`/waifus\`!`
+						)
+						.addFields(
+							{
+								name: "ATK",
+								value: atk.toString(),
+								inline: true,
+							},
+							{
+								name: "HP",
+								value: hp.toString(),
+								inline: true,
+							},
+							{
+								name: "SPD",
+								value: spd.toString(),
+								inline: true,
+							}
+						)
+						.setFooter({
+							text: "You unlocked an waifu! Image credit: Atamonica",
+						});
+
+					if (waifu.abilityName) {
+						waifuEmbed.addFields({
+							name: waifu.abilityName!,
+							value: waifu.abilityDescription!,
+						});
+					}
+
+					await thread.send({
+						content: `<@${interaction.user.id}> has unlocked a new waifu!`,
+						embeds: [waifuEmbed],
+						files: [waifu.path],
 					});
 
-				if (waifu.abilityName) {
-					waifuEmbed.addFields({
-						name: waifu.abilityName!,
-						value: waifu.abilityDescription!,
+					await user!.createWaifu({
+						name: waifu.name,
+						atk,
+						hp,
+						spd,
+						spec: waifu.spec,
+						kills: 0,
+						deaths: 0,
+					});
+
+					await user!.update({
+						lockedWaifus: user!.lockedWaifus!.filter(
+							(w) => w !== waifu.name
+						),
 					});
 				}
-
-				await thread.send({
-					content: `<@${interaction.user.id}> has unlocked a new waifu!`,
-					embeds: [waifuEmbed],
-					files: [waifu.path],
-				});
-
-				await user!.createWaifu({
-					name: waifu.name,
-					atk,
-					hp,
-					spd,
-					spec: waifu.spec,
-					kills: 0,
-					deaths: 0,
-				});
-
-				await user!.update({
-					lockedWaifus: user!.lockedWaifus!.filter(
-						(w) => w !== waifu.name
-					),
-				});
 			}
 		}
 

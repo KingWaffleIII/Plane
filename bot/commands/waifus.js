@@ -162,7 +162,7 @@ ${userWaifus.some((w) => w.generated)
     })
         .setThumbnail(targetUser.avatarURL())
         .setDescription(`You have ${waifuList.length}/${Object.keys(waifus_json_1.default).length} waifus unlocked! ${user.guaranteeWaifu
-        ? `You need to obtain ${0 + 1 - user.guaranteeCounter} more waifus before you get a guaranteed ${user
+        ? `You need to obtain ${10 + 1 - user.guaranteeCounter} more waifus before you get a guaranteed ${user
             .guaranteeWaifu}.`
         : "You are not currently targetting a waifu."} You have won ${user.kills} dogfights and lost ${user.deaths} dogfights.`)
         .addFields({
