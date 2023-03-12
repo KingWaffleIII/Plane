@@ -47,10 +47,28 @@ User.init({
         type: sequelize_1.DataTypes.STRING(32 + 5),
         allowNull: false,
     },
+    discriminator: {
+        type: sequelize_1.DataTypes.STRING(4),
+        allowNull: false,
+    },
+    avatarUrl: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: true,
+    },
     lockedWaifus: {
         type: sequelize_1.DataTypes.JSON,
         allowNull: false,
         defaultValue: Object.keys(waifus_json_1.default),
+    },
+    kills: {
+        type: sequelize_1.DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
+    },
+    deaths: {
+        type: sequelize_1.DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
     },
     guaranteeWaifu: {
         type: sequelize_1.DataTypes.STRING,
@@ -59,7 +77,6 @@ User.init({
     guaranteeCounter: {
         type: sequelize_1.DataTypes.INTEGER,
         allowNull: true,
-        defaultValue: 0,
     },
     createdAt: sequelize_1.DataTypes.DATE,
     updatedAt: sequelize_1.DataTypes.DATE,
@@ -101,6 +118,16 @@ Waifu.init({
         allowNull: false,
         defaultValue: false,
     },
+    kills: {
+        type: sequelize_1.DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
+    },
+    deaths: {
+        type: sequelize_1.DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
+    },
     createdAt: sequelize_1.DataTypes.DATE,
     updatedAt: sequelize_1.DataTypes.DATE,
 }, {
@@ -109,14 +136,20 @@ Waifu.init({
 });
 // Here we associate which actually populates out pre-declared `association` static and other methods.
 Guild.hasMany(User, {
-    sourceKey: "id",
-    // foreignKey: "guildId",
+    // sourceKey: "id",
+    foreignKey: "guildId",
     as: "users", // this determines the name in `associations`!
 });
-User.belongsTo(Guild, { targetKey: "id" });
+User.belongsTo(Guild, {
+    // targetKey: "id",
+    as: "guild",
+});
 User.hasMany(Waifu, {
-    sourceKey: "id",
-    // foreignKey: "userId",
+    // sourceKey: "id",
+    foreignKey: "userId",
     as: "waifus", // this determines the name in `associations`!
 });
-Waifu.belongsTo(User, { targetKey: "id" });
+Waifu.belongsTo(User, {
+    // targetKey: "id",
+    as: "user",
+});

@@ -57,7 +57,7 @@ export class Guild extends Model<
 
 	// You can also pre-declare possible inclusions, these will only be populated if you
 	// actively include a relation.
-	declare users: NonAttribute<User[]>; // Note this is optional since it's only populated when explicitly requested in code
+	declare users?: NonAttribute<User[]>; // Note this is optional since it's only populated when explicitly requested in code
 
 	declare static associations: {
 		users: Association<Guild, User>;
@@ -75,6 +75,8 @@ export class User extends Model<
 	// display an error if guildId is missing.
 	declare guildId: ForeignKey<Guild["id"]>;
 	declare username: string;
+	declare discriminator: string;
+	declare avatarUrl?: string | null;
 
 	// `guild` is an eagerly-loaded association.
 	// We tag it as `NonAttribute`
@@ -98,9 +100,12 @@ export class User extends Model<
 	declare guaranteeWaifu?: string | null;
 	declare guaranteeCounter?: number | null;
 
+	declare kills: number;
+	declare deaths: number;
+
 	// You can also pre-declare possible inclusions, these will only be populated if you
 	// actively include a relation.
-	declare waifus: NonAttribute<Waifu[]>; // Note this is optional since it's only populated when explicitly requested in code
+	declare waifus?: NonAttribute<Waifu[]>; // Note this is optional since it's only populated when explicitly requested in code
 
 	declare static associations: {
 		waifus: Association<User, Waifu>;
@@ -129,6 +134,8 @@ export class Waifu extends Model<
 	declare spd: number;
 	declare spec: boolean;
 	declare generated?: boolean; // if the waifu was generated in by an admin
+	declare kills: number;
+	declare deaths: number;
 
 	// `user` is an eagerly-loaded association.
 	// We tag it as `NonAttribute`
@@ -171,10 +178,28 @@ User.init(
 			type: DataTypes.STRING(32 + 5),
 			allowNull: false,
 		},
+		discriminator: {
+			type: DataTypes.STRING(4),
+			allowNull: false,
+		},
+		avatarUrl: {
+			type: DataTypes.STRING,
+			allowNull: true,
+		},
 		lockedWaifus: {
 			type: DataTypes.JSON,
 			allowNull: false,
 			defaultValue: Object.keys(waifus),
+		},
+		kills: {
+			type: DataTypes.INTEGER,
+			allowNull: false,
+			defaultValue: 0,
+		},
+		deaths: {
+			type: DataTypes.INTEGER,
+			allowNull: false,
+			defaultValue: 0,
 		},
 		guaranteeWaifu: {
 			type: DataTypes.STRING,
@@ -183,7 +208,6 @@ User.init(
 		guaranteeCounter: {
 			type: DataTypes.INTEGER,
 			allowNull: true,
-			defaultValue: 0,
 		},
 		createdAt: DataTypes.DATE,
 		updatedAt: DataTypes.DATE,
@@ -229,6 +253,16 @@ Waifu.init(
 			allowNull: false,
 			defaultValue: false,
 		},
+		kills: {
+			type: DataTypes.INTEGER,
+			allowNull: false,
+			defaultValue: 0,
+		},
+		deaths: {
+			type: DataTypes.INTEGER,
+			allowNull: false,
+			defaultValue: 0,
+		},
 		createdAt: DataTypes.DATE,
 		updatedAt: DataTypes.DATE,
 	},
@@ -240,14 +274,20 @@ Waifu.init(
 
 // Here we associate which actually populates out pre-declared `association` static and other methods.
 Guild.hasMany(User, {
-	sourceKey: "id",
-	// foreignKey: "guildId",
+	// sourceKey: "id",
+	foreignKey: "guildId",
 	as: "users", // this determines the name in `associations`!
 });
-User.belongsTo(Guild, { targetKey: "id" });
+User.belongsTo(Guild, {
+	// targetKey: "id",
+	as: "guild",
+});
 User.hasMany(Waifu, {
-	sourceKey: "id",
-	// foreignKey: "userId",
+	// sourceKey: "id",
+	foreignKey: "userId",
 	as: "waifus", // this determines the name in `associations`!
 });
-Waifu.belongsTo(User, { targetKey: "id" });
+Waifu.belongsTo(User, {
+	// targetKey: "id",
+	as: "user",
+});

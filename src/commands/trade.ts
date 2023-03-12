@@ -38,12 +38,14 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 		return;
 	}
 
-	let initialUserWaifus = await initialUserModel!.getWaifus();
-	initialUserWaifus.sort((a, b) => b.atk! - a.atk!).splice(25); // discord only allows 25 items
+	let initialUserWaifus = (await initialUserModel!.getWaifus())
+		.sort((a, b) => b.atk! - a.atk!)
+		.splice(0, 25); // discord only allows 25 items
 	let initialWaifu: Waifu;
 
-	let targetUserWaifus = await targetUserModel!.getWaifus();
-	targetUserWaifus.sort((a, b) => b.atk! - a.atk!).splice(25); // discord only allows 25 items
+	let targetUserWaifus = (await targetUserModel!.getWaifus())
+		.sort((a, b) => b.atk! - a.atk!)
+		.splice(25); // discord only allows 25 items
 	let targetWaifu: Waifu;
 
 	if (initialUserWaifus.length === 0 || targetUserWaifus.length === 0) {
@@ -111,12 +113,15 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 						.setPlaceholder("Select a copy to trade")
 				);
 
-			initialUserWaifus = await initialUserModel!.getWaifus({
-				where: {
-					name: initialWaifuSelectInteraction.values[0],
-				},
-			});
-			initialUserWaifus.sort((a, b) => b.atk! - a.atk!).splice(25); // discord only allows 25 items
+			initialUserWaifus = (
+				await initialUserModel!.getWaifus({
+					where: {
+						name: initialWaifuSelectInteraction.values[0],
+					},
+				})
+			)
+				.sort((a, b) => b.atk! - a.atk!)
+				.splice(0, 25); // discord only allows 25 items
 
 			initialUserWaifus.forEach((waifu) => {
 				initialCopySelectRow.components[0].addOptions({
@@ -232,17 +237,16 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 										)
 								);
 
-							targetUserWaifus = await targetUserModel!.getWaifus(
-								{
+							targetUserWaifus = (
+								await targetUserModel!.getWaifus({
 									where: {
 										name: targetWaifuSelectInteraction
 											.values[0],
 									},
-								}
-							);
-							targetUserWaifus
+								})
+							)
 								.sort((a, b) => b.atk! - a.atk!)
-								.splice(25); // discord only allows 25 items
+								.splice(0, 25); // discord only allows 25 items
 
 							targetUserWaifus.forEach((waifu) => {
 								targetCopySelectRow.components[0].addOptions({

@@ -10,7 +10,7 @@
 		"build": "tsc",
 		"prod": "npm i && npm run build",
 		"start": "node .",
-		"quickstart": "tsc && docker compose up bot"
+		"quickstart": "tsc && docker compose up bot -d"
 	},
 	"repository": {
 		"type": "git",

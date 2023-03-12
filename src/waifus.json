@@ -1,4 +1,12 @@
 {
+	"AMRAAM": {
+		"ability": "crit",
+		"abilityDescription": "After equipping this weapon, your next attack will be guaranteed to crit.",
+		"abilityName": "Precision Strike",
+		"path": "./assets/waifus/AMRAAM.jpg",
+		"spec": false,
+		"type": "weapon"
+	},
 	"Aardvark": {
 		"path": "./assets/waifus/Aardvark.jpg",
 		"spec": false,
@@ -9,11 +17,6 @@
 		"spec": false,
 		"type": "aircraft"
 	},
-	"AMRAAM": {
-		"path": "./assets/waifus/AMRAAM.jpg",
-		"spec": false,
-		"type": "weapon"
-	},
 	"Black Hawk": {
 		"path": "./assets/waifus/Black_Hawk.jpg",
 		"spec": false,
@@ -23,7 +26,7 @@
 	"Demon": {
 		"path": "./assets/waifus/Demon.jpg",
 		"spec": false,
-		"type": "weapon"
+		"type": "aircraft"
 	},
 	"Eagle": {
 		"path": "./assets/waifus/Eagle.jpg",
@@ -81,6 +84,9 @@
 		"type": "aircraft"
 	},
 	"Hellfire": {
+		"ability": "barrage",
+		"abilityDescription": "After equipping this weapon, this missile will deal 1/2 of the aircraft's and this weapon's combined ATK to the opponent every round, on top of any attacks the aircraft may have made.",
+		"abilityName": "Fire and Forget",
 		"path": "./assets/waifus/Hellfire.jpg",
 		"spec": false,
 		"type": "weapon"
@@ -89,12 +95,6 @@
 		"path": "./assets/waifus/Hornet.jpg",
 		"spec": true,
 		"type": "aircraft"
-	},
-	"Invasion Stripes": {
-		"path": "./assets/waifus/Invasion_Stripes.jpg",
-		"spec": false,
-		"type": "other",
-		"urlFriendlyName": "Invasion_Stripes"
 	},
 	"LaGG-3": {
 		"path": "./assets/waifus/LaGG-3.jpg",
@@ -122,11 +122,6 @@
 		"spec": false,
 		"type": "aircraft"
 	},
-	"Marshalling": {
-		"path": "./assets/waifus/Marshalling.jpg",
-		"spec": false,
-		"type": "other"
-	},
 	"Mustang": {
 		"path": "./assets/waifus/Mustang.jpg",
 		"spec": false,
@@ -138,6 +133,9 @@
 		"type": "aircraft"
 	},
 	"Paveway II": {
+		"ability": "heavy",
+		"abilityDescription": "After equipping this weapon, your next attack will deal 3x damage but you can no longer evade attacks.",
+		"abilityName": "Heavy Payload",
 		"path": "./assets/waifus/Paveway_II.jpg",
 		"spec": false,
 		"type": "weapon",
@@ -191,6 +189,9 @@
 		"type": "aircraft"
 	},
 	"Sidewinder": {
+		"ability": "stun",
+		"abilityDescription": "After equipping this weapon, your next attack will stun your opponent, meaning they cannot do anything that round.",
+		"abilityName": "Stunwave",
 		"path": "./assets/waifus/Sidewinder.jpg",
 		"spec": false,
 		"type": "weapon"
@@ -227,6 +228,9 @@
 		"type": "aircraft"
 	},
 	"Trident II": {
+		"ability": "support",
+		"abilityDescription": "After equipping this weapon, your next attack will call in a support strike, dealing damage equivalent to this weapon's ATK to the opponent, on top of any attacks this round.",
+		"abilityName": "Call for Support",
 		"path": "./assets/waifus/Trident_II.jpg",
 		"spec": true,
 		"type": "weapon",

@@ -25,11 +25,13 @@ async function execute(interaction) {
         });
         return;
     }
-    let initialUserWaifus = await initialUserModel.getWaifus();
-    initialUserWaifus.sort((a, b) => b.atk - a.atk).splice(25); // discord only allows 25 items
+    let initialUserWaifus = (await initialUserModel.getWaifus())
+        .sort((a, b) => b.atk - a.atk)
+        .splice(0, 25); // discord only allows 25 items
     let initialWaifu;
-    let targetUserWaifus = await targetUserModel.getWaifus();
-    targetUserWaifus.sort((a, b) => b.atk - a.atk).splice(25); // discord only allows 25 items
+    let targetUserWaifus = (await targetUserModel.getWaifus())
+        .sort((a, b) => b.atk - a.atk)
+        .splice(25); // discord only allows 25 items
     let targetWaifu;
     if (initialUserWaifus.length === 0 || targetUserWaifus.length === 0) {
         await interaction.followUp({
@@ -75,12 +77,13 @@ async function execute(interaction) {
         const initialCopySelectRow = new discord_js_1.ActionRowBuilder().addComponents(new discord_js_1.StringSelectMenuBuilder()
             .setCustomId(`trade-select-copy-${initialCopySelectId}`)
             .setPlaceholder("Select a copy to trade"));
-        initialUserWaifus = await initialUserModel.getWaifus({
+        initialUserWaifus = (await initialUserModel.getWaifus({
             where: {
                 name: initialWaifuSelectInteraction.values[0],
             },
-        });
-        initialUserWaifus.sort((a, b) => b.atk - a.atk).splice(25); // discord only allows 25 items
+        }))
+            .sort((a, b) => b.atk - a.atk)
+            .splice(0, 25); // discord only allows 25 items
         initialUserWaifus.forEach((waifu) => {
             initialCopySelectRow.components[0].addOptions({
                 label: `${waifu.name} (ATK:${waifu.atk} | HP:${waifu.hp} | SPD:${waifu.spd})`,
@@ -152,15 +155,14 @@ async function execute(interaction) {
                 const targetCopySelectRow = new discord_js_1.ActionRowBuilder().addComponents(new discord_js_1.StringSelectMenuBuilder()
                     .setCustomId(`trade-select-copy-${targetCopySelectId}`)
                     .setPlaceholder("Select a copy to trade"));
-                targetUserWaifus = await targetUserModel.getWaifus({
+                targetUserWaifus = (await targetUserModel.getWaifus({
                     where: {
                         name: targetWaifuSelectInteraction
                             .values[0],
                     },
-                });
-                targetUserWaifus
+                }))
                     .sort((a, b) => b.atk - a.atk)
-                    .splice(25); // discord only allows 25 items
+                    .splice(0, 25); // discord only allows 25 items
                 targetUserWaifus.forEach((waifu) => {
                     targetCopySelectRow.components[0].addOptions({
                         label: `${waifu.name} (ATK:${waifu.atk} | HP:${waifu.hp} | SPD:${waifu.spd})`,

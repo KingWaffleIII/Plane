@@ -46,9 +46,10 @@ client.on(discord_js_1.Events.ClientReady, (bot) => {
 client.on(discord_js_1.Events.InteractionCreate, async (interaction) => {
     if (!interaction.isChatInputCommand())
         return;
-    if (interaction.guild === null) {
+    if (interaction.guild === null ||
+        interaction.channel instanceof discord_js_1.ThreadChannel) {
         await interaction.reply({
-            content: "This command is not available in DMs. Please use it in a server instead.",
+            content: "This command is not available. Please use it in a normal server channel instead.",
             ephemeral: true,
         });
         return;

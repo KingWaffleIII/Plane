@@ -30,7 +30,13 @@ exports.data = new discord_js_1.SlashCommandBuilder()
     .setDescription("The HP stat of the waifu to generate (only for aircraft). Defaults to RNG."))
     .addIntegerOption((option) => option
     .setName("spd")
-    .setDescription("The SPD stat of the waifu to generate (only for aircraft). Defaults to RNG."));
+    .setDescription("The SPD stat of the waifu to generate (only for aircraft). Defaults to RNG."))
+    .addIntegerOption((option) => option
+    .setName("kills")
+    .setDescription("The kills stat of the waifu to generate (only for aircraft). Defaults to 0."))
+    .addIntegerOption((option) => option
+    .setName("deaths")
+    .setDescription("The deaths stat of the waifu to generate (only for aircraft). Defaults to 0."));
 async function execute(interaction) {
     const targetUser = interaction.options.getUser("user") ?? interaction.user;
     const name = interaction.options.getString("name");
@@ -38,6 +44,8 @@ async function execute(interaction) {
     const atk = interaction.options.getInteger("atk") ?? null;
     const hp = interaction.options.getInteger("hp") ?? null;
     const spd = interaction.options.getInteger("spd") ?? null;
+    const kills = interaction.options.getInteger("kills") ?? 0;
+    const deaths = interaction.options.getInteger("deaths") ?? 0;
     const waifusLowerCase = Object.keys(waifus_json_1.default).map((w) => w.toLowerCase());
     if (!waifusLowerCase.includes(name.toLowerCase())) {
         await interaction.reply({
@@ -47,17 +55,18 @@ async function execute(interaction) {
     }
     const waifuName = Object.keys(waifus_json_1.default)[waifusLowerCase.indexOf(name.toLowerCase())];
     const waifuData = waifus_json_1.default[waifuName];
-    await interaction.client.application.fetch();
-    if (interaction.user !== interaction.client.application.owner) {
-        await interaction.reply({
-            content: `Successfully generated ${amount} ${waifuName} waifu(s) (use \`/waifus user:${targetUser}\`) for ${targetUser.username}!`,
-        });
-        await wait(3000);
-        await interaction.followUp({
-            content: "https://media.tenor.com/KjXLIHAAeRkAAAAd/wakey-wakey-time-for-scoo.gif",
-        });
-        return;
-    }
+    // await interaction.client.application.fetch();
+    // if (interaction.user !== interaction.client.application.owner) {
+    // 	await interaction.reply({
+    // 		content: `Successfully generated ${amount} ${waifuName} waifu(s) (use \`/waifus user:${targetUser}\`) for ${targetUser.username}!`,
+    // 	});
+    // 	await wait(3000);
+    // 	await interaction.followUp({
+    // 		content:
+    // 			"https://media.tenor.com/KjXLIHAAeRkAAAAd/wakey-wakey-time-for-scoo.gif",
+    // 	});
+    // 	return;
+    // }
     await interaction.reply({
         content: "Generating waifu...",
         ephemeral: true,
@@ -73,9 +82,13 @@ async function execute(interaction) {
         const thisAtk = atk ?? Math.ceil(Math.random() * 10);
         let thisHp = hp ?? Math.ceil(Math.random() * (100 - 50) + 50);
         let thisSpd = spd ?? Math.ceil(Math.random() * 10);
+        let thisKills = kills;
+        let thisDeaths = deaths;
         if (waifuData.type === "weapon") {
             thisHp = 0;
             thisSpd = 0;
+            thisKills = 0;
+            thisDeaths = 0;
         }
         await user.createWaifu({
             name: waifuName,
@@ -84,6 +97,8 @@ async function execute(interaction) {
             hp: thisHp,
             spd: thisSpd,
             generated: true,
+            kills: thisKills,
+            deaths: thisDeaths,
         });
     }
     await interaction.editReply({

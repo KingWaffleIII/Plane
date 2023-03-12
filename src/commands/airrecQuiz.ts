@@ -402,6 +402,14 @@ If you want to play, click the button below.
 					.setFooter({
 						text: "You unlocked an waifu! Image credit: Atamonica",
 					});
+
+				if (waifu.abilityName) {
+					waifuEmbed.addFields({
+						name: waifu.abilityName!,
+						value: waifu.abilityDescription!,
+					});
+				}
+
 				await thread.send({
 					content: `<@${interaction.user.id}> has unlocked a new waifu!`,
 					embeds: [waifuEmbed],
@@ -414,6 +422,8 @@ If you want to play, click the button below.
 					hp,
 					spd,
 					spec: waifu.spec,
+					kills: 0,
+					deaths: 0,
 				});
 
 				await user!.update({

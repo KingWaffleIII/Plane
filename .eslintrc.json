@@ -43,6 +43,7 @@
 		"no-restricted-syntax": "off",
 		"global-require": "off",
 		"max-classes-per-file": "off",
+		"radix": "off",
 		// "no-use-before-define": [
 		// 	"error",
 		// 	{ "functions": false, "classes": false }
@@ -70,7 +71,7 @@
 		"import/no-unresolved": "off",
 
 		"@typescript-eslint/no-var-requires": "off",
-		"@typescript-eslint/no-unused-vars": "warn",
+		"@typescript-eslint/no-unused-vars": "off", // conflicts with ts own rules
 		"@typescript-eslint/no-non-null-assertion": "off"
 	}
 }

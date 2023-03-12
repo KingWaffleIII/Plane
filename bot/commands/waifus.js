@@ -21,11 +21,17 @@ async function execute(interaction) {
     const targetUser = interaction.options.getUser("user") ?? interaction.user;
     await interaction.deferReply();
     const guild = await models_1.Guild.findByPk(interaction.guildId);
-    let user = await models_1.User.findByPk(targetUser.id);
+    let user = await models_1.User.findByPk(targetUser.id, {
+        include: { model: models_1.Waifu, as: "waifus" },
+    });
     if (!user && targetUser.id === interaction.user.id) {
         await guild.createUser({
             id: interaction.user.id,
             username: interaction.user.username,
+            discriminator: interaction.user.discriminator,
+            avatarUrl: interaction.user.avatarURL(),
+            kills: 0,
+            deaths: 0,
         });
         user = await models_1.User.findByPk(interaction.user.id);
     }
@@ -80,6 +86,8 @@ async function execute(interaction) {
             });
             return;
         }
+        const won = userWaifus.reduce((acc, w) => acc + w.kills, 0);
+        const lost = userWaifus.reduce((acc, w) => acc + w.deaths, 0);
         const waifuEmbed = new discord_js_1.EmbedBuilder()
             .setColor(0xff00ff)
             .setTitle(waifuName)
@@ -91,8 +99,8 @@ async function execute(interaction) {
             .setImage(`attachment://${waifuData.urlFriendlyName ?? waifuName}.jpg`)
             .setFooter({
             text: `You can unlock ${specWaifus.length - unlockedSpecWaifus} more waifus with /airrec and ${nonSpecWaifus.length - unlockedNonSpecWaifus} more waifus by winning airrec quizzes!`,
-        });
-        waifuEmbed.setDescription(`
+        })
+            .setDescription(`
 This user has ${userWaifus.length} cop${userWaifus.length === 1 ? "y" : "ies"} of this waifu!\n
 ${userWaifus.some((w) => w.generated)
             ? "One or more of this waifu was generated."
@@ -102,7 +110,7 @@ ${userWaifus.some((w) => w.generated)
             : ""}${userWaifus.some((w) => !waifus_json_1.default[w.name].spec &&
             !w.generated)
             ? "One or more of this waifu was unlocked by winning an airrec quiz!"
-            : ""}
+            : ""} In dogfighting, this waifu has won ${won} time${won === 1 ? "" : "s"} and lost ${lost} time${lost === 1 ? "" : "s"}.
 			`);
         userWaifus.forEach((w) => {
             waifuEmbed.addFields({
@@ -111,6 +119,12 @@ ${userWaifus.some((w) => w.generated)
                 inline: true,
             });
         });
+        if (waifuData.ability) {
+            waifuEmbed.addFields({
+                name: waifuData.abilityName,
+                value: waifuData.abilityDescription,
+            });
+        }
         await interaction.editReply({
             embeds: [waifuEmbed],
             files: [waifuData.path],
@@ -150,7 +164,7 @@ ${userWaifus.some((w) => w.generated)
         .setDescription(`You have ${waifuList.length}/${Object.keys(waifus_json_1.default).length} waifus unlocked! ${user.guaranteeWaifu
         ? `You need to obtain ${0 + 1 - user.guaranteeCounter} more waifus before you get a guaranteed ${user
             .guaranteeWaifu}.`
-        : "You are not currently targetting a waifu."}`)
+        : "You are not currently targetting a waifu."} You have won ${user.kills} dogfights and lost ${user.deaths} dogfights.`)
         .addFields({
         name: "Unlocked Waifus",
         value: waifuList
@@ -163,7 +177,7 @@ ${userWaifus.some((w) => w.generated)
         inline: true,
     })
         .setFooter({
-        text: `${(await user.hasWaifu(1, { where: { generated: true } }))
+        text: `${waifuList.filter((w) => w.startsWith("\\*")).length > 0
             ? "*This waifu was generated."
             : ""}\nYou can unlock ${specWaifus.length - unlockedSpecWaifus} more waifus with /airrec and ${nonSpecWaifus.length - unlockedNonSpecWaifus} more waifus by winning airrec quizzes!`,
     });

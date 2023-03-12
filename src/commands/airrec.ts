@@ -34,6 +34,9 @@ export interface WaifuBaseData {
 	readonly type: string;
 	readonly spec: boolean; // if the aircraft is obtainable via /airrec
 	readonly urlFriendlyName?: string;
+	readonly ability?: string;
+	readonly abilityName?: string;
+	readonly abilityDescription?: string;
 }
 
 export interface WaifuData extends WaifuBaseData {
@@ -79,10 +82,6 @@ export async function spawnWaifu(
 				guaranteeWaifu: null,
 				guaranteeCounter: null,
 			});
-			User.findByPk(user!.id).then((u) => {
-				console.log(u!.guaranteeWaifu);
-				console.log(u!.guaranteeCounter);
-			});
 		} else if (user.guaranteeWaifu) {
 			await user!.update({
 				guaranteeCounter: user.guaranteeCounter! + 1,
@@ -101,6 +100,8 @@ export async function spawnWaifu(
 						path: waifu.path,
 						type: waifu.type,
 						spec: waifu.spec,
+						abilityName: waifu.abilityName,
+						abilityDescription: waifu.abilityDescription,
 					};
 				}
 				return {
@@ -109,6 +110,8 @@ export async function spawnWaifu(
 					path: waifu.path,
 					type: waifu.type,
 					spec: waifu.spec,
+					abilityName: waifu.abilityName,
+					abilityDescription: waifu.abilityDescription,
 				};
 			}
 			return null;
@@ -130,6 +133,8 @@ export async function spawnWaifu(
 				path: waifu.path,
 				type: waifu.type,
 				spec: waifu.spec,
+				abilityName: waifu.abilityName,
+				abilityDescription: waifu.abilityDescription,
 			};
 		}
 		return {
@@ -138,6 +143,8 @@ export async function spawnWaifu(
 			path: waifu.path,
 			type: waifu.type,
 			spec: waifu.spec,
+			abilityName: waifu.abilityName,
+			abilityDescription: waifu.abilityDescription,
 		};
 	}
 	return null;
@@ -326,6 +333,8 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 					hp,
 					spd,
 					spec: waifu.spec,
+					kills: 0,
+					deaths: 0,
 				});
 				user.lockedWaifus! = user.lockedWaifus!.filter(
 					(w) => w !== waifu.name

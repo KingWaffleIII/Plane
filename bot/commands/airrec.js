@@ -46,10 +46,6 @@ async function spawnWaifu(user, name) {
                 guaranteeWaifu: null,
                 guaranteeCounter: null,
             });
-            models_1.User.findByPk(user.id).then((u) => {
-                console.log(u.guaranteeWaifu);
-                console.log(u.guaranteeCounter);
-            });
         }
         else if (user.guaranteeWaifu) {
             await user.update({
@@ -66,6 +62,8 @@ async function spawnWaifu(user, name) {
                         path: waifu.path,
                         type: waifu.type,
                         spec: waifu.spec,
+                        abilityName: waifu.abilityName,
+                        abilityDescription: waifu.abilityDescription,
                     };
                 }
                 return {
@@ -74,6 +72,8 @@ async function spawnWaifu(user, name) {
                     path: waifu.path,
                     type: waifu.type,
                     spec: waifu.spec,
+                    abilityName: waifu.abilityName,
+                    abilityDescription: waifu.abilityDescription,
                 };
             }
             return null;
@@ -91,6 +91,8 @@ async function spawnWaifu(user, name) {
                 path: waifu.path,
                 type: waifu.type,
                 spec: waifu.spec,
+                abilityName: waifu.abilityName,
+                abilityDescription: waifu.abilityDescription,
             };
         }
         return {
@@ -99,6 +101,8 @@ async function spawnWaifu(user, name) {
             path: waifu.path,
             type: waifu.type,
             spec: waifu.spec,
+            abilityName: waifu.abilityName,
+            abilityDescription: waifu.abilityDescription,
         };
     }
     return null;
@@ -232,6 +236,8 @@ async function execute(interaction) {
                     hp,
                     spd,
                     spec: waifu.spec,
+                    kills: 0,
+                    deaths: 0,
                 });
                 user.lockedWaifus = user.lockedWaifus.filter((w) => w !== waifu.name);
                 await user.save();
