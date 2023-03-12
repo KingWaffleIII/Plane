@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.execute = exports.data = void 0;
 const crypto_1 = __importDefault(require("crypto"));
 const discord_js_1 = require("discord.js");
+const models_1 = require("../models");
 const airrec_1 = require("./airrec");
 const air_rec_json_1 = __importDefault(require("../air_rec.json"));
 const wait = require("node:timers/promises").setTimeout;
@@ -24,7 +25,7 @@ exports.data = new discord_js_1.SlashCommandBuilder()
     .setDescription("Gives you a series of aircraft images for you and others to identify with scoring.")
     .addIntegerOption((option) => option
     .setName("rounds")
-    .setDescription("The number of rounds you want to play. Leave blank for 10 rounds.")
+    .setDescription("The number of rounds you want to play. Defaults to 10 rounds.")
     .setMinValue(1)
     .setMaxValue(20));
 async function execute(interaction) {
@@ -33,12 +34,6 @@ async function execute(interaction) {
         content: "Creating a new thread...",
     });
     const channel = interaction.channel;
-    if (channel.threads.cache.find((t) => t.name === "Air Recognition Quiz" && !t.locked)) {
-        await interaction.editReply({
-            content: "A quiz is already ongoing, please wait for it to finish.",
-        });
-        return;
-    }
     const thread = await channel.threads.create({
         name: `Air Recognition Quiz`,
         autoArchiveDuration: 60,
@@ -106,6 +101,13 @@ If you want to play, click the button below.
             return;
         }
         if (i.customId === `skip-${buttonId}`) {
+            if (i.user.id !== interaction.user.id) {
+                i.reply({
+                    content: "You can't start this game.",
+                    ephemeral: true,
+                });
+                return;
+            }
             collector?.stop();
             return;
         }
@@ -209,7 +211,9 @@ If you want to play, click the button below.
                 value: aircraft.aliases.join(", ") || "None",
             }, {
                 name: "Aircraft features to help you identify it:",
-                value: aircraft.identification.join(", ") || "None",
+                value: aircraft.identification
+                    .map((identification) => `- ${identification}\n`)
+                    .join("") || "None",
             }, 
             // { name: "\u200B", value: "\u200B" },
             {
@@ -223,6 +227,7 @@ If you want to play, click the button below.
             });
             const sortedPlayers = Object.keys(players).sort((a, b) => players[b].score - players[a].score);
             const leaderboard = new discord_js_1.EmbedBuilder()
+                .setColor(0x0099ff)
                 .setTitle("Leaderboard")
                 .setTimestamp()
                 .setDescription(sortedPlayers
@@ -242,6 +247,7 @@ If you want to play, click the button below.
         }
         const sortedPlayers = Object.keys(players).sort((a, b) => players[b].score - players[a].score);
         const leaderboard = new discord_js_1.EmbedBuilder()
+            .setColor(0x0099ff)
             .setTitle("Final Leaderboard")
             .setDescription(sortedPlayers
             .map((userId) => {
@@ -255,7 +261,75 @@ If you want to play, click the button below.
             embeds: [leaderboard],
             components: [],
         });
-        await thread.setLocked(true);
+        // check if user exists in db
+        const user = await models_1.User.findByPk(sortedPlayers[0]);
+        if (!user) {
+            await thread.send({
+                content: `**<@${sortedPlayers[0]}>, you don't have waifu collection yet! Use \`/waifus\` to create one!**`,
+            });
+        }
+        const isGuaranteed = user.guaranteeWaifu && user.guaranteeCounter >= 10;
+        if (isGuaranteed ||
+            (rounds >= 5 && players[sortedPlayers[0]].score >= 0.25 * rounds)) {
+            let waifuName;
+            if (isGuaranteed) {
+                waifuName = user.guaranteeWaifu;
+            }
+            const waifu = await (0, airrec_1.spawnWaifu)(user, waifuName);
+            if (waifu &&
+                (await user.countWaifus({
+                    where: { name: waifu.name },
+                })) <= 5) {
+                const atk = Math.ceil(Math.random() * 10);
+                const hp = Math.ceil(Math.random() * (100 - 50) + 50);
+                const spd = Math.ceil(Math.random() * 10);
+                const waifuEmbed = new discord_js_1.EmbedBuilder()
+                    .setColor(0xff00ff)
+                    .setTitle(waifu.name)
+                    .setImage(`attachment://${waifu.urlFriendlyName}.jpg`)
+                    .setDescription(`You can view your waifu collection by using \`/waifus\`!`)
+                    .addFields({
+                    name: "ATK",
+                    value: atk.toString(),
+                    inline: true,
+                }, {
+                    name: "HP",
+                    value: hp.toString(),
+                    inline: true,
+                }, {
+                    name: "SPD",
+                    value: spd.toString(),
+                    inline: true,
+                })
+                    .setFooter({
+                    text: "You unlocked an waifu! Image credit: Atamonica",
+                });
+                if (waifu.abilityName) {
+                    waifuEmbed.addFields({
+                        name: waifu.abilityName,
+                        value: waifu.abilityDescription,
+                    });
+                }
+                await thread.send({
+                    content: `<@${interaction.user.id}> has unlocked a new waifu!`,
+                    embeds: [waifuEmbed],
+                    files: [waifu.path],
+                });
+                await user.createWaifu({
+                    name: waifu.name,
+                    atk,
+                    hp,
+                    spd,
+                    spec: waifu.spec,
+                    kills: 0,
+                    deaths: 0,
+                });
+                await user.update({
+                    lockedWaifus: user.lockedWaifus.filter((w) => w !== waifu.name),
+                });
+            }
+        }
+        await thread.setArchived(true);
     });
 }
 exports.execute = execute;

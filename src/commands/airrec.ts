@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import axios from "axios";
 import cheerio from "cheerio";
 import crypto from "crypto";
@@ -12,10 +13,36 @@ import {
 	SlashCommandBuilder,
 } from "discord.js";
 
-import { Aircraft } from "../interfaces";
+import { User } from "../models";
 import airrec from "../air_rec.json";
+import waifus from "../waifus.json";
 
-const wait = require("node:timers/promises").setTimeout;
+export interface Aircraft {
+	readonly name: string;
+	readonly role: string;
+	readonly manufacturer: string;
+	readonly model: string;
+	readonly aliases: string[];
+	readonly identification: string[];
+	readonly image: string;
+	readonly waifuImage?: string;
+	readonly wiki: string;
+}
+
+export interface WaifuBaseData {
+	readonly path: string;
+	readonly type: string;
+	readonly spec: boolean; // if the aircraft is obtainable via /airrec
+	readonly urlFriendlyName?: string;
+	readonly ability?: string;
+	readonly abilityName?: string;
+	readonly abilityDescription?: string;
+}
+
+export interface WaifuData extends WaifuBaseData {
+	readonly name: string;
+	readonly urlFriendlyName: string;
+}
 
 export async function getImage(url: string): Promise<string | null> {
 	try {
@@ -40,6 +67,89 @@ export async function getImage(url: string): Promise<string | null> {
 	}
 }
 
+export async function spawnWaifu(
+	user: User,
+	name?: string
+): Promise<WaifuData | null> {
+	let isGuaranteed = false;
+	if (user.guaranteeWaifu) {
+		isGuaranteed =
+			user.guaranteeWaifu !== undefined && user.guaranteeCounter! >= 10;
+	}
+	if (isGuaranteed || Math.floor(Math.random() * 3) === 0) {
+		if (isGuaranteed || name === user.guaranteeWaifu) {
+			await user!.update({
+				guaranteeWaifu: null,
+				guaranteeCounter: null,
+			});
+		} else if (user.guaranteeWaifu) {
+			await user!.update({
+				guaranteeCounter: user.guaranteeCounter! + 1,
+			});
+		}
+
+		if (name) {
+			if (Object.keys(waifus).includes(name)) {
+				const waifu: WaifuBaseData =
+					waifus[name as keyof typeof waifus];
+
+				if (waifu.urlFriendlyName) {
+					return {
+						name,
+						urlFriendlyName: waifu.urlFriendlyName,
+						path: waifu.path,
+						type: waifu.type,
+						spec: waifu.spec,
+						abilityName: waifu.abilityName,
+						abilityDescription: waifu.abilityDescription,
+					};
+				}
+				return {
+					name,
+					urlFriendlyName: name,
+					path: waifu.path,
+					type: waifu.type,
+					spec: waifu.spec,
+					abilityName: waifu.abilityName,
+					abilityDescription: waifu.abilityDescription,
+				};
+			}
+			return null;
+		}
+
+		const nonSpecWaifus = Object.keys(waifus).filter((w) => {
+			const waifuData = waifus[w as keyof typeof waifus];
+			return !waifuData.spec;
+		});
+		const waifuName = nonSpecWaifus[
+			Math.floor(Math.random() * Object.keys(nonSpecWaifus).length)
+		] as keyof typeof waifus;
+		const waifu: WaifuBaseData = waifus[waifuName];
+
+		if (waifu.urlFriendlyName) {
+			return {
+				name: waifuName,
+				urlFriendlyName: waifu.urlFriendlyName,
+				path: waifu.path,
+				type: waifu.type,
+				spec: waifu.spec,
+				abilityName: waifu.abilityName,
+				abilityDescription: waifu.abilityDescription,
+			};
+		}
+		return {
+			name: waifuName,
+			urlFriendlyName: waifuName,
+			path: waifu.path,
+			type: waifu.type,
+			spec: waifu.spec,
+			abilityName: waifu.abilityName,
+			abilityDescription: waifu.abilityDescription,
+		};
+	}
+	return null;
+}
+
 export const data = new SlashCommandBuilder()
 	.setName("airrec")
 	.setDescription("Gives you an aircraft image for you to identify.")
@@ -47,14 +157,14 @@ export const data = new SlashCommandBuilder()
 		option
 			.setName("random")
 			.setDescription(
-				"Whether to show a specific aircraft type or a random aircraft. Leave blank for a random aircraft."
+				"Whether to show a specific aircraft type or a random aircraft. Defaults to a random aircraft."
 			)
 	)
 	.addStringOption((option) =>
 		option
 			.setName("type")
 			.setDescription(
-				"The type of aircraft you want to be shown. Leave blank for a random aircraft."
+				"The type of aircraft you want to be shown. Defaults to a random aircraft."
 			)
 			.addChoices(
 				{ name: "Civilian", value: "civilian" },
@@ -66,6 +176,15 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 	const requestedType = interaction.options.getString("type") ?? false;
 
 	await interaction.deferReply();
+
+	// check if user exists in db
+	const user = await User.findByPk(interaction.user.id);
+	if (!user) {
+		await interaction.followUp({
+			content: `**<@${interaction.user.id}>, you don't have waifu collection yet! Use \`/waifus\` to create one!**`,
+		});
+		return;
+	}
 
 	let type: Aircraft[] =
 		airrec[
@@ -79,16 +198,16 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 		type = airrec[requestedType as keyof typeof airrec];
 	}
 
-	const aircraft: Aircraft = type[Math.floor(Math.random() * type.length)];
-	const image = await getImage(aircraft.image);
+	let aircraft: Aircraft = type[Math.floor(Math.random() * type.length)];
 
-	let waifuImage = false;
-	if (aircraft.waifuImage) {
-		// easter egg
-		if (Math.floor(Math.random() * 2) === 0) {
-			waifuImage = true;
-		}
-	}
+	if (
+		user!.guaranteeWaifu &&
+		user!.guaranteeCounter! >= 10 &&
+		waifus[user!.guaranteeWaifu! as keyof typeof waifus].spec
+	)
+		aircraft = type.find((a) => a.waifuImage === user!.guaranteeWaifu!)!;
+
+	const image = await getImage(aircraft.image);
 
 	if (!image) {
 		await interaction.editReply({
@@ -110,12 +229,12 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 		content: `**What is the name of this aircraft?**\n${image}`,
 		components: [row],
 	});
-	// }
 
 	const answer = new EmbedBuilder()
 		.setColor(0x0099ff)
 		.setTitle(aircraft.name)
 		.setDescription(aircraft.role)
+		.setImage(image)
 		.setTimestamp()
 		.addFields(
 			{
@@ -142,17 +261,10 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 				value: aircraft.image,
 				inline: true,
 			}
-		);
-
-	if (waifuImage) {
-		answer.setImage(`attachment://${aircraft.model}.jpg`).setFooter({
-			text: "You found an easter egg! Image credit: Atamonica",
-		});
-	} else {
-		answer.setImage(image).setFooter({
+		)
+		.setFooter({
 			text: "Photo credit: https://www.airfighters.com",
 		});
-	}
 
 	const filter = (i: ButtonInteraction) =>
 		i.customId === `reveal-airrec-${buttonId}`;
@@ -161,41 +273,90 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 		time: 30000,
 		filter,
 	});
+
+	const doReveal = async () => {
+		await interaction.editReply({
+			content: `**The answer was ${aircraft.name}!**`,
+			embeds: [answer],
+			components: [],
+		});
+
+		if (aircraft.waifuImage) {
+			const waifu: WaifuData | null = await spawnWaifu(
+				user,
+				aircraft.waifuImage
+			);
+			if (
+				waifu &&
+				(await user!.countWaifus({ where: { name: waifu.name } })) <= 5
+			) {
+				const atk = Math.ceil(Math.random() * 10);
+				const hp = Math.ceil(Math.random() * (100 - 50) + 50);
+				const spd = Math.ceil(Math.random() * 10);
+
+				const waifuEmbed = new EmbedBuilder()
+					.setColor(0xff00ff)
+					.setTitle(waifu.name)
+					.setImage(`attachment://${waifu.urlFriendlyName}.jpg`)
+					.setDescription(
+						`You can view your waifu collection by using \`/waifus\`!`
+					)
+					.addFields(
+						{
+							name: "ATK",
+							value: atk.toString(),
+							inline: true,
+						},
+						{
+							name: "HP",
+							value: hp.toString(),
+							inline: true,
+						},
+						{
+							name: "SPD",
+							value: spd.toString(),
+							inline: true,
+						}
+					)
+					.setFooter({
+						text: "You unlocked an waifu! Image credit: Atamonica",
+					});
+				await interaction.followUp({
+					content: `<@${interaction.user.id}> has unlocked a new waifu!`,
+					embeds: [waifuEmbed],
+					files: [waifu.path],
+				});
+
+				await user.createWaifu({
+					name: waifu.name,
+					atk,
+					hp,
+					spd,
+					spec: waifu.spec,
+					kills: 0,
+					deaths: 0,
+				});
+				user.lockedWaifus! = user.lockedWaifus!.filter(
+					(w) => w !== waifu.name
+				);
+				await user.save();
+			}
+		}
+	};
+
 	collector?.on("collect", async (i: ButtonInteraction) => {
 		if (i.user.id !== interaction.user.id) {
 			await i.reply({
 				content: "You can't reveal this answer.",
 				ephemeral: true,
 			});
-		} else if (waifuImage) {
-			await interaction.editReply({
-				content: `**The answer was ${aircraft.name}!**`,
-				embeds: [answer],
-				components: [],
-				files: [`./assets/waifus/${aircraft.model}.jpg`],
-			});
-		} else {
-			await interaction.editReply({
-				content: `**The answer was ${aircraft.name}!**`,
-				embeds: [answer],
-				components: [],
-			});
+			return;
+		}
+		await doReveal();
+	});
+	collector?.on("end", async (collected) => {
+		if (collected.size === 0) {
+			await doReveal();
 		}
 	});
-
-	await wait(30000);
-	if (waifuImage) {
-		await interaction.editReply({
-			content: `**The answer was ${aircraft.name}!**`,
-			embeds: [answer],
-			components: [],
-			files: [`./assets/waifus/${aircraft.model}.jpg`],
-		});
-	} else {
-		await interaction.editReply({
-			content: `**The answer was ${aircraft.name}!**`,
-			embeds: [answer],
-			components: [],
-		});
-	}
 }

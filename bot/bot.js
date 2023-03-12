@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const fs_1 = __importDefault(require("fs"));
 const path_1 = __importDefault(require("path"));
 const discord_js_1 = require("discord.js");
+const models_1 = require("./models");
 const config_json_1 = require("./config.json");
 const client = new discord_js_1.Client({
     intents: [
@@ -45,9 +46,10 @@ client.on(discord_js_1.Events.ClientReady, (bot) => {
 client.on(discord_js_1.Events.InteractionCreate, async (interaction) => {
     if (!interaction.isChatInputCommand())
         return;
-    if (interaction.guild === null) {
+    if (interaction.guild === null ||
+        interaction.channel instanceof discord_js_1.ThreadChannel) {
         await interaction.reply({
-            content: "This command is not available in DMs. Please use it in a server instead.",
+            content: "This command is not available. Please use it in a normal server channel instead.",
             ephemeral: true,
         });
         return;
@@ -80,5 +82,16 @@ const rest = new discord_js_1.REST({ version: "10" }).setToken(config_json_1.tok
     catch (error) {
         console.error(error);
     }
+    await models_1.db.sync();
     client.login(config_json_1.token);
+    const guilds = await client.guilds.fetch();
+    guilds.forEach(async (guild) => {
+        const guildModel = await models_1.Guild.findByPk(guild.id);
+        if (guildModel)
+            return;
+        await models_1.Guild.create({
+            id: guild.id,
+            name: guild.name,
+        });
+    });
 })();

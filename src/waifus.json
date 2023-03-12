@@ -1,0 +1,244 @@
+{
+	"AMRAAM": {
+		"ability": "crit",
+		"abilityDescription": "After equipping this weapon, your next attack will be guaranteed to crit.",
+		"abilityName": "Precision Strike",
+		"path": "./assets/waifus/AMRAAM.jpg",
+		"spec": false,
+		"type": "weapon"
+	},
+	"Aardvark": {
+		"path": "./assets/waifus/Aardvark.jpg",
+		"spec": false,
+		"type": "aircraft"
+	},
+	"Adder": {
+		"path": "./assets/waifus/Adder.jpg",
+		"spec": false,
+		"type": "aircraft"
+	},
+	"Black Hawk": {
+		"path": "./assets/waifus/Black_Hawk.jpg",
+		"spec": false,
+		"type": "aircraft",
+		"urlFriendlyName": "Black_Hawk"
+	},
+	"Demon": {
+		"path": "./assets/waifus/Demon.jpg",
+		"spec": false,
+		"type": "aircraft"
+	},
+	"Eagle": {
+		"path": "./assets/waifus/Eagle.jpg",
+		"spec": true,
+		"type": "aircraft"
+	},
+	"Falcon": {
+		"path": "./assets/waifus/Falcon.jpg",
+		"spec": true,
+		"type": "aircraft"
+	},
+	"Fishbed": {
+		"path": "./assets/waifus/Fishbed.jpg",
+		"spec": true,
+		"type": "aircraft"
+	},
+	"Flanker": {
+		"path": "./assets/waifus/Flanker.jpg",
+		"spec": true,
+		"type": "aircraft"
+	},
+	"Foxhound": {
+		"path": "./assets/waifus/Foxhound.jpg",
+		"spec": true,
+		"type": "aircraft"
+	},
+	"Freestyle": {
+		"path": "./assets/waifus/Freestyle.jpg",
+		"spec": false,
+		"type": "aircraft"
+	},
+	"Fulcrum": {
+		"path": "./assets/waifus/Fulcrum.jpg",
+		"spec": true,
+		"type": "aircraft"
+	},
+	"Globemaster": {
+		"path": "./assets/waifus/Globemaster.jpg",
+		"spec": true,
+		"type": "aircraft"
+	},
+	"Gripen": {
+		"path": "./assets/waifus/Gripen.jpg",
+		"spec": true,
+		"type": "aircraft"
+	},
+	"Harrier": {
+		"path": "./assets/waifus/Harrier.jpg",
+		"spec": true,
+		"type": "aircraft"
+	},
+	"Hawkeye": {
+		"path": "./assets/waifus/Hawkeye.jpg",
+		"spec": false,
+		"type": "aircraft"
+	},
+	"Hellfire": {
+		"ability": "barrage",
+		"abilityDescription": "After equipping this weapon, this missile will deal 1/2 of the aircraft's and this weapon's combined ATK to the opponent every round, on top of any attacks the aircraft may have made.",
+		"abilityName": "Fire and Forget",
+		"path": "./assets/waifus/Hellfire.jpg",
+		"spec": false,
+		"type": "weapon"
+	},
+	"Hornet": {
+		"path": "./assets/waifus/Hornet.jpg",
+		"spec": true,
+		"type": "aircraft"
+	},
+	"LaGG-3": {
+		"path": "./assets/waifus/LaGG-3.jpg",
+		"spec": false,
+		"type": "aircraft"
+	},
+	"Lancer": {
+		"path": "./assets/waifus/Lancer.jpg",
+		"spec": false,
+		"type": "aircraft"
+	},
+	"Lightning": {
+		"path": "./assets/waifus/Lightning.jpg",
+		"spec": false,
+		"type": "aircraft"
+	},
+	"Lightning II": {
+		"path": "./assets/waifus/Lightning_II.jpg",
+		"spec": true,
+		"type": "aircraft",
+		"urlFriendlyName": "Lightning II"
+	},
+	"Mainstay": {
+		"path": "./assets/waifus/Mainstay.jpg",
+		"spec": false,
+		"type": "aircraft"
+	},
+	"Mustang": {
+		"path": "./assets/waifus/Mustang.jpg",
+		"spec": false,
+		"type": "aircraft"
+	},
+	"Nighthawk": {
+		"path": "./assets/waifus/Nighthawk.jpg",
+		"spec": false,
+		"type": "aircraft"
+	},
+	"Paveway II": {
+		"ability": "heavy",
+		"abilityDescription": "After equipping this weapon, your next attack will deal 3x damage but you can no longer evade attacks.",
+		"abilityName": "Heavy Payload",
+		"path": "./assets/waifus/Paveway_II.jpg",
+		"spec": false,
+		"type": "weapon",
+		"urlFriendlyName": "Paveway_II"
+	},
+	"Peace Eye": {
+		"path": "./assets/waifus/Peace_Eye.jpg",
+		"spec": true,
+		"type": "aircraft",
+		"urlFriendlyName": "Peace_Eye"
+	},
+	"Pegasus": {
+		"path": "./assets/waifus/Pegasus.jpg",
+		"spec": false,
+		"type": "aircraft"
+	},
+	"Phantom": {
+		"path": "./assets/waifus/Phantom.jpg",
+		"spec": true,
+		"type": "aircraft"
+	},
+	"Phoenix": {
+		"path": "./assets/waifus/Phoenix.jpg",
+		"spec": false,
+		"type": "aircraft"
+	},
+	"Poseidon": {
+		"path": "./assets/waifus/Poseidon.jpg",
+		"spec": true,
+		"type": "aircraft"
+	},
+	"Raider": {
+		"path": "./assets/waifus/Raider.jpg",
+		"spec": false,
+		"type": "aircraft"
+	},
+	"Reaper": {
+		"path": "./assets/waifus/Reaper.jpg",
+		"spec": true,
+		"type": "aircraft"
+	},
+	"SBD Dauntless": {
+		"path": "./assets/waifus/SBD_Dauntless.jpg",
+		"spec": false,
+		"type": "aircraft",
+		"urlFriendlyName": "SBD_Dauntless"
+	},
+	"Sentry": {
+		"path": "./assets/waifus/Sentry.jpg",
+		"spec": true,
+		"type": "aircraft"
+	},
+	"Sidewinder": {
+		"ability": "stun",
+		"abilityDescription": "After equipping this weapon, your next attack will stun your opponent, meaning they cannot do anything that round.",
+		"abilityName": "Stunwave",
+		"path": "./assets/waifus/Sidewinder.jpg",
+		"spec": false,
+		"type": "weapon"
+	},
+	"Skyhawk": {
+		"path": "./assets/waifus/Skyhawk.jpg",
+		"spec": false,
+		"type": "aircraft"
+	},
+	"Sparrow": {
+		"path": "./assets/waifus/Sparrow.jpg",
+		"spec": false,
+		"type": "aircraft"
+	},
+	"Spirit": {
+		"path": "./assets/waifus/Spirit.jpg",
+		"spec": false,
+		"type": "aircraft"
+	},
+	"Talon": {
+		"path": "./assets/waifus/Talon.jpg",
+		"spec": false,
+		"type": "aircraft"
+	},
+	"Tiger II": {
+		"path": "./assets/waifus/Tiger_II.jpg",
+		"spec": false,
+		"type": "aircraft",
+		"urlFriendlyName": "Tiger_II"
+	},
+	"Tomcat": {
+		"path": "./assets/waifus/Tomcat.jpg",
+		"spec": true,
+		"type": "aircraft"
+	},
+	"Trident II": {
+		"ability": "support",
+		"abilityDescription": "After equipping this weapon, your next attack will call in a support strike, dealing damage equivalent to this weapon's ATK to the opponent, on top of any attacks this round.",
+		"abilityName": "Call for Support",
+		"path": "./assets/waifus/Trident_II.jpg",
+		"spec": true,
+		"type": "weapon",
+		"urlFriendlyName": "Trident_II"
+	},
+	"Warthog": {
+		"path": "./assets/waifus/Warthog.jpg",
+		"spec": true,
+		"type": "aircraft"
+	}
+}

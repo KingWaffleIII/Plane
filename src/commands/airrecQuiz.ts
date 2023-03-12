@@ -12,8 +12,8 @@ import {
 	SlashCommandBuilder,
 } from "discord.js";
 
-import { Aircraft } from "../interfaces";
-import { getImage } from "./airrec";
+import { User } from "../models";
+import { Aircraft, getImage, spawnWaifu, WaifuData } from "./airrec";
 import airrec from "../air_rec.json";
 
 const wait = require("node:timers/promises").setTimeout;
@@ -50,7 +50,7 @@ export const data = new SlashCommandBuilder()
 		option
 			.setName("rounds")
 			.setDescription(
-				"The number of rounds you want to play. Leave blank for 10 rounds."
+				"The number of rounds you want to play. Defaults to 10 rounds."
 			)
 			.setMinValue(1)
 			.setMaxValue(20)
@@ -64,17 +64,6 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 	});
 
 	const channel = interaction.channel as BaseGuildTextChannel;
-
-	if (
-		channel.threads.cache.find(
-			(t) => t.name === "Air Recognition Quiz" && !t.locked
-		)
-	) {
-		await interaction.editReply({
-			content: "A quiz is already ongoing, please wait for it to finish.",
-		});
-		return;
-	}
 
 	const thread = await channel.threads.create({
 		name: `Air Recognition Quiz`,
@@ -150,6 +139,14 @@ If you want to play, click the button below.
 			return;
 		}
 		if (i.customId === `skip-${buttonId}`) {
+			if (i.user.id !== interaction.user.id) {
+				i.reply({
+					content: "You can't start this game.",
+					ephemeral: true,
+				});
+				return;
+			}
+
 			collector?.stop();
 			return;
 		}
@@ -298,6 +295,7 @@ If you want to play, click the button below.
 			);
 
 			const leaderboard = new EmbedBuilder()
+				.setColor(0x0099ff)
 				.setTitle("Leaderboard")
 				.setTimestamp()
 				.setDescription(
@@ -327,6 +325,7 @@ If you want to play, click the button below.
 		);
 
 		const leaderboard = new EmbedBuilder()
+			.setColor(0x0099ff)
 			.setTitle("Final Leaderboard")
 			.setDescription(
 				sortedPlayers
@@ -346,6 +345,95 @@ If you want to play, click the button below.
 			components: [],
 		});
 
-		await thread.setLocked(true);
+		// check if user exists in db
+		const user = await User.findByPk(sortedPlayers[0]);
+		if (!user) {
+			await thread.send({
+				content: `**<@${sortedPlayers[0]}>, you don't have waifu collection yet! Use \`/waifus\` to create one!**`,
+			});
+		}
+
+		const isGuaranteed =
+			user!.guaranteeWaifu && user!.guaranteeCounter! >= 10;
+
+		if (
+			isGuaranteed ||
+			(rounds >= 5 && players[sortedPlayers[0]].score >= 0.25 * rounds)
+		) {
+			let waifuName;
+			if (isGuaranteed) {
+				waifuName = user!.guaranteeWaifu!;
+			}
+			const waifu: WaifuData | null = await spawnWaifu(user!, waifuName);
+			if (
+				waifu &&
+				(await user!.countWaifus({
+					where: { name: waifu.name },
+				})) <= 5
+			) {
+				const atk = Math.ceil(Math.random() * 10);
+				const hp = Math.ceil(Math.random() * (100 - 50) + 50);
+				const spd = Math.ceil(Math.random() * 10);
+
+				const waifuEmbed = new EmbedBuilder()
+					.setColor(0xff00ff)
+					.setTitle(waifu.name)
+					.setImage(`attachment://${waifu.urlFriendlyName}.jpg`)
+					.setDescription(
+						`You can view your waifu collection by using \`/waifus\`!`
+					)
+					.addFields(
+						{
+							name: "ATK",
+							value: atk.toString(),
+							inline: true,
+						},
+						{
+							name: "HP",
+							value: hp.toString(),
+							inline: true,
+						},
+						{
+							name: "SPD",
+							value: spd.toString(),
+							inline: true,
+						}
+					)
+					.setFooter({
+						text: "You unlocked an waifu! Image credit: Atamonica",
+					});
+
+				if (waifu.abilityName) {
+					waifuEmbed.addFields({
+						name: waifu.abilityName!,
+						value: waifu.abilityDescription!,
+					});
+				}
+
+				await thread.send({
+					content: `<@${interaction.user.id}> has unlocked a new waifu!`,
+					embeds: [waifuEmbed],
+					files: [waifu.path],
+				});
+
+				await user!.createWaifu({
+					name: waifu.name,
+					atk,
+					hp,
+					spd,
+					spec: waifu.spec,
+					kills: 0,
+					deaths: 0,
+				});
+
+				await user!.update({
+					lockedWaifus: user!.lockedWaifus!.filter(
+						(w) => w !== waifu.name
+					),
+				});
+			}
+		}
+
+		await thread.setArchived(true);
 	});
 }

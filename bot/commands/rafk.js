@@ -13,12 +13,12 @@ exports.data = new discord_js_1.SlashCommandBuilder()
     .setDescription("Gives you a question about RAFK.")
     .addIntegerOption((option) => option
     .setName("part")
-    .setDescription("The part of RAFK you want to be asked about (1-3). Leave blank for a random part.")
+    .setDescription("The part of RAFK you want to be asked about (1-3). Defaults to a random part.")
     .setMinValue(1)
     .setMaxValue(3))
     .addStringOption((option) => option
     .setName("subject")
-    .setDescription("The subject you want to be asked about. Leave blank for a random subject.")
+    .setDescription("The subject you want to be asked about. Defaults to a random subject.")
     .addChoices({ name: "The RAF", value: "The RAF" }, { name: "The CCF", value: "The CCF" }, { name: "Airmanship", value: "Airmanship" }, { name: "Map Reading", value: "Map Reading" }));
 async function execute(interaction) {
     const requestedSubject = interaction.options.getString("subject") ?? false;

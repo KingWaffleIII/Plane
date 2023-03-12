@@ -3,16 +3,25 @@ import path from "path";
 
 import {
 	ActivityType,
+	BaseGuildTextChannel,
 	Client,
 	Collection,
+	DMChannel,
 	Events,
 	GatewayIntentBits,
 	Interaction,
 	REST,
 	Routes,
+	SlashCommandBuilder,
+	ThreadChannel,
 } from "discord.js";
+import { db, Guild } from "./models";
 import { clientId, token } from "./config.json";
-import { Command } from "./interfaces";
+
+interface Command {
+	data: SlashCommandBuilder;
+	execute: (interaction: unknown) => Promise<void>;
+}
 
 const client: Client = new Client({
 	intents: [
@@ -56,10 +65,13 @@ client.on(Events.ClientReady, (bot) => {
 
 client.on(Events.InteractionCreate, async (interaction: Interaction) => {
 	if (!interaction.isChatInputCommand()) return;
-	if (interaction.guild === null) {
+	if (
+		interaction.guild === null ||
+		interaction.channel instanceof ThreadChannel
+	) {
 		await interaction.reply({
 			content:
-				"This command is not available in DMs. Please use it in a server instead.",
+				"This command is not available. Please use it in a normal server channel instead.",
 			ephemeral: true,
 		});
 		return;
@@ -103,5 +115,17 @@ const rest = new REST({ version: "10" }).setToken(token);
 		console.error(error);
 	}
 
+	await db.sync();
+
 	client.login(token);
+
+	const guilds = await client.guilds.fetch();
+	guilds.forEach(async (guild) => {
+		const guildModel = await Guild.findByPk(guild.id);
+		if (guildModel) return;
+		await Guild.create({
+			id: guild.id,
+			name: guild.name,
+		});
+	});
 })();

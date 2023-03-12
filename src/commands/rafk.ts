@@ -9,10 +9,14 @@ import {
 	SlashCommandBuilder,
 } from "discord.js";
 
-import { Question } from "../interfaces";
 import rafk from "../RAFK.json";
 
 const wait = require("node:timers/promises").setTimeout;
+
+interface Question {
+	question: string;
+	answer: string;
+}
 
 export const data = new SlashCommandBuilder()
 	.setName("rafk")
@@ -21,7 +25,7 @@ export const data = new SlashCommandBuilder()
 		option
 			.setName("part")
 			.setDescription(
-				"The part of RAFK you want to be asked about (1-3). Leave blank for a random part."
+				"The part of RAFK you want to be asked about (1-3). Defaults to a random part."
 			)
 			.setMinValue(1)
 			.setMaxValue(3)
@@ -30,7 +34,7 @@ export const data = new SlashCommandBuilder()
 		option
 			.setName("subject")
 			.setDescription(
-				"The subject you want to be asked about. Leave blank for a random subject."
+				"The subject you want to be asked about. Defaults to a random subject."
 			)
 			.addChoices(
 				{ name: "The RAF", value: "The RAF" },
