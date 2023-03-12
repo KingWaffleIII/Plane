@@ -8,7 +8,7 @@ exports.data = new discord_js_1.SlashCommandBuilder()
 async function execute(interaction) {
     const embed = new discord_js_1.EmbedBuilder()
         .setColor(0x0099ff)
-        .setTitle('Plane v1.3.2 "Super Galahad"')
+        .setTitle('Plane v1.3.1 "Super Galahad"')
         .setURL("https://github.com/KingWaffleIII/plane")
         .setAuthor({
         name: "KingWaffleIII @ PlanetWaffle",

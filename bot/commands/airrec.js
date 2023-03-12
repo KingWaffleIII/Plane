@@ -38,7 +38,7 @@ async function spawnWaifu(user, name) {
     let isGuaranteed = false;
     if (user.guaranteeWaifu) {
         isGuaranteed =
-            user.guaranteeWaifu !== null && user.guaranteeCounter >= 1;
+            user.guaranteeWaifu !== undefined && user.guaranteeCounter >= 10;
     }
     if (isGuaranteed || Math.floor(Math.random() * 3) === 0) {
         if (isGuaranteed || name === user.guaranteeWaifu) {
@@ -138,7 +138,7 @@ async function execute(interaction) {
     let aircraft = type[Math.floor(Math.random() * type.length)];
     if (user) {
         if (user.guaranteeWaifu &&
-            user.guaranteeCounter >= 1 &&
+            user.guaranteeCounter >= 10 &&
             waifus_json_1.default[user.guaranteeWaifu].spec)
             aircraft = type.find((a) => a.waifuImage === user.guaranteeWaifu);
     }
@@ -202,12 +202,9 @@ async function execute(interaction) {
             if (aircraft.waifuImage) {
                 const waifu = await spawnWaifu(user, aircraft.waifuImage);
                 if (waifu &&
-                    (await models_1.Waifu.count({
-                        where: {
-                            userId: user.id,
-                            name: waifu.name,
-                        },
-                    })) > 5) {
+                    (await user.countWaifus({
+                        where: { name: waifu.name },
+                    })) <= 5) {
                     const atk = Math.ceil(Math.random() * 10);
                     const hp = Math.ceil(Math.random() * (100 - 50) + 50);
                     const spd = Math.ceil(Math.random() * 10);
