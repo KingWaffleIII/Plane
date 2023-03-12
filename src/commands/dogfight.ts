@@ -316,9 +316,15 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 						opponent: WaifuData,
 						opponentModel: Waifu
 					) => {
+						if (opponent.isEvading) {
+							opponent.isEvading = false;
+							return;
+						}
+
 						if (attacker.isLaunchingBarrage) {
 							const atk = Math.ceil(
-								(attacker.atk + attacker.equipment!.atk) * 0.5
+								(attackerModel.atk + attacker.equipment!.atk) *
+									0.5
 							);
 							await t.send(
 								`<@${attackerModel.user.id}>'s ${
@@ -422,7 +428,6 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 												await thread.send({
 													content: `<@${main.user.id}> tried to attack, but <@${secondary.user.id}>'s **${secondary.name}** evaded!`,
 												});
-												secondaryData.isEvading = false;
 											}
 											break;
 										}
@@ -484,7 +489,6 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 													components: [weaponEquip],
 												});
 
-											console.log("weapon selection");
 											await new Promise((r) => {
 												weaponEquipCollector.on(
 													"collect",
@@ -554,7 +558,6 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 													}
 												);
 											});
-											console.log("weapon selection end");
 
 											break;
 										}
@@ -563,7 +566,6 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 										}
 									}
 
-									console.log("follow up dmg");
 									await calculateFollowUpDamage(
 										thread,
 										mainData,
@@ -571,7 +573,6 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 										secondaryData,
 										secondary
 									);
-									console.log("resolved");
 									resolve(true);
 								}
 							);
@@ -588,9 +589,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 						});
 
 					while (firstWaifu.hp > 0 && secondWaifu.hp > 0) {
-						console.log("loop");
 						if (firstWaifu.isStunned) {
-							console.log("first stunned");
 							await thread.send(
 								`<@${first.user.id}>'s **${first.name}** is stunned!`
 							);
@@ -677,14 +676,16 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 										.setStyle(ButtonStyle.Primary)
 										.setLabel("Equip a weapon")
 								);
+
 							if (
 								firstWaifu.equipment ||
-								(await first.user!.hasWaifu(1, {
+								(await Waifu.count({
 									where: {
+										userId: first.user.id,
 										hp: 0,
 										spd: 0,
 									},
-								}))
+								})) === 0
 							)
 								firstDogfight.components[2].setDisabled(true);
 							if (!firstWaifu.canEvade)
@@ -738,7 +739,6 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 						}
 
 						if (secondWaifu.isStunned) {
-							console.log("second stunned");
 							await thread.send(
 								`<@${second.user.id}>'s **${second.name}** is stunned!`
 							);
@@ -825,14 +825,16 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 										.setStyle(ButtonStyle.Primary)
 										.setLabel("Equip a weapon")
 								);
+
 							if (
 								secondWaifu.equipment ||
-								(await second.user!.hasWaifu(1, {
+								(await Waifu.count({
 									where: {
+										userId: second.user.id,
 										hp: 0,
 										spd: 0,
 									},
-								}))
+								})) === 0
 							)
 								secondDogfight.components[2].setDisabled(true);
 							if (!secondWaifu.canEvade)

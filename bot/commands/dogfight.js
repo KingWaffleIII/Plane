@@ -214,8 +214,13 @@ async function execute(interaction) {
                 return { isCrit, dmg };
             };
             const calculateFollowUpDamage = async (t, attacker, attackerModel, opponent, opponentModel) => {
+                if (opponent.isEvading) {
+                    opponent.isEvading = false;
+                    return;
+                }
                 if (attacker.isLaunchingBarrage) {
-                    const atk = Math.ceil((attacker.atk + attacker.equipment.atk) * 0.5);
+                    const atk = Math.ceil((attackerModel.atk + attacker.equipment.atk) *
+                        0.5);
                     await t.send(`<@${attackerModel.user.id}>'s ${attacker.equipment.name} dealt **${atk}** damage to <@${opponentModel.user.id}>'s ${opponentModel.name} from its ongoing barrage! (${opponentModel.name}: ${opponent.hp} -> **${opponent.hp - atk}**)`);
                     opponent.hp -= atk;
                     return;
@@ -263,7 +268,6 @@ async function execute(interaction) {
                                 await thread.send({
                                     content: `<@${main.user.id}> tried to attack, but <@${secondary.user.id}>'s **${secondary.name}** evaded!`,
                                 });
-                                secondaryData.isEvading = false;
                             }
                             break;
                         }
@@ -303,7 +307,6 @@ async function execute(interaction) {
                                 content: `<@${main.user.id}>, select a weapon to equip!`,
                                 components: [weaponEquip],
                             });
-                            console.log("weapon selection");
                             await new Promise((r) => {
                                 weaponEquipCollector.on("collect", async (int) => {
                                     if (int.user.id !==
@@ -345,16 +348,13 @@ async function execute(interaction) {
                                     }
                                 });
                             });
-                            console.log("weapon selection end");
                             break;
                         }
                         default: {
                             break;
                         }
                     }
-                    console.log("follow up dmg");
                     await calculateFollowUpDamage(thread, mainData, main, secondaryData, secondary);
-                    console.log("resolved");
                     resolve(true);
                 });
                 collector.on("end", async (collected) => {
@@ -368,9 +368,7 @@ async function execute(interaction) {
                 });
             });
             while (firstWaifu.hp > 0 && secondWaifu.hp > 0) {
-                console.log("loop");
                 if (firstWaifu.isStunned) {
-                    console.log("first stunned");
                     await thread.send(`<@${first.user.id}>'s **${first.name}** is stunned!`);
                     firstWaifu.isStunned = false;
                     firstWaifu.hasbeenStunned = true;
@@ -425,12 +423,13 @@ async function execute(interaction) {
                         .setStyle(discord_js_1.ButtonStyle.Primary)
                         .setLabel("Equip a weapon"));
                     if (firstWaifu.equipment ||
-                        (await first.user.hasWaifu(1, {
+                        (await models_1.Waifu.count({
                             where: {
+                                userId: first.user.id,
                                 hp: 0,
                                 spd: 0,
                             },
-                        })))
+                        })) === 0)
                         firstDogfight.components[2].setDisabled(true);
                     if (!firstWaifu.canEvade)
                         firstDogfight.components[1].setDisabled(true);
@@ -461,7 +460,6 @@ async function execute(interaction) {
                     }
                 }
                 if (secondWaifu.isStunned) {
-                    console.log("second stunned");
                     await thread.send(`<@${second.user.id}>'s **${second.name}** is stunned!`);
                     secondWaifu.isStunned = false;
                     secondWaifu.hasbeenStunned = true;
@@ -516,12 +514,13 @@ async function execute(interaction) {
                         .setStyle(discord_js_1.ButtonStyle.Primary)
                         .setLabel("Equip a weapon"));
                     if (secondWaifu.equipment ||
-                        (await second.user.hasWaifu(1, {
+                        (await models_1.Waifu.count({
                             where: {
+                                userId: second.user.id,
                                 hp: 0,
                                 spd: 0,
                             },
-                        })))
+                        })) === 0)
                         secondDogfight.components[2].setDisabled(true);
                     if (!secondWaifu.canEvade)
                         secondDogfight.components[1].setDisabled(true);
