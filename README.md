@@ -39,7 +39,7 @@ Weapon waifus are the secondary type of waifu. They have just a randomly generat
 
 **AMRAAM: Precision Strike** - After equipping this weapon, your next attack will be guaranteed to crit.
 
-**Hellfire: Fire and Forget** - After equipping this weapon, this missile will deal 1/2 of the aircraft's and this weapon's combined ATK to the opponent every round, on top of any attacks the aircraft may have made.
+**Hellfire: Fire and Forget** - After equipping this weapon, this weapon will deal 1/2 of the aircraft's and this weapon's combined ATK to the opponent every round, on top of any attacks the aircraft may have made.
 
 **Paveway II: Heavy Payload** - After equipping this weapon, your next attack will deal 3x damage but you can no longer evade attacks.
 
