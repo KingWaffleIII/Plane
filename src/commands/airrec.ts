@@ -13,7 +13,7 @@ import {
 	SlashCommandBuilder,
 } from "discord.js";
 
-import { User } from "../models";
+import { User, Waifu } from "../models";
 import airrec from "../air_rec.json";
 import waifus from "../waifus.json";
 
@@ -74,7 +74,7 @@ export async function spawnWaifu(
 	let isGuaranteed = false;
 	if (user.guaranteeWaifu) {
 		isGuaranteed =
-			user.guaranteeWaifu !== undefined && user.guaranteeCounter! >= 10;
+			user.guaranteeWaifu !== null && user.guaranteeCounter! >= 1;
 	}
 	if (isGuaranteed || Math.floor(Math.random() * 3) === 0) {
 		if (isGuaranteed || name === user.guaranteeWaifu) {
@@ -202,7 +202,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 	if (user) {
 		if (
 			user!.guaranteeWaifu &&
-			user!.guaranteeCounter! >= 10 &&
+			user!.guaranteeCounter! >= 1 &&
 			waifus[user!.guaranteeWaifu! as keyof typeof waifus].spec
 		)
 			aircraft = type.find(
@@ -292,9 +292,12 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 				);
 				if (
 					waifu &&
-					(await user!.countWaifus({
-						where: { name: waifu.name },
-					})) <= 5
+					(await Waifu.count({
+						where: {
+							userId: user.id,
+							name: waifu.name,
+						},
+					})) > 5
 				) {
 					const atk = Math.ceil(Math.random() * 10);
 					const hp = Math.ceil(Math.random() * (100 - 50) + 50);
