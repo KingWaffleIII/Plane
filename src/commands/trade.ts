@@ -45,7 +45,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 
 	let targetUserWaifus = (await targetUserModel!.getWaifus())
 		.sort((a, b) => b.atk! - a.atk!)
-		.splice(0, 25); // discord only allows 25 items
+		.splice(25); // discord only allows 25 items
 	let targetWaifu: Waifu;
 
 	if (initialUserWaifus.length === 0 || targetUserWaifus.length === 0) {

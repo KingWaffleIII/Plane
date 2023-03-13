@@ -181,8 +181,9 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 	const user = await User.findByPk(interaction.user.id);
 	if (!user) {
 		await interaction.followUp({
-			content: `<@${interaction.user.id}>, you don't have waifu collection yet! Use \`/waifus\` to create one!`,
+			content: `**<@${interaction.user.id}>, you don't have waifu collection yet! Use \`/waifus\` to create one!**`,
 		});
+		return;
 	}
 
 	let type: Aircraft[] =
@@ -199,16 +200,12 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 
 	let aircraft: Aircraft = type[Math.floor(Math.random() * type.length)];
 
-	if (user) {
-		if (
-			user!.guaranteeWaifu &&
-			user!.guaranteeCounter! >= 10 &&
-			waifus[user!.guaranteeWaifu! as keyof typeof waifus].spec
-		)
-			aircraft = type.find(
-				(a) => a.waifuImage === user!.guaranteeWaifu!
-			)!;
-	}
+	if (
+		user!.guaranteeWaifu &&
+		user!.guaranteeCounter! >= 10 &&
+		waifus[user!.guaranteeWaifu! as keyof typeof waifus].spec
+	)
+		aircraft = type.find((a) => a.waifuImage === user!.guaranteeWaifu!)!;
 
 	const image = await getImage(aircraft.image);
 
@@ -284,69 +281,65 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 			components: [],
 		});
 
-		if (user) {
-			if (aircraft.waifuImage) {
-				const waifu: WaifuData | null = await spawnWaifu(
-					user,
-					aircraft.waifuImage
+		if (aircraft.waifuImage) {
+			const waifu: WaifuData | null = await spawnWaifu(
+				user,
+				aircraft.waifuImage
+			);
+			if (
+				waifu &&
+				(await user!.countWaifus({ where: { name: waifu.name } })) <= 5
+			) {
+				const atk = Math.ceil(Math.random() * 10);
+				const hp = Math.ceil(Math.random() * (100 - 50) + 50);
+				const spd = Math.ceil(Math.random() * 10);
+
+				const waifuEmbed = new EmbedBuilder()
+					.setColor(0xff00ff)
+					.setTitle(waifu.name)
+					.setImage(`attachment://${waifu.urlFriendlyName}.jpg`)
+					.setDescription(
+						`You can view your waifu collection by using \`/waifus\`!`
+					)
+					.addFields(
+						{
+							name: "ATK",
+							value: atk.toString(),
+							inline: true,
+						},
+						{
+							name: "HP",
+							value: hp.toString(),
+							inline: true,
+						},
+						{
+							name: "SPD",
+							value: spd.toString(),
+							inline: true,
+						}
+					)
+					.setFooter({
+						text: "You unlocked an waifu! Image credit: Atamonica",
+					});
+				await interaction.followUp({
+					content: `<@${interaction.user.id}> has unlocked a new waifu!`,
+					embeds: [waifuEmbed],
+					files: [waifu.path],
+				});
+
+				await user.createWaifu({
+					name: waifu.name,
+					atk,
+					hp,
+					spd,
+					spec: waifu.spec,
+					kills: 0,
+					deaths: 0,
+				});
+				user.lockedWaifus! = user.lockedWaifus!.filter(
+					(w) => w !== waifu.name
 				);
-				if (
-					waifu &&
-					(await user!.countWaifus({
-						where: { name: waifu.name },
-					})) <= 5
-				) {
-					const atk = Math.ceil(Math.random() * 10);
-					const hp = Math.ceil(Math.random() * (100 - 50) + 50);
-					const spd = Math.ceil(Math.random() * 10);
-
-					const waifuEmbed = new EmbedBuilder()
-						.setColor(0xff00ff)
-						.setTitle(waifu.name)
-						.setImage(`attachment://${waifu.urlFriendlyName}.jpg`)
-						.setDescription(
-							`You can view your waifu collection by using \`/waifus\`!`
-						)
-						.addFields(
-							{
-								name: "ATK",
-								value: atk.toString(),
-								inline: true,
-							},
-							{
-								name: "HP",
-								value: hp.toString(),
-								inline: true,
-							},
-							{
-								name: "SPD",
-								value: spd.toString(),
-								inline: true,
-							}
-						)
-						.setFooter({
-							text: "You unlocked an waifu! Image credit: Atamonica",
-						});
-					await interaction.followUp({
-						content: `<@${interaction.user.id}> has unlocked a new waifu!`,
-						embeds: [waifuEmbed],
-						files: [waifu.path],
-					});
-
-					await user.createWaifu({
-						name: waifu.name,
-						atk,
-						hp,
-						spd,
-						spec: waifu.spec,
-						kills: 0,
-						deaths: 0,
-					});
-					user.lockedWaifus! = user.lockedWaifus!.filter(
-						(w) => w !== waifu.name
-					);
-					await user.save();
-				}
+				await user.save();
 			}
 		}
 	};
