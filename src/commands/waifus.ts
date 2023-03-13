@@ -223,7 +223,7 @@ ${
 			} waifus unlocked! ${
 				user!.guaranteeWaifu
 					? `You need to obtain ${
-							10 - user!.guaranteeCounter!
+							10 + 1 - user!.guaranteeCounter!
 					  } more waifus before you get a guaranteed ${user!
 							.guaranteeWaifu!}.`
 					: "You are not currently targetting a waifu."
