@@ -85,7 +85,7 @@
 	},
 	"Hellfire": {
 		"ability": "barrage",
-		"abilityDescription": "After equipping this weapon, this weapon will deal 1/2 of the aircraft's and this weapon's combined ATK to the opponent every round, on top of any attacks the aircraft may have made.",
+		"abilityDescription": "After equipping this weapon, this missile will deal 1/2 of the aircraft's and this weapon's combined ATK to the opponent every round, on top of any attacks the aircraft may have made.",
 		"abilityName": "Fire and Forget",
 		"path": "./assets/waifus/Hellfire.jpg",
 		"spec": false,

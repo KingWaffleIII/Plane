@@ -125,8 +125,9 @@ async function execute(interaction) {
     const user = await models_1.User.findByPk(interaction.user.id);
     if (!user) {
         await interaction.followUp({
-            content: `<@${interaction.user.id}>, you don't have waifu collection yet! Use \`/waifus\` to create one!`,
+            content: `**<@${interaction.user.id}>, you don't have waifu collection yet! Use \`/waifus\` to create one!**`,
         });
+        return;
     }
     let type = air_rec_json_1.default[Object.keys(air_rec_json_1.default)[
     // Math.floor(Math.random() * Object.keys(airrec).length)
@@ -136,12 +137,10 @@ async function execute(interaction) {
         type = air_rec_json_1.default[requestedType];
     }
     let aircraft = type[Math.floor(Math.random() * type.length)];
-    if (user) {
-        if (user.guaranteeWaifu &&
-            user.guaranteeCounter >= 10 &&
-            waifus_json_1.default[user.guaranteeWaifu].spec)
-            aircraft = type.find((a) => a.waifuImage === user.guaranteeWaifu);
-    }
+    if (user.guaranteeWaifu &&
+        user.guaranteeCounter >= 10 &&
+        waifus_json_1.default[user.guaranteeWaifu].spec)
+        aircraft = type.find((a) => a.waifuImage === user.guaranteeWaifu);
     const image = await getImage(aircraft.image);
     if (!image) {
         await interaction.editReply({
@@ -198,54 +197,50 @@ async function execute(interaction) {
             embeds: [answer],
             components: [],
         });
-        if (user) {
-            if (aircraft.waifuImage) {
-                const waifu = await spawnWaifu(user, aircraft.waifuImage);
-                if (waifu &&
-                    (await user.countWaifus({
-                        where: { name: waifu.name },
-                    })) <= 5) {
-                    const atk = Math.ceil(Math.random() * 10);
-                    const hp = Math.ceil(Math.random() * (100 - 50) + 50);
-                    const spd = Math.ceil(Math.random() * 10);
-                    const waifuEmbed = new discord_js_1.EmbedBuilder()
-                        .setColor(0xff00ff)
-                        .setTitle(waifu.name)
-                        .setImage(`attachment://${waifu.urlFriendlyName}.jpg`)
-                        .setDescription(`You can view your waifu collection by using \`/waifus\`!`)
-                        .addFields({
-                        name: "ATK",
-                        value: atk.toString(),
-                        inline: true,
-                    }, {
-                        name: "HP",
-                        value: hp.toString(),
-                        inline: true,
-                    }, {
-                        name: "SPD",
-                        value: spd.toString(),
-                        inline: true,
-                    })
-                        .setFooter({
-                        text: "You unlocked an waifu! Image credit: Atamonica",
-                    });
-                    await interaction.followUp({
-                        content: `<@${interaction.user.id}> has unlocked a new waifu!`,
-                        embeds: [waifuEmbed],
-                        files: [waifu.path],
-                    });
-                    await user.createWaifu({
-                        name: waifu.name,
-                        atk,
-                        hp,
-                        spd,
-                        spec: waifu.spec,
-                        kills: 0,
-                        deaths: 0,
-                    });
-                    user.lockedWaifus = user.lockedWaifus.filter((w) => w !== waifu.name);
-                    await user.save();
-                }
+        if (aircraft.waifuImage) {
+            const waifu = await spawnWaifu(user, aircraft.waifuImage);
+            if (waifu &&
+                (await user.countWaifus({ where: { name: waifu.name } })) <= 5) {
+                const atk = Math.ceil(Math.random() * 10);
+                const hp = Math.ceil(Math.random() * (100 - 50) + 50);
+                const spd = Math.ceil(Math.random() * 10);
+                const waifuEmbed = new discord_js_1.EmbedBuilder()
+                    .setColor(0xff00ff)
+                    .setTitle(waifu.name)
+                    .setImage(`attachment://${waifu.urlFriendlyName}.jpg`)
+                    .setDescription(`You can view your waifu collection by using \`/waifus\`!`)
+                    .addFields({
+                    name: "ATK",
+                    value: atk.toString(),
+                    inline: true,
+                }, {
+                    name: "HP",
+                    value: hp.toString(),
+                    inline: true,
+                }, {
+                    name: "SPD",
+                    value: spd.toString(),
+                    inline: true,
+                })
+                    .setFooter({
+                    text: "You unlocked an waifu! Image credit: Atamonica",
+                });
+                await interaction.followUp({
+                    content: `<@${interaction.user.id}> has unlocked a new waifu!`,
+                    embeds: [waifuEmbed],
+                    files: [waifu.path],
+                });
+                await user.createWaifu({
+                    name: waifu.name,
+                    atk,
+                    hp,
+                    spd,
+                    spec: waifu.spec,
+                    kills: 0,
+                    deaths: 0,
+                });
+                user.lockedWaifus = user.lockedWaifus.filter((w) => w !== waifu.name);
+                await user.save();
             }
         }
     };
