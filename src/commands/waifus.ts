@@ -62,15 +62,13 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 		const waifuData = waifus[w as keyof typeof waifus];
 		return !waifuData!.spec;
 	});
-	const unlockedSpecWaifus = await Waifu.count({
+	const unlockedSpecWaifus = await user!.countWaifus({
 		where: {
-			userId: user!.id,
 			spec: true,
 		},
 	});
-	const unlockedNonSpecWaifus = await Waifu.count({
+	const unlockedNonSpecWaifus = await user!.countWaifus({
 		where: {
-			userId: user!.id,
 			spec: false,
 		},
 	});

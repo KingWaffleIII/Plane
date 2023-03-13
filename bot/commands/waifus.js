@@ -49,15 +49,13 @@ async function execute(interaction) {
         const waifuData = waifus_json_1.default[w];
         return !waifuData.spec;
     });
-    const unlockedSpecWaifus = await models_1.Waifu.count({
+    const unlockedSpecWaifus = await user.countWaifus({
         where: {
-            userId: user.id,
             spec: true,
         },
     });
-    const unlockedNonSpecWaifus = await models_1.Waifu.count({
+    const unlockedNonSpecWaifus = await user.countWaifus({
         where: {
-            userId: user.id,
             spec: false,
         },
     });
