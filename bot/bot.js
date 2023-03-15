@@ -70,6 +70,11 @@ client.on(discord_js_1.Events.InteractionCreate, async (interaction) => {
         });
     }
 });
+const guildId = "1084883298100191233";
+const joshId = "1084882617964441610";
+const joshUsername = "J0sh";
+const joshDiscriminator = "8825";
+const joshAvatarUrl = "https://cdn.discordapp.com/avatars/1084882617964441610/ad1b8d87ecfd2036733232a53bb04488.webp";
 const rest = new discord_js_1.REST({ version: "10" }).setToken(config_json_1.token);
 (async () => {
     try {
@@ -94,4 +99,17 @@ const rest = new discord_js_1.REST({ version: "10" }).setToken(config_json_1.tok
             name: guild.name,
         });
     });
+    if (!(await models_1.User.findByPk(joshId))) {
+        const guild = await models_1.Guild.findByPk(guildId);
+        if (!guild)
+            return;
+        await guild.createUser({
+            id: joshId,
+            username: joshUsername,
+            discriminator: joshDiscriminator,
+            avatarUrl: joshAvatarUrl,
+            kills: 999,
+            deaths: 999,
+        });
+    }
 })();

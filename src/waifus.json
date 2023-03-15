@@ -13,15 +13,28 @@
 		"type": "aircraft"
 	},
 	"Adder": {
+		"ability": "fail-evade",
+		"abilityDescription": "After equipping this weapon, the next time your opponent fails an evade, your next attack will deal 1.5x damage.",
+		"abilityName": "Punisher",
 		"path": "./assets/waifus/Adder.jpg",
 		"spec": false,
-		"type": "aircraft"
+		"type": "weapon"
 	},
 	"Black Hawk": {
 		"path": "./assets/waifus/Black_Hawk.jpg",
 		"spec": false,
 		"type": "aircraft",
 		"urlFriendlyName": "Black_Hawk"
+	},
+	"Boramae": {
+		"path": "./assets/waifus/Boramae.jpg",
+		"spec": false,
+		"type": "aircraft"
+	},
+	"Corsair": {
+		"path": "./assets/waifus/Corsair.jpg",
+		"spec": false,
+		"type": "aircraft"
 	},
 	"Demon": {
 		"path": "./assets/waifus/Demon.jpg",
@@ -36,6 +49,16 @@
 	"Falcon": {
 		"path": "./assets/waifus/Falcon.jpg",
 		"spec": true,
+		"type": "aircraft"
+	},
+	"Fighting Eagle": {
+		"path": "./assets/waifus/Fighting_Eagle.jpg",
+		"spec": false,
+		"type": "aircraft"
+	},
+	"Fire Scout": {
+		"path": "./assets/waifus/Fire_Scout.jpg",
+		"spec": false,
 		"type": "aircraft"
 	},
 	"Fishbed": {
@@ -73,6 +96,14 @@
 		"spec": true,
 		"type": "aircraft"
 	},
+	"HARM": {
+		"ability": "evade",
+		"abilityDescription": "After equipping this weapon, the next time the opponent attempts to evade, your attack is guaranteed to hit.",
+		"abilityName": "Lock-on",
+		"path": "./assets/waifus/HARM.jpg",
+		"spec": false,
+		"type": "weapon"
+	},
 	"Harrier": {
 		"path": "./assets/waifus/Harrier.jpg",
 		"spec": true,
@@ -85,7 +116,7 @@
 	},
 	"Hellfire": {
 		"ability": "barrage",
-		"abilityDescription": "After equipping this weapon, this missile will deal 1/2 of the aircraft's and this weapon's combined ATK to the opponent every round, on top of any attacks the aircraft may have made.",
+		"abilityDescription": "After equipping this weapon, this missile will deal 50% of the aircraft's and this weapon's combined ATK to the opponent every round, on top of any attacks the aircraft may have made.",
 		"abilityName": "Fire and Forget",
 		"path": "./assets/waifus/Hellfire.jpg",
 		"spec": false,
@@ -115,7 +146,7 @@
 		"path": "./assets/waifus/Lightning_II.jpg",
 		"spec": true,
 		"type": "aircraft",
-		"urlFriendlyName": "Lightning II"
+		"urlFriendlyName": "Lightning_II"
 	},
 	"Mainstay": {
 		"path": "./assets/waifus/Mainstay.jpg",
@@ -158,9 +189,12 @@
 		"type": "aircraft"
 	},
 	"Phoenix": {
+		"ability": "distance",
+		"abilityDescription": "After equipping this weapon, after your next attack, you will be guaranteed to evade your opponent's next attack.",
+		"abilityName": "Long Distance",
 		"path": "./assets/waifus/Phoenix.jpg",
 		"spec": false,
-		"type": "aircraft"
+		"type": "weapon"
 	},
 	"Poseidon": {
 		"path": "./assets/waifus/Poseidon.jpg",
@@ -202,9 +236,12 @@
 		"type": "aircraft"
 	},
 	"Sparrow": {
+		"ability": "exclusive",
+		"abilityDescription": "If this weapon is equipped on an American aircraft, it will add an extra 50% of this weapon's ATK to the total ATK.",
+		"abilityName": "Exclusivity",
 		"path": "./assets/waifus/Sparrow.jpg",
 		"spec": false,
-		"type": "aircraft"
+		"type": "weapon"
 	},
 	"Spirit": {
 		"path": "./assets/waifus/Spirit.jpg",
@@ -237,6 +274,9 @@
 		"urlFriendlyName": "Trident_II"
 	},
 	"Warthog": {
+		"ability": "support",
+		"abilityDescription": "After equipping this weapon, your next attack will call in a support strike, dealing damage equivalent to this weapon's ATK to the opponent, on top of any attacks this round.",
+		"abilityName": "Call for Support",
 		"path": "./assets/waifus/Warthog.jpg",
 		"spec": true,
 		"type": "aircraft"

@@ -11,6 +11,7 @@ import {
 	Message,
 	SlashCommandBuilder,
 } from "discord.js";
+import { createClient } from "redis";
 
 import { User } from "../models";
 import { Aircraft, getImage, spawnWaifu, WaifuData } from "./airrec";
@@ -25,6 +26,9 @@ interface Players {
 		lastScore: number;
 	};
 }
+
+const joshId = "1084882617964441610";
+const joshUsername = "J0sh";
 
 function checkAnswer(message: string, aircraft: Aircraft): number {
 	if (message.toLowerCase() === aircraft.name.toLowerCase()) {
@@ -63,9 +67,9 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 		content: "Creating a new thread...",
 	});
 
-	const channel = interaction.channel as BaseGuildTextChannel;
+	const c = interaction.channel as BaseGuildTextChannel;
 
-	const thread = await channel.threads.create({
+	const thread = await c.threads.create({
 		name: `Air Recognition Quiz`,
 		autoArchiveDuration: 60,
 		reason: "Air Recognition Quiz",
@@ -121,6 +125,31 @@ If you want to play, click the button below.
 		time: 60000,
 		filter: playFilter,
 	});
+
+	const listener = async (message: string, channel: string) => {
+		if (channel !== "josh-new-quiz" || message !== "accept") return;
+
+		players[joshId] = {
+			username: joshUsername,
+			score: 0,
+			lastScore: 0,
+		};
+		await thread.send({
+			content: `<@${joshId}> has joined the game!`,
+		});
+	};
+
+	const pub = createClient({
+		url: "redis://plane_redis:6379",
+	});
+	pub.on("error", (err) => console.error(err));
+	const sub = pub.duplicate();
+	sub.on("error", (err) => console.error(err));
+	await sub.connect();
+	await sub.subscribe("josh-new-quiz", listener);
+	await pub.connect();
+	await pub.publish("josh-new-quiz", thread.id);
+
 	collector?.on("collect", async (i: ButtonInteraction) => {
 		if (i.customId === `cancel-${buttonId}`) {
 			if (i.user.id !== interaction.user.id) {
@@ -216,6 +245,10 @@ If you want to play, click the button below.
 				components: [],
 			});
 
+			if (Object.keys(players).includes(joshId)) {
+				await pub.publish("josh-do-quiz", aircraft.name);
+			}
+
 			//! cheat mode
 			// await thread.send({
 			// 	content: aircraft.name,
@@ -231,7 +264,7 @@ If you want to play, click the button below.
 				return false;
 			};
 			const messages = await thread.awaitMessages({
-				time: 15000,
+				time: 10000,
 				max: Object.keys(players).length,
 				filter: answerFilter,
 				// errors: ["time"],
@@ -320,6 +353,8 @@ If you want to play, click the button below.
 			await wait(10000);
 		}
 
+		await pub.publish("josh-do-quiz", "end");
+
 		const sortedPlayers = Object.keys(players).sort(
 			(a, b) => players[b].score - players[a].score
 		);
@@ -351,86 +386,90 @@ If you want to play, click the button below.
 			await thread.send({
 				content: `**<@${sortedPlayers[0]}>, you don't have waifu collection yet! Use \`/waifus\` to create one!**`,
 			});
-		}
+		} else {
+			const isGuaranteed =
+				user!.guaranteeWaifu && user!.guaranteeCounter! >= 10;
 
-		const isGuaranteed =
-			user!.guaranteeWaifu && user!.guaranteeCounter! >= 10;
-
-		if (
-			isGuaranteed ||
-			(rounds >= 5 && players[sortedPlayers[0]].score >= 0.25 * rounds)
-		) {
-			let waifuName;
-			if (isGuaranteed) {
-				waifuName = user!.guaranteeWaifu!;
-			}
-			const waifu: WaifuData | null = await spawnWaifu(user!, waifuName);
 			if (
-				waifu &&
-				(await user!.countWaifus({
-					where: { name: waifu.name },
-				})) <= 5
+				isGuaranteed ||
+				(rounds >= 5 &&
+					players[sortedPlayers[0]].score >= 0.25 * rounds)
 			) {
-				const atk = Math.ceil(Math.random() * 10);
-				const hp = Math.ceil(Math.random() * (100 - 50) + 50);
-				const spd = Math.ceil(Math.random() * 10);
+				let waifuName;
+				if (isGuaranteed) {
+					waifuName = user!.guaranteeWaifu!;
+				}
+				const waifu: WaifuData | null = await spawnWaifu(
+					user!,
+					waifuName
+				);
+				if (
+					waifu &&
+					(await user!.countWaifus({
+						where: { name: waifu.name },
+					})) <= 5
+				) {
+					const atk = Math.ceil(Math.random() * 10);
+					const hp = Math.ceil(Math.random() * (100 - 50) + 50);
+					const spd = Math.ceil(Math.random() * 10);
 
-				const waifuEmbed = new EmbedBuilder()
-					.setColor(0xff00ff)
-					.setTitle(waifu.name)
-					.setImage(`attachment://${waifu.urlFriendlyName}.jpg`)
-					.setDescription(
-						`You can view your waifu collection by using \`/waifus\`!`
-					)
-					.addFields(
-						{
-							name: "ATK",
-							value: atk.toString(),
-							inline: true,
-						},
-						{
-							name: "HP",
-							value: hp.toString(),
-							inline: true,
-						},
-						{
-							name: "SPD",
-							value: spd.toString(),
-							inline: true,
-						}
-					)
-					.setFooter({
-						text: "You unlocked an waifu! Image credit: Atamonica",
+					const waifuEmbed = new EmbedBuilder()
+						.setColor(0xff00ff)
+						.setTitle(waifu.name)
+						.setImage(`attachment://${waifu.urlFriendlyName}.jpg`)
+						.setDescription(
+							`You can view your waifu collection by using \`/waifus\`!`
+						)
+						.addFields(
+							{
+								name: "ATK",
+								value: atk.toString(),
+								inline: true,
+							},
+							{
+								name: "HP",
+								value: hp.toString(),
+								inline: true,
+							},
+							{
+								name: "SPD",
+								value: spd.toString(),
+								inline: true,
+							}
+						)
+						.setFooter({
+							text: "You unlocked an waifu! Image credit: Atamonica",
+						});
+
+					if (waifu.abilityName) {
+						waifuEmbed.addFields({
+							name: waifu.abilityName!,
+							value: waifu.abilityDescription!,
+						});
+					}
+
+					await thread.send({
+						content: `<@${interaction.user.id}> has unlocked a new waifu!`,
+						embeds: [waifuEmbed],
+						files: [waifu.path],
 					});
 
-				if (waifu.abilityName) {
-					waifuEmbed.addFields({
-						name: waifu.abilityName!,
-						value: waifu.abilityDescription!,
+					await user!.createWaifu({
+						name: waifu.name,
+						atk,
+						hp,
+						spd,
+						spec: waifu.spec,
+						kills: 0,
+						deaths: 0,
+					});
+
+					await user!.update({
+						lockedWaifus: user!.lockedWaifus!.filter(
+							(w) => w !== waifu.name
+						),
 					});
 				}
-
-				await thread.send({
-					content: `<@${interaction.user.id}> has unlocked a new waifu!`,
-					embeds: [waifuEmbed],
-					files: [waifu.path],
-				});
-
-				await user!.createWaifu({
-					name: waifu.name,
-					atk,
-					hp,
-					spd,
-					spec: waifu.spec,
-					kills: 0,
-					deaths: 0,
-				});
-
-				await user!.update({
-					lockedWaifus: user!.lockedWaifus!.filter(
-						(w) => w !== waifu.name
-					),
-				});
 			}
 		}
 

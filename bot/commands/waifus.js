@@ -49,15 +49,15 @@ async function execute(interaction) {
         const waifuData = waifus_json_1.default[w];
         return !waifuData.spec;
     });
-    const unlockedSpecWaifus = await user.countWaifus({
-        where: {
-            spec: true,
-        },
-    });
-    const unlockedNonSpecWaifus = await user.countWaifus({
-        where: {
-            spec: false,
-        },
+    const unlockedSpecWaifus = [];
+    const unlockedNonSpecWaifus = [];
+    user.waifus?.forEach((w) => {
+        if (!w.spec) {
+            if (!unlockedNonSpecWaifus.includes(w.name))
+                unlockedNonSpecWaifus.push(w.name);
+        }
+        else if (!unlockedSpecWaifus.includes(w.name))
+            unlockedSpecWaifus.push(w.name);
     });
     if (name) {
         const waifusLowerCase = Object.keys(waifus_json_1.default).map((w) => w.toLowerCase());
@@ -98,7 +98,7 @@ async function execute(interaction) {
             .setThumbnail(targetUser.avatarURL())
             .setImage(`attachment://${waifuData.urlFriendlyName ?? waifuName}.jpg`)
             .setFooter({
-            text: `You can unlock ${specWaifus.length - unlockedSpecWaifus} more waifus with /airrec and ${nonSpecWaifus.length - unlockedNonSpecWaifus} more waifus by winning airrec quizzes!`,
+            text: `You can unlock ${specWaifus.length - unlockedSpecWaifus.length} more waifus with /airrec and ${nonSpecWaifus.length - unlockedNonSpecWaifus.length} more waifus by winning airrec quizzes!`,
         })
             .setDescription(`
 This user has ${userWaifus.length} cop${userWaifus.length === 1 ? "y" : "ies"} of this waifu!\n
@@ -161,10 +161,10 @@ ${userWaifus.some((w) => w.generated)
         iconURL: targetUser.avatarURL(),
     })
         .setThumbnail(targetUser.avatarURL())
-        .setDescription(`You have ${waifuList.length}/${Object.keys(waifus_json_1.default).length} waifus unlocked! ${user.guaranteeWaifu
-        ? `You need to obtain ${0 + 1 - user.guaranteeCounter} more waifus before you get a guaranteed ${user
-            .guaranteeWaifu}.`
-        : "You are not currently targetting a waifu."} You have won ${user.kills} dogfights and lost ${user.deaths} dogfights.`)
+        .setDescription(`You have **${waifuList.length}/${Object.keys(waifus_json_1.default).length}** waifus unlocked! ${user.guaranteeWaifu
+        ? `You need to obtain **${10 - user.guaranteeCounter}** more waifu(s) before you get a guaranteed **${user
+            .guaranteeWaifu}**.`
+        : "You are not currently targetting a waifu."} You have won **${user.kills}** dogfights and lost **${user.deaths}** dogfights.`)
         .addFields({
         name: "Unlocked Waifus",
         value: waifuList
@@ -179,7 +179,7 @@ ${userWaifus.some((w) => w.generated)
         .setFooter({
         text: `${waifuList.filter((w) => w.startsWith("\\*")).length > 0
             ? "*This waifu was generated."
-            : ""}\nYou can unlock ${specWaifus.length - unlockedSpecWaifus} more waifus with /airrec and ${nonSpecWaifus.length - unlockedNonSpecWaifus} more waifus by winning airrec quizzes!`,
+            : ""}\nYou can unlock ${specWaifus.length - unlockedSpecWaifus.length} more waifus with /airrec and ${nonSpecWaifus.length - unlockedNonSpecWaifus.length} more waifus by winning airrec quizzes!`,
     });
     await interaction.editReply({
         embeds: [embed],

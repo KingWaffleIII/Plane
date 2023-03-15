@@ -26,13 +26,14 @@ interface WaifuData {
 	hp: number;
 	spd: number;
 	equipment?: Waifu;
+	isAttacking: boolean;
 	isEvading: boolean;
 	isAbilityUsed: boolean;
 	canEvade: boolean; // paveway ii
 	isStunned: boolean; // sidewinder
+	hasbeenStunned: boolean; // sidewinder
 	isBeingSupported: boolean; // trident ii
 	isLaunchingBarrage: boolean; // hellfire
-	hasbeenStunned: boolean; // sidewinder
 }
 
 export const data = new SlashCommandBuilder()
@@ -225,6 +226,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 						atk: first.atk,
 						hp: first.hp,
 						spd: first.spd,
+						isAttacking: false,
 						isEvading: false,
 						isAbilityUsed: false,
 						canEvade: true,
@@ -237,6 +239,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 						atk: second.atk,
 						hp: second.hp,
 						spd: second.spd,
+						isAttacking: false,
 						isEvading: false,
 						isAbilityUsed: false,
 						canEvade: true,

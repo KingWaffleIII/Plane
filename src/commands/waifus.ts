@@ -62,15 +62,14 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 		const waifuData = waifus[w as keyof typeof waifus];
 		return !waifuData!.spec;
 	});
-	const unlockedSpecWaifus = await user!.countWaifus({
-		where: {
-			spec: true,
-		},
-	});
-	const unlockedNonSpecWaifus = await user!.countWaifus({
-		where: {
-			spec: false,
-		},
+	const unlockedSpecWaifus: string[] = [];
+	const unlockedNonSpecWaifus: string[] = [];
+	user!.waifus?.forEach((w) => {
+		if (!w.spec) {
+			if (!unlockedNonSpecWaifus.includes(w.name))
+				unlockedNonSpecWaifus.push(w.name);
+		} else if (!unlockedSpecWaifus.includes(w.name))
+			unlockedSpecWaifus.push(w.name);
 	});
 
 	if (name) {
@@ -126,9 +125,9 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 			)
 			.setFooter({
 				text: `You can unlock ${
-					specWaifus.length - unlockedSpecWaifus
+					specWaifus.length - unlockedSpecWaifus.length
 				} more waifus with /airrec and ${
-					nonSpecWaifus.length - unlockedNonSpecWaifus
+					nonSpecWaifus.length - unlockedNonSpecWaifus.length
 				} more waifus by winning airrec quizzes!`,
 			})
 			.setDescription(
@@ -218,18 +217,18 @@ ${
 		})
 		.setThumbnail(targetUser.avatarURL() as string)
 		.setDescription(
-			`You have ${waifuList.length}/${
+			`You have **${waifuList.length}/${
 				Object.keys(waifus).length
-			} waifus unlocked! ${
+			}** waifus unlocked! ${
 				user!.guaranteeWaifu
-					? `You need to obtain ${
-							0 + 1 - user!.guaranteeCounter!
-					  } more waifus before you get a guaranteed ${user!
-							.guaranteeWaifu!}.`
+					? `You need to obtain **${
+							10 - user!.guaranteeCounter!
+					  }** more waifu(s) before you get a guaranteed **${user!
+							.guaranteeWaifu!}**.`
 					: "You are not currently targetting a waifu."
-			} You have won ${user!.kills} dogfights and lost ${
+			} You have won **${user!.kills}** dogfights and lost **${
 				user!.deaths
-			} dogfights.`
+			}** dogfights.`
 		)
 		.addFields(
 			{
@@ -257,9 +256,9 @@ ${
 					? "*This waifu was generated."
 					: ""
 			}\nYou can unlock ${
-				specWaifus.length - unlockedSpecWaifus
+				specWaifus.length - unlockedSpecWaifus.length
 			} more waifus with /airrec and ${
-				nonSpecWaifus.length - unlockedNonSpecWaifus
+				nonSpecWaifus.length - unlockedNonSpecWaifus.length
 			} more waifus by winning airrec quizzes!`,
 		});
 

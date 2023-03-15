@@ -8,7 +8,7 @@ exports.data = new discord_js_1.SlashCommandBuilder()
 async function execute(interaction) {
     const embed = new discord_js_1.EmbedBuilder()
         .setColor(0x0099ff)
-        .setTitle('Plane v1.3.0 "Super Galahad"')
+        .setTitle('Plane v1.3.1 "Super Galahad"')
         .setURL("https://github.com/KingWaffleIII/plane")
         .setAuthor({
         name: "KingWaffleIII @ PlanetWaffle",
@@ -33,10 +33,14 @@ __**Credits**__
 - **KingWaffleIII#9031** - Lead developer and maintainer
 - **ApocalypticTofu#4278** - Lead adviser
 - **Cranium#2516** - Adviser and military aircraft recognition tips
-- **Green Guy#9990** - "Green"(?) Adviser
+- **Mew#4253** - Adviser
+- **\\*Piplup\\*#5802** - Adviser
+- **Neo the Ice Cream Waifu#6339** - Adviser
+- **Dark Phoenix#3582** - Adviser (despite being an Army cadet)
+
 
 - **https://airfighters.com** - Aircraft images
-- **Atamonica** - Easter egg images
+- **Atamonica** - Waifu images
 			`)
         .setThumbnail("https://i.imgur.com/YnUnoQL.png")
         .setTimestamp()

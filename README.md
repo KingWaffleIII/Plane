@@ -37,13 +37,21 @@ Weapon waifus are the secondary type of waifu. They have just a randomly generat
 
 ### Weapon abilities
 
+**Adder: ???** - ???
+
 **AMRAAM: Precision Strike** - After equipping this weapon, your next attack will be guaranteed to crit.
+
+**HARM: Lock-on** - After equipping this weapon, the next time the opponent attempts to evade, your attack is guaranteed to hit.
 
 **Hellfire: Fire and Forget** - After equipping this weapon, this missile will deal 1/2 of the aircraft's and this weapon's combined ATK to the opponent every round, on top of any attacks the aircraft may have made.
 
 **Paveway II: Heavy Payload** - After equipping this weapon, your next attack will deal 3x damage but you can no longer evade attacks.
 
+**Phoenix:** ??? - ???
+
 **Sidewinder: Stunwave** - After equipping this weapon, your next attack will stun your opponent, meaning they cannot do anything that round.
+
+**Sparrow: ???** - ???
 
 **Trident II: Call for Support** - After equipping this weapon, your next attack will call in a support strike, dealing damage equivalent to this weapon's ATK to the opponent, on top of any attacks this round.
 
@@ -75,7 +83,7 @@ Dogfighting is a duel between users. Once a dogfight request is accepted, users 
 -   the waifu with the faster SPD stat goes first
 -   they can either attack, evade or equip a weapon
 -   equipping a weapon is done by selecting a weapon waifu, which then adds its ATK stat to the aircraft waifu's ATK stat
--   evading means that the waifu will not take damage this round
+-   if an aircraft attempts to evade, depending on the aircraft's SPD (calculation TBD), the evade can fail or succeed. If it succeeds, the aircraft cannot be damaged that round (except HARM). If it fails, the aircraft will be stunned that round. This encourages META as some weapons are only useful against aircraft with high SPD
 -   when attacking, the waifu deals damage equal to her ATK stat (this is the combined stat of both the aircraft and weapon waifu) with a 10% chance of dealing double damage (crit)
 -   the opposing waifu then has their go
 -   the waifu first to reach 0 HP loses

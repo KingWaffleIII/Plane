@@ -1,4 +1,10 @@
 services:
+    redis:
+        container_name: plane_redis
+        image: redis:latest
+        # sysctls:
+        #     - vm.overcommit_memory=1
+        restart: always
     bot:
         container_name: plane_bot
         image: node:slim
@@ -15,3 +21,5 @@ services:
         working_dir: /bot
         entrypoint: /bot/entrypoint.sh
         restart: always
+        depends_on:
+            - redis

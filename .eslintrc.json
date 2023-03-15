@@ -50,6 +50,7 @@
 		// ],
 		"no-use-before-define": "off",
 		"lines-between-class-members": "off",
+		"no-continue": "off",
 
 		"import/no-dynamic-require": "off",
 		"import/no-import-module-exports": "off",
