@@ -96,7 +96,7 @@ export class User extends Model<
 	declare countWaifus: HasManyCountAssociationsMixin;
 	declare createWaifu: HasManyCreateAssociationMixin<Waifu, "userId">;
 
-	declare lockedWaifus?: string[];
+	declare lockedWaifus: string[];
 	declare guaranteeWaifu?: string | null;
 	declare guaranteeCounter?: number | null;
 

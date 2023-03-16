@@ -110,6 +110,7 @@ const rest = new discord_js_1.REST({ version: "10" }).setToken(config_json_1.tok
             avatarUrl: joshAvatarUrl,
             kills: 999,
             deaths: 999,
+            lockedWaifus: [],
         });
     }
 })();

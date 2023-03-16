@@ -51,6 +51,13 @@ export const data = new SlashCommandBuilder()
 				"The SPD stat of the waifu to generate (only for aircraft). Defaults to RNG."
 			)
 	)
+	.addBooleanOption((option) =>
+		option
+			.setName("show_as_legit")
+			.setDescription(
+				"Whether to show the waifu as it it was not generated. Defaults to false."
+			)
+	)
 	.addIntegerOption((option) =>
 		option
 			.setName("kills")
@@ -73,6 +80,8 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 	const atk = interaction.options.getInteger("atk") ?? null;
 	const hp = interaction.options.getInteger("hp") ?? null;
 	const spd = interaction.options.getInteger("spd") ?? null;
+	const showAsLegit =
+		interaction.options.getBoolean("show_as_legit") ?? false;
 	const kills = interaction.options.getInteger("kills") ?? 0;
 	const deaths = interaction.options.getInteger("deaths") ?? 0;
 
@@ -81,6 +90,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 	if (!waifusLowerCase.includes(name.toLowerCase())) {
 		await interaction.reply({
 			content: "That waifu doesn't exist!",
+			ephemeral: true,
 		});
 		return;
 	}
@@ -90,22 +100,22 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 
 	const waifuData: WaifuBaseData = waifus[waifuName as keyof typeof waifus];
 
-	await interaction.client.application.fetch();
+	// await interaction.client.application.fetch();
 
-	if (interaction.user !== interaction.client.application.owner) {
-		await interaction.reply({
-			content: `Successfully generated ${amount} ${waifuName} waifu(s) (use \`/waifus user:${targetUser}\`) for ${targetUser.username}!`,
-		});
+	// if (interaction.user !== interaction.client.application.owner) {
+	// 	await interaction.reply({
+	// 		content: `Successfully generated ${amount} ${waifuName} waifu(s) (use \`/waifus user:${targetUser}\`) for ${targetUser.username}!`,
+	// 	});
 
-		await wait(3000);
+	// 	await wait(3000);
 
-		await interaction.followUp({
-			content:
-				"https://media.tenor.com/KjXLIHAAeRkAAAAd/wakey-wakey-time-for-scoo.gif",
-		});
+	// 	await interaction.followUp({
+	// 		content:
+	// 			"https://media.tenor.com/KjXLIHAAeRkAAAAd/wakey-wakey-time-for-scoo.gif",
+	// 	});
 
-		return;
-	}
+	// 	return;
+	// }
 
 	await interaction.reply({
 		content: "Generating waifu...",
@@ -135,7 +145,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 			thisDeaths = 0;
 		}
 
-		await user.createWaifu({
+		const waifu = await user.createWaifu({
 			name: waifuName,
 			spec: waifuData.spec,
 			atk: thisAtk,
@@ -145,6 +155,15 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 			kills: thisKills,
 			deaths: thisDeaths,
 		});
+
+		if (showAsLegit) {
+			await waifu.update({
+				generated: false,
+			});
+			await user.update({
+				lockedWaifus: user.lockedWaifus.filter((w) => w !== waifuName),
+			});
+		}
 	}
 
 	await interaction.editReply({

@@ -30,6 +30,7 @@ async function execute(interaction) {
             username: interaction.user.username,
             discriminator: interaction.user.discriminator,
             avatarUrl: interaction.user.avatarURL(),
+            lockedWaifus: Object.keys(waifus_json_1.default),
             kills: 0,
             deaths: 0,
         });
@@ -52,6 +53,8 @@ async function execute(interaction) {
     const unlockedSpecWaifus = [];
     const unlockedNonSpecWaifus = [];
     user.waifus?.forEach((w) => {
+        if (w.generated)
+            return;
         if (!w.spec) {
             if (!unlockedNonSpecWaifus.includes(w.name))
                 unlockedNonSpecWaifus.push(w.name);
@@ -110,7 +113,8 @@ ${userWaifus.some((w) => w.generated)
             : ""}${userWaifus.some((w) => !waifus_json_1.default[w.name].spec &&
             !w.generated)
             ? "One or more of this waifu was unlocked by winning an airrec quiz!"
-            : ""} In dogfighting, this waifu has won ${won} time${won === 1 ? "" : "s"} and lost ${lost} time${lost === 1 ? "" : "s"}.
+            : ""}
+In dogfighting, this waifu has won ${won} time${won === 1 ? "" : "s"} and lost ${lost} time${lost === 1 ? "" : "s"}.
 			`);
         userWaifus.forEach((w) => {
             waifuEmbed.addFields({
@@ -161,7 +165,7 @@ ${userWaifus.some((w) => w.generated)
         iconURL: targetUser.avatarURL(),
     })
         .setThumbnail(targetUser.avatarURL())
-        .setDescription(`You have **${waifuList.length}/${Object.keys(waifus_json_1.default).length}** waifus unlocked! ${user.guaranteeWaifu
+        .setDescription(`You have **${waifuList.filter((w) => !w.includes("\\*")).length}/${Object.keys(waifus_json_1.default).length}** waifus unlocked! ${user.guaranteeWaifu
         ? `You need to obtain **${10 - user.guaranteeCounter}** more waifu(s) before you get a guaranteed **${user
             .guaranteeWaifu}**.`
         : "You are not currently targetting a waifu."} You have won **${user.kills}** dogfights and lost **${user.deaths}** dogfights.`)
@@ -178,7 +182,7 @@ ${userWaifus.some((w) => w.generated)
     })
         .setFooter({
         text: `${waifuList.filter((w) => w.startsWith("\\*")).length > 0
-            ? "*This waifu was generated."
+            ? "*This waifu was generated. Generated waifus do not count towards your stats."
             : ""}\nYou can unlock ${specWaifus.length - unlockedSpecWaifus.length} more waifus with /airrec and ${nonSpecWaifus.length - unlockedNonSpecWaifus.length} more waifus by winning airrec quizzes!`,
     });
     await interaction.editReply({

@@ -16,6 +16,7 @@ db.sqlite
 # Project
 config.json
 src/assets/waifus/Unused/
+src/josh.ts
 
 bot/package.json
 bot/package-lock.json

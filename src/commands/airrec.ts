@@ -37,6 +37,7 @@ export interface WaifuBaseData {
 	readonly ability?: string;
 	readonly abilityName?: string;
 	readonly abilityDescription?: string;
+	readonly country?: string;
 }
 
 export interface WaifuData extends WaifuBaseData {

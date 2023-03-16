@@ -42,6 +42,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 			username: interaction.user.username,
 			discriminator: interaction.user.discriminator,
 			avatarUrl: interaction.user.avatarURL(),
+			lockedWaifus: Object.keys(waifus),
 			kills: 0,
 			deaths: 0,
 		});
@@ -65,6 +66,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 	const unlockedSpecWaifus: string[] = [];
 	const unlockedNonSpecWaifus: string[] = [];
 	user!.waifus?.forEach((w) => {
+		if (w.generated) return;
 		if (!w.spec) {
 			if (!unlockedNonSpecWaifus.includes(w.name))
 				unlockedNonSpecWaifus.push(w.name);
@@ -155,7 +157,8 @@ ${
 					)
 						? "One or more of this waifu was unlocked by winning an airrec quiz!"
 						: ""
-				} In dogfighting, this waifu has won ${won} time${
+				}
+In dogfighting, this waifu has won ${won} time${
 					won === 1 ? "" : "s"
 				} and lost ${lost} time${lost === 1 ? "" : "s"}.
 			`
@@ -217,7 +220,7 @@ ${
 		})
 		.setThumbnail(targetUser.avatarURL() as string)
 		.setDescription(
-			`You have **${waifuList.length}/${
+			`You have **${waifuList.filter((w) => !w.includes("\\*")).length}/${
 				Object.keys(waifus).length
 			}** waifus unlocked! ${
 				user!.guaranteeWaifu
@@ -253,7 +256,7 @@ ${
 		.setFooter({
 			text: `${
 				waifuList.filter((w) => w.startsWith("\\*")).length > 0
-					? "*This waifu was generated."
+					? "*This waifu was generated. Generated waifus do not count towards your stats."
 					: ""
 			}\nYou can unlock ${
 				specWaifus.length - unlockedSpecWaifus.length

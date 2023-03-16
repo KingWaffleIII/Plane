@@ -138,9 +138,13 @@ async function execute(interaction) {
                 atk: first.atk,
                 hp: first.hp,
                 spd: first.spd,
+                // isAttacking: false,
                 isEvading: false,
+                // isEquipping: false,
+                move: "",
                 isAbilityUsed: false,
                 canEvade: true,
+                failedEvade: false,
                 isBeingSupported: false,
                 isLaunchingBarrage: false,
                 isStunned: false,
@@ -150,9 +154,13 @@ async function execute(interaction) {
                 atk: second.atk,
                 hp: second.hp,
                 spd: second.spd,
+                // isAttacking: false,
                 isEvading: false,
+                // isEquipping: false,
+                move: "",
                 isAbilityUsed: false,
                 canEvade: true,
+                failedEvade: false,
                 isBeingSupported: false,
                 isLaunchingBarrage: false,
                 isStunned: false,
@@ -162,78 +170,241 @@ async function execute(interaction) {
             const secondWaifu = waifuList[second.id];
             const firstWaifuData = waifus_json_1.default[first.name];
             const secondWaifuData = waifus_json_1.default[second.name];
-            const calculateDamage = (attacker, opponent) => {
-                let dmg = attacker.atk;
-                let isCrit = Math.random() < 0.1;
-                // waifu abilities
-                if (attacker.equipment) {
-                    const waifuData = waifus_json_1.default[attacker.equipment
-                        .name];
-                    switch (waifuData.ability) {
-                        case "crit": {
-                            if (attacker.isAbilityUsed)
-                                break;
-                            isCrit = true;
-                            attacker.isAbilityUsed = true;
-                            break;
+            const doCalculations = async (attacker, attackerModel, opponent, opponentModel) => {
+                switch (attacker.move) {
+                    case "attack": {
+                        let dmg = attacker.atk;
+                        let isCrit = Math.random() < 0.1;
+                        if (!opponent.isEvading &&
+                            attacker.equipment?.name !== "HARM" // evade
+                        ) {
+                            // waifu abilities
+                            if (attacker.equipment) {
+                                const waifuData = waifus_json_1.default[attacker.equipment
+                                    .name];
+                                switch (waifuData.ability) {
+                                    case "crit": {
+                                        if (attacker.isAbilityUsed)
+                                            break;
+                                        isCrit = true;
+                                        attacker.isAbilityUsed = true;
+                                        break;
+                                    }
+                                    case "fail-evade": {
+                                        if (attacker.isAbilityUsed)
+                                            break;
+                                        if (opponent.failedEvade) {
+                                            dmg *= 1.5;
+                                            attacker.isAbilityUsed =
+                                                true;
+                                        }
+                                        break;
+                                    }
+                                    case "evade": {
+                                        if (attacker.isAbilityUsed)
+                                            break;
+                                        if (opponent.isEvading) {
+                                            opponent.isEvading = false;
+                                            attacker.isAbilityUsed =
+                                                true;
+                                        }
+                                        attacker.isAbilityUsed = true;
+                                        break;
+                                    }
+                                    case "distance": {
+                                        if (attacker.isAbilityUsed)
+                                            break;
+                                        attacker.isEvading = true;
+                                        attacker.isAbilityUsed = true;
+                                        break;
+                                    }
+                                    case "exclusive": {
+                                        if (attacker.isAbilityUsed)
+                                            break;
+                                        break;
+                                    }
+                                    case "barrage": {
+                                        if (attacker.isAbilityUsed)
+                                            break;
+                                        break;
+                                    }
+                                    case "stun": {
+                                        if (attacker.isAbilityUsed)
+                                            break;
+                                        if (opponent.hasbeenStunned)
+                                            break;
+                                        opponent.isStunned = true;
+                                        break;
+                                    }
+                                    case "heavy": {
+                                        if (attacker.isAbilityUsed)
+                                            break;
+                                        isCrit = false;
+                                        dmg *= 3;
+                                        attacker.isAbilityUsed = true;
+                                        break;
+                                    }
+                                    case "support": {
+                                        if (attacker.isAbilityUsed)
+                                            break;
+                                        attacker.isBeingSupported =
+                                            true;
+                                        break;
+                                    }
+                                    default: {
+                                        break;
+                                    }
+                                }
+                            }
+                            if (!isCrit) {
+                                await thread.send({
+                                    content: `<@${attackerModel.user.id}> attacked, dealing ${dmg} damage! (${opponentModel.name}: ${opponent.hp} -> **${opponent.hp - dmg}**)`,
+                                });
+                            }
+                            else {
+                                dmg *= 2;
+                                await thread.send({
+                                    content: `**Critical hit!** <@${attackerModel.user.id}> attacked, dealing ${dmg} damage! (${opponentModel.name}: ${opponent.hp} -> **${opponent.hp - dmg}**)`,
+                                });
+                            }
+                            opponent.hp -= dmg;
+                            if (opponent.hp <= 0) {
+                                return false;
+                            }
                         }
-                        case "barrage": {
-                            if (attacker.isAbilityUsed)
-                                break;
-                            break;
+                        else {
+                            await thread.send({
+                                content: `<@${attackerModel.user.id}> tried to attack, but <@${opponentModel.user.id}>'s **${opponentModel.name}** evaded!`,
+                            });
                         }
-                        case "stun": {
-                            if (attacker.isAbilityUsed)
-                                break;
-                            if (opponent.hasbeenStunned)
-                                break;
-                            opponent.isStunned = true;
+                        break;
+                    }
+                    case "evade": {
+                        if (!attacker.canEvade)
                             break;
+                        // Generate a random number between 0 and 1
+                        const randomNum = Math.random();
+                        // Calculate the probability of returning true based on spd
+                        const probability = attacker.spd / 10;
+                        // Return true if the random number is less than the probability, otherwise return false
+                        if (randomNum < probability) {
+                            attacker.isEvading = true;
                         }
-                        case "heavy": {
-                            if (attacker.isAbilityUsed)
-                                break;
-                            isCrit = false;
-                            dmg *= 3;
-                            attacker.isAbilityUsed = true;
-                            break;
+                        else {
+                            await thread.send({
+                                content: `<@${attackerModel.user.id}> tried to evade, but failed!`,
+                            });
+                            attacker.isEvading = false;
+                            attacker.failedEvade = true;
                         }
-                        case "support": {
-                            if (attacker.isAbilityUsed)
-                                break;
-                            attacker.isBeingSupported = true;
-                            break;
-                        }
-                        default: {
-                            break;
-                        }
+                        break;
+                    }
+                    case "equip": {
+                        const weaponEquipId = crypto_1.default
+                            .randomBytes(6)
+                            .toString("hex");
+                        const weaponEquip = new discord_js_1.ActionRowBuilder().addComponents(new discord_js_1.StringSelectMenuBuilder()
+                            .setCustomId(`dogfight-equip-weapon-${weaponEquipId}`)
+                            .setPlaceholder("Select a weapon"));
+                        const userWaifus = (await attackerModel.user.getWaifus({
+                            where: {
+                                hp: 0,
+                                spd: 0,
+                            },
+                        }))
+                            .sort((a, b) => b.atk - a.atk)
+                            .splice(0, 25);
+                        userWaifus.forEach((waifu) => {
+                            weaponEquip.components[0].addOptions({
+                                label: `${waifu.name} (ATK: ${waifu.atk})`,
+                                value: waifu.id.toString(),
+                            });
+                        });
+                        const weaponEquipFilter = (int) => int.customId ===
+                            `dogfight-equip-weapon-${weaponEquipId}`;
+                        const weaponEquipCollector = thread.createMessageComponentCollector({
+                            filter: weaponEquipFilter,
+                            time: 30000,
+                            componentType: discord_js_1.ComponentType.StringSelect,
+                        });
+                        const weaponEquipMsg = await thread.send({
+                            content: `<@${attackerModel.user.id}>, select a weapon to equip!`,
+                            components: [weaponEquip],
+                        });
+                        const p = await new Promise((r) => {
+                            weaponEquipCollector.on("collect", async (int) => {
+                                if (int.user.id !==
+                                    attackerModel.user.id) {
+                                    await int.reply({
+                                        content: "You can't make this move.",
+                                        ephemeral: true,
+                                    });
+                                    return;
+                                }
+                                await weaponEquipMsg.delete();
+                                attacker.equipment =
+                                    (await models_1.Waifu.findByPk(int.values[0]));
+                                attacker.atk +=
+                                    attacker.equipment.atk;
+                                const equipmentData = waifus_json_1.default[attacker.equipment
+                                    .name];
+                                const waifuData = waifus_json_1.default[attackerModel.name];
+                                if (equipmentData.ability ===
+                                    "heavy")
+                                    attacker.canEvade = false;
+                                if (equipmentData.ability ===
+                                    "barrage")
+                                    attacker.isLaunchingBarrage =
+                                        true;
+                                if (equipmentData.ability ===
+                                    "exclusive" &&
+                                    waifuData.country === "USA")
+                                    attacker.atk +=
+                                        0.5 *
+                                            attacker.equipment.atk;
+                                await thread.send({
+                                    content: `<@${attackerModel.user.id}> equipped **${attacker.equipment.name}**, boosting their attack to **${attacker.atk}**!`,
+                                });
+                                r(true);
+                            });
+                            weaponEquipCollector.on("end", async (collected) => {
+                                if (collected.size === 0) {
+                                    await thread.send({
+                                        content: `<@${attackerModel.user.id}>'s **${attackerModel.name}** fled!`,
+                                    });
+                                    attacker.hp = 0;
+                                    r(false);
+                                }
+                            });
+                        });
+                        if (!p)
+                            return false;
+                        break;
+                    }
+                    default: {
+                        break;
                     }
                 }
-                if (isCrit)
-                    dmg *= 2;
-                return { isCrit, dmg };
-            };
-            const calculateFollowUpDamage = async (t, attacker, attackerModel, opponent, opponentModel) => {
                 if (opponent.isEvading) {
                     opponent.isEvading = false;
-                    return;
+                    return true;
                 }
                 if (attacker.isLaunchingBarrage) {
                     const atk = Math.ceil((attackerModel.atk + attacker.equipment.atk) *
                         0.5);
-                    await t.send(`<@${attackerModel.user.id}>'s ${attacker.equipment.name} dealt **${atk}** damage to <@${opponentModel.user.id}>'s ${opponentModel.name} from its ongoing barrage! (${opponentModel.name}: ${opponent.hp} -> **${opponent.hp - atk}**)`);
+                    await thread.send(`<@${attackerModel.user.id}>'s ${attacker.equipment.name} dealt **${atk}** damage to <@${opponentModel.user.id}>'s ${opponentModel.name} from its ongoing barrage! (${opponentModel.name}: ${opponent.hp} -> **${opponent.hp - atk}**)`);
                     opponent.hp -= atk;
-                    return;
                 }
                 if (attacker.isBeingSupported) {
                     const { atk } = attacker.equipment;
-                    await t.send(`<@${attackerModel.user.id}>'s ${attacker.equipment.name} dealt **${atk}** damage to <@${opponentModel.user.id}>'s ${opponentModel.name} from its support strike! (${opponentModel.name}: ${opponent.hp} -> **${opponent.hp - atk}**)`);
+                    await thread.send(`<@${attackerModel.user.id}>'s ${attacker.equipment.name} dealt **${atk}** damage to <@${opponentModel.user.id}>'s ${opponentModel.name} from its support strike! (${opponentModel.name}: ${opponent.hp} -> **${opponent.hp - atk}**)`);
                     opponent.hp -= atk;
                     attacker.isBeingSupported = false;
                 }
+                return true;
             };
             // don't let the while loop continue unless the collector has received a response
-            const doMove = (main, mainData, secondary, secondaryData, buttonId, collector, turnMsg) => new Promise((resolve) => {
+            const doMove = (main, mainData, buttonId, collector, turnMsg) => new Promise((resolve) => {
                 collector.on("collect", async (i) => {
                     if (i.user.id !== main.user.id) {
                         await i.reply({
@@ -245,116 +416,24 @@ async function execute(interaction) {
                     await turnMsg.delete();
                     switch (i.customId) {
                         case `dogfight-attack-${buttonId}`: {
-                            if (!secondaryData.isEvading) {
-                                const { isCrit, dmg } = calculateDamage(mainData, secondaryData);
-                                if (!isCrit) {
-                                    await thread.send({
-                                        content: `<@${main.user.id}> attacked, dealing ${dmg} damage! (${second.name}: ${secondaryData.hp} -> **${secondaryData.hp -
-                                            dmg}**)`,
-                                    });
-                                }
-                                else {
-                                    await thread.send({
-                                        content: `**Critical hit!** <@${main.user.id}> attacked, dealing ${dmg} damage! (${second.name}: ${secondaryData.hp} -> **${secondaryData.hp -
-                                            dmg}**)`,
-                                    });
-                                }
-                                secondaryData.hp -= dmg;
-                                if (secondaryData.hp <= 0) {
-                                    resolve(false);
-                                }
-                            }
-                            else {
-                                await thread.send({
-                                    content: `<@${main.user.id}> tried to attack, but <@${secondary.user.id}>'s **${secondary.name}** evaded!`,
-                                });
-                            }
+                            // mainData.isAttacking = true;
+                            mainData.move = "attack";
                             break;
                         }
                         case `dogfight-evade-${buttonId}`: {
-                            mainData.isEvading = true;
+                            // mainData.isEvading = true;
+                            mainData.move = "evade";
                             break;
                         }
                         case `dogfight-equip-${buttonId}`: {
-                            const weaponEquipId = crypto_1.default
-                                .randomBytes(6)
-                                .toString("hex");
-                            const weaponEquip = new discord_js_1.ActionRowBuilder().addComponents(new discord_js_1.StringSelectMenuBuilder()
-                                .setCustomId(`dogfight-equip-weapon-${weaponEquipId}`)
-                                .setPlaceholder("Select a weapon"));
-                            const userWaifus = (await main.user.getWaifus({
-                                where: {
-                                    hp: 0,
-                                    spd: 0,
-                                },
-                            }))
-                                .sort((a, b) => b.atk - a.atk)
-                                .splice(0, 25);
-                            userWaifus.forEach((waifu) => {
-                                weaponEquip.components[0].addOptions({
-                                    label: waifu.name,
-                                    value: waifu.id.toString(),
-                                });
-                            });
-                            const weaponEquipFilter = (int) => int.customId ===
-                                `dogfight-equip-weapon-${weaponEquipId}`;
-                            const weaponEquipCollector = thread.createMessageComponentCollector({
-                                filter: weaponEquipFilter,
-                                time: 30000,
-                                componentType: discord_js_1.ComponentType.StringSelect,
-                            });
-                            const weaponEquipMsg = await thread.send({
-                                content: `<@${main.user.id}>, select a weapon to equip!`,
-                                components: [weaponEquip],
-                            });
-                            await new Promise((r) => {
-                                weaponEquipCollector.on("collect", async (int) => {
-                                    if (int.user.id !==
-                                        main.user.id) {
-                                        await int.reply({
-                                            content: "You can't make this move.",
-                                            ephemeral: true,
-                                        });
-                                        return;
-                                    }
-                                    await weaponEquipMsg.delete();
-                                    mainData.equipment =
-                                        (await models_1.Waifu.findByPk(int.values[0]));
-                                    mainData.atk +=
-                                        mainData.equipment.atk;
-                                    const equipmentData = waifus_json_1.default[mainData
-                                        .equipment
-                                        .name];
-                                    if (equipmentData.ability ===
-                                        "heavy")
-                                        mainData.canEvade =
-                                            false;
-                                    if (equipmentData.ability ===
-                                        "barrage")
-                                        mainData.isLaunchingBarrage =
-                                            true;
-                                    await thread.send({
-                                        content: `<@${main.user.id}> equipped **${mainData.equipment.name}**, boosting their attack to **${mainData.atk}**!`,
-                                    });
-                                    r(true);
-                                });
-                                weaponEquipCollector.on("end", async (collected) => {
-                                    if (collected.size === 0) {
-                                        await thread.send({
-                                            content: `<@${main.user.id}>'s **${main.name}** fled!`,
-                                        });
-                                        mainData.hp = 0;
-                                        r(false);
-                                    }
-                                });
-                            });
+                            // mainData.isEquipping = true;
+                            mainData.move = "equip";
                             break;
                         }
                         default: {
                             break;
                         }
                     }
-                    await calculateFollowUpDamage(thread, mainData, main, secondaryData, secondary);
                     resolve(true);
                 });
                 collector.on("end", async (collected) => {
@@ -454,7 +533,7 @@ async function execute(interaction) {
                         time: 30000,
                         componentType: discord_js_1.ComponentType.Button,
                     });
-                    const firstResolve = await doMove(first, firstWaifu, second, secondWaifu, firstDogfightId, firstDogfightCollector, firstTurn);
+                    const firstResolve = await doMove(first, firstWaifu, firstDogfightId, firstDogfightCollector, firstTurn);
                     if (!firstResolve) {
                         break;
                     }
@@ -545,7 +624,10 @@ async function execute(interaction) {
                         time: 30000,
                         componentType: discord_js_1.ComponentType.Button,
                     });
-                    await doMove(second, secondWaifu, first, firstWaifu, secondDogfightId, secondDogfightCollector, secondTurn);
+                    await doMove(second, secondWaifu, secondDogfightId, secondDogfightCollector, secondTurn).then(async () => {
+                        await doCalculations(firstWaifu, first, secondWaifu, second);
+                        await doCalculations(secondWaifu, second, firstWaifu, first);
+                    });
                 }
             }
             if (firstWaifu.hp <= 0) {

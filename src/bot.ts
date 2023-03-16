@@ -144,6 +144,7 @@ const rest = new REST({ version: "10" }).setToken(token);
 			avatarUrl: joshAvatarUrl,
 			kills: 999,
 			deaths: 999,
+			lockedWaifus: [],
 		});
 	}
 })();
