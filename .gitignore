@@ -25,6 +25,4 @@ bot/air_rec.json
 bot/waifus.json
 bot/assets/
 
-
-
-
+bot/entrypoint.sh

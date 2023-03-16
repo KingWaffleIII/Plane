@@ -22,6 +22,14 @@ If you really want to host the bot yourself, you can do so by following these st
 3. run the `npm prod` script to compile the TypeScript code
 4. run `docker compose up -d` to start the bot
 
+Note: due to clashes with my custom bot, `bot/entrypoint.sh` is not provided but you can use this template:
+
+```sh
+#!/bin/bash
+npm i
+npm run start
+```
+
 ## Waifus
 
 Waifus are a complex, main [gacha](https://en.wikipedia.org/wiki/Gacha_game) feature of the bot.
@@ -114,3 +122,7 @@ https://github.com/KingWaffleIII/plane/issues
 ## Licence
 
 This project is licensed under the GNU General Public Licence 3.0 - see the [LICENCE](LICENCE) file for details
+
+```
+
+```
