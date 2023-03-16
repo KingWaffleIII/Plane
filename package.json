@@ -9,7 +9,7 @@
 		"prebuild": "npm run format && npm run lint",
 		"build": "tsc",
 		"prod": "npm i && npm run build",
-		"start": "node bot.js & node josh.js",
+		"start": "node bot.js",
 		"quickstart": "npm i && tsc && docker compose up -d"
 	},
 	"repository": {
