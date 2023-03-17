@@ -87,28 +87,40 @@ If you want to play, click the button below.
         time: 60000,
         filter: playFilter,
     });
-    const listener = async (message, channel) => {
-        if (channel !== "josh-new-quiz" || message !== "accept")
-            return;
-        players[joshId] = {
-            username: joshUsername,
-            score: 0,
-            lastScore: 0,
+    let isJoshOnline = false;
+    try {
+        const conn = (0, redis_1.createClient)();
+        await conn.connect();
+        isJoshOnline = true;
+    }
+    catch (err) {
+        isJoshOnline = false;
+    }
+    let pub;
+    if (isJoshOnline) {
+        const listener = async (message, channel) => {
+            if (channel !== "josh-new-quiz" || message !== "accept")
+                return;
+            players[joshId] = {
+                username: joshUsername,
+                score: 0,
+                lastScore: 0,
+            };
+            await thread.send({
+                content: `<@${joshId}> has joined the game!`,
+            });
         };
-        await thread.send({
-            content: `<@${joshId}> has joined the game!`,
+        pub = (0, redis_1.createClient)({
+            url: "redis://plane_redis:6379",
         });
-    };
-    const pub = (0, redis_1.createClient)({
-        url: "redis://plane_redis:6379",
-    });
-    pub.on("error", (err) => console.error(err));
-    const sub = pub.duplicate();
-    sub.on("error", (err) => console.error(err));
-    await sub.connect();
-    await sub.subscribe("josh-new-quiz", listener);
-    await pub.connect();
-    await pub.publish("josh-new-quiz", thread.id);
+        pub.on("error", (err) => console.error(err));
+        const sub = pub.duplicate();
+        sub.on("error", (err) => console.error(err));
+        await sub.connect();
+        await sub.subscribe("josh-new-quiz", listener);
+        await pub.connect();
+        await pub.publish("josh-new-quiz", thread.id);
+    }
     collector?.on("collect", async (i) => {
         if (i.customId === `cancel-${buttonId}`) {
             if (i.user.id !== interaction.user.id) {
@@ -273,7 +285,9 @@ If you want to play, click the button below.
             });
             await wait(10000);
         }
-        await pub.publish("josh-do-quiz", "end");
+        if (Object.keys(players).includes(joshId)) {
+            await pub.publish("josh-do-quiz", "end");
+        }
         const sortedPlayers = Object.keys(players).sort((a, b) => players[b].score - players[a].score);
         const leaderboard = new discord_js_1.EmbedBuilder()
             .setColor(0x0099ff)

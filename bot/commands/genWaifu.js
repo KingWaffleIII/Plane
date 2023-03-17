@@ -21,7 +21,8 @@ exports.data = new discord_js_1.SlashCommandBuilder()
     .setDescription("The user to generate a waifu for. Defaults to you."))
     .addIntegerOption((option) => option
     .setName("amount")
-    .setDescription("The amount of waifus you want to generate (max (including existing dupes) is 25). Defaults to 1."))
+    .setDescription("The amount of waifus you want to generate (max (including existing dupes) is 25). Defaults to 1.")
+    .setMaxValue(25))
     .addIntegerOption((option) => option
     .setName("atk")
     .setDescription("The ATK stat of the waifu to generate. Defaults to RNG."))
@@ -80,6 +81,18 @@ async function execute(interaction) {
     if (!user) {
         await interaction.editReply({
             content: "This user doesn't have a waifu collection yet. They need to run `/waifus` first.",
+        });
+        return;
+    }
+    const userWaifus = await user.countWaifus({
+        where: {
+            name: waifuName,
+        },
+    });
+    if (userWaifus + amount > 25) {
+        await interaction.editReply({
+            content: `You can't generate more than 25 waifus of the same type (including existing dupes). You can generate a maximum of **${25 - userWaifus}** more ${waifuName} waifu(s) for this user.
+					`,
         });
         return;
     }

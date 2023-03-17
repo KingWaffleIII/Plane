@@ -11,7 +11,7 @@ import {
 	Message,
 	SlashCommandBuilder,
 } from "discord.js";
-import { createClient } from "redis";
+import { createClient, RedisClientType } from "redis";
 
 import { User } from "../models";
 import { Aircraft, getImage, spawnWaifu, WaifuData } from "./airrec";
@@ -126,29 +126,41 @@ If you want to play, click the button below.
 		filter: playFilter,
 	});
 
-	const listener = async (message: string, channel: string) => {
-		if (channel !== "josh-new-quiz" || message !== "accept") return;
+	let isJoshOnline = false;
+	try {
+		const conn = createClient();
+		await conn.connect();
+		isJoshOnline = true;
+	} catch (err) {
+		isJoshOnline = false;
+	}
 
-		players[joshId] = {
-			username: joshUsername,
-			score: 0,
-			lastScore: 0,
+	let pub: RedisClientType;
+	if (isJoshOnline) {
+		const listener = async (message: string, channel: string) => {
+			if (channel !== "josh-new-quiz" || message !== "accept") return;
+
+			players[joshId] = {
+				username: joshUsername,
+				score: 0,
+				lastScore: 0,
+			};
+			await thread.send({
+				content: `<@${joshId}> has joined the game!`,
+			});
 		};
-		await thread.send({
-			content: `<@${joshId}> has joined the game!`,
-		});
-	};
 
-	const pub = createClient({
-		url: "redis://plane_redis:6379",
-	});
-	pub.on("error", (err) => console.error(err));
-	const sub = pub.duplicate();
-	sub.on("error", (err) => console.error(err));
-	await sub.connect();
-	await sub.subscribe("josh-new-quiz", listener);
-	await pub.connect();
-	await pub.publish("josh-new-quiz", thread.id);
+		pub = createClient({
+			url: "redis://plane_redis:6379",
+		});
+		pub.on("error", (err) => console.error(err));
+		const sub = pub.duplicate();
+		sub.on("error", (err) => console.error(err));
+		await sub.connect();
+		await sub.subscribe("josh-new-quiz", listener);
+		await pub.connect();
+		await pub.publish("josh-new-quiz", thread.id);
+	}
 
 	collector?.on("collect", async (i: ButtonInteraction) => {
 		if (i.customId === `cancel-${buttonId}`) {
@@ -353,7 +365,9 @@ If you want to play, click the button below.
 			await wait(10000);
 		}
 
-		await pub.publish("josh-do-quiz", "end");
+		if (Object.keys(players).includes(joshId)) {
+			await pub.publish("josh-do-quiz", "end");
+		}
 
 		const sortedPlayers = Object.keys(players).sort(
 			(a, b) => players[b].score - players[a].score

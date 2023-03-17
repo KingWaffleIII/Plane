@@ -29,6 +29,7 @@ export const data = new SlashCommandBuilder()
 			.setDescription(
 				"The amount of waifus you want to generate (max (including existing dupes) is 25). Defaults to 1."
 			)
+			.setMaxValue(25)
 	)
 	.addIntegerOption((option) =>
 		option
@@ -127,6 +128,22 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 		await interaction.editReply({
 			content:
 				"This user doesn't have a waifu collection yet. They need to run `/waifus` first.",
+		});
+		return;
+	}
+
+	const userWaifus = await user.countWaifus({
+		where: {
+			name: waifuName,
+		},
+	});
+
+	if (userWaifus + amount > 25) {
+		await interaction.editReply({
+			content: `You can't generate more than 25 waifus of the same type (including existing dupes). You can generate a maximum of **${
+				25 - userWaifus
+			}** more ${waifuName} waifu(s) for this user.
+					`,
 		});
 		return;
 	}
