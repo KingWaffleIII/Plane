@@ -15,7 +15,6 @@ import {
 	ButtonInteraction,
 	Message,
 	InteractionCollector,
-	ThreadChannel,
 } from "discord.js";
 import { User, Waifu } from "../models";
 import { WaifuBaseData } from "./airrec";
@@ -301,7 +300,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 												if (attacker.isAbilityUsed)
 													break;
 												if (opponent.failedEvade) {
-													dmg *= 1.5;
+													dmg = Math.ceil(dmg * 1.5);
 													attacker.isAbilityUsed =
 														true;
 												}
@@ -365,25 +364,31 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 									}
 
 									if (!isCrit) {
+										// await thread.send({
+										// 	content: `<@${
+										// 		attackerModel.user.id
+										// 	}> attacked, dealing ${dmg} damage! (${
+										// 		opponentModel.name
+										// 	}: ${opponent.hp} -> **${
+										// 		opponent.hp - dmg
+										// 	}**)`,
+										// });
 										await thread.send({
-											content: `<@${
-												attackerModel.user.id
-											}> attacked, dealing ${dmg} damage! (${
-												opponentModel.name
-											}: ${opponent.hp} -> **${
-												opponent.hp - dmg
-											}**)`,
+											content: `${attackerModel.name} attack ${dmg}`,
 										});
 									} else {
 										dmg *= 2;
+										// await thread.send({
+										// 	content: `**Critical hit!** <@${
+										// 		attackerModel.user.id
+										// 	}> attacked, dealing ${dmg} damage! (${
+										// 		opponentModel.name
+										// 	}: ${opponent.hp} -> **${
+										// 		opponent.hp - dmg
+										// 	}**)`,
+										// });
 										await thread.send({
-											content: `**Critical hit!** <@${
-												attackerModel.user.id
-											}> attacked, dealing ${dmg} damage! (${
-												opponentModel.name
-											}: ${opponent.hp} -> **${
-												opponent.hp - dmg
-											}**)`,
+											content: `${attackerModel.name} crit attack ${dmg}`,
 										});
 									}
 
@@ -393,8 +398,11 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 										return false;
 									}
 								} else {
+									// await thread.send({
+									// 	content: `<@${attackerModel.user.id}> tried to attack, but <@${opponentModel.user.id}>'s **${opponentModel.name}** evaded!`,
+									// });
 									await thread.send({
-										content: `<@${attackerModel.user.id}> tried to attack, but <@${opponentModel.user.id}>'s **${opponentModel.name}** evaded!`,
+										content: `${attackerModel.name} fail attack b/c evade`,
 									});
 								}
 
@@ -411,9 +419,15 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 								// Return true if the random number is less than the probability, otherwise return false
 								if (randomNum < probability) {
 									attacker.isEvading = true;
-								} else {
 									await thread.send({
-										content: `<@${attackerModel.user.id}> tried to evade, but failed!`,
+										content: `${attackerModel.name} evade`,
+									});
+								} else {
+									// await thread.send({
+									// 	content: `<@${attackerModel.user.id}> tried to evade, but failed!`,
+									// });
+									await thread.send({
+										content: `${attackerModel.name} fail evade`,
 									});
 									attacker.isEvading = false;
 									attacker.failedEvade = true;
@@ -520,9 +534,9 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 													"exclusive" &&
 												waifuData.country === "USA"
 											)
-												attacker.atk +=
-													0.5 *
-													attacker.equipment.atk;
+												attacker.atk += Math.ceil(
+													0.5 * attacker.equipment.atk
+												);
 
 											await thread.send({
 												content: `<@${attackerModel.user.id}> equipped **${attacker.equipment.name}**, boosting their attack to **${attacker.atk}**!`,
@@ -535,7 +549,13 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 									weaponEquipCollector.on(
 										"end",
 										async (collected) => {
-											if (collected.size === 0) {
+											if (
+												collected.filter(
+													(i) =>
+														i.user.id ===
+														attackerModel.user.id
+												).size === 0
+											) {
 												await thread.send({
 													content: `<@${attackerModel.user.id}>'s **${attackerModel.name}** fled!`,
 												});
@@ -577,7 +597,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 							opponent.hp -= atk;
 						}
 						if (attacker.isBeingSupported) {
-							const { atk } = attacker.equipment!;
+							const atk = attacker.equipment!.atk * 2;
 							await thread.send(
 								`<@${attackerModel.user.id}>'s ${
 									attacker.equipment!.name
@@ -592,6 +612,8 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 							opponent.hp -= atk;
 							attacker.isBeingSupported = false;
 						}
+
+						attacker.move = "";
 						return true;
 					};
 
@@ -644,7 +666,11 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 							);
 
 							collector.on("end", async (collected) => {
-								if (collected.size === 0) {
+								if (
+									collected.filter(
+										(i) => i.user.id === main.user.id
+									).size === 0
+								) {
 									await thread.send({
 										content: `<@${main.user.id}>'s **${main.name}** fled!`,
 									});
@@ -1081,7 +1107,10 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 			);
 
 			targetWaifuSelectCollector.on("end", async (collected) => {
-				if (collected.size === 0) {
+				if (
+					collected.filter((i) => i.user.id === targetUser.id)
+						.size === 0
+				) {
 					await interaction.editReply({
 						content: "The dogfight was called off.",
 						components: [],
@@ -1092,7 +1121,11 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 	);
 
 	initialWaifuSelectCollector.on("end", async (collected) => {
-		if (collected.size === 0) {
+		// if (collected.size === 0) {
+		if (
+			collected.filter((i) => i.user.id === interaction.user.id).size ===
+			0
+		) {
 			await interaction.editReply({
 				content: "The dogfight was called off.",
 				components: [],

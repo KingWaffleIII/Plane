@@ -15,7 +15,7 @@
 	},
 	"Adder": {
 		"ability": "fail-evade",
-		"abilityDescription": "After equipping this weapon, the next time your opponent fails an evade, your next attack will deal 1.5x damage.",
+		"abilityDescription": "After equipping this weapon, the next time your opponent fails an evade, your next attack will deal 1.5x damage (you are still able to crit as well for a 3x bonus if you are lucky).",
 		"abilityName": "Punisher",
 		"path": "./assets/waifus/Adder.jpg",
 		"spec": false,
@@ -62,13 +62,15 @@
 		"path": "./assets/waifus/Fighting_Eagle.jpg",
 		"spec": false,
 		"type": "aircraft",
-		"country": "USA"
+		"country": "USA",
+		"urlFriendlyName": "Fighting_Eagle"
 	},
 	"Fire Scout": {
 		"path": "./assets/waifus/Fire_Scout.jpg",
 		"spec": false,
 		"type": "aircraft",
-		"country": "USA"
+		"country": "USA",
+		"urlFriendlyName": "Fire_Scout"
 	},
 	"Fishbed": {
 		"path": "./assets/waifus/Fishbed.jpg",

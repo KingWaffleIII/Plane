@@ -37,23 +37,23 @@ Weapon waifus are the secondary type of waifu. They have just a randomly generat
 
 ### Weapon abilities
 
-**Adder: ???** - ???
+**Adder: Punisher** - After equipping this weapon, the next time your opponent fails an evade, your next attack will deal 1.5x damage (you are still able to crit as well for a 3x bonus if you are lucky).
 
 **AMRAAM: Precision Strike** - After equipping this weapon, your next attack will be guaranteed to crit.
 
 **HARM: Lock-on** - After equipping this weapon, the next time the opponent attempts to evade, your attack is guaranteed to hit.
 
-**Hellfire: Fire and Forget** - After equipping this weapon, this missile will deal 1/2 of the aircraft's and this weapon's combined ATK to the opponent every round, on top of any attacks the aircraft may have made.
+**Hellfire: Fire and Forget** - After equipping this weapon, this missile will deal 50% of the aircraft's and this weapon's combined ATK to the opponent every round, on top of any attacks the aircraft may have made.
 
 **Paveway II: Heavy Payload** - After equipping this weapon, your next attack will deal 3x damage but you can no longer evade attacks.
 
-**Phoenix:** ??? - ???
+**Phoenix: Long Distance** - After equipping this weapon, after your next attack, you will be guaranteed to evade your opponent's next attack.
 
 **Sidewinder: Stunwave** - After equipping this weapon, your next attack will stun your opponent, meaning they cannot do anything that round.
 
-**Sparrow: ???** - ???
+**Sparrow: Exclusivity** - If this weapon is equipped on an American aircraft, it will add an extra 50% of this weapon's ATK to the total ATK.
 
-**Trident II: Call for Support** - After equipping this weapon, your next attack will call in a support strike, dealing damage equivalent to this weapon's ATK to the opponent, on top of any attacks this round.
+**Trident II: Call for Support** - After equipping this weapon, your next attack will call in a support strike, dealing 2x this weapon's ATK to the opponent, on top of any attacks this round.
 
 ### Obtaining waifus
 
@@ -94,7 +94,10 @@ Note: due to Discord limitations, only 25 items can be in a dropdown menu at onc
 
 ### Dogfighting META
 
-WIP
+There are two builds that are currently considered the best:
+
+-   Using a high SPD aircraft, equipped with a high ATK Hellfire - this allows you to consistently evade, whilst still dealing passive DMG. If you have high ATK on your high SPD aircraft too, you will struggle to lose.
+-   Using a high ATK American aircraft, equipped with a high ATK Sparrow. This allows for a very high total ATK (a maximum of 25).
 
 ## Changelog
 

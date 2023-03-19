@@ -38,9 +38,9 @@ async function execute(interaction) {
     });
     const c = interaction.channel;
     const thread = await c.threads.create({
-        name: `Air Recognition Quiz`,
+        name: `Aircraft Recognition Quiz`,
         autoArchiveDuration: 60,
-        reason: "Air Recognition Quiz",
+        reason: "Aircraft Recognition Quiz",
     });
     await interaction.editReply({
         content: "Thread created! Click here:",
@@ -63,7 +63,7 @@ async function execute(interaction) {
     ]);
     const msg = await thread.send({
         content: `
-__**Air Recognition Quiz**__
+__**Aircraft Recognition Quiz**__
 You will be shown pictures of **${rounds}** aircraft and you will have to reply with the name of the aircraft.
 You will be given 15 seconds for an answer (**you will only be allowed one response so don't send any messages unless you are sending an answer**).
 
@@ -89,7 +89,9 @@ If you want to play, click the button below.
     });
     let isJoshOnline = false;
     try {
-        const conn = (0, redis_1.createClient)();
+        const conn = (0, redis_1.createClient)({
+            url: "redis://host.docker.internal:6379",
+        });
         await conn.connect();
         isJoshOnline = true;
     }
@@ -111,7 +113,7 @@ If you want to play, click the button below.
             });
         };
         pub = (0, redis_1.createClient)({
-            url: "redis://plane_redis:6379",
+            url: "redis://host.docker.internal:6379",
         });
         pub.on("error", (err) => console.error(err));
         const sub = pub.duplicate();
@@ -285,9 +287,6 @@ If you want to play, click the button below.
             });
             await wait(10000);
         }
-        if (Object.keys(players).includes(joshId)) {
-            await pub.publish("josh-do-quiz", "end");
-        }
         const sortedPlayers = Object.keys(players).sort((a, b) => players[b].score - players[a].score);
         const leaderboard = new discord_js_1.EmbedBuilder()
             .setColor(0x0099ff)
@@ -304,6 +303,9 @@ If you want to play, click the button below.
             embeds: [leaderboard],
             components: [],
         });
+        if (Object.keys(players).includes(joshId)) {
+            await pub.publish("josh-do-quiz", "end");
+        }
         // check if user exists in db
         const user = await models_1.User.findByPk(sortedPlayers[0]);
         if (!user) {

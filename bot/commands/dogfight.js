@@ -257,14 +257,32 @@ async function execute(interaction) {
                                 }
                             }
                             if (!isCrit) {
+                                // await thread.send({
+                                // 	content: `<@${
+                                // 		attackerModel.user.id
+                                // 	}> attacked, dealing ${dmg} damage! (${
+                                // 		opponentModel.name
+                                // 	}: ${opponent.hp} -> **${
+                                // 		opponent.hp - dmg
+                                // 	}**)`,
+                                // });
                                 await thread.send({
-                                    content: `<@${attackerModel.user.id}> attacked, dealing ${dmg} damage! (${opponentModel.name}: ${opponent.hp} -> **${opponent.hp - dmg}**)`,
+                                    content: `${attackerModel.name} attack ${dmg}`,
                                 });
                             }
                             else {
                                 dmg *= 2;
+                                // await thread.send({
+                                // 	content: `**Critical hit!** <@${
+                                // 		attackerModel.user.id
+                                // 	}> attacked, dealing ${dmg} damage! (${
+                                // 		opponentModel.name
+                                // 	}: ${opponent.hp} -> **${
+                                // 		opponent.hp - dmg
+                                // 	}**)`,
+                                // });
                                 await thread.send({
-                                    content: `**Critical hit!** <@${attackerModel.user.id}> attacked, dealing ${dmg} damage! (${opponentModel.name}: ${opponent.hp} -> **${opponent.hp - dmg}**)`,
+                                    content: `${attackerModel.name} crit attack ${dmg}`,
                                 });
                             }
                             opponent.hp -= dmg;
@@ -273,8 +291,11 @@ async function execute(interaction) {
                             }
                         }
                         else {
+                            // await thread.send({
+                            // 	content: `<@${attackerModel.user.id}> tried to attack, but <@${opponentModel.user.id}>'s **${opponentModel.name}** evaded!`,
+                            // });
                             await thread.send({
-                                content: `<@${attackerModel.user.id}> tried to attack, but <@${opponentModel.user.id}>'s **${opponentModel.name}** evaded!`,
+                                content: `${attackerModel.name} fail attack b/c evade`,
                             });
                         }
                         break;
@@ -289,10 +310,16 @@ async function execute(interaction) {
                         // Return true if the random number is less than the probability, otherwise return false
                         if (randomNum < probability) {
                             attacker.isEvading = true;
+                            await thread.send({
+                                content: `${attackerModel.name} evade`,
+                            });
                         }
                         else {
+                            // await thread.send({
+                            // 	content: `<@${attackerModel.user.id}> tried to evade, but failed!`,
+                            // });
                             await thread.send({
-                                content: `<@${attackerModel.user.id}> tried to evade, but failed!`,
+                                content: `${attackerModel.name} fail evade`,
                             });
                             attacker.isEvading = false;
                             attacker.failedEvade = true;
@@ -368,7 +395,8 @@ async function execute(interaction) {
                                 r(true);
                             });
                             weaponEquipCollector.on("end", async (collected) => {
-                                if (collected.size === 0) {
+                                if (collected.filter((i) => i.user.id ===
+                                    attackerModel.user.id).size === 0) {
                                     await thread.send({
                                         content: `<@${attackerModel.user.id}>'s **${attackerModel.name}** fled!`,
                                     });
@@ -396,11 +424,12 @@ async function execute(interaction) {
                     opponent.hp -= atk;
                 }
                 if (attacker.isBeingSupported) {
-                    const { atk } = attacker.equipment;
+                    const atk = attacker.equipment.atk * 2;
                     await thread.send(`<@${attackerModel.user.id}>'s ${attacker.equipment.name} dealt **${atk}** damage to <@${opponentModel.user.id}>'s ${opponentModel.name} from its support strike! (${opponentModel.name}: ${opponent.hp} -> **${opponent.hp - atk}**)`);
                     opponent.hp -= atk;
                     attacker.isBeingSupported = false;
                 }
+                attacker.move = "";
                 return true;
             };
             // don't let the while loop continue unless the collector has received a response
@@ -437,7 +466,7 @@ async function execute(interaction) {
                     resolve(true);
                 });
                 collector.on("end", async (collected) => {
-                    if (collected.size === 0) {
+                    if (collected.filter((i) => i.user.id === main.user.id).size === 0) {
                         await thread.send({
                             content: `<@${main.user.id}>'s **${main.name}** fled!`,
                         });
@@ -722,7 +751,8 @@ async function execute(interaction) {
             await thread.setArchived(true);
         });
         targetWaifuSelectCollector.on("end", async (collected) => {
-            if (collected.size === 0) {
+            if (collected.filter((i) => i.user.id === targetUser.id)
+                .size === 0) {
                 await interaction.editReply({
                     content: "The dogfight was called off.",
                     components: [],
@@ -731,7 +761,9 @@ async function execute(interaction) {
         });
     });
     initialWaifuSelectCollector.on("end", async (collected) => {
-        if (collected.size === 0) {
+        // if (collected.size === 0) {
+        if (collected.filter((i) => i.user.id === interaction.user.id).size ===
+            0) {
             await interaction.editReply({
                 content: "The dogfight was called off.",
                 components: [],
