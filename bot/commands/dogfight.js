@@ -194,7 +194,7 @@ async function execute(interaction) {
                                         if (attacker.isAbilityUsed)
                                             break;
                                         if (opponent.failedEvade) {
-                                            dmg *= 1.5;
+                                            dmg = Math.ceil(dmg * 1.5);
                                             attacker.isAbilityUsed =
                                                 true;
                                         }
@@ -386,9 +386,7 @@ async function execute(interaction) {
                                 if (equipmentData.ability ===
                                     "exclusive" &&
                                     waifuData.country === "USA")
-                                    attacker.atk +=
-                                        0.5 *
-                                            attacker.equipment.atk;
+                                    attacker.atk += Math.ceil(0.5 * attacker.equipment.atk);
                                 await thread.send({
                                     content: `<@${attackerModel.user.id}> equipped **${attacker.equipment.name}**, boosting their attack to **${attacker.atk}**!`,
                                 });
@@ -698,10 +696,12 @@ async function execute(interaction) {
                     deaths: first.deaths + 1,
                 });
                 await second.user.update({
-                    kills: second.user.kills + 1,
+                    dogfightKills: second.user.dogfightKills + 1,
+                    dogfightWinstreak: second.user.dogfightWinstreak + 1,
                 });
                 await first.user.update({
-                    deaths: first.user.deaths + 1,
+                    dogfightDeaths: first.user.dogfightDeaths + 1,
+                    dogfightWinstreak: 0,
                 });
             }
             else if (secondWaifu.hp <= 0) {
@@ -742,10 +742,12 @@ async function execute(interaction) {
                     deaths: second.deaths + 1,
                 });
                 await first.user.update({
-                    kills: first.user.kills + 1,
+                    dogfightKills: first.user.dogfightKills + 1,
+                    dogfightWinstreak: first.user.dogfightWinstreak + 1,
                 });
                 await second.user.update({
-                    deaths: second.user.deaths + 1,
+                    dogfightDeaths: second.user.dogfightDeaths + 1,
+                    dogfightWinstreak: 0,
                 });
             }
             await thread.setArchived(true);

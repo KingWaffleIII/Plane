@@ -103,6 +103,8 @@ There are two builds that are currently considered the best:
 
 See pull requests [here](https://github.com/KingWaffleIII/plane/pulls?q=is%3Apr+is%3Aclosed).
 
+## [Credits](https://github.com/KingWaffleIII/plane/blob/main/credits.md)
+
 ## Versioning
 
 -   vX.Y.Z

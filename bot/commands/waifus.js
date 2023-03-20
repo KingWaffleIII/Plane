@@ -31,8 +31,12 @@ async function execute(interaction) {
             discriminator: interaction.user.discriminator,
             avatarUrl: interaction.user.avatarURL(),
             lockedWaifus: Object.keys(waifus_json_1.default),
-            kills: 0,
-            deaths: 0,
+            dogfightKills: 0,
+            dogfightDeaths: 0,
+            dogfightWinstreak: 0,
+            airrecQuizWins: 0,
+            airrecQuizLosses: 0,
+            airrecQuizWinstreak: 0,
         });
         user = await models_1.User.findByPk(interaction.user.id);
     }
@@ -94,6 +98,7 @@ async function execute(interaction) {
         const waifuEmbed = new discord_js_1.EmbedBuilder()
             .setColor(0xff00ff)
             .setTitle(waifuName)
+            .setTimestamp()
             .setAuthor({
             name: targetUser.username,
             iconURL: targetUser.avatarURL(),
@@ -168,7 +173,7 @@ In dogfighting, this waifu has won ${won} time${won === 1 ? "" : "s"} and lost $
         .setDescription(`You have **${waifuList.filter((w) => !w.includes("\\*")).length}/${Object.keys(waifus_json_1.default).length}** waifus unlocked! ${user.guaranteeWaifu
         ? `You need to obtain **${10 - user.guaranteeCounter}** more waifu(s) before you get a guaranteed **${user
             .guaranteeWaifu}**.`
-        : "You are not currently targetting a waifu."} You have won **${user.kills}** dogfights and lost **${user.deaths}** dogfights.`)
+        : "You are not currently targetting a waifu."}`)
         .addFields({
         name: "Unlocked Waifus",
         value: waifuList

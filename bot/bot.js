@@ -8,6 +8,7 @@ const path_1 = __importDefault(require("path"));
 const discord_js_1 = require("discord.js");
 const models_1 = require("./models");
 const config_json_1 = require("./config.json");
+const waifus_json_1 = __importDefault(require("./waifus.json"));
 const client = new discord_js_1.Client({
     intents: [
         discord_js_1.GatewayIntentBits.Guilds,
@@ -108,9 +109,13 @@ const rest = new discord_js_1.REST({ version: "10" }).setToken(config_json_1.tok
             username: joshUsername,
             discriminator: joshDiscriminator,
             avatarUrl: joshAvatarUrl,
-            kills: 999,
-            deaths: 999,
-            lockedWaifus: [],
+            dogfightKills: 999,
+            dogfightDeaths: 999,
+            dogfightWinstreak: 999,
+            airrecQuizWins: 999,
+            airrecQuizLosses: 999,
+            airrecQuizWinstreak: 999,
+            lockedWaifus: Object.keys(waifus_json_1.default),
         });
     }
 })();

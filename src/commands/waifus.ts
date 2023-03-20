@@ -43,8 +43,12 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 			discriminator: interaction.user.discriminator,
 			avatarUrl: interaction.user.avatarURL(),
 			lockedWaifus: Object.keys(waifus),
-			kills: 0,
-			deaths: 0,
+			dogfightKills: 0,
+			dogfightDeaths: 0,
+			dogfightWinstreak: 0,
+			airrecQuizWins: 0,
+			airrecQuizLosses: 0,
+			airrecQuizWinstreak: 0,
 		});
 		user = await User.findByPk(interaction.user.id);
 	} else if (!user && targetUser.id !== interaction.user.id) {
@@ -117,6 +121,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 		const waifuEmbed = new EmbedBuilder()
 			.setColor(0xff00ff)
 			.setTitle(waifuName)
+			.setTimestamp()
 			.setAuthor({
 				name: targetUser.username,
 				iconURL: targetUser.avatarURL() as string,
@@ -229,9 +234,7 @@ In dogfighting, this waifu has won ${won} time${
 					  }** more waifu(s) before you get a guaranteed **${user!
 							.guaranteeWaifu!}**.`
 					: "You are not currently targetting a waifu."
-			} You have won **${user!.kills}** dogfights and lost **${
-				user!.deaths
-			}** dogfights.`
+			}`
 		)
 		.addFields(
 			{

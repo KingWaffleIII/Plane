@@ -396,6 +396,18 @@ If you want to play, click the button below.
 			await pub.publish("josh-do-quiz", "end");
 		}
 
+		sortedPlayers
+			.filter((p) => p !== sortedPlayers[0])
+			.forEach(async (p) => {
+				const user = await User.findByPk(p);
+				if (user) {
+					await user.update({
+						airrecQuizLosses: user.airrecQuizLosses + 1,
+						airrecQuizWinstreak: 0,
+					});
+				}
+			});
+
 		// check if user exists in db
 		const user = await User.findByPk(sortedPlayers[0]);
 		if (!user) {
@@ -403,6 +415,11 @@ If you want to play, click the button below.
 				content: `**<@${sortedPlayers[0]}>, you don't have waifu collection yet! Use \`/waifus\` to create one!**`,
 			});
 		} else {
+			await user.update({
+				airrecQuizWins: user.airrecQuizWins + 1,
+				airrecQuizWinstreak: user.airrecQuizWinstreak + 1,
+			});
+
 			const isGuaranteed =
 				user!.guaranteeWaifu && user!.guaranteeCounter! >= 10;
 

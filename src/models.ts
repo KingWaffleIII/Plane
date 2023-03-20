@@ -36,11 +36,6 @@ export class Guild extends Model<
 	declare id: string;
 	declare name: string;
 
-	// createdAt can be undefined during creation
-	declare createdAt: CreationOptional<Date>;
-	// updatedAt can be undefined during creation
-	declare updatedAt: CreationOptional<Date>;
-
 	// Since TS cannot determine model association at compile time
 	// we have to declare them here purely virtually
 	// these will not exist until `Model.init` was called.
@@ -58,29 +53,37 @@ export class Guild extends Model<
 	// You can also pre-declare possible inclusions, these will only be populated if you
 	// actively include a relation.
 	declare users?: NonAttribute<User[]>; // Note this is optional since it's only populated when explicitly requested in code
-
 	declare static associations: {
 		users: Association<Guild, User>;
 	};
+
+	// createdAt can be undefined during creation
+	declare createdAt: CreationOptional<Date>;
+	// updatedAt can be undefined during creation
+	declare updatedAt: CreationOptional<Date>;
 }
 
 export class User extends Model<
 	InferAttributes<User, { omit: "waifus" }>,
 	InferCreationAttributes<User, { omit: "waifus" }>
 > {
-	declare id: string;
-
 	// foreign keys are automatically added by associations methods (like User.belongsTo)
 	// by branding them using the `ForeignKey` type, `User.init` will know it does not need to
 	// display an error if guildId is missing.
+	declare id: string;
 	declare guildId: ForeignKey<Guild["id"]>;
 	declare username: string;
 	declare discriminator: string;
 	declare avatarUrl?: string | null;
-
-	// `guild` is an eagerly-loaded association.
-	// We tag it as `NonAttribute`
-	declare guild: NonAttribute<Guild>;
+	declare lockedWaifus: string[];
+	declare guaranteeWaifu?: string | null;
+	declare guaranteeCounter?: number | null;
+	declare dogfightKills: number;
+	declare dogfightDeaths: number;
+	declare dogfightWinstreak: number;
+	declare airrecQuizWins: number;
+	declare airrecQuizLosses: number;
+	declare airrecQuizWinstreak: number;
 
 	// Since TS cannot determine model association at compile time
 	// we have to declare them here purely virtually
@@ -96,17 +99,12 @@ export class User extends Model<
 	declare countWaifus: HasManyCountAssociationsMixin;
 	declare createWaifu: HasManyCreateAssociationMixin<Waifu, "userId">;
 
-	declare lockedWaifus: string[];
-	declare guaranteeWaifu?: string | null;
-	declare guaranteeCounter?: number | null;
-
-	declare kills: number;
-	declare deaths: number;
-
 	// You can also pre-declare possible inclusions, these will only be populated if you
 	// actively include a relation.
+	// `guild` is an eagerly-loaded association.
+	// We tag it as `NonAttribute`
+	declare guild: NonAttribute<Guild>;
 	declare waifus?: NonAttribute<Waifu[]>; // Note this is optional since it's only populated when explicitly requested in code
-
 	declare static associations: {
 		waifus: Association<User, Waifu>;
 	};
@@ -121,14 +119,12 @@ export class Waifu extends Model<
 	InferAttributes<Waifu>,
 	InferCreationAttributes<Waifu>
 > {
-	declare id: CreationOptional<number>;
-
 	// foreign keys are automatically added by associations methods (like User.belongsTo)
 	// by branding them using the `ForeignKey` type, `User.init` will know it does not need to
 	// display an error if userId is missing.
+	declare id: CreationOptional<number>;
 	declare userId: ForeignKey<User["id"]>;
 	declare name: string;
-
 	declare atk: number;
 	declare hp: number;
 	declare spd: number;
@@ -191,12 +187,32 @@ User.init(
 			allowNull: false,
 			defaultValue: Object.keys(waifus),
 		},
-		kills: {
+		dogfightKills: {
 			type: DataTypes.INTEGER,
 			allowNull: false,
 			defaultValue: 0,
 		},
-		deaths: {
+		dogfightDeaths: {
+			type: DataTypes.INTEGER,
+			allowNull: false,
+			defaultValue: 0,
+		},
+		dogfightWinstreak: {
+			type: DataTypes.INTEGER,
+			allowNull: false,
+			defaultValue: 0,
+		},
+		airrecQuizWins: {
+			type: DataTypes.INTEGER,
+			allowNull: false,
+			defaultValue: 0,
+		},
+		airrecQuizLosses: {
+			type: DataTypes.INTEGER,
+			allowNull: false,
+			defaultValue: 0,
+		},
+		airrecQuizWinstreak: {
 			type: DataTypes.INTEGER,
 			allowNull: false,
 			defaultValue: 0,

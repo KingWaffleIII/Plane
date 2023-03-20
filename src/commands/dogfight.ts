@@ -1038,10 +1038,13 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 							deaths: first.deaths + 1,
 						});
 						await second.user.update({
-							kills: second.user!.kills + 1,
+							dogfightKills: second.user!.dogfightKills + 1,
+							dogfightWinstreak:
+								second.user!.dogfightWinstreak + 1,
 						});
 						await first.user.update({
-							deaths: first.user!.deaths + 1,
+							dogfightDeaths: first.user!.dogfightDeaths + 1,
+							dogfightWinstreak: 0,
 						});
 					} else if (secondWaifu.hp <= 0) {
 						const victorEmbed = new EmbedBuilder()
@@ -1096,10 +1099,13 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 							deaths: second.deaths + 1,
 						});
 						await first.user.update({
-							kills: first.user!.kills + 1,
+							dogfightKills: first.user!.dogfightKills + 1,
+							dogfightWinstreak:
+								first.user!.dogfightWinstreak + 1,
 						});
 						await second.user.update({
-							deaths: second.user!.deaths + 1,
+							dogfightDeaths: second.user!.dogfightDeaths + 1,
+							dogfightWinstreak: 0,
 						});
 					}
 					await thread.setArchived(true);

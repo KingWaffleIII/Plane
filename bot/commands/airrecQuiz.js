@@ -306,6 +306,17 @@ If you want to play, click the button below.
         if (Object.keys(players).includes(joshId)) {
             await pub.publish("josh-do-quiz", "end");
         }
+        sortedPlayers
+            .filter((p) => p !== sortedPlayers[0])
+            .forEach(async (p) => {
+            const user = await models_1.User.findByPk(p);
+            if (user) {
+                await user.update({
+                    airrecQuizLosses: user.airrecQuizLosses + 1,
+                    airrecQuizWinstreak: 0,
+                });
+            }
+        });
         // check if user exists in db
         const user = await models_1.User.findByPk(sortedPlayers[0]);
         if (!user) {
@@ -314,6 +325,10 @@ If you want to play, click the button below.
             });
         }
         else {
+            await user.update({
+                airrecQuizWins: user.airrecQuizWins + 1,
+                airrecQuizWinstreak: user.airrecQuizWinstreak + 1,
+            });
             const isGuaranteed = user.guaranteeWaifu && user.guaranteeCounter >= 10;
             if (isGuaranteed ||
                 (rounds >= 5 &&

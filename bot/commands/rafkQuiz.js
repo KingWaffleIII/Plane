@@ -4,10 +4,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.execute = exports.data = void 0;
-const crypto_1 = __importDefault(require("crypto"));
 const discord_js_1 = require("discord.js");
+const redis_1 = require("redis");
 const RAFK_json_1 = __importDefault(require("../RAFK.json"));
 const wait = require("node:timers/promises").setTimeout;
+const joshId = "1084882617964441610";
+const joshUsername = "J0sh";
 exports.data = new discord_js_1.SlashCommandBuilder()
     .setName("rafk-quiz")
     .setDescription("Gives you a series of RAFK questions, similar to a part test.")
@@ -33,50 +35,63 @@ async function execute(interaction) {
     await interaction.editReply({
         content: "Thread created! Click here:",
     });
+    let isJoshOnline = false;
+    try {
+        const conn = (0, redis_1.createClient)({
+            url: "redis://host.docker.internal:6379",
+        });
+        await conn.connect();
+        isJoshOnline = true;
+    }
+    catch (err) {
+        isJoshOnline = false;
+    }
+    let isJoshParticipating = false;
+    let pub;
+    if (isJoshOnline) {
+        const listener = async (m, c) => {
+            if (c !== "josh-new-quiz" || m !== "accept")
+                return;
+            isJoshParticipating = true;
+            await thread.send({
+                content: `<@${joshId}> has joined the game!`,
+            });
+        };
+        pub = (0, redis_1.createClient)({
+            url: "redis://host.docker.internal:6379",
+        });
+        pub.on("error", (err) => console.error(err));
+        const sub = pub.duplicate();
+        sub.on("error", (err) => console.error(err));
+        await sub.connect();
+        await sub.subscribe("josh-new-quiz", listener);
+        await pub.connect();
+        await pub.publish("josh-new-quiz", thread.id);
+    }
+    await thread.send({
+        content: `
+__**RAFK Part ${1} Quiz**__
+You will be given 2 questions from each category in Part ${part} of RAFK. You will have 10 seconds to answer each question. Good luck!
+
+**Starting in 10 seconds...**
+		`,
+    });
+    await wait(10000);
     const questions = [];
     const doQuestion = async (randomQuestion) => 
     // eslint-disable-next-line no-async-promise-executor
     new Promise(async (resolve) => {
         const { question, answer } = randomQuestion;
-        const buttonId = crypto_1.default.randomBytes(6).toString("hex");
-        const row = new discord_js_1.ActionRowBuilder().addComponents(new discord_js_1.ButtonBuilder()
-            .setCustomId(`reveal-rafk-${buttonId}`)
-            .setLabel("Reveal answer")
-            .setStyle(discord_js_1.ButtonStyle.Primary));
         const msg = await thread.send({
-            content: question,
-            components: [row],
+            content: `${question}\n**The answer will be revealed in 10 seconds...**`,
         });
-        const filter = (i) => i.customId === `reveal-rafk-${buttonId}`;
-        const collector = thread.createMessageComponentCollector({
-            componentType: discord_js_1.ComponentType.Button,
-            time: 10000,
-            filter,
+        if (isJoshParticipating)
+            await pub.publish("josh-do-quiz", answer);
+        await wait(10000);
+        await msg.edit({
+            content: `${question}\n**${answer}**`,
         });
-        collector?.on("collect", async (i) => {
-            if (i.user.id !== interaction.user.id) {
-                await i.reply({
-                    content: "You can't reveal this answer.",
-                    ephemeral: true,
-                });
-            }
-            else {
-                await msg.edit({
-                    content: `${question}\n**${answer}**`,
-                    components: [],
-                });
-                resolve(true);
-            }
-        });
-        collector?.on("end", async (collected) => {
-            if (collected.size === 0) {
-                await msg.edit({
-                    content: `\n${question}\n**${answer}**`,
-                    components: [],
-                });
-                resolve(true);
-            }
-        });
+        resolve(true);
     });
     for (let j = 0; j < Object.keys(part).length; j++) {
         let subject = part[Object.keys(part)[j]];
@@ -104,5 +119,8 @@ async function execute(interaction) {
             });
         });
     }
+    if (isJoshParticipating)
+        await pub.publish("josh-do-quiz", "end");
+    await thread.setArchived(true);
 }
 exports.execute = execute;

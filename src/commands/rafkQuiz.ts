@@ -7,15 +7,17 @@ import {
 	ButtonStyle,
 	ChatInputCommandInteraction,
 	ComponentType,
-	EmbedBuilder,
-	Message,
 	SlashCommandBuilder,
 } from "discord.js";
+import { createClient, RedisClientType } from "redis";
 
 import { Question } from "./rafk";
 import rafk from "../RAFK.json";
 
 const wait = require("node:timers/promises").setTimeout;
+
+const joshId = "1084882617964441610";
+const joshUsername = "J0sh";
 
 export const data = new SlashCommandBuilder()
 	.setName("rafk-quiz")
@@ -56,57 +58,73 @@ export async function execute(
 		content: "Thread created! Click here:",
 	});
 
+	let isJoshOnline = false;
+	try {
+		const conn = createClient({
+			url: "redis://host.docker.internal:6379",
+		});
+		await conn.connect();
+		isJoshOnline = true;
+	} catch (err) {
+		isJoshOnline = false;
+	}
+
+	let isJoshParticipating = false;
+	let pub: RedisClientType;
+	if (isJoshOnline) {
+		const listener = async (m: string, c: string) => {
+			if (c !== "josh-new-quiz" || m !== "accept") return;
+
+			isJoshParticipating = true;
+
+			await thread.send({
+				content: `<@${joshId}> has joined the game!`,
+			});
+		};
+
+		pub = createClient({
+			url: "redis://host.docker.internal:6379",
+		});
+		pub.on("error", (err) => console.error(err));
+		const sub = pub.duplicate();
+		sub.on("error", (err) => console.error(err));
+		await sub.connect();
+		await sub.subscribe("josh-new-quiz", listener);
+		await pub.connect();
+		await pub.publish("josh-new-quiz", thread.id);
+	}
+
+	await thread.send({
+		content: `
+__**RAFK Part ${1} Quiz**__
+You will be given 2 questions from each category in Part ${part} of RAFK. You will have 10 seconds to answer each question. Good luck!
+
+**Starting in 10 seconds...**
+		`,
+	});
+
+	await wait(10000);
+
 	const questions: Question[] = [];
 
 	const doQuestion = async (randomQuestion: Question) =>
 		// eslint-disable-next-line no-async-promise-executor
 		new Promise(async (resolve) => {
 			const { question, answer } = randomQuestion;
-			const buttonId = crypto.randomBytes(6).toString("hex");
 
-			const row = new ActionRowBuilder<ButtonBuilder>().addComponents(
-				new ButtonBuilder()
-					.setCustomId(`reveal-rafk-${buttonId}`)
-					.setLabel("Reveal answer")
-					.setStyle(ButtonStyle.Primary)
-			);
 			const msg = await thread.send({
-				content: question,
-				components: [row],
+				content: `${question}\n**The answer will be revealed in 10 seconds...**`,
 			});
 
-			const filter = (i: ButtonInteraction) =>
-				i.customId === `reveal-rafk-${buttonId}`;
-			const collector = thread.createMessageComponentCollector({
-				componentType: ComponentType.Button,
-				time: 10000,
-				filter,
-			});
-			collector?.on("collect", async (i: ButtonInteraction) => {
-				if (i.user.id !== interaction.user.id) {
-					await i.reply({
-						content: "You can't reveal this answer.",
-						ephemeral: true,
-					});
-				} else {
-					await msg.edit({
-						content: `${question}\n**${answer}**`,
-						components: [],
-					});
+			if (isJoshParticipating) await pub!.publish("josh-do-quiz", answer);
 
-					resolve(true);
-				}
-			});
-			collector?.on("end", async (collected) => {
-				if (collected.size === 0) {
-					await msg.edit({
-						content: `\n${question}\n**${answer}**`,
-						components: [],
-					});
+			await wait(10000);
 
-					resolve(true);
-				}
+			await msg.edit({
+				content: `${question}\n**${answer}**`,
 			});
+
+			resolve(true);
 		});
 
 	for (let j = 0; j < Object.keys(part).length; j++) {
@@ -153,4 +171,8 @@ export async function execute(
 			});
 		});
 	}
+
+	if (isJoshParticipating) await pub!.publish("josh-do-quiz", "end");
+
+	await thread.setArchived(true);
 }

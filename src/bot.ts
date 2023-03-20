@@ -15,6 +15,7 @@ import {
 
 import { db, Guild, User } from "./models";
 import { clientId, token } from "./config.json";
+import waifus from "./waifus.json";
 
 interface Command {
 	data: SlashCommandBuilder;
@@ -142,9 +143,13 @@ const rest = new REST({ version: "10" }).setToken(token);
 			username: joshUsername,
 			discriminator: joshDiscriminator,
 			avatarUrl: joshAvatarUrl,
-			kills: 999,
-			deaths: 999,
-			lockedWaifus: [],
+			dogfightKills: 999,
+			dogfightDeaths: 999,
+			dogfightWinstreak: 999,
+			airrecQuizWins: 999,
+			airrecQuizLosses: 999,
+			airrecQuizWinstreak: 999,
+			lockedWaifus: Object.keys(waifus),
 		});
 	}
 })();

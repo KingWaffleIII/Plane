@@ -36,17 +36,8 @@ If you have any questions, suggestions or find an error, you can contact me by:
 Please note that simply using the bot counts as a contribution!
 \n
 __**Credits**__
-- **KingWaffleIII#9031** - Lead developer and maintainer
-- **ApocalypticTofu#4278** - Lead adviser
-- **Cranium#2516** - Adviser and military aircraft recognition tips
-- **Mew#4253** - Adviser
-- **\\*Piplup\\*#5802** - Adviser
-- **Neo the Ice Cream Waifu#6339** - Adviser
-- **Dark Phoenix#3582** - Adviser (despite being an Army cadet)
-
-
-- **https://airfighters.com** - Aircraft images
-- **Atamonica** - Waifu images
+https://github.com/KingWaffleIII/plane/blob/main/credits.md
+If you feel you've helped with the bot and I missed you out, please let me know!
 			`
 		)
 		.setThumbnail("https://i.imgur.com/YnUnoQL.png")
