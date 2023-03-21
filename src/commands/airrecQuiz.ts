@@ -278,7 +278,7 @@ If you want to play, click the button below.
 				return false;
 			};
 			const messages = await thread.awaitMessages({
-				time: 10000,
+				time: 15000,
 				max: Object.keys(players).length,
 				filter: answerFilter,
 				// errors: ["time"],
@@ -442,9 +442,9 @@ If you want to play, click the button below.
 						where: { name: waifu.name },
 					})) <= 5
 				) {
-					const atk = Math.ceil(Math.random() * 10);
-					const hp = Math.ceil(Math.random() * (100 - 50) + 50);
-					const spd = Math.ceil(Math.random() * 10);
+					const atk = Math.floor(Math.random() * 10);
+					const hp = Math.floor(Math.random() * (100 - 50) + 50);
+					const spd = Math.floor(Math.random() * 10);
 
 					const waifuEmbed = new EmbedBuilder()
 						.setColor(0xff00ff)
