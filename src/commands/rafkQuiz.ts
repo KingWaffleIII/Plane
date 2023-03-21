@@ -97,7 +97,7 @@ export async function execute(
 	await thread.send({
 		content: `
 __**RAFK Part ${1} Quiz**__
-You will be given 2 questions from each category in Part ${part} of RAFK. You will have 10 seconds to answer each question. Good luck!
+You will be given 2 questions from each category in Part ${1} of RAFK. You will have 10 seconds to answer each question. Good luck!
 
 **Starting in 10 seconds...**
 		`,

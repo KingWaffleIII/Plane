@@ -62,6 +62,15 @@ client.on(Events.ClientReady, (bot) => {
 	console.log(`Bot is ready, logged in as ${bot.user.tag}!`);
 });
 
+client.on(Events.GuildCreate, async (guild) => {
+	const guildModel = await Guild.findByPk(guild.id);
+	if (guildModel) return;
+	await Guild.create({
+		id: guild.id,
+		name: guild.name,
+	});
+});
+
 client.on(Events.InteractionCreate, async (interaction: Interaction) => {
 	if (!interaction.isChatInputCommand()) return;
 	if (

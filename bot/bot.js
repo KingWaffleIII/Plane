@@ -44,6 +44,15 @@ for (const file of commandFiles) {
 client.on(discord_js_1.Events.ClientReady, (bot) => {
     console.log(`Bot is ready, logged in as ${bot.user.tag}!`);
 });
+client.on(discord_js_1.Events.GuildCreate, async (guild) => {
+    const guildModel = await models_1.Guild.findByPk(guild.id);
+    if (guildModel)
+        return;
+    await models_1.Guild.create({
+        id: guild.id,
+        name: guild.name,
+    });
+});
 client.on(discord_js_1.Events.InteractionCreate, async (interaction) => {
     if (!interaction.isChatInputCommand())
         return;

@@ -94,10 +94,11 @@ Note: due to Discord limitations, only 25 items can be in a dropdown menu at onc
 
 ### Dogfighting META
 
-There are two builds that are currently considered the best:
+There are three builds that are currently considered the best:
 
 -   Using a high SPD aircraft, equipped with a high ATK Hellfire - this allows you to consistently evade, whilst still dealing passive DMG. If you have high ATK on your high SPD aircraft too, you will struggle to lose.
 -   Using a high ATK American aircraft, equipped with a high ATK Sparrow. This allows for a very high total ATK (a maximum of 25).
+-   Using a high ATK aircraft with a high ATK Paveway II can deal up to 60 DMG in one turn with perfect ATK rolls. However, with average rolls, it could potentially lead to a two-turn or three-turn KO.
 
 ## Changelog
 

@@ -31,6 +31,7 @@ interface WaifuData {
 	move: string;
 	isAbilityUsed: boolean;
 	canEvade: boolean; // paveway ii
+	evadeWasCancelled: boolean; // harm
 	failedEvade: boolean; // adder
 	isStunned: boolean; // sidewinder
 	hasbeenStunned: boolean; // sidewinder
@@ -234,6 +235,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 						move: "",
 						isAbilityUsed: false,
 						canEvade: true,
+						evadeWasCancelled: false,
 						failedEvade: false,
 						isBeingSupported: false,
 						isLaunchingBarrage: false,
@@ -250,6 +252,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 						move: "",
 						isAbilityUsed: false,
 						canEvade: true,
+						evadeWasCancelled: false,
 						failedEvade: false,
 						isBeingSupported: false,
 						isLaunchingBarrage: false,
@@ -277,8 +280,8 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 								let isCrit = Math.random() < 0.1;
 
 								if (
-									!opponent.isEvading &&
-									attacker.equipment?.name !== "HARM" // evade
+									!opponent.isEvading
+									// attacker.equipment?.name !== "HARM" // evade
 								) {
 									// waifu abilities
 									if (attacker.equipment) {
@@ -364,32 +367,32 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 									}
 
 									if (!isCrit) {
-										// await thread.send({
-										// 	content: `<@${
-										// 		attackerModel.user.id
-										// 	}> attacked, dealing ${dmg} damage! (${
-										// 		opponentModel.name
-										// 	}: ${opponent.hp} -> **${
-										// 		opponent.hp - dmg
-										// 	}**)`,
-										// });
 										await thread.send({
-											content: `${attackerModel.name} attack ${dmg}`,
+											content: `<@${
+												attackerModel.user.id
+											}> attacked, dealing ${dmg} damage! (${
+												opponentModel.name
+											}: ${opponent.hp} -> **${
+												opponent.hp - dmg
+											}**)`,
 										});
+										// await thread.send({
+										// 	content: `${attackerModel.name} attack ${dmg}`,
+										// });
 									} else {
 										dmg *= 2;
-										// await thread.send({
-										// 	content: `**Critical hit!** <@${
-										// 		attackerModel.user.id
-										// 	}> attacked, dealing ${dmg} damage! (${
-										// 		opponentModel.name
-										// 	}: ${opponent.hp} -> **${
-										// 		opponent.hp - dmg
-										// 	}**)`,
-										// });
 										await thread.send({
-											content: `${attackerModel.name} crit attack ${dmg}`,
+											content: `**Critical hit!** <@${
+												attackerModel.user.id
+											}> attacked, dealing ${dmg} damage! (${
+												opponentModel.name
+											}: ${opponent.hp} -> **${
+												opponent.hp - dmg
+											}**)`,
 										});
+										// await thread.send({
+										// 	content: `${attackerModel.name} crit attack ${dmg}`,
+										// });
 									}
 
 									opponent.hp -= dmg;
@@ -398,18 +401,27 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 										return false;
 									}
 								} else {
-									// await thread.send({
-									// 	content: `<@${attackerModel.user.id}> tried to attack, but <@${opponentModel.user.id}>'s **${opponentModel.name}** evaded!`,
-									// });
 									await thread.send({
-										content: `${attackerModel.name} fail attack b/c evade`,
+										content: `<@${attackerModel.user.id}> tried to attack, but <@${opponentModel.user.id}>'s **${opponentModel.name}** evaded!`,
 									});
+									// await thread.send({
+									// 	content: `${attackerModel.name} fail attack b/c evade`,
+									// });
 								}
 
 								break;
 							}
 							case "evade": {
 								if (!attacker.canEvade) break;
+								// evade
+								if (
+									opponent.equipment?.name === "HARM" &&
+									!attacker.evadeWasCancelled
+								) {
+									attacker.evadeWasCancelled = true;
+									break;
+								}
+
 								// Generate a random number between 0 and 1
 								const randomNum = Math.random();
 
@@ -419,16 +431,16 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 								// Return true if the random number is less than the probability, otherwise return false
 								if (randomNum < probability) {
 									attacker.isEvading = true;
-									await thread.send({
-										content: `${attackerModel.name} evade`,
-									});
-								} else {
 									// await thread.send({
-									// 	content: `<@${attackerModel.user.id}> tried to evade, but failed!`,
+									// 	content: `${attackerModel.name} evade`,
 									// });
+								} else {
 									await thread.send({
-										content: `${attackerModel.name} fail evade`,
+										content: `<@${attackerModel.user.id}> tried to evade, but failed!`,
 									});
+									// await thread.send({
+									// 	content: `${attackerModel.name} fail evade`,
+									// });
 									attacker.isEvading = false;
 									attacker.failedEvade = true;
 								}
@@ -961,27 +973,31 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 									componentType: ComponentType.Button,
 								});
 
-							await doMove(
+							const secondResolve = await doMove(
 								second,
 								secondWaifu,
 								secondDogfightId,
 								secondDogfightCollector,
 								secondTurn
-							).then(async () => {
-								await doCalculations(
-									firstWaifu,
-									first,
-									secondWaifu,
-									second
-								);
-								await doCalculations(
-									secondWaifu,
-									second,
-									firstWaifu,
-									first
-								);
-							});
+							);
+
+							if (!secondResolve) {
+								break;
+							}
 						}
+
+						await doCalculations(
+							firstWaifu,
+							first,
+							secondWaifu,
+							second
+						);
+						await doCalculations(
+							secondWaifu,
+							second,
+							firstWaifu,
+							first
+						);
 					}
 
 					if (firstWaifu.hp <= 0) {
