@@ -101,22 +101,22 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 
 	const waifuData: WaifuBaseData = waifus[waifuName as keyof typeof waifus];
 
-	// await interaction.client.application.fetch();
+	await interaction.client.application.fetch();
 
-	// if (interaction.user !== interaction.client.application.owner) {
-	// 	await interaction.reply({
-	// 		content: `Successfully generated ${amount} ${waifuName} waifu(s) (use \`/waifus user:${targetUser}\`) for ${targetUser.username}!`,
-	// 	});
+	if (interaction.user !== interaction.client.application.owner) {
+		await interaction.reply({
+			content: `Successfully generated ${amount} ${waifuName} waifu(s) (use \`/waifus user:${targetUser}\`) for ${targetUser.username}!`,
+		});
 
-	// 	await wait(3000);
+		await wait(3000);
 
-	// 	await interaction.followUp({
-	// 		content:
-	// 			"https://media.tenor.com/KjXLIHAAeRkAAAAd/wakey-wakey-time-for-scoo.gif",
-	// 	});
+		await interaction.followUp({
+			content:
+				"https://media.tenor.com/KjXLIHAAeRkAAAAd/wakey-wakey-time-for-scoo.gif",
+		});
 
-	// 	return;
-	// }
+		return;
+	}
 
 	await interaction.reply({
 		content: "Generating waifu...",
