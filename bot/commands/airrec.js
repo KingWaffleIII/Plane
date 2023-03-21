@@ -199,9 +199,9 @@ async function execute(interaction) {
                     (await user.countWaifus({
                         where: { name: waifu.name },
                     })) <= 5) {
-                    const atk = Math.ceil(Math.random() * 10);
-                    const hp = Math.ceil(Math.random() * (100 - 50) + 50);
-                    const spd = Math.ceil(Math.random() * 10);
+                    const atk = Math.floor(Math.random() * 10);
+                    const hp = Math.floor(Math.random() * (100 - 50) + 50);
+                    const spd = Math.floor(Math.random() * 10);
                     const waifuEmbed = new discord_js_1.EmbedBuilder()
                         .setColor(0xff00ff)
                         .setTitle(waifu.name)

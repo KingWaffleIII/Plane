@@ -71,12 +71,12 @@ async function execute(interaction) {
     await thread.send({
         content: `
 __**RAFK Part ${1} Quiz**__
-You will be given 2 questions from each category in Part ${1} of RAFK. You will have 10 seconds to answer each question. Good luck!
+You will be given 2 questions from each category in Part ${1} of RAFK. You will have 15 seconds to answer each question. Good luck!
 
-**Starting in 10 seconds...**
+**Starting in 30 seconds...**
 		`,
     });
-    await wait(10000);
+    await wait(30000);
     const questions = [];
     const doQuestion = async (randomQuestion) => 
     // eslint-disable-next-line no-async-promise-executor
@@ -87,7 +87,7 @@ You will be given 2 questions from each category in Part ${1} of RAFK. You will 
         });
         if (isJoshParticipating)
             await pub.publish("josh-do-quiz", answer);
-        await wait(10000);
+        await wait(15000);
         await msg.edit({
             content: `${question}\n**${answer}**`,
         });
