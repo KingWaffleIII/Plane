@@ -37,15 +37,23 @@ Weapon waifus are the secondary type of waifu. They have just a randomly generat
 
 ### Weapon abilities
 
+**Adder: Punisher** - After equipping this weapon, the next time your opponent fails an evade, your next attack will deal 1.5x damage (you are still able to crit as well for a 3x bonus if you are lucky).
+
 **AMRAAM: Precision Strike** - After equipping this weapon, your next attack will be guaranteed to crit.
 
-**Hellfire: Fire and Forget** - After equipping this weapon, this missile will deal 1/2 of the aircraft's and this weapon's combined ATK to the opponent every round, on top of any attacks the aircraft may have made.
+**HARM: Lock-on** - After equipping this weapon, the next time the opponent attempts to evade, your attack is guaranteed to hit.
+
+**Hellfire: Fire and Forget** - After equipping this weapon, this missile will deal 50% of the aircraft's and this weapon's combined ATK to the opponent every round, on top of any attacks the aircraft may have made.
 
 **Paveway II: Heavy Payload** - After equipping this weapon, your next attack will deal 3x damage but you can no longer evade attacks.
 
+**Phoenix: Long Distance** - After equipping this weapon, after your next attack, you will be guaranteed to evade your opponent's next attack.
+
 **Sidewinder: Stunwave** - After equipping this weapon, your next attack will stun your opponent, meaning they cannot do anything that round.
 
-**Trident II: Call for Support** - After equipping this weapon, your next attack will call in a support strike, dealing damage equivalent to this weapon's ATK to the opponent, on top of any attacks this round.
+**Sparrow: Exclusivity** - If this weapon is equipped on an American aircraft, it will add an extra 50% of this weapon's ATK to the total ATK.
+
+**Trident II: Call for Support** - After equipping this weapon, your next attack will call in a support strike, dealing 2x this weapon's ATK to the opponent, on top of any attacks this round.
 
 ### Obtaining waifus
 
@@ -75,7 +83,7 @@ Dogfighting is a duel between users. Once a dogfight request is accepted, users 
 -   the waifu with the faster SPD stat goes first
 -   they can either attack, evade or equip a weapon
 -   equipping a weapon is done by selecting a weapon waifu, which then adds its ATK stat to the aircraft waifu's ATK stat
--   evading means that the waifu will not take damage this round
+-   if an aircraft attempts to evade, depending on the aircraft's SPD (calculation TBD), the evade can fail or succeed. If it succeeds, the aircraft cannot be damaged that round (except HARM). If it fails, the aircraft will be stunned that round. This encourages META as some weapons are only useful against aircraft with high SPD
 -   when attacking, the waifu deals damage equal to her ATK stat (this is the combined stat of both the aircraft and weapon waifu) with a 10% chance of dealing double damage (crit)
 -   the opposing waifu then has their go
 -   the waifu first to reach 0 HP loses
@@ -86,11 +94,17 @@ Note: due to Discord limitations, only 25 items can be in a dropdown menu at onc
 
 ### Dogfighting META
 
-WIP
+There are three builds that are currently considered the best:
+
+-   Using a high SPD aircraft, equipped with a high ATK Hellfire - this allows you to consistently evade, whilst still dealing passive DMG. If you have high ATK on your high SPD aircraft too, you will struggle to lose.
+-   Using a high ATK American aircraft, equipped with a high ATK Sparrow. This allows for a very high total ATK (a maximum of 25).
+-   Using a high ATK aircraft with a high ATK Paveway II can deal up to 60 DMG in one turn with perfect ATK rolls. However, with average rolls, it could potentially lead to a two-turn or three-turn KO.
 
 ## Changelog
 
 See pull requests [here](https://github.com/KingWaffleIII/plane/pulls?q=is%3Apr+is%3Aclosed).
+
+## [Credits](https://github.com/KingWaffleIII/plane/blob/main/credits.md)
 
 ## Versioning
 
@@ -106,3 +120,7 @@ https://github.com/KingWaffleIII/plane/issues
 ## Licence
 
 This project is licensed under the GNU General Public Licence 3.0 - see the [LICENCE](LICENCE) file for details
+
+```
+
+```

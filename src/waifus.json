@@ -10,82 +10,133 @@
 	"Aardvark": {
 		"path": "./assets/waifus/Aardvark.jpg",
 		"spec": false,
-		"type": "aircraft"
+		"type": "aircraft",
+		"country": "USA"
 	},
 	"Adder": {
+		"ability": "fail-evade",
+		"abilityDescription": "After equipping this weapon, the next time your opponent fails an evade, your next attack will deal 1.5x damage (you are still able to crit as well for a 3x bonus if you are lucky).",
+		"abilityName": "Punisher",
 		"path": "./assets/waifus/Adder.jpg",
 		"spec": false,
-		"type": "aircraft"
+		"type": "weapon"
 	},
 	"Black Hawk": {
 		"path": "./assets/waifus/Black_Hawk.jpg",
 		"spec": false,
 		"type": "aircraft",
-		"urlFriendlyName": "Black_Hawk"
+		"urlFriendlyName": "Black_Hawk",
+		"country": "USA"
+	},
+	"Boramae": {
+		"path": "./assets/waifus/Boramae.jpg",
+		"spec": false,
+		"type": "aircraft",
+		"country": "South Korea"
+	},
+	"Corsair": {
+		"path": "./assets/waifus/Corsair.jpg",
+		"spec": false,
+		"type": "aircraft",
+		"country": "USA"
 	},
 	"Demon": {
 		"path": "./assets/waifus/Demon.jpg",
 		"spec": false,
-		"type": "aircraft"
+		"type": "aircraft",
+		"country": "USA"
 	},
 	"Eagle": {
 		"path": "./assets/waifus/Eagle.jpg",
 		"spec": true,
-		"type": "aircraft"
+		"type": "aircraft",
+		"country": "USA"
 	},
 	"Falcon": {
 		"path": "./assets/waifus/Falcon.jpg",
 		"spec": true,
-		"type": "aircraft"
+		"type": "aircraft",
+		"country": "USA"
+	},
+	"Fighting Eagle": {
+		"path": "./assets/waifus/Fighting_Eagle.jpg",
+		"spec": false,
+		"type": "aircraft",
+		"country": "USA",
+		"urlFriendlyName": "Fighting_Eagle"
+	},
+	"Fire Scout": {
+		"path": "./assets/waifus/Fire_Scout.jpg",
+		"spec": false,
+		"type": "aircraft",
+		"country": "USA",
+		"urlFriendlyName": "Fire_Scout"
 	},
 	"Fishbed": {
 		"path": "./assets/waifus/Fishbed.jpg",
 		"spec": true,
-		"type": "aircraft"
+		"type": "aircraft",
+		"country": "Russia"
 	},
 	"Flanker": {
 		"path": "./assets/waifus/Flanker.jpg",
 		"spec": true,
-		"type": "aircraft"
+		"type": "aircraft",
+		"country": "Russia"
 	},
 	"Foxhound": {
 		"path": "./assets/waifus/Foxhound.jpg",
 		"spec": true,
-		"type": "aircraft"
+		"type": "aircraft",
+		"country": "Russia"
 	},
 	"Freestyle": {
 		"path": "./assets/waifus/Freestyle.jpg",
 		"spec": false,
-		"type": "aircraft"
+		"type": "aircraft",
+		"country": "Russia"
 	},
 	"Fulcrum": {
 		"path": "./assets/waifus/Fulcrum.jpg",
 		"spec": true,
-		"type": "aircraft"
+		"type": "aircraft",
+		"country": "Russia"
 	},
 	"Globemaster": {
 		"path": "./assets/waifus/Globemaster.jpg",
 		"spec": true,
-		"type": "aircraft"
+		"type": "aircraft",
+		"country": "USA"
 	},
 	"Gripen": {
 		"path": "./assets/waifus/Gripen.jpg",
 		"spec": true,
-		"type": "aircraft"
+		"type": "aircraft",
+		"country": "Sweden"
+	},
+	"HARM": {
+		"ability": "evade",
+		"abilityDescription": "After equipping this weapon, the next time the opponent successfully evades, your attack is guaranteed to hit.",
+		"abilityName": "Lock-on",
+		"path": "./assets/waifus/HARM.jpg",
+		"spec": false,
+		"type": "weapon"
 	},
 	"Harrier": {
 		"path": "./assets/waifus/Harrier.jpg",
 		"spec": true,
-		"type": "aircraft"
+		"type": "aircraft",
+		"country": "UK"
 	},
 	"Hawkeye": {
 		"path": "./assets/waifus/Hawkeye.jpg",
 		"spec": false,
-		"type": "aircraft"
+		"type": "aircraft",
+		"country": "USA"
 	},
 	"Hellfire": {
 		"ability": "barrage",
-		"abilityDescription": "After equipping this weapon, this missile will deal 1/2 of the aircraft's and this weapon's combined ATK to the opponent every round, on top of any attacks the aircraft may have made.",
+		"abilityDescription": "After equipping this weapon, this missile will deal 50% of the aircraft's and this weapon's combined ATK to the opponent every round, on top of any attacks the aircraft may have made.",
 		"abilityName": "Fire and Forget",
 		"path": "./assets/waifus/Hellfire.jpg",
 		"spec": false,
@@ -94,43 +145,51 @@
 	"Hornet": {
 		"path": "./assets/waifus/Hornet.jpg",
 		"spec": true,
-		"type": "aircraft"
+		"type": "aircraft",
+		"country": "USA"
 	},
 	"LaGG-3": {
 		"path": "./assets/waifus/LaGG-3.jpg",
 		"spec": false,
-		"type": "aircraft"
+		"type": "aircraft",
+		"country": "Russia"
 	},
 	"Lancer": {
 		"path": "./assets/waifus/Lancer.jpg",
 		"spec": false,
-		"type": "aircraft"
+		"type": "aircraft",
+		"country": "USA"
 	},
 	"Lightning": {
 		"path": "./assets/waifus/Lightning.jpg",
 		"spec": false,
-		"type": "aircraft"
+		"type": "aircraft",
+		"country": "USA"
 	},
 	"Lightning II": {
 		"path": "./assets/waifus/Lightning_II.jpg",
 		"spec": true,
 		"type": "aircraft",
-		"urlFriendlyName": "Lightning II"
+		"urlFriendlyName": "Lightning_II",
+		"country": "USA"
 	},
 	"Mainstay": {
 		"path": "./assets/waifus/Mainstay.jpg",
 		"spec": false,
-		"type": "aircraft"
+		"type": "aircraft",
+		"country": "Russia"
 	},
 	"Mustang": {
 		"path": "./assets/waifus/Mustang.jpg",
 		"spec": false,
-		"type": "aircraft"
+		"type": "aircraft",
+		"country": "USA"
 	},
 	"Nighthawk": {
 		"path": "./assets/waifus/Nighthawk.jpg",
 		"spec": false,
-		"type": "aircraft"
+		"type": "aircraft",
+		"country": "USA"
 	},
 	"Paveway II": {
 		"ability": "heavy",
@@ -145,48 +204,59 @@
 		"path": "./assets/waifus/Peace_Eye.jpg",
 		"spec": true,
 		"type": "aircraft",
-		"urlFriendlyName": "Peace_Eye"
+		"urlFriendlyName": "Peace_Eye",
+		"country": "Australia"
 	},
 	"Pegasus": {
 		"path": "./assets/waifus/Pegasus.jpg",
 		"spec": false,
-		"type": "aircraft"
+		"type": "aircraft",
+		"country": "USA"
 	},
 	"Phantom": {
 		"path": "./assets/waifus/Phantom.jpg",
 		"spec": true,
-		"type": "aircraft"
+		"type": "aircraft",
+		"country": "USA"
 	},
 	"Phoenix": {
+		"ability": "distance",
+		"abilityDescription": "After equipping this weapon, after your next attack, you will be guaranteed to evade your opponent's next attack.",
+		"abilityName": "Long Distance",
 		"path": "./assets/waifus/Phoenix.jpg",
 		"spec": false,
-		"type": "aircraft"
+		"type": "weapon"
 	},
 	"Poseidon": {
 		"path": "./assets/waifus/Poseidon.jpg",
 		"spec": true,
-		"type": "aircraft"
+		"type": "aircraft",
+		"country": "USA"
 	},
 	"Raider": {
 		"path": "./assets/waifus/Raider.jpg",
 		"spec": false,
-		"type": "aircraft"
+		"type": "aircraft",
+		"country": "USA"
 	},
 	"Reaper": {
 		"path": "./assets/waifus/Reaper.jpg",
 		"spec": true,
-		"type": "aircraft"
+		"type": "aircraft",
+		"country": "USA"
 	},
 	"SBD Dauntless": {
 		"path": "./assets/waifus/SBD_Dauntless.jpg",
 		"spec": false,
 		"type": "aircraft",
-		"urlFriendlyName": "SBD_Dauntless"
+		"urlFriendlyName": "SBD_Dauntless",
+		"country": "USA"
 	},
 	"Sentry": {
 		"path": "./assets/waifus/Sentry.jpg",
 		"spec": true,
-		"type": "aircraft"
+		"type": "aircraft",
+		"country": "USA"
 	},
 	"Sidewinder": {
 		"ability": "stun",
@@ -194,38 +264,47 @@
 		"abilityName": "Stunwave",
 		"path": "./assets/waifus/Sidewinder.jpg",
 		"spec": false,
-		"type": "weapon"
+		"type": "weapon",
+		"country": "USA"
 	},
 	"Skyhawk": {
 		"path": "./assets/waifus/Skyhawk.jpg",
 		"spec": false,
-		"type": "aircraft"
+		"type": "aircraft",
+		"country": "USA"
 	},
 	"Sparrow": {
+		"ability": "exclusive",
+		"abilityDescription": "If this weapon is equipped on an American aircraft, it will add an extra 50% of this weapon's ATK to the total ATK.",
+		"abilityName": "Exclusivity",
 		"path": "./assets/waifus/Sparrow.jpg",
 		"spec": false,
-		"type": "aircraft"
+		"type": "weapon"
 	},
 	"Spirit": {
 		"path": "./assets/waifus/Spirit.jpg",
 		"spec": false,
-		"type": "aircraft"
+		"type": "aircraft",
+		"country": "USA"
 	},
 	"Talon": {
 		"path": "./assets/waifus/Talon.jpg",
 		"spec": false,
-		"type": "aircraft"
+		"type": "aircraft",
+		"country": "USA"
 	},
 	"Tiger II": {
 		"path": "./assets/waifus/Tiger_II.jpg",
 		"spec": false,
 		"type": "aircraft",
-		"urlFriendlyName": "Tiger_II"
+		"urlFriendlyName": "Tiger_II",
+		"country": "South Korea"
 	},
 	"Tomcat": {
 		"path": "./assets/waifus/Tomcat.jpg",
 		"spec": true,
-		"type": "aircraft"
+		"type": "aircraft",
+		"country": "USA"
 	},
 	"Trident II": {
 		"ability": "support",
@@ -237,8 +316,12 @@
 		"urlFriendlyName": "Trident_II"
 	},
 	"Warthog": {
+		"ability": "support",
+		"abilityDescription": "After equipping this weapon, your next attack will call in a support strike, dealing damage equivalent to this weapon's ATK to the opponent, on top of any attacks this round.",
+		"abilityName": "Call for Support",
 		"path": "./assets/waifus/Warthog.jpg",
 		"spec": true,
-		"type": "aircraft"
+		"type": "aircraft",
+		"country": "USA"
 	}
 }

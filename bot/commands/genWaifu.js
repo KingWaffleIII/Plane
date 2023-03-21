@@ -21,7 +21,8 @@ exports.data = new discord_js_1.SlashCommandBuilder()
     .setDescription("The user to generate a waifu for. Defaults to you."))
     .addIntegerOption((option) => option
     .setName("amount")
-    .setDescription("The amount of waifus you want to generate (max (including existing dupes) is 25). Defaults to 1."))
+    .setDescription("The amount of waifus you want to generate (max (including existing dupes) is 25). Defaults to 1.")
+    .setMaxValue(25))
     .addIntegerOption((option) => option
     .setName("atk")
     .setDescription("The ATK stat of the waifu to generate. Defaults to RNG."))
@@ -31,6 +32,9 @@ exports.data = new discord_js_1.SlashCommandBuilder()
     .addIntegerOption((option) => option
     .setName("spd")
     .setDescription("The SPD stat of the waifu to generate (only for aircraft). Defaults to RNG."))
+    .addBooleanOption((option) => option
+    .setName("show_as_legit")
+    .setDescription("Whether to show the waifu as it it was not generated. Defaults to false."))
     .addIntegerOption((option) => option
     .setName("kills")
     .setDescription("The kills stat of the waifu to generate (only for aircraft). Defaults to 0."))
@@ -44,12 +48,14 @@ async function execute(interaction) {
     const atk = interaction.options.getInteger("atk") ?? null;
     const hp = interaction.options.getInteger("hp") ?? null;
     const spd = interaction.options.getInteger("spd") ?? null;
+    const showAsLegit = interaction.options.getBoolean("show_as_legit") ?? false;
     const kills = interaction.options.getInteger("kills") ?? 0;
     const deaths = interaction.options.getInteger("deaths") ?? 0;
     const waifusLowerCase = Object.keys(waifus_json_1.default).map((w) => w.toLowerCase());
     if (!waifusLowerCase.includes(name.toLowerCase())) {
         await interaction.reply({
             content: "That waifu doesn't exist!",
+            ephemeral: true,
         });
         return;
     }
@@ -78,6 +84,18 @@ async function execute(interaction) {
         });
         return;
     }
+    const userWaifus = await user.countWaifus({
+        where: {
+            name: waifuName,
+        },
+    });
+    if (userWaifus + amount > 25) {
+        await interaction.editReply({
+            content: `You can't generate more than 25 waifus of the same type (including existing dupes). You can generate a maximum of **${25 - userWaifus}** more ${waifuName} waifu(s) for this user.
+					`,
+        });
+        return;
+    }
     for (let i = 0; i < amount; i++) {
         const thisAtk = atk ?? Math.ceil(Math.random() * 10);
         let thisHp = hp ?? Math.ceil(Math.random() * (100 - 50) + 50);
@@ -90,7 +108,7 @@ async function execute(interaction) {
             thisKills = 0;
             thisDeaths = 0;
         }
-        await user.createWaifu({
+        const waifu = await user.createWaifu({
             name: waifuName,
             spec: waifuData.spec,
             atk: thisAtk,
@@ -100,6 +118,14 @@ async function execute(interaction) {
             kills: thisKills,
             deaths: thisDeaths,
         });
+        if (showAsLegit) {
+            await waifu.update({
+                generated: false,
+            });
+            await user.update({
+                lockedWaifus: user.lockedWaifus.filter((w) => w !== waifuName),
+            });
+        }
     }
     await interaction.editReply({
         content: `Successfully generated ${amount} ${waifuName} waifu(s) (use \`/waifus user:${targetUser}\`) for ${targetUser.username}!`,

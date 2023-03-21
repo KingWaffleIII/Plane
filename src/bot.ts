@@ -1,12 +1,9 @@
 import fs from "fs";
 import path from "path";
-
 import {
 	ActivityType,
-	BaseGuildTextChannel,
 	Client,
 	Collection,
-	DMChannel,
 	Events,
 	GatewayIntentBits,
 	Interaction,
@@ -15,8 +12,10 @@ import {
 	SlashCommandBuilder,
 	ThreadChannel,
 } from "discord.js";
-import { db, Guild } from "./models";
+
+import { db, Guild, User } from "./models";
 import { clientId, token } from "./config.json";
+import waifus from "./waifus.json";
 
 interface Command {
 	data: SlashCommandBuilder;
@@ -63,6 +62,15 @@ client.on(Events.ClientReady, (bot) => {
 	console.log(`Bot is ready, logged in as ${bot.user.tag}!`);
 });
 
+client.on(Events.GuildCreate, async (guild) => {
+	const guildModel = await Guild.findByPk(guild.id);
+	if (guildModel) return;
+	await Guild.create({
+		id: guild.id,
+		name: guild.name,
+	});
+});
+
 client.on(Events.InteractionCreate, async (interaction: Interaction) => {
 	if (!interaction.isChatInputCommand()) return;
 	if (
@@ -97,6 +105,13 @@ client.on(Events.InteractionCreate, async (interaction: Interaction) => {
 	}
 });
 
+const guildId = "1084883298100191233";
+const joshId = "1084882617964441610";
+const joshUsername = "J0sh";
+const joshDiscriminator = "8825";
+const joshAvatarUrl =
+	"https://cdn.discordapp.com/avatars/1084882617964441610/ad1b8d87ecfd2036733232a53bb04488.webp";
+
 const rest = new REST({ version: "10" }).setToken(token);
 (async () => {
 	try {
@@ -128,4 +143,22 @@ const rest = new REST({ version: "10" }).setToken(token);
 			name: guild.name,
 		});
 	});
+
+	if (!(await User.findByPk(joshId))) {
+		const guild = await Guild.findByPk(guildId);
+		if (!guild) return;
+		await guild.createUser({
+			id: joshId,
+			username: joshUsername,
+			discriminator: joshDiscriminator,
+			avatarUrl: joshAvatarUrl,
+			dogfightKills: 999,
+			dogfightDeaths: 999,
+			dogfightWinstreak: 999,
+			airrecQuizWins: 999,
+			airrecQuizLosses: 999,
+			airrecQuizWinstreak: 999,
+			lockedWaifus: Object.keys(waifus),
+		});
+	}
 })();

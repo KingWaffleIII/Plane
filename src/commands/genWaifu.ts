@@ -29,6 +29,7 @@ export const data = new SlashCommandBuilder()
 			.setDescription(
 				"The amount of waifus you want to generate (max (including existing dupes) is 25). Defaults to 1."
 			)
+			.setMaxValue(25)
 	)
 	.addIntegerOption((option) =>
 		option
@@ -49,6 +50,13 @@ export const data = new SlashCommandBuilder()
 			.setName("spd")
 			.setDescription(
 				"The SPD stat of the waifu to generate (only for aircraft). Defaults to RNG."
+			)
+	)
+	.addBooleanOption((option) =>
+		option
+			.setName("show_as_legit")
+			.setDescription(
+				"Whether to show the waifu as it it was not generated. Defaults to false."
 			)
 	)
 	.addIntegerOption((option) =>
@@ -73,6 +81,8 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 	const atk = interaction.options.getInteger("atk") ?? null;
 	const hp = interaction.options.getInteger("hp") ?? null;
 	const spd = interaction.options.getInteger("spd") ?? null;
+	const showAsLegit =
+		interaction.options.getBoolean("show_as_legit") ?? false;
 	const kills = interaction.options.getInteger("kills") ?? 0;
 	const deaths = interaction.options.getInteger("deaths") ?? 0;
 
@@ -81,6 +91,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 	if (!waifusLowerCase.includes(name.toLowerCase())) {
 		await interaction.reply({
 			content: "That waifu doesn't exist!",
+			ephemeral: true,
 		});
 		return;
 	}
@@ -121,6 +132,22 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 		return;
 	}
 
+	const userWaifus = await user.countWaifus({
+		where: {
+			name: waifuName,
+		},
+	});
+
+	if (userWaifus + amount > 25) {
+		await interaction.editReply({
+			content: `You can't generate more than 25 waifus of the same type (including existing dupes). You can generate a maximum of **${
+				25 - userWaifus
+			}** more ${waifuName} waifu(s) for this user.
+					`,
+		});
+		return;
+	}
+
 	for (let i = 0; i < amount; i++) {
 		const thisAtk = atk ?? Math.ceil(Math.random() * 10);
 		let thisHp = hp ?? Math.ceil(Math.random() * (100 - 50) + 50);
@@ -135,7 +162,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 			thisDeaths = 0;
 		}
 
-		await user.createWaifu({
+		const waifu = await user.createWaifu({
 			name: waifuName,
 			spec: waifuData.spec,
 			atk: thisAtk,
@@ -145,6 +172,15 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 			kills: thisKills,
 			deaths: thisDeaths,
 		});
+
+		if (showAsLegit) {
+			await waifu.update({
+				generated: false,
+			});
+			await user.update({
+				lockedWaifus: user.lockedWaifus.filter((w) => w !== waifuName),
+			});
+		}
 	}
 
 	await interaction.editReply({

@@ -21,7 +21,7 @@ exports.data = new discord_js_1.SlashCommandBuilder()
     .setDescription("Search for and view and aircraft profile.")
     .addStringOption((option) => option
     .setName("name")
-    .setDescription("The name of the aircraft you want to search for. Use the aircraft model (e.g. F-22)")
+    .setDescription("The name/alias/model/etc. of the aircraft you want to search for (e.g. F-22 or Raptor).")
     .setRequired(true));
 async function execute(interaction) {
     const name = interaction.options.getString("name").toLowerCase() ?? false;
@@ -80,7 +80,6 @@ async function execute(interaction) {
             text: "Photo credit: https://www.airfighters.com",
         });
         await interaction.editReply({
-            content: `**Match found!**`,
             embeds: [embed],
         });
     }

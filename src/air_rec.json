@@ -694,7 +694,7 @@
 			"wiki": "https://en.wikipedia.org/wiki/Grob_G103a_Twin_II"
 		},
 		{
-			"name": "Gron G109",
+			"name": "Grob G109",
 			"role": "Motor glider.",
 			"manufacturer": "Grob",
 			"model": "G109",
@@ -1052,13 +1052,7 @@
 			"role": "Close air support attack aircraft.",
 			"manufacturer": "Fairchild Republic",
 			"model": "A-10",
-			"aliases": [
-				"Thunderbolt II",
-				"Thunderbolt",
-				"Warthog",
-				"A10",
-				"A 10"
-			],
+			"aliases": ["Thunderbolt II", "Thunderbolt", "A10", "A 10"],
 			"identification": [
 				"Big gun in nose of plane",
 				"Big af like James and they both have 30mm cannons",
@@ -1113,7 +1107,7 @@
 			"role": "Multirole and air superiority fighter.",
 			"manufacturer": "General Dynamics",
 			"model": "F-16",
-			"aliases": ["Fighting Falcon", "Viper", "F16", "F 16"],
+			"aliases": ["Fighting Falcon", "F16", "F 16"],
 			"identification": [
 				"Has a singular engine with a singular air intake bellow the canopy",
 				"Has a singular vertical stabiliser with two elevators at the level of the airframe",

@@ -13,7 +13,7 @@ import rafk from "../RAFK.json";
 
 const wait = require("node:timers/promises").setTimeout;
 
-interface Question {
+export interface Question {
 	question: string;
 	answer: string;
 }
