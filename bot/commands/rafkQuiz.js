@@ -48,6 +48,7 @@ async function execute(interaction) {
     }
     let isJoshParticipating = false;
     let pub;
+    let sub;
     if (isJoshOnline) {
         const listener = async (m, c) => {
             if (c !== "josh-new-quiz" || m !== "accept")
@@ -56,12 +57,13 @@ async function execute(interaction) {
             await thread.send({
                 content: `<@${joshId}> has joined the game!`,
             });
+            await sub.disconnect();
         };
         pub = (0, redis_1.createClient)({
             url: "redis://host.docker.internal:6379",
         });
         pub.on("error", (err) => console.error(err));
-        const sub = pub.duplicate();
+        sub = pub.duplicate();
         sub.on("error", (err) => console.error(err));
         await sub.connect();
         await sub.subscribe("josh-new-quiz", listener);
@@ -121,6 +123,9 @@ You will be given 2 questions from each category in Part ${1} of RAFK. You will 
     }
     if (isJoshParticipating)
         await pub.publish("josh-do-quiz", "end");
+    if (isJoshOnline) {
+        await pub.disconnect();
+    }
     await thread.setArchived(true);
 }
 exports.execute = execute;

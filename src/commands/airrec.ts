@@ -78,7 +78,10 @@ export async function spawnWaifu(
 			user.guaranteeWaifu !== undefined && user.guaranteeCounter! >= 10;
 	}
 	if (isGuaranteed || Math.floor(Math.random() * 3) === 0) {
-		if (isGuaranteed || name === user.guaranteeWaifu) {
+		if (
+			(isGuaranteed && name === user.guaranteeWaifu) ||
+			name === user.guaranteeWaifu
+		) {
 			await user!.update({
 				guaranteeWaifu: null,
 				guaranteeCounter: null,
