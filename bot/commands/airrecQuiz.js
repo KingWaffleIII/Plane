@@ -112,7 +112,7 @@ If you want to play, click the button below.
             await thread.send({
                 content: `<@${joshId}> has joined the game!`,
             });
-            sub.disconnect();
+            await sub.disconnect();
         };
         pub = (0, redis_1.createClient)({
             url: "redis://host.docker.internal:6379",
@@ -394,10 +394,10 @@ If you want to play, click the button below.
                 }
             }
         }
-        await thread.setArchived(true);
         if (isJoshOnline) {
             await pub.disconnect();
         }
+        await thread.setArchived(true);
     });
 }
 exports.execute = execute;

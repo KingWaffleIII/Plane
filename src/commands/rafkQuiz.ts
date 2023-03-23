@@ -82,7 +82,7 @@ export async function execute(
 				content: `<@${joshId}> has joined the game!`,
 			});
 
-			sub.disconnect();
+			await sub.disconnect();
 		};
 
 		pub = createClient({
@@ -176,6 +176,9 @@ You will be given 2 questions from each category in Part ${1} of RAFK. You will 
 	}
 
 	if (isJoshParticipating) await pub!.publish("josh-do-quiz", "end");
+	if (isJoshOnline) {
+		await pub!.disconnect();
+	}
 
 	await thread.setArchived(true);
 }

@@ -152,7 +152,7 @@ If you want to play, click the button below.
 				content: `<@${joshId}> has joined the game!`,
 			});
 
-			sub.disconnect();
+			await sub.disconnect();
 		};
 
 		pub = createClient({
@@ -509,9 +509,9 @@ If you want to play, click the button below.
 			}
 		}
 
-		await thread.setArchived(true);
 		if (isJoshOnline) {
 			await pub.disconnect();
 		}
+		await thread.setArchived(true);
 	});
 }
