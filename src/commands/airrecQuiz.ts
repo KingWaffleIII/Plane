@@ -138,6 +138,7 @@ If you want to play, click the button below.
 	}
 
 	let pub: RedisClientType;
+	let sub: RedisClientType;
 	if (isJoshOnline) {
 		const listener = async (message: string, channel: string) => {
 			if (channel !== "josh-new-quiz" || message !== "accept") return;
@@ -150,13 +151,15 @@ If you want to play, click the button below.
 			await thread.send({
 				content: `<@${joshId}> has joined the game!`,
 			});
+
+			sub.disconnect();
 		};
 
 		pub = createClient({
 			url: "redis://host.docker.internal:6379",
 		});
 		pub.on("error", (err) => console.error(err));
-		const sub = pub.duplicate();
+		sub = pub.duplicate();
 		sub.on("error", (err) => console.error(err));
 		await sub.connect();
 		await sub.subscribe("josh-new-quiz", listener);
@@ -507,5 +510,8 @@ If you want to play, click the button below.
 		}
 
 		await thread.setArchived(true);
+		if (isJoshOnline) {
+			await pub.disconnect();
+		}
 	});
 }

@@ -71,6 +71,7 @@ export async function execute(
 
 	let isJoshParticipating = false;
 	let pub: RedisClientType;
+	let sub: RedisClientType;
 	if (isJoshOnline) {
 		const listener = async (m: string, c: string) => {
 			if (c !== "josh-new-quiz" || m !== "accept") return;
@@ -80,13 +81,15 @@ export async function execute(
 			await thread.send({
 				content: `<@${joshId}> has joined the game!`,
 			});
+
+			sub.disconnect();
 		};
 
 		pub = createClient({
 			url: "redis://host.docker.internal:6379",
 		});
 		pub.on("error", (err) => console.error(err));
-		const sub = pub.duplicate();
+		sub = pub.duplicate();
 		sub.on("error", (err) => console.error(err));
 		await sub.connect();
 		await sub.subscribe("josh-new-quiz", listener);
