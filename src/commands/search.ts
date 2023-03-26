@@ -34,7 +34,7 @@ export const data = new SlashCommandBuilder()
 	);
 
 export async function execute(interaction: ChatInputCommandInteraction) {
-	const name = interaction.options.getString("name")!.toLowerCase() ?? false;
+	const name = interaction.options.getString("name")!.toLowerCase();
 
 	await interaction.deferReply();
 
@@ -43,20 +43,24 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 
 	let match = false;
 	let matchedAircraft: Aircraft | null = null;
-	civilianAircraft.forEach((aircraft) => {
+	for (const aircraft of civilianAircraft) {
 		const result = checkMatch(name, aircraft);
 		if (result) {
 			match = true;
 			matchedAircraft = result;
+			break;
 		}
-	});
-	militaryAircraft.forEach((aircraft) => {
-		const result = checkMatch(name, aircraft);
-		if (result) {
-			match = true;
-			matchedAircraft = result;
+	}
+	if (!match) {
+		for (const aircraft of militaryAircraft) {
+			const result = checkMatch(name, aircraft);
+			if (result) {
+				match = true;
+				matchedAircraft = result;
+				break;
+			}
 		}
-	});
+	}
 
 	if (!match) {
 		await interaction.editReply({

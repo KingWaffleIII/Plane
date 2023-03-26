@@ -1,6 +1,6 @@
 {
 	"name": "plane",
-	"version": "1.4.2",
+	"version": "1.4.3",
 	"description": "Discord bot frontend for the Plane aircraft recognition API, as well as other functionality provided by plugins.",
 	"main": "bot.js",
 	"scripts": {
@@ -10,7 +10,7 @@
 		"build": "tsc",
 		"prod": "npm i && npm run build",
 		"start": "node bot.js",
-		"quickstart": "npm i && tsc && docker compose up"
+		"quickstart": "npm i && tsc && docker compose up -d"
 	},
 	"repository": {
 		"type": "git",

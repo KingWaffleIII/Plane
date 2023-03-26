@@ -24,26 +24,30 @@ exports.data = new discord_js_1.SlashCommandBuilder()
     .setDescription("The name/alias/model/etc. of the aircraft you want to search for (e.g. F-22 or Raptor).")
     .setRequired(true));
 async function execute(interaction) {
-    const name = interaction.options.getString("name").toLowerCase() ?? false;
+    const name = interaction.options.getString("name").toLowerCase();
     await interaction.deferReply();
     const civilianAircraft = air_rec_json_1.default.civilian;
     const militaryAircraft = air_rec_json_1.default.military;
     let match = false;
     let matchedAircraft = null;
-    civilianAircraft.forEach((aircraft) => {
+    for (const aircraft of civilianAircraft) {
         const result = checkMatch(name, aircraft);
         if (result) {
             match = true;
             matchedAircraft = result;
+            break;
         }
-    });
-    militaryAircraft.forEach((aircraft) => {
-        const result = checkMatch(name, aircraft);
-        if (result) {
-            match = true;
-            matchedAircraft = result;
+    }
+    if (!match) {
+        for (const aircraft of militaryAircraft) {
+            const result = checkMatch(name, aircraft);
+            if (result) {
+                match = true;
+                matchedAircraft = result;
+                break;
+            }
         }
-    });
+    }
     if (!match) {
         await interaction.editReply({
             content: "No aircraft matched your search.",
