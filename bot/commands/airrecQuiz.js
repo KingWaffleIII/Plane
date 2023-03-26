@@ -107,7 +107,6 @@ If you want to play, click the button below.
                 return;
             if (channel !== "josh-new-quiz" || message !== "accept")
                 return;
-            console.log(channel, message);
             players[joshId] = {
                 username: joshUsername,
                 score: 0,

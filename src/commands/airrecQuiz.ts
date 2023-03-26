@@ -144,7 +144,6 @@ If you want to play, click the button below.
 		const listener = async (message: string, channel: string) => {
 			if (isFinished) return;
 			if (channel !== "josh-new-quiz" || message !== "accept") return;
-			console.log(channel, message);
 
 			players[joshId] = {
 				username: joshUsername,
