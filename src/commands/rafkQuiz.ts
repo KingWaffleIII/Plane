@@ -69,11 +69,13 @@ export async function execute(
 		isJoshOnline = false;
 	}
 
+	let isFinished = false;
 	let isJoshParticipating = false;
 	let pub: RedisClientType;
 	let sub: RedisClientType;
 	if (isJoshOnline) {
 		const listener = async (m: string, c: string) => {
+			if (isFinished) return;
 			if (c !== "josh-new-quiz" || m !== "accept") return;
 
 			isJoshParticipating = true;
@@ -82,7 +84,7 @@ export async function execute(
 				content: `<@${joshId}> has joined the game!`,
 			});
 
-			await sub.disconnect();
+			await sub.unsubscribe();
 		};
 
 		pub = createClient({
@@ -91,10 +93,10 @@ export async function execute(
 		pub.on("error", (err) => console.error(err));
 		sub = pub.duplicate();
 		sub.on("error", (err) => console.error(err));
-		await sub.connect();
-		await sub.subscribe("josh-new-quiz", listener);
 		await pub.connect();
 		await pub.publish("josh-new-quiz", thread.id);
+		await sub.connect();
+		await sub.subscribe("josh-new-quiz", listener);
 	}
 
 	await thread.send({
@@ -102,11 +104,11 @@ export async function execute(
 __**RAFK Part ${1} Quiz**__
 You will be given 2 questions from each category in Part ${1} of RAFK. You will have 15 seconds to answer each question. Good luck!
 
-**Starting in 30 seconds...**
+**Starting in 15 seconds...**
 		`,
 	});
 
-	await wait(30000);
+	await wait(15000);
 
 	const questions: Question[] = [];
 
@@ -175,8 +177,10 @@ You will be given 2 questions from each category in Part ${1} of RAFK. You will 
 		});
 	}
 
+	isFinished = true;
 	if (isJoshParticipating) await pub!.publish("josh-do-quiz", "end");
 	if (isJoshOnline) {
+		await sub!.disconnect();
 		await pub!.disconnect();
 	}
 

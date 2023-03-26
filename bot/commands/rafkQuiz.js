@@ -46,18 +46,21 @@ async function execute(interaction) {
     catch (err) {
         isJoshOnline = false;
     }
+    let isFinished = false;
     let isJoshParticipating = false;
     let pub;
     let sub;
     if (isJoshOnline) {
         const listener = async (m, c) => {
+            if (isFinished)
+                return;
             if (c !== "josh-new-quiz" || m !== "accept")
                 return;
             isJoshParticipating = true;
             await thread.send({
                 content: `<@${joshId}> has joined the game!`,
             });
-            await sub.disconnect();
+            await sub.unsubscribe();
         };
         pub = (0, redis_1.createClient)({
             url: "redis://host.docker.internal:6379",
@@ -65,20 +68,20 @@ async function execute(interaction) {
         pub.on("error", (err) => console.error(err));
         sub = pub.duplicate();
         sub.on("error", (err) => console.error(err));
-        await sub.connect();
-        await sub.subscribe("josh-new-quiz", listener);
         await pub.connect();
         await pub.publish("josh-new-quiz", thread.id);
+        await sub.connect();
+        await sub.subscribe("josh-new-quiz", listener);
     }
     await thread.send({
         content: `
 __**RAFK Part ${1} Quiz**__
 You will be given 2 questions from each category in Part ${1} of RAFK. You will have 15 seconds to answer each question. Good luck!
 
-**Starting in 30 seconds...**
+**Starting in 15 seconds...**
 		`,
     });
-    await wait(30000);
+    await wait(15000);
     const questions = [];
     const doQuestion = async (randomQuestion) => 
     // eslint-disable-next-line no-async-promise-executor
@@ -121,9 +124,11 @@ You will be given 2 questions from each category in Part ${1} of RAFK. You will 
             });
         });
     }
+    isFinished = true;
     if (isJoshParticipating)
         await pub.publish("josh-do-quiz", "end");
     if (isJoshOnline) {
+        await sub.disconnect();
         await pub.disconnect();
     }
     await thread.setArchived(true);

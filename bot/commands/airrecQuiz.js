@@ -98,12 +98,16 @@ If you want to play, click the button below.
     catch (err) {
         isJoshOnline = false;
     }
+    let isFinished = false;
     let pub;
     let sub;
     if (isJoshOnline) {
         const listener = async (message, channel) => {
+            if (isFinished)
+                return;
             if (channel !== "josh-new-quiz" || message !== "accept")
                 return;
+            console.log(channel, message);
             players[joshId] = {
                 username: joshUsername,
                 score: 0,
@@ -112,7 +116,7 @@ If you want to play, click the button below.
             await thread.send({
                 content: `<@${joshId}> has joined the game!`,
             });
-            await sub.disconnect();
+            await sub.unsubscribe();
         };
         pub = (0, redis_1.createClient)({
             url: "redis://host.docker.internal:6379",
@@ -120,10 +124,10 @@ If you want to play, click the button below.
         pub.on("error", (err) => console.error(err));
         sub = pub.duplicate();
         sub.on("error", (err) => console.error(err));
-        await sub.connect();
-        await sub.subscribe("josh-new-quiz", listener);
         await pub.connect();
         await pub.publish("josh-new-quiz", thread.id);
+        await sub.connect();
+        await sub.subscribe("josh-new-quiz", listener);
     }
     collector?.on("collect", async (i) => {
         if (i.customId === `cancel-${buttonId}`) {
@@ -394,7 +398,9 @@ If you want to play, click the button below.
                 }
             }
         }
+        isFinished = true;
         if (isJoshOnline) {
+            await sub.disconnect();
             await pub.disconnect();
         }
         await thread.setArchived(true);
