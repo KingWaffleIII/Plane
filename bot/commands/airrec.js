@@ -18,12 +18,11 @@ async function getImage(url) {
         const $ = cheerio_1.default.load(response.data);
         const images = [];
         // get every a element with class pgthumb
-        $("a.pgthumb").each((i, element) => {
+        $("a.pgthumb").each((_i, element) => {
             // get the src attribute of the child img element
             const image = $(element).children("img").attr("src");
-            if (image) {
+            if (image)
                 images.push(image);
-            }
         });
         const image = images[Math.floor(Math.random() * images.length)];
         return `https://www.airfighters.com/${image.replace("400", "9999")}`;

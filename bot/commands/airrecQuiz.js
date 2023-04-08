@@ -6,7 +6,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.execute = exports.data = void 0;
 const crypto_1 = __importDefault(require("crypto"));
 const discord_js_1 = require("discord.js");
-const redis_1 = require("redis");
 const models_1 = require("../models");
 const airrec_1 = require("./airrec");
 const air_rec_json_1 = __importDefault(require("../air_rec.json"));
@@ -87,47 +86,45 @@ If you want to play, click the button below.
         time: 60000,
         filter: playFilter,
     });
-    let isJoshOnline = false;
-    try {
-        const conn = (0, redis_1.createClient)({
-            url: "redis://host.docker.internal:6379",
-        });
-        await conn.connect();
-        isJoshOnline = true;
-    }
-    catch (err) {
-        isJoshOnline = false;
-    }
-    let isFinished = false;
-    let pub;
-    let sub;
-    if (isJoshOnline) {
-        const listener = async (message, channel) => {
-            if (isFinished)
-                return;
-            if (channel !== "josh-new-quiz" || message !== "accept")
-                return;
-            players[joshId] = {
-                username: joshUsername,
-                score: 0,
-                lastScore: 0,
-            };
-            await thread.send({
-                content: `<@${joshId}> has joined the game!`,
-            });
-            await sub.unsubscribe();
-        };
-        pub = (0, redis_1.createClient)({
-            url: "redis://host.docker.internal:6379",
-        });
-        pub.on("error", (err) => console.error(err));
-        sub = pub.duplicate();
-        sub.on("error", (err) => console.error(err));
-        await pub.connect();
-        await pub.publish("josh-new-quiz", thread.id);
-        await sub.connect();
-        await sub.subscribe("josh-new-quiz", listener);
-    }
+    //! J0sh is deprecated
+    // let isJoshOnline = false;
+    // try {
+    // 	const conn = createClient({
+    // 		url: "redis://host.docker.internal:6379",
+    // 	});
+    // 	await conn.connect();
+    // 	isJoshOnline = true;
+    // } catch (err) {
+    // 	isJoshOnline = false;
+    // }
+    // let isFinished = false;
+    // let pub: RedisClientType;
+    // let sub: RedisClientType;
+    // if (isJoshOnline) {
+    // 	const listener = async (message: string, channel: string) => {
+    // 		if (isFinished) return;
+    // 		if (channel !== "josh-new-quiz" || message !== "accept") return;
+    // 		players[joshId] = {
+    // 			username: joshUsername,
+    // 			score: 0,
+    // 			lastScore: 0,
+    // 		};
+    // 		await thread.send({
+    // 			content: `<@${joshId}> has joined the game!`,
+    // 		});
+    // 		await sub.unsubscribe();
+    // 	};
+    // 	pub = createClient({
+    // 		url: "redis://host.docker.internal:6379",
+    // 	});
+    // 	pub.on("error", (err) => console.error(err));
+    // 	sub = pub.duplicate();
+    // 	sub.on("error", (err) => console.error(err));
+    // 	await pub.connect();
+    // 	await pub.publish("josh-new-quiz", thread.id);
+    // 	await sub.connect();
+    // 	await sub.subscribe("josh-new-quiz", listener);
+    // }
     collector?.on("collect", async (i) => {
         if (i.customId === `cancel-${buttonId}`) {
             if (i.user.id !== interaction.user.id) {
@@ -210,9 +207,10 @@ If you want to play, click the button below.
                 content: `**Round ${i + 1} of ${rounds}:**\nWhat is the name of this aircraft?\n${image}`,
                 components: [],
             });
-            if (Object.keys(players).includes(joshId)) {
-                await pub.publish("josh-do-quiz", aircraft.name);
-            }
+            //! J0sh is deprecated
+            // if (Object.keys(players).includes(joshId)) {
+            // 	await pub.publish("josh-do-quiz", aircraft.name);
+            // }
             //! cheat mode
             // await thread.send({
             // 	content: aircraft.name,
@@ -308,9 +306,10 @@ If you want to play, click the button below.
             embeds: [leaderboard],
             components: [],
         });
-        if (Object.keys(players).includes(joshId)) {
-            await pub.publish("josh-do-quiz", "end");
-        }
+        //! J0sh is deprecated
+        // if (Object.keys(players).includes(joshId)) {
+        // 	await pub.publish("josh-do-quiz", "end");
+        // }
         sortedPlayers
             .filter((p) => p !== sortedPlayers[0])
             .forEach(async (p) => {
@@ -397,11 +396,12 @@ If you want to play, click the button below.
                 }
             }
         }
-        isFinished = true;
-        if (isJoshOnline) {
-            await sub.disconnect();
-            await pub.disconnect();
-        }
+        //! J0sh is deprecated
+        // isFinished = true;
+        // if (isJoshOnline) {
+        // 	await sub.disconnect();
+        // 	await pub.disconnect();
+        // }
         await thread.setArchived(true);
     });
 }

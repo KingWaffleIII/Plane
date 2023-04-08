@@ -4,7 +4,7 @@ An extremely modular Discord bot designed to help RAF students with their RAFK (
 
 ## Usage & Invite
 
-If you want to use the bot, we heavily recommend you use the bot hosted by Planet Waffle; you can do so [here](https://discord.com/api/oauth2/authorize?client_id=1044710491110522940&permissions=326417599488&scope=bot). This bot will always use the latest version from the main branch (I update the bot every time I merge a PR).
+If you want to use the bot, we heavily recommend you use the bot hosted by Planet Waffle; you can do so [here](https://discord.com/api/oauth2/authorize?client_id=1044710491110522940&permissions=309237697536&scope=bot). This bot will always use the latest version from the main branch (I update the bot every time I merge a PR).
 
 If you really want to host the bot yourself, you can do so by following these steps:
 (note: Docker and Docker Compose are required to run the bot)
@@ -21,6 +21,20 @@ If you really want to host the bot yourself, you can do so by following these st
 
 3. run the `npm prod` script to compile the TypeScript code
 4. run `docker compose up -d` to start the bot
+
+## Aircraft
+
+### mRAST Spec
+
+The mRAST spec is inconsistent in its use of aircraft names. Sometimes, it uses the most up-to-date model with the latest manufacturer and sometimes it likes to stay in the past. An example is the CASA/IPTN CN-235, which the spec calls the Airbus CN-235. Another example is the Breguet 1150 Atlantic, which the spec calls the Dassault Atlantic.
+
+As a result, I've compromised and tried to use the most accurate name possible, whilst avoiding going against the spec.
+
+You can see the aircraft supported in the bot [here](https://github.com/KingWaffleIII/plane/blob/main/aircraft.md).
+
+### Images
+
+If you have any issues with the images given for \`/airrec\` and \`/airrec-quiz\`, please understand that these are randomly picked from a website. There is no way to control the quality of the images so if you find a bad image, just try again.
 
 ## Waifus
 
@@ -120,7 +134,3 @@ https://github.com/KingWaffleIII/plane/issues
 ## Licence
 
 This project is licensed under the GNU General Public Licence 3.0 - see the [LICENCE](LICENCE) file for details
-
-```
-
-```

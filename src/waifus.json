@@ -40,6 +40,12 @@
 		"type": "aircraft",
 		"country": "USA"
 	},
+	"Crusader": {
+		"path": "./assets/waifus/Crusader.jpg",
+		"spec": false,
+		"type": "aircraft",
+		"country": "USA"
+	},
 	"Demon": {
 		"path": "./assets/waifus/Demon.jpg",
 		"spec": false,
@@ -142,11 +148,12 @@
 		"spec": false,
 		"type": "weapon"
 	},
-	"Hornet": {
-		"path": "./assets/waifus/Hornet.jpg",
+	"Super Hornet": {
+		"path": "./assets/waifus/Super_Hornet.jpg",
 		"spec": true,
 		"type": "aircraft",
-		"country": "USA"
+		"country": "USA",
+		"urlFriendlyName": "Super_Hornet"
 	},
 	"LaGG-3": {
 		"path": "./assets/waifus/LaGG-3.jpg",

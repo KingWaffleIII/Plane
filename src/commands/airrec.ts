@@ -52,12 +52,10 @@ export async function getImage(url: string): Promise<string | null> {
 		const images: string[] = [];
 
 		// get every a element with class pgthumb
-		$("a.pgthumb").each((i, element) => {
+		$("a.pgthumb").each((_i, element) => {
 			// get the src attribute of the child img element
 			const image = $(element).children("img").attr("src");
-			if (image) {
-				images.push(image);
-			}
+			if (image) images.push(image);
 		});
 
 		const image = images[Math.floor(Math.random() * images.length)];

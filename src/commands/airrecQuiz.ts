@@ -126,48 +126,49 @@ If you want to play, click the button below.
 		filter: playFilter,
 	});
 
-	let isJoshOnline = false;
-	try {
-		const conn = createClient({
-			url: "redis://host.docker.internal:6379",
-		});
-		await conn.connect();
-		isJoshOnline = true;
-	} catch (err) {
-		isJoshOnline = false;
-	}
+	//! J0sh is deprecated
+	// let isJoshOnline = false;
+	// try {
+	// 	const conn = createClient({
+	// 		url: "redis://host.docker.internal:6379",
+	// 	});
+	// 	await conn.connect();
+	// 	isJoshOnline = true;
+	// } catch (err) {
+	// 	isJoshOnline = false;
+	// }
 
-	let isFinished = false;
-	let pub: RedisClientType;
-	let sub: RedisClientType;
-	if (isJoshOnline) {
-		const listener = async (message: string, channel: string) => {
-			if (isFinished) return;
-			if (channel !== "josh-new-quiz" || message !== "accept") return;
+	// let isFinished = false;
+	// let pub: RedisClientType;
+	// let sub: RedisClientType;
+	// if (isJoshOnline) {
+	// 	const listener = async (message: string, channel: string) => {
+	// 		if (isFinished) return;
+	// 		if (channel !== "josh-new-quiz" || message !== "accept") return;
 
-			players[joshId] = {
-				username: joshUsername,
-				score: 0,
-				lastScore: 0,
-			};
-			await thread.send({
-				content: `<@${joshId}> has joined the game!`,
-			});
+	// 		players[joshId] = {
+	// 			username: joshUsername,
+	// 			score: 0,
+	// 			lastScore: 0,
+	// 		};
+	// 		await thread.send({
+	// 			content: `<@${joshId}> has joined the game!`,
+	// 		});
 
-			await sub.unsubscribe();
-		};
+	// 		await sub.unsubscribe();
+	// 	};
 
-		pub = createClient({
-			url: "redis://host.docker.internal:6379",
-		});
-		pub.on("error", (err) => console.error(err));
-		sub = pub.duplicate();
-		sub.on("error", (err) => console.error(err));
-		await pub.connect();
-		await pub.publish("josh-new-quiz", thread.id);
-		await sub.connect();
-		await sub.subscribe("josh-new-quiz", listener);
-	}
+	// 	pub = createClient({
+	// 		url: "redis://host.docker.internal:6379",
+	// 	});
+	// 	pub.on("error", (err) => console.error(err));
+	// 	sub = pub.duplicate();
+	// 	sub.on("error", (err) => console.error(err));
+	// 	await pub.connect();
+	// 	await pub.publish("josh-new-quiz", thread.id);
+	// 	await sub.connect();
+	// 	await sub.subscribe("josh-new-quiz", listener);
+	// }
 
 	collector?.on("collect", async (i: ButtonInteraction) => {
 		if (i.customId === `cancel-${buttonId}`) {
@@ -264,9 +265,10 @@ If you want to play, click the button below.
 				components: [],
 			});
 
-			if (Object.keys(players).includes(joshId)) {
-				await pub.publish("josh-do-quiz", aircraft.name);
-			}
+			//! J0sh is deprecated
+			// if (Object.keys(players).includes(joshId)) {
+			// 	await pub.publish("josh-do-quiz", aircraft.name);
+			// }
 
 			//! cheat mode
 			// await thread.send({
@@ -397,9 +399,10 @@ If you want to play, click the button below.
 			components: [],
 		});
 
-		if (Object.keys(players).includes(joshId)) {
-			await pub.publish("josh-do-quiz", "end");
-		}
+		//! J0sh is deprecated
+		// if (Object.keys(players).includes(joshId)) {
+		// 	await pub.publish("josh-do-quiz", "end");
+		// }
 
 		sortedPlayers
 			.filter((p) => p !== sortedPlayers[0])
@@ -511,11 +514,12 @@ If you want to play, click the button below.
 			}
 		}
 
-		isFinished = true;
-		if (isJoshOnline) {
-			await sub.disconnect();
-			await pub.disconnect();
-		}
+		//! J0sh is deprecated
+		// isFinished = true;
+		// if (isJoshOnline) {
+		// 	await sub.disconnect();
+		// 	await pub.disconnect();
+		// }
 		await thread.setArchived(true);
 	});
 }
