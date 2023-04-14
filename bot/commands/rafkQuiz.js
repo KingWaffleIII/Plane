@@ -7,8 +7,12 @@ exports.execute = exports.data = void 0;
 const discord_js_1 = require("discord.js");
 const RAFK_json_1 = __importDefault(require("../RAFK.json"));
 const wait = require("node:timers/promises").setTimeout;
-const joshId = "1084882617964441610";
-const joshUsername = "J0sh";
+// stop crashing if thread is deleted pre-emptively
+process.on("unhandledRejection", (error) => {
+    if (error.name === "Error [ChannelNotCached]")
+        return;
+    console.error("Unhandled promise rejection:", error);
+});
 exports.data = new discord_js_1.SlashCommandBuilder()
     .setName("rafk-quiz")
     .setDescription("Gives you a series of RAFK questions, similar to a part test.")
@@ -34,42 +38,6 @@ async function execute(interaction) {
     await interaction.editReply({
         content: "Thread created! Click here:",
     });
-    //! J0sh is deprecated
-    // let isJoshOnline = false;
-    // try {
-    // 	const conn = createClient({
-    // 		url: "redis://host.docker.internal:6379",
-    // 	});
-    // 	await conn.connect();
-    // 	isJoshOnline = true;
-    // } catch (err) {
-    // 	isJoshOnline = false;
-    // }
-    // let isFinished = false;
-    // let isJoshParticipating = false;
-    // let pub: RedisClientType;
-    // let sub: RedisClientType;
-    // if (isJoshOnline) {
-    // 	const listener = async (m: string, c: string) => {
-    // 		if (isFinished) return;
-    // 		if (c !== "josh-new-quiz" || m !== "accept") return;
-    // 		isJoshParticipating = true;
-    // 		await thread.send({
-    // 			content: `<@${joshId}> has joined the game!`,
-    // 		});
-    // 		await sub.unsubscribe();
-    // 	};
-    // 	pub = createClient({
-    // 		url: "redis://host.docker.internal:6379",
-    // 	});
-    // 	pub.on("error", (err) => console.error(err));
-    // 	sub = pub.duplicate();
-    // 	sub.on("error", (err) => console.error(err));
-    // 	await pub.connect();
-    // 	await pub.publish("josh-new-quiz", thread.id);
-    // 	await sub.connect();
-    // 	await sub.subscribe("josh-new-quiz", listener);
-    // }
     await thread.send({
         content: `
 __**RAFK Part ${1} Quiz**__
@@ -87,8 +55,6 @@ You will be given 2 questions from each category in Part ${1} of RAFK. You will 
         const msg = await thread.send({
             content: `${question}\n**The answer will be revealed in 10 seconds...**`,
         });
-        //! J0sh is deprecated
-        // if (isJoshParticipating) await pub!.publish("josh-do-quiz", answer);
         await wait(15000);
         await msg.edit({
             content: `${question}\n**${answer}**`,
@@ -121,13 +87,6 @@ You will be given 2 questions from each category in Part ${1} of RAFK. You will 
             });
         });
     }
-    //! J0sh is deprecated
-    // isFinished = true;
-    // if (isJoshParticipating) await pub!.publish("josh-do-quiz", "end");
-    // if (isJoshOnline) {
-    // 	await sub!.disconnect();
-    // 	await pub!.disconnect();
-    // }
     await thread.setArchived(true);
 }
 exports.execute = execute;

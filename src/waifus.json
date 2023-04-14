@@ -23,7 +23,7 @@
 	},
 	"Black Hawk": {
 		"path": "./assets/waifus/Black_Hawk.jpg",
-		"spec": false,
+		"spec": true,
 		"type": "aircraft",
 		"urlFriendlyName": "Black_Hawk",
 		"country": "USA"
@@ -136,7 +136,7 @@
 	},
 	"Hawkeye": {
 		"path": "./assets/waifus/Hawkeye.jpg",
-		"spec": false,
+		"spec": true,
 		"type": "aircraft",
 		"country": "USA"
 	},
@@ -163,7 +163,7 @@
 	},
 	"Lancer": {
 		"path": "./assets/waifus/Lancer.jpg",
-		"spec": false,
+		"spec": true,
 		"type": "aircraft",
 		"country": "USA"
 	},
@@ -188,7 +188,7 @@
 	},
 	"Mustang": {
 		"path": "./assets/waifus/Mustang.jpg",
-		"spec": false,
+		"spec": true,
 		"type": "aircraft",
 		"country": "USA"
 	},
@@ -216,7 +216,7 @@
 	},
 	"Pegasus": {
 		"path": "./assets/waifus/Pegasus.jpg",
-		"spec": false,
+		"spec": true,
 		"type": "aircraft",
 		"country": "USA"
 	},
@@ -290,7 +290,7 @@
 	},
 	"Spirit": {
 		"path": "./assets/waifus/Spirit.jpg",
-		"spec": false,
+		"spec": true,
 		"type": "aircraft",
 		"country": "USA"
 	},

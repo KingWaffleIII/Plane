@@ -10,8 +10,12 @@ const models_1 = require("../models");
 const airrec_1 = require("./airrec");
 const air_rec_json_1 = __importDefault(require("../air_rec.json"));
 const wait = require("node:timers/promises").setTimeout;
-const joshId = "1084882617964441610";
-const joshUsername = "J0sh";
+// stop crashing if thread is deleted pre-emptively
+process.on("unhandledRejection", (error) => {
+    if (error.name === "Error [ChannelNotCached]")
+        return;
+    console.error("Unhandled promise rejection:", error);
+});
 function checkAnswer(message, aircraft) {
     if (message.toLowerCase() === aircraft.name.toLowerCase()) {
         return 2;
@@ -86,45 +90,6 @@ If you want to play, click the button below.
         time: 60000,
         filter: playFilter,
     });
-    //! J0sh is deprecated
-    // let isJoshOnline = false;
-    // try {
-    // 	const conn = createClient({
-    // 		url: "redis://host.docker.internal:6379",
-    // 	});
-    // 	await conn.connect();
-    // 	isJoshOnline = true;
-    // } catch (err) {
-    // 	isJoshOnline = false;
-    // }
-    // let isFinished = false;
-    // let pub: RedisClientType;
-    // let sub: RedisClientType;
-    // if (isJoshOnline) {
-    // 	const listener = async (message: string, channel: string) => {
-    // 		if (isFinished) return;
-    // 		if (channel !== "josh-new-quiz" || message !== "accept") return;
-    // 		players[joshId] = {
-    // 			username: joshUsername,
-    // 			score: 0,
-    // 			lastScore: 0,
-    // 		};
-    // 		await thread.send({
-    // 			content: `<@${joshId}> has joined the game!`,
-    // 		});
-    // 		await sub.unsubscribe();
-    // 	};
-    // 	pub = createClient({
-    // 		url: "redis://host.docker.internal:6379",
-    // 	});
-    // 	pub.on("error", (err) => console.error(err));
-    // 	sub = pub.duplicate();
-    // 	sub.on("error", (err) => console.error(err));
-    // 	await pub.connect();
-    // 	await pub.publish("josh-new-quiz", thread.id);
-    // 	await sub.connect();
-    // 	await sub.subscribe("josh-new-quiz", listener);
-    // }
     collector?.on("collect", async (i) => {
         if (i.customId === `cancel-${buttonId}`) {
             if (i.user.id !== interaction.user.id) {
@@ -207,14 +172,6 @@ If you want to play, click the button below.
                 content: `**Round ${i + 1} of ${rounds}:**\nWhat is the name of this aircraft?\n${image}`,
                 components: [],
             });
-            //! J0sh is deprecated
-            // if (Object.keys(players).includes(joshId)) {
-            // 	await pub.publish("josh-do-quiz", aircraft.name);
-            // }
-            //! cheat mode
-            // await thread.send({
-            // 	content: aircraft.name,
-            // });
             const answered = [];
             const answerFilter = (m) => {
                 if (!answered.includes(m.author.id)) {
@@ -236,10 +193,6 @@ If you want to play, click the button below.
                 messages.forEach(async (message) => {
                     const score = checkAnswer(message.content, aircraft);
                     players[message.author.id].score += score;
-                    //! too spammy
-                    // await message.reply({
-                    // 	content: `You got **${score}** point(s)!`,
-                    // });
                 });
             }
             const answer = new discord_js_1.EmbedBuilder()
@@ -306,10 +259,6 @@ If you want to play, click the button below.
             embeds: [leaderboard],
             components: [],
         });
-        //! J0sh is deprecated
-        // if (Object.keys(players).includes(joshId)) {
-        // 	await pub.publish("josh-do-quiz", "end");
-        // }
         sortedPlayers
             .filter((p) => p !== sortedPlayers[0])
             .forEach(async (p) => {
@@ -396,12 +345,6 @@ If you want to play, click the button below.
                 }
             }
         }
-        //! J0sh is deprecated
-        // isFinished = true;
-        // if (isJoshOnline) {
-        // 	await sub.disconnect();
-        // 	await pub.disconnect();
-        // }
         await thread.setArchived(true);
     });
 }

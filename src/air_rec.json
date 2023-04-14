@@ -1722,6 +1722,7 @@
 			"model": "KC-46",
 			"name": "Boeing KC-46 Pegasus",
 			"role": "Aerial refuelling and transport tanker aircraft.",
+			"waifuImage": "Pegasus",
 			"wiki": "https://en.wikipedia.org/wiki/Boeing_KC-46_Pegasus"
 		},
 		{
@@ -1741,6 +1742,7 @@
 			"model": "F/A-18E/F",
 			"name": "Boeing F/A-18E/F Super Hornet",
 			"role": "Carrier-based multirole fighter aircraft.",
+			"waifuImage": "Super Hornet",
 			"wiki": "https://en.wikipedia.org/wiki/Boeing_F/A-18E/F_Super_Hornet"
 		},
 		{
@@ -2115,6 +2117,7 @@
 			"model": "P-51",
 			"name": "North American P-51 Mustang",
 			"role": "Fighter aircraft.",
+			"waifuImage": "Mustang",
 			"wiki": "https://en.wikipedia.org/wiki/North_American_P-51_Mustang"
 		},
 		{
@@ -2135,6 +2138,7 @@
 			"model": "E-2",
 			"name": "Northrop Grumman E-2 Hawkeye",
 			"role": "Airborne early warning and control (AEW&C) aircraft.",
+			"waifuImage": "Hawkeye",
 			"wiki": "https://en.wikipedia.org/wiki/Northrop_Grumman_E-2_Hawkeye"
 		},
 		{
@@ -2145,6 +2149,7 @@
 			"model": "B-2",
 			"name": "Northrop Grumman B-2 Spirit",
 			"role": "Stealth strategic heavy bomber aircraft.",
+			"waifuImage": "Spirit",
 			"wiki": "https://en.wikipedia.org/wiki/Northrop_Grumman_B-2_Spirit"
 		},
 		{
@@ -2175,6 +2180,7 @@
 			"model": "B-1",
 			"name": "Rockwell B-1 Lancer",
 			"role": "Supersonic strategic bomber aircraft.",
+			"waifuImage": "Lancer",
 			"wiki": "https://en.wikipedia.org/wiki/Rockwell_B-1_Lancer"
 		},
 		{
@@ -2289,6 +2295,7 @@
 			"model": "UH-60",
 			"name": "Sikorsky UH-60 Black Hawk",
 			"role": "Utility helicopter.",
+			"waifuImage": "Black Hawk",
 			"wiki": "https://en.wikipedia.org/wiki/Sikorsky_UH-60_Black_Hawk"
 		},
 		{

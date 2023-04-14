@@ -8,7 +8,7 @@ const path_1 = __importDefault(require("path"));
 const discord_js_1 = require("discord.js");
 const models_1 = require("./models");
 const config_json_1 = require("./config.json");
-const waifus_json_1 = __importDefault(require("./waifus.json"));
+const migrations_1 = require("./migrations");
 const client = new discord_js_1.Client({
     intents: [
         discord_js_1.GatewayIntentBits.Guilds,
@@ -80,11 +80,6 @@ client.on(discord_js_1.Events.InteractionCreate, async (interaction) => {
         });
     }
 });
-const guildId = "1084883298100191233";
-const joshId = "1084882617964441610";
-const joshUsername = "J0sh";
-const joshDiscriminator = "8825";
-const joshAvatarUrl = "https://cdn.discordapp.com/avatars/1084882617964441610/ad1b8d87ecfd2036733232a53bb04488.webp";
 const rest = new discord_js_1.REST({ version: "10" }).setToken(config_json_1.token);
 (async () => {
     try {
@@ -109,22 +104,23 @@ const rest = new discord_js_1.REST({ version: "10" }).setToken(config_json_1.tok
             name: guild.name,
         });
     });
-    if (!(await models_1.User.findByPk(joshId))) {
-        const guild = await models_1.Guild.findByPk(guildId);
-        if (!guild)
-            return;
-        await guild.createUser({
-            id: joshId,
-            username: joshUsername,
-            discriminator: joshDiscriminator,
-            avatarUrl: joshAvatarUrl,
-            dogfightKills: 999,
-            dogfightDeaths: 999,
-            dogfightWinstreak: 999,
-            airrecQuizWins: 999,
-            airrecQuizLosses: 999,
-            airrecQuizWinstreak: 999,
-            lockedWaifus: Object.keys(waifus_json_1.default),
-        });
-    }
+    await (0, migrations_1.runAllMigrations)();
+    //! J0sh is deprecated
+    // if (!(await User.findByPk(joshId))) {
+    // 	const guild = await Guild.findByPk(guildId);
+    // 	if (!guild) return;
+    // 	await guild.createUser({
+    // 		id: joshId,
+    // 		username: joshUsername,
+    // 		discriminator: joshDiscriminator,
+    // 		avatarUrl: joshAvatarUrl,
+    // 		dogfightKills: 999,
+    // 		dogfightDeaths: 999,
+    // 		dogfightWinstreak: 999,
+    // 		airrecQuizWins: 999,
+    // 		airrecQuizLosses: 999,
+    // 		airrecQuizWinstreak: 999,
+    // 		lockedWaifus: Object.keys(waifus),
+    // 	});
+    // }
 })();
