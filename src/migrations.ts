@@ -1,4 +1,5 @@
 // DB migrations to update users using old data
+// On DB changes, e.g. a new field for User is added, migrations should be made to update users' data
 
 import { User, Waifu } from "./models";
 import waifus from "./waifus.json";
@@ -8,10 +9,8 @@ export async function updateLockedWaifus(): Promise<void> {
 	await User.sync({ alter: true });
 
 	(await User.findAll()).forEach(async (user) => {
-		const oldLockedWaifus = user.lockedWaifus;
-		const newLockedWaifus = Object.keys(waifus);
-		const difference = newLockedWaifus.filter(
-			(x) => !oldLockedWaifus.includes(x)
+		const difference = Object.keys(waifus).filter(
+			(w) => !user.lockedWaifus.includes(w)
 		);
 
 		if (difference.length > 0) {

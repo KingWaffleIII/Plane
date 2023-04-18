@@ -21,7 +21,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 	const user = await User.findByPk(interaction.user.id);
 	if (!user) {
 		await interaction.editReply({
-			content: `You don't have waifu collection yet! Use \`/waifus\` to create one!`,
+			content: `You don't have profile yet. Use \`/waifus\` or \`/stats\` to first.`,
 		});
 		return;
 	}

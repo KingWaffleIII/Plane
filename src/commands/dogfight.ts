@@ -71,7 +71,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 	if (!initialUserModel || !targetUserModel) {
 		await interaction.editReply({
 			content:
-				"Either you or the user you want to dogfight don't have waifu collections yet! Use `/waifus` to create one!",
+				"Either you or the user you want to dogfight don't have profiles yet. Use `/waifus` or `/stats` first.",
 		});
 		return;
 	}

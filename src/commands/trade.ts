@@ -33,7 +33,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 	if (!initialUserModel || !targetUserModel) {
 		await interaction.followUp({
 			content:
-				"**Either you or the user you want to trade with don't have waifu collections yet! Use `/waifus` to create one!**",
+				"Either you or the user you want to trade with don't have profiles yet. Use `/waifus` or `/stats` first.",
 		});
 		return;
 	}
@@ -51,7 +51,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 	if (initialUserWaifus.length === 0 || targetUserWaifus.length === 0) {
 		await interaction.followUp({
 			content:
-				"Either you or the user you want to trade with don't have any waifus!",
+				"Either you or the user you want to trade with don't have waifus to dogfight with! Get collecting with `/airrec` and `/airrec-quiz`!",
 		});
 		return;
 	}

@@ -79,7 +79,7 @@ async function execute(interaction) {
     const user = await models_1.User.findByPk(targetUser.id);
     if (!user) {
         await interaction.editReply({
-            content: "This user doesn't have a waifu collection yet. They need to run `/waifus` first.",
+            content: "This user doesn't have a profile yet. They need to use `/waifus` or `/stats` first.",
         });
         return;
     }

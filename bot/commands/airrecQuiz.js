@@ -274,7 +274,7 @@ If you want to play, click the button below.
         const user = await models_1.User.findByPk(sortedPlayers[0]);
         if (!user) {
             await thread.send({
-                content: `**<@${sortedPlayers[0]}>, you don't have waifu collection yet! Use \`/waifus\` to create one!**`,
+                content: `**<@${sortedPlayers[0]}>, you doesn't have a profile yet! Use \`/waifus\` or \`/stats\` to get one!**`,
             });
         }
         else {
@@ -326,7 +326,7 @@ If you want to play, click the button below.
                         });
                     }
                     await thread.send({
-                        content: `<@${interaction.user.id}> has unlocked a new waifu!`,
+                        content: `<@${user.id}> has unlocked a new waifu!`,
                         embeds: [waifuEmbed],
                         files: [waifu.path],
                     });

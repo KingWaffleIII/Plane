@@ -1306,7 +1306,7 @@
 			"wiki": "https://en.wikipedia.org/wiki/Sukhoi_Su-57"
 		},
 		{
-			"aliases": ["Fishbed", "MiG21", "MiG 21"],
+			"aliases": ["Fishbed", "MiG21", "MiG 21", "J-7", "J7", "J 7"],
 			"identification": [
 				"Has 1 large engine at the rear",
 				"Has that is open with a cone inside it",
@@ -1440,7 +1440,7 @@
 			"wiki": "https://en.wikipedia.org/wiki/Xi%27an_JH-7"
 		},
 		{
-			"aliases": ["Fishcan", "MiG-21", "MiG21", "J7", "J 7"],
+			"aliases": ["Fishcan", "MiG-21", "MiG21", "MiG 21", "J7", "J 7"],
 			"identification": [
 				"Basically a repainted MiG-21",
 				"Has 1 large engine at the rear",

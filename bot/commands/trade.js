@@ -21,7 +21,7 @@ async function execute(interaction) {
     const targetUserModel = await models_1.User.findByPk(targetUser.id);
     if (!initialUserModel || !targetUserModel) {
         await interaction.followUp({
-            content: "**Either you or the user you want to trade with don't have waifu collections yet! Use `/waifus` to create one!**",
+            content: "Either you or the user you want to trade with don't have profiles yet. Use `/waifus` or `/stats` first.",
         });
         return;
     }
@@ -35,7 +35,7 @@ async function execute(interaction) {
     let targetWaifu;
     if (initialUserWaifus.length === 0 || targetUserWaifus.length === 0) {
         await interaction.followUp({
-            content: "Either you or the user you want to trade with don't have any waifus!",
+            content: "Either you or the user you want to trade with don't have waifus to dogfight with! Get collecting with `/airrec` and `/airrec-quiz`!",
         });
         return;
     }

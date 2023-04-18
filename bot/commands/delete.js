@@ -21,7 +21,7 @@ async function execute(interaction) {
     const user = await models_1.User.findByPk(interaction.user.id);
     if (!user) {
         await interaction.followUp({
-            content: `You don't have waifu collection yet! Use \`/waifus\` to create one!`,
+            content: "You don't have a profile yet. Use `/waifus` or `/stats` first.",
         });
     }
     const waifusLowerCase = Object.keys(waifus_json_1.default).map((w) => w.toLowerCase());
