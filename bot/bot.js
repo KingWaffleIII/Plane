@@ -105,22 +105,4 @@ const rest = new discord_js_1.REST({ version: "10" }).setToken(config_json_1.tok
         });
     });
     await (0, migrations_1.runAllMigrations)();
-    //! J0sh is deprecated
-    // if (!(await User.findByPk(joshId))) {
-    // 	const guild = await Guild.findByPk(guildId);
-    // 	if (!guild) return;
-    // 	await guild.createUser({
-    // 		id: joshId,
-    // 		username: joshUsername,
-    // 		discriminator: joshDiscriminator,
-    // 		avatarUrl: joshAvatarUrl,
-    // 		dogfightKills: 999,
-    // 		dogfightDeaths: 999,
-    // 		dogfightWinstreak: 999,
-    // 		airrecQuizWins: 999,
-    // 		airrecQuizLosses: 999,
-    // 		airrecQuizWinstreak: 999,
-    // 		lockedWaifus: Object.keys(waifus),
-    // 	});
-    // }
 })();

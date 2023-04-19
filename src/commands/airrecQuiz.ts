@@ -379,16 +379,14 @@ If you want to play, click the button below.
 				if (isGuaranteed) {
 					waifuName = user!.guaranteeWaifu!;
 				}
+
+				waifuName = "Aardvark";
+
 				const waifu: WaifuData | null = await spawnWaifu(
 					user!,
 					waifuName
 				);
-				if (
-					waifu &&
-					(await user!.countWaifus({
-						where: { name: waifu.name },
-					})) <= 5
-				) {
+				if (waifu) {
 					const atk = Math.floor(Math.random() * 10);
 					const hp = Math.floor(Math.random() * (100 - 50) + 50);
 					const spd = Math.floor(Math.random() * 10);

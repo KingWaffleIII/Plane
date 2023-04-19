@@ -286,12 +286,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 					user,
 					aircraft.waifuImage
 				);
-				if (
-					waifu &&
-					(await user!.countWaifus({
-						where: { name: waifu.name },
-					})) <= 5
-				) {
+				if (waifu) {
 					const atk = Math.floor(Math.random() * 10);
 					const hp = Math.floor(Math.random() * (100 - 50) + 50);
 					const spd = Math.floor(Math.random() * 10);
