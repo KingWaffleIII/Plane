@@ -16,7 +16,7 @@ async function execute(interaction) {
         url: "https://github.com/KingWaffleIII/",
     })
         .setDescription(`
-Plane focuses on supplementing RAF cadets' RAFK (RAF Knowledge) and their aircraft recognition skills (especially in preparation for mRAST).
+Plane focuses on supplementing RAF cadets' RAFK (RAF Knowledge) and their aircraft recognition skills (especially in preparation for RAST).
 \n
 __**Known issues/suggestions**__
 https://github.com/KingWaffleIII/plane/issues

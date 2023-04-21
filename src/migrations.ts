@@ -1,14 +1,18 @@
 // DB migrations to update users using old data
 // On DB changes, e.g. a new field for User is added, migrations should be made to update users' data
 
-import { User, Waifu } from "./models";
+import { db, User, Waifu } from "./models";
 import waifus from "./waifus.json";
 
 export async function updateLockedWaifus(): Promise<void> {
 	// If there's ever new waifus added, this will add them to the lockedWaifus array.
 
 	// update column default value
-	await User.sync({ alter: true });
+	await User.sync({
+		alter: {
+			drop: false,
+		},
+	});
 
 	(await User.findAll()).forEach(async (user) => {
 		const difference = Object.keys(waifus).filter(
@@ -56,7 +60,13 @@ export async function updateLegacyHornetName(): Promise<void> {
 	});
 }
 
+export async function deleteGuildModel(): Promise<void> {
+	// As of v1.4.4, Guilds are no longer used. This function deletes the Guild model from the DB.
+	await db.getQueryInterface().dropTable("Guilds");
+}
+
 export async function runAllMigrations(): Promise<void> {
+	await deleteGuildModel();
 	await updateLegacyHornetName();
 	await updateLockedWaifus();
 }

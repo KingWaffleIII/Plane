@@ -1,4 +1,4 @@
-**Total aircraft: 177**
+**Total aircraft: 178**
 
 ## Civilian:
 
@@ -548,6 +548,9 @@ None
 - Fishbed
 - MiG21
 - MiG 21
+- J-7
+- J7
+- J 7
 
 
 ### Mikoyan MiG-29
@@ -606,6 +609,7 @@ None
 - Fishcan
 - MiG-21
 - MiG21
+- MiG 21
 - J7
 - J 7
 
@@ -1201,4 +1205,11 @@ None
 ### Vickers Valiant
 **Aliases:**
 None
+
+
+### Lockheed F-117 Nighthawk
+**Aliases:**
+- Nighthawk
+- F117
+- F 117
 

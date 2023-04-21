@@ -9,6 +9,7 @@ const discord_js_1 = require("discord.js");
 const models_1 = require("../models");
 const airrec_1 = require("./airrec");
 const air_rec_json_1 = __importDefault(require("../air_rec.json"));
+const waifus_json_1 = __importDefault(require("../waifus.json"));
 const wait = require("node:timers/promises").setTimeout;
 // stop crashing if thread is deleted pre-emptively
 process.on("unhandledRejection", (error) => {
@@ -282,16 +283,19 @@ If you want to play, click the button below.
                 airrecQuizWins: user.airrecQuizWins + 1,
                 airrecQuizWinstreak: user.airrecQuizWinstreak + 1,
             });
-            const isGuaranteed = user.guaranteeWaifu && user.guaranteeCounter >= 10;
+            const isGuaranteed = user.guaranteeWaifu &&
+                user.guaranteeCounter >= 10 &&
+                !waifus_json_1.default[user.guaranteeWaifu].spec;
             if (isGuaranteed ||
                 (rounds >= 5 &&
                     players[sortedPlayers[0]].score >= 0.25 * rounds)) {
-                let waifuName;
+                let waifu;
                 if (isGuaranteed) {
-                    waifuName = user.guaranteeWaifu;
+                    waifu = await (0, airrec_1.spawnWaifu)(user, user.guaranteeWaifu);
                 }
-                waifuName = "Aardvark";
-                const waifu = await (0, airrec_1.spawnWaifu)(user, waifuName);
+                else {
+                    waifu = await (0, airrec_1.spawnWaifu)(user);
+                }
                 if (waifu) {
                     const atk = Math.floor(Math.random() * 10);
                     const hp = Math.floor(Math.random() * (100 - 50) + 50);

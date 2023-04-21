@@ -13,7 +13,7 @@ import {
 	ThreadChannel,
 } from "discord.js";
 
-import { db, Guild } from "./models";
+import { db } from "./models";
 import { clientId, token } from "./config.json";
 import { runAllMigrations } from "./migrations";
 
@@ -60,15 +60,6 @@ for (const file of commandFiles) {
 
 client.on(Events.ClientReady, (bot) => {
 	console.log(`Bot is ready, logged in as ${bot.user.tag}!`);
-});
-
-client.on(Events.GuildCreate, async (guild) => {
-	const guildModel = await Guild.findByPk(guild.id);
-	if (guildModel) return;
-	await Guild.create({
-		id: guild.id,
-		name: guild.name,
-	});
 });
 
 client.on(Events.InteractionCreate, async (interaction: Interaction) => {
@@ -125,17 +116,7 @@ const rest = new REST({ version: "10" }).setToken(token);
 
 	await db.sync();
 
-	client.login(token);
-
-	const guilds = await client.guilds.fetch();
-	guilds.forEach(async (guild) => {
-		const guildModel = await Guild.findByPk(guild.id);
-		if (guildModel) return;
-		await Guild.create({
-			id: guild.id,
-			name: guild.name,
-		});
-	});
-
 	await runAllMigrations();
+
+	await client.login(token);
 })();

@@ -4,7 +4,7 @@ An extremely modular Discord bot designed to help RAF students with their RAFK (
 
 ## Usage & Invite
 
-If you want to use the bot, we heavily recommend you use the bot hosted by Planet Waffle; you can do so [here](https://discord.com/api/oauth2/authorize?client_id=1044710491110522940&permissions=309237697536&scope=bot). This bot will always use the latest version from the main branch (I update the bot every time I merge a PR).
+If you want to use the bot, we heavily recommend you use the bot hosted by Planet Waffle; you can do so [here](https://discord.com/api/oauth2/authorize?client_id=1044710491110522940&permissions=326417566720&scope=bot). This bot will always use the latest version from the main branch (I update the bot every time I merge a PR).
 
 If you really want to host the bot yourself, you can do so by following these steps:
 (note: Docker and Docker Compose are required to run the bot)
@@ -24,9 +24,9 @@ If you really want to host the bot yourself, you can do so by following these st
 
 ## Aircraft
 
-### mRAST Spec
+### RAST Spec
 
-The mRAST spec is inconsistent in its use of aircraft names. Sometimes, it uses the most up-to-date model with the latest manufacturer and sometimes it likes to stay in the past. An example is the CASA/IPTN CN-235, which the spec calls the Airbus CN-235. Another example is the Breguet 1150 Atlantic, which the spec calls the Dassault Atlantic.
+The RAST spec is inconsistent in its use of aircraft names. Sometimes, it uses the most up-to-date model with the latest manufacturer and sometimes it likes to stay in the past. An example is the CASA/IPTN CN-235, which the spec calls the Airbus CN-235. Another example is the Breguet 1150 Atlantic, which the spec calls the Dassault Atlantic.
 
 As a result, I've compromised and tried to use the most accurate name possible, whilst avoiding going against the spec.
 

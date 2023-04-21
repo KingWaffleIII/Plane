@@ -353,8 +353,8 @@
 				"ERJ-145",
 				"ERJ 145",
 				"EMB135",
-				"EMB 135",
-				"EMB-135",
+				"EMB 145",
+				"EMB-145",
 				"R99A",
 				"R99B"
 			],
@@ -2397,6 +2397,16 @@
 			"name": "Vickers Valiant",
 			"role": "Strategic bomber and aerial refuelling tanker aircraft.",
 			"wiki": "https://en.wikipedia.org/wiki/Vickers_Valiant"
+		},
+		{
+			"aliases": ["Nighthawk", "F117", "F 117"],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=1604",
+			"manufacturer": "Lockheed",
+			"model": "F-117",
+			"name": "Lockheed F-117 Nighthawk",
+			"role": "Stealth attack aircraft.",
+			"wiki": "https://en.wikipedia.org/wiki/Lockheed_F-117_Nighthawk"
 		}
 	]
 }

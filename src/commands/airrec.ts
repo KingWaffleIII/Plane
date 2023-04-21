@@ -75,19 +75,18 @@ export async function spawnWaifu(
 		isGuaranteed =
 			user.guaranteeWaifu !== undefined && user.guaranteeCounter! >= 10;
 	}
-	if (isGuaranteed || Math.floor(Math.random() * 3) === 0) {
-		if (
-			(isGuaranteed && name === user.guaranteeWaifu) ||
-			name === user.guaranteeWaifu
-		) {
+	if (isGuaranteed || Math.floor(Math.random() * 1) === 0) {
+		if (name === user.guaranteeWaifu) {
 			await user!.update({
 				guaranteeWaifu: null,
 				guaranteeCounter: null,
 			});
 		} else if (user.guaranteeWaifu) {
-			await user!.update({
-				guaranteeCounter: user.guaranteeCounter! + 1,
-			});
+			if (user.guaranteeCounter! < 10) {
+				await user!.update({
+					guaranteeCounter: user.guaranteeCounter! + 1,
+				});
+			}
 		}
 
 		if (name) {

@@ -20,12 +20,11 @@ async function execute(interaction) {
     const name = interaction.options.getString("name") ?? null;
     const targetUser = interaction.options.getUser("user") ?? interaction.user;
     await interaction.deferReply();
-    const guild = await models_1.Guild.findByPk(interaction.guildId);
     let user = await models_1.User.findByPk(targetUser.id, {
         include: { model: models_1.Waifu, as: "waifus" },
     });
     if (!user && targetUser.id === interaction.user.id) {
-        await guild.createUser({
+        await models_1.User.create({
             id: interaction.user.id,
             username: interaction.user.username,
             discriminator: interaction.user.discriminator,

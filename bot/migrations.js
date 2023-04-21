@@ -5,13 +5,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.runAllMigrations = exports.updateLegacyHornetName = exports.updateLockedWaifus = void 0;
+exports.runAllMigrations = exports.deleteGuildModel = exports.updateLegacyHornetName = exports.updateLockedWaifus = void 0;
 const models_1 = require("./models");
 const waifus_json_1 = __importDefault(require("./waifus.json"));
 async function updateLockedWaifus() {
     // If there's ever new waifus added, this will add them to the lockedWaifus array.
     // update column default value
-    await models_1.User.sync({ alter: true });
+    await models_1.User.sync({
+        alter: {
+            drop: false,
+        },
+    });
     (await models_1.User.findAll()).forEach(async (user) => {
         const difference = Object.keys(waifus_json_1.default).filter((w) => !user.lockedWaifus.includes(w));
         if (difference.length > 0) {
@@ -48,7 +52,13 @@ async function updateLegacyHornetName() {
     });
 }
 exports.updateLegacyHornetName = updateLegacyHornetName;
+async function deleteGuildModel() {
+    // As of v1.4.4, Guilds are no longer used. This function deletes the Guild model from the DB.
+    await models_1.db.getQueryInterface().dropTable("Guilds");
+}
+exports.deleteGuildModel = deleteGuildModel;
 async function runAllMigrations() {
+    await deleteGuildModel();
     await updateLegacyHornetName();
     await updateLockedWaifus();
 }

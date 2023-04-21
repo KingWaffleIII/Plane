@@ -68,7 +68,7 @@
 		"path": "./assets/waifus/Fighting_Eagle.jpg",
 		"spec": false,
 		"type": "aircraft",
-		"country": "USA",
+		"country": "South Korea",
 		"urlFriendlyName": "Fighting_Eagle"
 	},
 	"Fire Scout": {
@@ -194,7 +194,7 @@
 	},
 	"Nighthawk": {
 		"path": "./assets/waifus/Nighthawk.jpg",
-		"spec": false,
+		"spec": true,
 		"type": "aircraft",
 		"country": "USA"
 	},
@@ -318,7 +318,7 @@
 		"abilityDescription": "After equipping this weapon, your next attack will call in a support strike, dealing damage equivalent to this weapon's ATK to the opponent, on top of any attacks this round.",
 		"abilityName": "Call for Support",
 		"path": "./assets/waifus/Trident_II.jpg",
-		"spec": true,
+		"spec": false,
 		"type": "weapon",
 		"urlFriendlyName": "Trident_II"
 	},

@@ -16,6 +16,7 @@ import {
 import { User } from "../models";
 import { Aircraft, getImage, spawnWaifu, WaifuData } from "./airrec";
 import airrec from "../air_rec.json";
+import waifus from "../waifus.json";
 
 const wait = require("node:timers/promises").setTimeout;
 
@@ -368,24 +369,22 @@ If you want to play, click the button below.
 			});
 
 			const isGuaranteed =
-				user!.guaranteeWaifu && user!.guaranteeCounter! >= 10;
+				user!.guaranteeWaifu &&
+				user!.guaranteeCounter! >= 10 &&
+				!waifus[user!.guaranteeWaifu as keyof typeof waifus].spec;
 
 			if (
 				isGuaranteed ||
 				(rounds >= 5 &&
 					players[sortedPlayers[0]].score >= 0.25 * rounds)
 			) {
-				let waifuName;
+				let waifu: WaifuData | null;
 				if (isGuaranteed) {
-					waifuName = user!.guaranteeWaifu!;
+					waifu = await spawnWaifu(user!, user.guaranteeWaifu!);
+				} else {
+					waifu = await spawnWaifu(user!);
 				}
 
-				waifuName = "Aardvark";
-
-				const waifu: WaifuData | null = await spawnWaifu(
-					user!,
-					waifuName
-				);
 				if (waifu) {
 					const atk = Math.floor(Math.random() * 10);
 					const hp = Math.floor(Math.random() * (100 - 50) + 50);
@@ -444,7 +443,7 @@ If you want to play, click the button below.
 
 					await user!.update({
 						lockedWaifus: user!.lockedWaifus!.filter(
-							(w) => w !== waifu.name
+							(w) => w !== waifu!.name
 						),
 					});
 				}

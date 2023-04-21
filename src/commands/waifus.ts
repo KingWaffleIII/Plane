@@ -4,7 +4,7 @@ import {
 	SlashCommandBuilder,
 } from "discord.js";
 
-import { Guild, User, Waifu } from "../models";
+import { User, Waifu } from "../models";
 import { WaifuBaseData } from "./airrec";
 import waifus from "../waifus.json";
 
@@ -32,12 +32,11 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 
 	await interaction.deferReply();
 
-	const guild = await Guild.findByPk(interaction.guildId as string);
 	let user = await User.findByPk(targetUser.id, {
 		include: { model: Waifu, as: "waifus" },
 	});
 	if (!user && targetUser.id === interaction.user.id) {
-		await guild!.createUser({
+		await User.create({
 			id: interaction.user.id,
 			username: interaction.user.username,
 			discriminator: interaction.user.discriminator,

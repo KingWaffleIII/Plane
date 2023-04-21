@@ -16,10 +16,9 @@ exports.data = new discord_js_1.SlashCommandBuilder()
 async function execute(interaction) {
     const targetUser = interaction.options.getUser("user") ?? interaction.user;
     await interaction.deferReply();
-    const guild = await models_1.Guild.findByPk(interaction.guildId);
     let user = await models_1.User.findByPk(targetUser.id);
     if (!user && targetUser.id === interaction.user.id) {
-        await guild.createUser({
+        await models_1.User.create({
             id: interaction.user.id,
             username: interaction.user.username,
             discriminator: interaction.user.discriminator,

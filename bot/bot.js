@@ -44,15 +44,6 @@ for (const file of commandFiles) {
 client.on(discord_js_1.Events.ClientReady, (bot) => {
     console.log(`Bot is ready, logged in as ${bot.user.tag}!`);
 });
-client.on(discord_js_1.Events.GuildCreate, async (guild) => {
-    const guildModel = await models_1.Guild.findByPk(guild.id);
-    if (guildModel)
-        return;
-    await models_1.Guild.create({
-        id: guild.id,
-        name: guild.name,
-    });
-});
 client.on(discord_js_1.Events.InteractionCreate, async (interaction) => {
     if (!interaction.isChatInputCommand())
         return;
@@ -93,16 +84,6 @@ const rest = new discord_js_1.REST({ version: "10" }).setToken(config_json_1.tok
         console.error(error);
     }
     await models_1.db.sync();
-    client.login(config_json_1.token);
-    const guilds = await client.guilds.fetch();
-    guilds.forEach(async (guild) => {
-        const guildModel = await models_1.Guild.findByPk(guild.id);
-        if (guildModel)
-            return;
-        await models_1.Guild.create({
-            id: guild.id,
-            name: guild.name,
-        });
-    });
     await (0, migrations_1.runAllMigrations)();
+    await client.login(config_json_1.token);
 })();
