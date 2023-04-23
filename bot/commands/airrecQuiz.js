@@ -27,6 +27,100 @@ function checkAnswer(message, aircraft) {
     }
     return 0;
 }
+async function spawnWaifu(user, rounds, score, name) {
+    let isGuaranteed = false;
+    if (user.guaranteeWaifu) {
+        isGuaranteed =
+            user.guaranteeWaifu !== undefined && user.guaranteeCounter >= 10;
+    }
+    const doSpawn = () => {
+        // If the user has a guaranteed waifu, spawn it
+        if (isGuaranteed) {
+            return true;
+        }
+        // Set a minimum number of rounds before a waifu can spawn
+        if (rounds < 5) {
+            return false;
+        }
+        // Generate a random number between 0 and 1
+        const randomNum = Math.random();
+        // Calculate the probability of returning true based on the score (score is halved as you can earn 2 points in each round)
+        const probability = score / 2 / rounds;
+        // Return true if the random number is less than the probability, otherwise return false
+        if (randomNum < probability) {
+            return true;
+        }
+        return false;
+    };
+    if (doSpawn()) {
+        if (name === user.guaranteeWaifu) {
+            await user.update({
+                guaranteeWaifu: null,
+                guaranteeCounter: null,
+            });
+        }
+        else if (user.guaranteeWaifu) {
+            if (user.guaranteeCounter < 10) {
+                await user.update({
+                    guaranteeCounter: user.guaranteeCounter + 1,
+                });
+            }
+        }
+        if (name) {
+            if (Object.keys(waifus_json_1.default).includes(name)) {
+                const waifu = waifus_json_1.default[name];
+                if (waifu.urlFriendlyName) {
+                    return {
+                        name,
+                        urlFriendlyName: waifu.urlFriendlyName,
+                        path: waifu.path,
+                        type: waifu.type,
+                        spec: waifu.spec,
+                        abilityName: waifu.abilityName,
+                        abilityDescription: waifu.abilityDescription,
+                    };
+                }
+                return {
+                    name,
+                    urlFriendlyName: name,
+                    path: waifu.path,
+                    type: waifu.type,
+                    spec: waifu.spec,
+                    abilityName: waifu.abilityName,
+                    abilityDescription: waifu.abilityDescription,
+                };
+            }
+            return null;
+        }
+        const nonSpecWaifus = Object.keys(waifus_json_1.default).filter((w) => {
+            const waifuData = waifus_json_1.default[w];
+            return !waifuData.spec;
+        });
+        const waifuName = nonSpecWaifus[Math.floor(Math.random() * Object.keys(nonSpecWaifus).length)];
+        const waifu = waifus_json_1.default[waifuName];
+        if (waifu.urlFriendlyName) {
+            return {
+                name: waifuName,
+                urlFriendlyName: waifu.urlFriendlyName,
+                path: waifu.path,
+                type: waifu.type,
+                spec: waifu.spec,
+                abilityName: waifu.abilityName,
+                abilityDescription: waifu.abilityDescription,
+            };
+        }
+        return {
+            name: waifuName,
+            urlFriendlyName: waifuName,
+            path: waifu.path,
+            type: waifu.type,
+            spec: waifu.spec,
+            abilityName: waifu.abilityName,
+            abilityDescription: waifu.abilityDescription,
+        };
+    }
+    return null;
+}
 exports.data = new discord_js_1.SlashCommandBuilder()
     .setName("airrec-quiz")
     .setDescription("Gives you a series of aircraft images for you and others to identify with scoring.")
@@ -173,6 +267,7 @@ If you want to play, click the button below.
                 content: `**Round ${i + 1} of ${rounds}:**\nWhat is the name of this aircraft?\n${image}`,
                 components: [],
             });
+            await thread.send(aircraft.name);
             const answered = [];
             const answerFilter = (m) => {
                 if (!answered.includes(m.author.id)) {
@@ -244,7 +339,20 @@ If you want to play, click the button below.
             });
             await wait(10000);
         }
+        const winners = [];
         const sortedPlayers = Object.keys(players).sort((a, b) => players[b].score - players[a].score);
+        winners.push(sortedPlayers[0]);
+        // check if there's a tie and how many people are tied
+        if (players[sortedPlayers[0]].score ===
+            players[sortedPlayers[1]].score &&
+            players[sortedPlayers[0]].score !== 0) {
+            for (let i = 1; i < sortedPlayers.length; i++) {
+                if (players[sortedPlayers[i]].score ===
+                    players[sortedPlayers[0]].score) {
+                    winners.push(sortedPlayers[i]);
+                }
+            }
+        }
         const leaderboard = new discord_js_1.EmbedBuilder()
             .setColor(0x0099ff)
             .setTitle("Final Leaderboard")
@@ -261,7 +369,7 @@ If you want to play, click the button below.
             components: [],
         });
         sortedPlayers
-            .filter((p) => p !== sortedPlayers[0])
+            .filter((p) => !winners.includes(p))
             .forEach(async (p) => {
             const user = await models_1.User.findByPk(p);
             if (user) {
@@ -271,30 +379,28 @@ If you want to play, click the button below.
                 });
             }
         });
-        // check if user exists in db
-        const user = await models_1.User.findByPk(sortedPlayers[0]);
-        if (!user) {
-            await thread.send({
-                content: `**<@${sortedPlayers[0]}>, you doesn't have a profile yet! Use \`/waifus\` or \`/stats\` to get one!**`,
-            });
-        }
-        else {
-            await user.update({
-                airrecQuizWins: user.airrecQuizWins + 1,
-                airrecQuizWinstreak: user.airrecQuizWinstreak + 1,
-            });
-            const isGuaranteed = user.guaranteeWaifu &&
-                user.guaranteeCounter >= 10 &&
-                !waifus_json_1.default[user.guaranteeWaifu].spec;
-            if (isGuaranteed ||
-                (rounds >= 5 &&
-                    players[sortedPlayers[0]].score >= 0.25 * rounds)) {
+        winners.forEach(async (u) => {
+            // check if user exists in db
+            const user = await models_1.User.findByPk(u);
+            if (!user) {
+                await thread.send({
+                    content: `**<@${u}>, you doesn't have a profile yet! Use \`/waifus\` or \`/stats\` to get one!**`,
+                });
+            }
+            else {
+                await user.update({
+                    airrecQuizWins: user.airrecQuizWins + 1,
+                    airrecQuizWinstreak: user.airrecQuizWinstreak + 1,
+                });
+                const isGuaranteed = user.guaranteeWaifu &&
+                    user.guaranteeCounter >= 10 &&
+                    !waifus_json_1.default[user.guaranteeWaifu].spec;
                 let waifu;
                 if (isGuaranteed) {
-                    waifu = await (0, airrec_1.spawnWaifu)(user, user.guaranteeWaifu);
+                    waifu = await spawnWaifu(user, rounds, players[u].score, user.guaranteeWaifu);
                 }
                 else {
-                    waifu = await (0, airrec_1.spawnWaifu)(user);
+                    waifu = await spawnWaifu(user, rounds, players[u].score);
                 }
                 if (waifu) {
                     const atk = Math.floor(Math.random() * 10);
@@ -346,7 +452,7 @@ If you want to play, click the button below.
                     });
                 }
             }
-        }
+        });
         await thread.setArchived(true);
     });
 }

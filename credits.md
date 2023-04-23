@@ -11,9 +11,9 @@
 -   **ApocalypticTofu#4278** - Lead adviser
 -   **Cranium#2516** - Adviser and aircraft recognition tips
 -   **Mew#4253** - Adviser and aircraft recognition tips
+-   **tecnoplayz#6181** - Adviser
 -   **\*Piplup\*#5802** - Adviser
 -   **Salem the Grimm Waifu#6339** - Adviser
--   **Dark Phoenix#3582** - Adviser (despite being an Army cadet)
 
 ### Sources
 

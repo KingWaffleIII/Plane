@@ -20,7 +20,7 @@ const client = new discord_js_1.Client({
         status: "online",
         activities: [
             {
-                name: "mRAST",
+                name: "RAST",
                 type: discord_js_1.ActivityType.Competing,
             },
         ],

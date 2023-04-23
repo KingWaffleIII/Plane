@@ -66,16 +66,13 @@ export async function getImage(url: string): Promise<string | null> {
 	}
 }
 
-export async function spawnWaifu(
-	user: User,
-	name?: string
-): Promise<WaifuData | null> {
+async function spawnWaifu(user: User, name: string): Promise<WaifuData | null> {
 	let isGuaranteed = false;
 	if (user.guaranteeWaifu) {
 		isGuaranteed =
 			user.guaranteeWaifu !== undefined && user.guaranteeCounter! >= 10;
 	}
-	if (isGuaranteed || Math.floor(Math.random() * 1) === 0) {
+	if (isGuaranteed || Math.floor(Math.random() * 3) === 0) {
 		if (name === user.guaranteeWaifu) {
 			await user!.update({
 				guaranteeWaifu: null,
@@ -89,25 +86,13 @@ export async function spawnWaifu(
 			}
 		}
 
-		if (name) {
-			if (Object.keys(waifus).includes(name)) {
-				const waifu: WaifuBaseData =
-					waifus[name as keyof typeof waifus];
+		if (Object.keys(waifus).includes(name)) {
+			const waifu: WaifuBaseData = waifus[name as keyof typeof waifus];
 
-				if (waifu.urlFriendlyName) {
-					return {
-						name,
-						urlFriendlyName: waifu.urlFriendlyName,
-						path: waifu.path,
-						type: waifu.type,
-						spec: waifu.spec,
-						abilityName: waifu.abilityName,
-						abilityDescription: waifu.abilityDescription,
-					};
-				}
+			if (waifu.urlFriendlyName) {
 				return {
 					name,
-					urlFriendlyName: name,
+					urlFriendlyName: waifu.urlFriendlyName,
 					path: waifu.path,
 					type: waifu.type,
 					spec: waifu.spec,
@@ -115,22 +100,9 @@ export async function spawnWaifu(
 					abilityDescription: waifu.abilityDescription,
 				};
 			}
-			return null;
-		}
-
-		const nonSpecWaifus = Object.keys(waifus).filter((w) => {
-			const waifuData = waifus[w as keyof typeof waifus];
-			return !waifuData.spec;
-		});
-		const waifuName = nonSpecWaifus[
-			Math.floor(Math.random() * Object.keys(nonSpecWaifus).length)
-		] as keyof typeof waifus;
-		const waifu: WaifuBaseData = waifus[waifuName];
-
-		if (waifu.urlFriendlyName) {
 			return {
-				name: waifuName,
-				urlFriendlyName: waifu.urlFriendlyName,
+				name,
+				urlFriendlyName: name,
 				path: waifu.path,
 				type: waifu.type,
 				spec: waifu.spec,
@@ -138,15 +110,7 @@ export async function spawnWaifu(
 				abilityDescription: waifu.abilityDescription,
 			};
 		}
-		return {
-			name: waifuName,
-			urlFriendlyName: waifuName,
-			path: waifu.path,
-			type: waifu.type,
-			spec: waifu.spec,
-			abilityName: waifu.abilityName,
-			abilityDescription: waifu.abilityDescription,
-		};
+		return null;
 	}
 	return null;
 }

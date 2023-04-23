@@ -1,4 +1,4 @@
-**Total aircraft: 178**
+**Total aircraft: 177**
 
 ## Civilian:
 
@@ -64,16 +64,6 @@ None
 None
 
 
-### Boeing 707
-**Aliases:**
-- KC-137
-- KC137
-- KC 137
-- E-6
-- E6
-- E 6
-
-
 ### Boeing 727
 **Aliases:**
 None
@@ -128,8 +118,8 @@ None
 - ERJ-145
 - ERJ 145
 - EMB135
-- EMB 135
-- EMB-135
+- EMB 145
+- EMB-145
 - R99A
 - R99B
 
@@ -149,9 +139,9 @@ None
 
 ### Britten-Norman BN-2 Islander
 **Aliases:**
+- Islander
 - BN2
 - BN 2
-- Islander
 
 
 ### Saab 340

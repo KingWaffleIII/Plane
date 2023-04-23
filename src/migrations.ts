@@ -65,8 +65,29 @@ export async function deleteGuildModel(): Promise<void> {
 	await db.getQueryInterface().dropTable("Guilds");
 }
 
+export async function updateSpecWaifus(): Promise<void> {
+	// Some waifus' spec status may have changed. This function updates the spec status of all users' waifus.
+
+	(await User.findAll()).forEach(async (user) => {
+		(await Waifu.findAll({ where: { userId: user.id } })).forEach(
+			async (w) => {
+				if (waifus[w.name as keyof typeof waifus].spec) {
+					await w.update({
+						spec: true,
+					});
+				} else {
+					await w.update({
+						spec: false,
+					});
+				}
+			}
+		);
+	});
+}
+
 export async function runAllMigrations(): Promise<void> {
 	await deleteGuildModel();
 	await updateLegacyHornetName();
 	await updateLockedWaifus();
+	await updateSpecWaifus();
 }

@@ -27,3 +27,12 @@ with open("aircraft.md", "w+") as f:
     f.write("## Military:\n")
     for i in data["military"]:
         write_aircraft(f, i)
+
+with open("incomplete.txt", "w+") as f:
+    for i in data["civilian"]:
+        if len(i["identification"]) == 0:
+            f.write(f"{i['name']}\n")
+
+    for i in data["military"]:
+        if len(i["identification"]) == 0:
+            f.write(f"{i['name']}\n")

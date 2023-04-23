@@ -335,7 +335,7 @@
 			"aliases": [
 				"ERJ-145",
 				"ERJ 145",
-				"EMB135",
+				"EMB145",
 				"EMB 145",
 				"EMB-145",
 				"R99A",
@@ -391,7 +391,7 @@
 			"wiki": "https://en.wikipedia.org/wiki/Dassault_Falcon_20"
 		},
 		{
-			"aliases": ["BN2", "BN 2", "Islander"],
+			"aliases": ["Islander", "BN2", "BN 2"],
 			"identification": [
 				"Short length",
 				"No winglets",

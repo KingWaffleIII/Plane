@@ -33,7 +33,7 @@ const client: Client = new Client({
 		status: "online",
 		activities: [
 			{
-				name: "mRAST",
+				name: "RAST",
 				type: ActivityType.Competing,
 			},
 		],

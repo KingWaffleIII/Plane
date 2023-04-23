@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.execute = exports.data = exports.spawnWaifu = exports.getImage = void 0;
+exports.execute = exports.data = exports.getImage = void 0;
 /* eslint-disable no-param-reassign */
 const axios_1 = __importDefault(require("axios"));
 const cheerio_1 = __importDefault(require("cheerio"));
@@ -39,7 +39,7 @@ async function spawnWaifu(user, name) {
         isGuaranteed =
             user.guaranteeWaifu !== undefined && user.guaranteeCounter >= 10;
     }
-    if (isGuaranteed || Math.floor(Math.random() * 1) === 0) {
+    if (isGuaranteed || Math.floor(Math.random() * 3) === 0) {
         if (name === user.guaranteeWaifu) {
             await user.update({
                 guaranteeWaifu: null,
@@ -53,23 +53,12 @@ async function spawnWaifu(user, name) {
                 });
             }
         }
-        if (name) {
-            if (Object.keys(waifus_json_1.default).includes(name)) {
-                const waifu = waifus_json_1.default[name];
-                if (waifu.urlFriendlyName) {
-                    return {
-                        name,
-                        urlFriendlyName: waifu.urlFriendlyName,
-                        path: waifu.path,
-                        type: waifu.type,
-                        spec: waifu.spec,
-                        abilityName: waifu.abilityName,
-                        abilityDescription: waifu.abilityDescription,
-                    };
-                }
+        if (Object.keys(waifus_json_1.default).includes(name)) {
+            const waifu = waifus_json_1.default[name];
+            if (waifu.urlFriendlyName) {
                 return {
                     name,
-                    urlFriendlyName: name,
+                    urlFriendlyName: waifu.urlFriendlyName,
                     path: waifu.path,
                     type: waifu.type,
                     spec: waifu.spec,
@@ -77,18 +66,9 @@ async function spawnWaifu(user, name) {
                     abilityDescription: waifu.abilityDescription,
                 };
             }
-            return null;
-        }
-        const nonSpecWaifus = Object.keys(waifus_json_1.default).filter((w) => {
-            const waifuData = waifus_json_1.default[w];
-            return !waifuData.spec;
-        });
-        const waifuName = nonSpecWaifus[Math.floor(Math.random() * Object.keys(nonSpecWaifus).length)];
-        const waifu = waifus_json_1.default[waifuName];
-        if (waifu.urlFriendlyName) {
             return {
-                name: waifuName,
-                urlFriendlyName: waifu.urlFriendlyName,
+                name,
+                urlFriendlyName: name,
                 path: waifu.path,
                 type: waifu.type,
                 spec: waifu.spec,
@@ -96,19 +76,10 @@ async function spawnWaifu(user, name) {
                 abilityDescription: waifu.abilityDescription,
             };
         }
-        return {
-            name: waifuName,
-            urlFriendlyName: waifuName,
-            path: waifu.path,
-            type: waifu.type,
-            spec: waifu.spec,
-            abilityName: waifu.abilityName,
-            abilityDescription: waifu.abilityDescription,
-        };
+        return null;
     }
     return null;
 }
-exports.spawnWaifu = spawnWaifu;
 exports.data = new discord_js_1.SlashCommandBuilder()
     .setName("airrec")
     .setDescription("Gives you an aircraft image for you to identify.")

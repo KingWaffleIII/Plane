@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.runAllMigrations = exports.deleteGuildModel = exports.updateLegacyHornetName = exports.updateLockedWaifus = void 0;
+exports.runAllMigrations = exports.updateSpecWaifus = exports.deleteGuildModel = exports.updateLegacyHornetName = exports.updateLockedWaifus = void 0;
 const models_1 = require("./models");
 const waifus_json_1 = __importDefault(require("./waifus.json"));
 async function updateLockedWaifus() {
@@ -57,9 +57,28 @@ async function deleteGuildModel() {
     await models_1.db.getQueryInterface().dropTable("Guilds");
 }
 exports.deleteGuildModel = deleteGuildModel;
+async function updateSpecWaifus() {
+    // Some waifus' spec status may have changed. This function updates the spec status of all users' waifus.
+    (await models_1.User.findAll()).forEach(async (user) => {
+        (await models_1.Waifu.findAll({ where: { userId: user.id } })).forEach(async (w) => {
+            if (waifus_json_1.default[w.name].spec) {
+                await w.update({
+                    spec: true,
+                });
+            }
+            else {
+                await w.update({
+                    spec: false,
+                });
+            }
+        });
+    });
+}
+exports.updateSpecWaifus = updateSpecWaifus;
 async function runAllMigrations() {
     await deleteGuildModel();
     await updateLegacyHornetName();
     await updateLockedWaifus();
+    await updateSpecWaifus();
 }
 exports.runAllMigrations = runAllMigrations;
