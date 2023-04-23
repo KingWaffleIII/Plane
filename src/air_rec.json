@@ -183,23 +183,6 @@
 			"wiki": "https://en.wikipedia.org/wiki/Airbus_A350"
 		},
 		{
-			"aliases": ["KC-137", "KC137", "KC 137", "E-6", "E6", "E 6"],
-			"identification": [
-				"Medium length",
-				"No winglets",
-				"Pointed nose",
-				"8 rear landing gear wheels",
-				"Four jet engines - built into the wing and not below",
-				"Commonly seen with AWACS radar dome on top"
-			],
-			"image": "https://www.airfighters.com/photosearch.php?cra=656",
-			"manufacturer": "Boeing",
-			"model": "707",
-			"name": "Boeing 707",
-			"role": "Narrow-body airliner.",
-			"wiki": "https://en.wikipedia.org/wiki/Boeing_707"
-		},
-		{
 			"aliases": [],
 			"identification": [
 				"Medium length",
@@ -599,7 +582,7 @@
 			"aliases": ["A330", "Voyager", "KC-30"],
 			"identification": [
 				"Has 2 jet engines positioned by fuselage",
-				"Has a refueling boom (highlighted in red) at the rear of the aircraft for air to air refueling",
+				"Has a refueling boom at the rear of the aircraft for air to air refueling",
 				"Wing tips are raised on both ends"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=571",
@@ -645,7 +628,8 @@
 			"identification": [
 				"4 small-ish, thing jet engines on the wings, further away from the airframe than to the wing tips",
 				"Big radar dish on top op plane that's circular and spins",
-				"Just look for the big circular radar dish"
+				"Just look for the big circular radar dish",
+				"IF IT DOESN'T HAVE A DISH, IT'S A BOEING 707"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=665",
 			"manufacturer": "Boeing",
