@@ -376,14 +376,14 @@
 		{
 			"aliases": ["Falcon"],
 			"identification": [
-				"Short-medium length",
+				"Short length",
 				"No winglets",
 				"Pointed nose",
 				"4 rear landing gear wheels",
 				"Elevator is in the middle of the tail",
-				"3 jet engines at the rear - one is in the tail"
+				"2 jet engines at the rear"
 			],
-			"image": "https://www.airfighters.com/photosearch.php?cra=802",
+			"image": "https://www.airfighters.com/photosearch.php?cra=806",
 			"manufacturer": "Dassault",
 			"model": "Falcon 20",
 			"name": "Dassault Falcon 20",
