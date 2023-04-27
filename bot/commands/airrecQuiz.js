@@ -269,7 +269,6 @@ If you want to play, click the button below.
                 embeds: [embed],
                 components: [],
             });
-            await thread.send(aircraft.name);
             const answered = [];
             const answerFilter = (m) => {
                 if (!answered.includes(m.author.id)) {

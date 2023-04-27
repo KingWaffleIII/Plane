@@ -342,8 +342,6 @@ If you want to play, click the button below.
 				components: [],
 			});
 
-			await thread.send(aircraft.name);
-
 			const answered: string[] = [];
 
 			const answerFilter = (m: Message) => {
