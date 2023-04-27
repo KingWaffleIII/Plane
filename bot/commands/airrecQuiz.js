@@ -343,15 +343,19 @@ If you want to play, click the button below.
         }
         const winners = [];
         const sortedPlayers = Object.keys(players).sort((a, b) => players[b].score - players[a].score);
-        winners.push(sortedPlayers[0]);
-        // check if there's a tie and how many people are tied
-        if (players[sortedPlayers[0]].score ===
-            players[sortedPlayers[1]].score &&
-            players[sortedPlayers[0]].score !== 0) {
-            for (let i = 1; i < sortedPlayers.length; i++) {
-                if (players[sortedPlayers[i]].score ===
-                    players[sortedPlayers[0]].score) {
-                    winners.push(sortedPlayers[i]);
+        if (players[sortedPlayers[0]].score !== 0) {
+            winners.push(sortedPlayers[0]);
+            if (sortedPlayers.length !== 1) {
+                // check if there's a tie and how many people are tied
+                if (players[sortedPlayers[0]].score ===
+                    players[sortedPlayers[1]].score &&
+                    players[sortedPlayers[0]].score !== 0) {
+                    for (let i = 1; i < sortedPlayers.length; i++) {
+                        if (players[sortedPlayers[i]].score ===
+                            players[sortedPlayers[0]].score) {
+                            winners.push(sortedPlayers[i]);
+                        }
+                    }
                 }
             }
         }
