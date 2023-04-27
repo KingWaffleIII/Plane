@@ -66,6 +66,17 @@ export async function getImage(url: string): Promise<string | null> {
 	}
 }
 
+export function makeEmbedWithImage(img: string): EmbedBuilder {
+	return new EmbedBuilder()
+		.setColor(0x0099ff)
+		.setTitle("What is the name of this aircraft?")
+		.setImage(img)
+		.setTimestamp()
+		.setFooter({
+			text: "Photo credit: https://www.airfighters.com",
+		});
+}
+
 async function spawnWaifu(user: User, name: string): Promise<WaifuData | null> {
 	let isGuaranteed = false;
 	if (user.guaranteeWaifu) {
@@ -183,12 +194,13 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 	const row = new ActionRowBuilder<ButtonBuilder>().addComponents(
 		new ButtonBuilder()
 			.setCustomId(`reveal-airrec-${buttonId}`)
-			.setLabel("Reveal answer")
+			.setLabel("Revenal answer")
 			.setStyle(ButtonStyle.Primary)
 	);
 
+	const embed = makeEmbedWithImage(image);
 	await interaction.editReply({
-		content: `**What is the name of this aircraft?**\n${image}`,
+		embeds: [embed],
 		components: [row],
 	});
 

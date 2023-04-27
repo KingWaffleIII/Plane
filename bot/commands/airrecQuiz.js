@@ -263,8 +263,10 @@ If you want to play, click the button below.
                 });
                 return;
             }
+            const embed = (0, airrec_1.makeEmbedWithImage)(image);
             const question = await thread.send({
-                content: `**Round ${i + 1} of ${rounds}:**\nWhat is the name of this aircraft?\n${image}`,
+                content: `**Round ${i + 1} of ${rounds}:**`,
+                embeds: [embed],
                 components: [],
             });
             await thread.send(aircraft.name);

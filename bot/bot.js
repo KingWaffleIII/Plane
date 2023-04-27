@@ -78,7 +78,7 @@ const rest = new discord_js_1.REST({ version: "10" }).setToken(config_json_1.tok
         await rest.put(discord_js_1.Routes.applicationCommands(config_json_1.clientId), {
             body: commandsList,
         });
-        console.log(`Successfully reloaded ${commandsList.length} application (/) commands.`);
+        console.log(`Successfully reloaded ${commandsList.length} application (/) command(s).`);
     }
     catch (error) {
         console.error(error);

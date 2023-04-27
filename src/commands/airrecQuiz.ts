@@ -13,7 +13,13 @@ import {
 } from "discord.js";
 
 import { User } from "../models";
-import { Aircraft, getImage, WaifuBaseData, WaifuData } from "./airrec";
+import {
+	Aircraft,
+	getImage,
+	makeEmbedWithImage,
+	WaifuBaseData,
+	WaifuData,
+} from "./airrec";
 import airrec from "../air_rec.json";
 import waifus from "../waifus.json";
 
@@ -329,10 +335,10 @@ If you want to play, click the button below.
 				return;
 			}
 
+			const embed = makeEmbedWithImage(image);
 			const question = await thread.send({
-				content: `**Round ${
-					i + 1
-				} of ${rounds}:**\nWhat is the name of this aircraft?\n${image}`,
+				content: `**Round ${i + 1} of ${rounds}:**`,
+				embeds: [embed],
 				components: [],
 			});
 

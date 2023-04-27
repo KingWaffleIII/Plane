@@ -2,6 +2,7 @@ import fs from "fs";
 import path from "path";
 import {
 	ActivityType,
+	ChatInputCommandInteraction,
 	Client,
 	Collection,
 	Events,
@@ -19,7 +20,7 @@ import { runAllMigrations } from "./migrations";
 
 interface Command {
 	data: SlashCommandBuilder;
-	execute: (interaction: unknown) => Promise<void>;
+	execute: (interaction: ChatInputCommandInteraction) => Promise<void>;
 }
 
 const client: Client = new Client({
@@ -108,7 +109,7 @@ const rest = new REST({ version: "10" }).setToken(token);
 		});
 
 		console.log(
-			`Successfully reloaded ${commandsList.length} application (/) commands.`
+			`Successfully reloaded ${commandsList.length} application (/) command(s).`
 		);
 	} catch (error) {
 		console.error(error);

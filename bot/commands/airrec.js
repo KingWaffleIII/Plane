@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.execute = exports.data = exports.getImage = void 0;
+exports.execute = exports.data = exports.makeEmbedWithImage = exports.getImage = void 0;
 /* eslint-disable no-param-reassign */
 const axios_1 = __importDefault(require("axios"));
 const cheerio_1 = __importDefault(require("cheerio"));
@@ -33,6 +33,17 @@ async function getImage(url) {
     }
 }
 exports.getImage = getImage;
+function makeEmbedWithImage(img) {
+    return new discord_js_1.EmbedBuilder()
+        .setColor(0x0099ff)
+        .setTitle("What is the name of this aircraft?")
+        .setImage(img)
+        .setTimestamp()
+        .setFooter({
+        text: "Photo credit: https://www.airfighters.com",
+    });
+}
+exports.makeEmbedWithImage = makeEmbedWithImage;
 async function spawnWaifu(user, name) {
     let isGuaranteed = false;
     if (user.guaranteeWaifu) {
@@ -118,10 +129,11 @@ async function execute(interaction) {
     const buttonId = crypto_1.default.randomBytes(6).toString("hex");
     const row = new discord_js_1.ActionRowBuilder().addComponents(new discord_js_1.ButtonBuilder()
         .setCustomId(`reveal-airrec-${buttonId}`)
-        .setLabel("Reveal answer")
+        .setLabel("Revenal answer")
         .setStyle(discord_js_1.ButtonStyle.Primary));
+    const embed = makeEmbedWithImage(image);
     await interaction.editReply({
-        content: `**What is the name of this aircraft?**\n${image}`,
+        embeds: [embed],
         components: [row],
     });
     const answer = new discord_js_1.EmbedBuilder()
