@@ -1,7 +1,7 @@
 import { ChatInputCommandInteraction, SlashCommandBuilder } from "discord.js";
 
-import { User } from "../models";
-import waifus from "../waifus.json";
+import { User } from "../models.js";
+import waifus from "../waifus.json" assert { type: "json" };
 
 export const data = new SlashCommandBuilder()
 	.setName("target")

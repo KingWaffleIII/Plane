@@ -4,10 +4,10 @@ import {
 	SlashCommandBuilder,
 } from "discord.js";
 
-import { Question } from "./rafk";
-import rafk from "../RAFK.json";
+import { Question } from "./rafk.js";
+import rafk from "../RAFK.json" assert { type: "json" };
 
-const wait = require("node:timers/promises").setTimeout;
+const wait = (await import("node:timers/promises")).setTimeout;
 
 // stop crashing if thread is deleted pre-emptively
 process.on("unhandledRejection", (error: Error) => {

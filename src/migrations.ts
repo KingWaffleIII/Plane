@@ -1,8 +1,8 @@
 // DB migrations to update users using old data
 // On DB changes, e.g. a new field for User is added, migrations should be made to update users' data
 
-import { db, User, Waifu } from "./models";
-import waifus from "./waifus.json";
+import { db, User, Waifu } from "./models.js";
+import waifus from "./waifus.json" assert { type: "json" };
 
 export async function updateLockedWaifus(): Promise<void> {
 	// If there's ever new waifus added, this will add them to the lockedWaifus array.

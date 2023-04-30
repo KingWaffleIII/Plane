@@ -20,7 +20,7 @@ import {
 	ForeignKey,
 } from "sequelize";
 
-import waifus from "./waifus.json";
+import waifus from "./waifus.json" assert { type: "json" };
 
 export const db = new Sequelize({
 	dialect: "sqlite",

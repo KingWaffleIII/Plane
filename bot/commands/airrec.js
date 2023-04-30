@@ -1,21 +1,15 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.execute = exports.data = exports.makeEmbedWithImage = exports.getImage = void 0;
 /* eslint-disable no-param-reassign */
-const axios_1 = __importDefault(require("axios"));
-const cheerio_1 = __importDefault(require("cheerio"));
-const crypto_1 = __importDefault(require("crypto"));
-const discord_js_1 = require("discord.js");
-const models_1 = require("../models");
-const air_rec_json_1 = __importDefault(require("../air_rec.json"));
-const waifus_json_1 = __importDefault(require("../waifus.json"));
-async function getImage(url) {
+import axios from "axios";
+import cheerio from "cheerio";
+import crypto from "crypto";
+import { ActionRowBuilder, ButtonBuilder, ButtonStyle, ComponentType, EmbedBuilder, SlashCommandBuilder, } from "discord.js";
+import { User } from "../models.js";
+import airrec from "../air_rec.json" assert { type: "json" };
+import waifus from "../waifus.json" assert { type: "json" };
+export async function getImage(url) {
     try {
-        const response = await axios_1.default.get(url);
-        const $ = cheerio_1.default.load(response.data);
+        const response = await axios.get(url);
+        const $ = cheerio.load(response.data);
         const images = [];
         // get every a element with class pgthumb
         $("a.pgthumb").each((_i, element) => {
@@ -32,9 +26,8 @@ async function getImage(url) {
         return null;
     }
 }
-exports.getImage = getImage;
-function makeEmbedWithImage(img) {
-    return new discord_js_1.EmbedBuilder()
+export function makeEmbedWithImage(img) {
+    return new EmbedBuilder()
         .setColor(0x0099ff)
         .setTitle("What is the name of this aircraft?")
         .setImage(img)
@@ -43,7 +36,6 @@ function makeEmbedWithImage(img) {
         text: "Photo credit: https://www.airfighters.com",
     });
 }
-exports.makeEmbedWithImage = makeEmbedWithImage;
 async function spawnWaifu(user, name) {
     let isGuaranteed = false;
     if (user.guaranteeWaifu) {
@@ -64,8 +56,8 @@ async function spawnWaifu(user, name) {
                 });
             }
         }
-        if (Object.keys(waifus_json_1.default).includes(name)) {
-            const waifu = waifus_json_1.default[name];
+        if (Object.keys(waifus).includes(name)) {
+            const waifu = waifus[name];
             if (waifu.urlFriendlyName) {
                 return {
                     name,
@@ -91,7 +83,7 @@ async function spawnWaifu(user, name) {
     }
     return null;
 }
-exports.data = new discord_js_1.SlashCommandBuilder()
+export const data = new SlashCommandBuilder()
     .setName("airrec")
     .setDescription("Gives you an aircraft image for you to identify.")
     .addBooleanOption((option) => option
@@ -101,22 +93,22 @@ exports.data = new discord_js_1.SlashCommandBuilder()
     .setName("type")
     .setDescription("The type of aircraft you want to be shown. Defaults to a random aircraft.")
     .addChoices({ name: "Civilian", value: "civilian" }, { name: "Military", value: "military" }));
-async function execute(interaction) {
+export async function execute(interaction) {
     const requestedType = interaction.options.getString("type") ?? false;
     await interaction.deferReply();
-    const user = await models_1.User.findByPk(interaction.user.id);
-    let type = air_rec_json_1.default[Object.keys(air_rec_json_1.default)[
+    const user = await User.findByPk(interaction.user.id);
+    let type = airrec[Object.keys(airrec)[
     // Math.floor(Math.random() * Object.keys(airrec).length)
     Math.floor(Math.random() * 2) // for some reason there's a key called "default" in the object?? setting max to 2
     ]];
     if (requestedType) {
-        type = air_rec_json_1.default[requestedType];
+        type = airrec[requestedType];
     }
     let aircraft = type[Math.floor(Math.random() * type.length)];
     if (user) {
         if (user.guaranteeWaifu &&
             user.guaranteeCounter >= 10 &&
-            waifus_json_1.default[user.guaranteeWaifu].spec)
+            waifus[user.guaranteeWaifu].spec)
             aircraft = type.find((a) => a.waifuImage === user.guaranteeWaifu);
     }
     const image = await getImage(aircraft.image);
@@ -126,17 +118,17 @@ async function execute(interaction) {
         });
         return;
     }
-    const buttonId = crypto_1.default.randomBytes(6).toString("hex");
-    const row = new discord_js_1.ActionRowBuilder().addComponents(new discord_js_1.ButtonBuilder()
+    const buttonId = crypto.randomBytes(6).toString("hex");
+    const row = new ActionRowBuilder().addComponents(new ButtonBuilder()
         .setCustomId(`reveal-airrec-${buttonId}`)
         .setLabel("Revenal answer")
-        .setStyle(discord_js_1.ButtonStyle.Primary));
+        .setStyle(ButtonStyle.Primary));
     const embed = makeEmbedWithImage(image);
     await interaction.editReply({
         embeds: [embed],
         components: [row],
     });
-    const answer = new discord_js_1.EmbedBuilder()
+    const answer = new EmbedBuilder()
         .setColor(0x0099ff)
         .setTitle(aircraft.name)
         .setDescription(aircraft.role)
@@ -166,7 +158,7 @@ async function execute(interaction) {
     });
     const filter = (i) => i.customId === `reveal-airrec-${buttonId}`;
     const collector = interaction.channel?.createMessageComponentCollector({
-        componentType: discord_js_1.ComponentType.Button,
+        componentType: ComponentType.Button,
         time: 30000,
         filter,
     });
@@ -183,7 +175,7 @@ async function execute(interaction) {
                     const atk = Math.floor(Math.random() * 10);
                     const hp = Math.floor(Math.random() * (100 - 50) + 50);
                     const spd = Math.floor(Math.random() * 10);
-                    const waifuEmbed = new discord_js_1.EmbedBuilder()
+                    const waifuEmbed = new EmbedBuilder()
                         .setColor(0xff00ff)
                         .setTitle(waifu.name)
                         .setImage(`attachment://${waifu.urlFriendlyName}.jpg`)
@@ -240,4 +232,3 @@ async function execute(interaction) {
         }
     });
 }
-exports.execute = execute;

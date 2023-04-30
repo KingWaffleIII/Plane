@@ -1,5 +1,6 @@
+/* eslint-disable no-underscore-dangle */
 import fs from "fs";
-import path from "path";
+import path, { dirname } from "path";
 import {
 	ActivityType,
 	ChatInputCommandInteraction,
@@ -13,10 +14,11 @@ import {
 	SlashCommandBuilder,
 	ThreadChannel,
 } from "discord.js";
+import { fileURLToPath } from "url";
 
-import { db } from "./models";
-import { clientId, token } from "./config.json";
-import { runAllMigrations } from "./migrations";
+import { db } from "./models.js";
+import config from "./config.json" assert { type: "json" };
+import { runAllMigrations } from "./migrations.js";
 
 interface Command {
 	data: SlashCommandBuilder;
@@ -43,13 +45,15 @@ const client: Client = new Client({
 
 const commands: Collection<string, Command> = new Collection();
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 const commandsPath = path.join(__dirname, "commands");
 const commandFiles = fs
 	.readdirSync(commandsPath)
 	.filter((file) => file.endsWith(".js"));
 for (const file of commandFiles) {
 	const filePath = path.join(commandsPath, file);
-	const command: Command = require(filePath);
+	const command: Command = await import(filePath);
 	if ("data" in command && "execute" in command) {
 		commands.set(command.data.name, command);
 	} else {
@@ -97,27 +101,27 @@ client.on(Events.InteractionCreate, async (interaction: Interaction) => {
 	}
 });
 
+const { clientId, token } = config;
+
 const rest = new REST({ version: "10" }).setToken(token);
-(async () => {
-	try {
-		const commandsList: Array<object> = commands.map((command) =>
-			command.data.toJSON()
-		);
+try {
+	const commandsList: Array<object> = commands.map((command) =>
+		command.data.toJSON()
+	);
 
-		await rest.put(Routes.applicationCommands(clientId), {
-			body: commandsList,
-		});
+	await rest.put(Routes.applicationCommands(clientId), {
+		body: commandsList,
+	});
 
-		console.log(
-			`Successfully reloaded ${commandsList.length} application (/) command(s).`
-		);
-	} catch (error) {
-		console.error(error);
-	}
+	console.log(
+		`Successfully reloaded ${commandsList.length} application (/) command(s).`
+	);
+} catch (error) {
+	console.error(error);
+}
 
-	await db.sync();
+await db.sync();
 
-	await runAllMigrations();
+await runAllMigrations();
 
-	await client.login(token);
-})();
+await client.login(token);

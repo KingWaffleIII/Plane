@@ -11,7 +11,7 @@ import {
 	StringSelectMenuInteraction,
 } from "discord.js";
 
-import { User, Waifu } from "../models";
+import { User, Waifu } from "../models.js";
 
 export const data = new SlashCommandBuilder()
 	.setName("trade")

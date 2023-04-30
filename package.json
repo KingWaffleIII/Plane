@@ -3,6 +3,7 @@
 	"version": "1.4.4",
 	"description": "Discord bot frontend for the Plane aircraft recognition API, as well as other functionality provided by plugins.",
 	"main": "bot.js",
+	"type": "module",
 	"scripts": {
 		"format": "npx prettier src --write",
 		"lint": "npx eslint --cache src --ext .ts --fix",

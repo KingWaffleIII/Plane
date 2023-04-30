@@ -1,39 +1,38 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const fs_1 = __importDefault(require("fs"));
-const path_1 = __importDefault(require("path"));
-const discord_js_1 = require("discord.js");
-const models_1 = require("./models");
-const config_json_1 = require("./config.json");
-const migrations_1 = require("./migrations");
-const client = new discord_js_1.Client({
+/* eslint-disable no-underscore-dangle */
+import fs from "fs";
+import path, { dirname } from "path";
+import { ActivityType, Client, Collection, Events, GatewayIntentBits, REST, Routes, ThreadChannel, } from "discord.js";
+import { fileURLToPath } from "url";
+import { db } from "./models.js";
+import config from "./config.json" assert { type: "json" };
+import { runAllMigrations } from "./migrations.js";
+const client = new Client({
     intents: [
-        discord_js_1.GatewayIntentBits.Guilds,
-        discord_js_1.GatewayIntentBits.GuildMembers,
-        discord_js_1.GatewayIntentBits.GuildMessages,
-        discord_js_1.GatewayIntentBits.MessageContent,
+        GatewayIntentBits.Guilds,
+        GatewayIntentBits.GuildMembers,
+        GatewayIntentBits.GuildMessages,
+        GatewayIntentBits.MessageContent,
     ],
     presence: {
         status: "online",
         activities: [
             {
                 name: "RAST",
-                type: discord_js_1.ActivityType.Competing,
+                type: ActivityType.Competing,
             },
         ],
     },
 });
-const commands = new discord_js_1.Collection();
-const commandsPath = path_1.default.join(__dirname, "commands");
-const commandFiles = fs_1.default
+const commands = new Collection();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const commandsPath = path.join(__dirname, "commands");
+const commandFiles = fs
     .readdirSync(commandsPath)
     .filter((file) => file.endsWith(".js"));
 for (const file of commandFiles) {
-    const filePath = path_1.default.join(commandsPath, file);
-    const command = require(filePath);
+    const filePath = path.join(commandsPath, file);
+    const command = await import(filePath);
     if ("data" in command && "execute" in command) {
         commands.set(command.data.name, command);
     }
@@ -41,14 +40,14 @@ for (const file of commandFiles) {
         console.log(`[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`);
     }
 }
-client.on(discord_js_1.Events.ClientReady, (bot) => {
+client.on(Events.ClientReady, (bot) => {
     console.log(`Bot is ready, logged in as ${bot.user.tag}!`);
 });
-client.on(discord_js_1.Events.InteractionCreate, async (interaction) => {
+client.on(Events.InteractionCreate, async (interaction) => {
     if (!interaction.isChatInputCommand())
         return;
     if (interaction.guild === null ||
-        interaction.channel instanceof discord_js_1.ThreadChannel) {
+        interaction.channel instanceof ThreadChannel) {
         await interaction.reply({
             content: "This command is not available. Please use it in a normal server channel instead.",
             ephemeral: true,
@@ -71,19 +70,18 @@ client.on(discord_js_1.Events.InteractionCreate, async (interaction) => {
         });
     }
 });
-const rest = new discord_js_1.REST({ version: "10" }).setToken(config_json_1.token);
-(async () => {
-    try {
-        const commandsList = commands.map((command) => command.data.toJSON());
-        await rest.put(discord_js_1.Routes.applicationCommands(config_json_1.clientId), {
-            body: commandsList,
-        });
-        console.log(`Successfully reloaded ${commandsList.length} application (/) command(s).`);
-    }
-    catch (error) {
-        console.error(error);
-    }
-    await models_1.db.sync();
-    await (0, migrations_1.runAllMigrations)();
-    await client.login(config_json_1.token);
-})();
+const { clientId, token } = config;
+const rest = new REST({ version: "10" }).setToken(token);
+try {
+    const commandsList = commands.map((command) => command.data.toJSON());
+    await rest.put(Routes.applicationCommands(clientId), {
+        body: commandsList,
+    });
+    console.log(`Successfully reloaded ${commandsList.length} application (/) command(s).`);
+}
+catch (error) {
+    console.error(error);
+}
+await db.sync();
+await runAllMigrations();
+await client.login(token);

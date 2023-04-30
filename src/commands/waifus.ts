@@ -4,9 +4,9 @@ import {
 	SlashCommandBuilder,
 } from "discord.js";
 
-import { User, Waifu } from "../models";
-import { WaifuBaseData } from "./airrec";
-import waifus from "../waifus.json";
+import { User, Waifu } from "../models.js";
+import { WaifuBaseData } from "./airrec.js";
+import waifus from "../waifus.json" assert { type: "json" };
 
 export const data = new SlashCommandBuilder()
 	.setName("waifus")

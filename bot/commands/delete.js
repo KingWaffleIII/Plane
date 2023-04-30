@@ -1,37 +1,31 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.execute = exports.data = void 0;
-const crypto_1 = __importDefault(require("crypto"));
-const discord_js_1 = require("discord.js");
-const models_1 = require("../models");
-const waifus_json_1 = __importDefault(require("../waifus.json"));
-exports.data = new discord_js_1.SlashCommandBuilder()
+import crypto from "crypto";
+import { ActionRowBuilder, ComponentType, SlashCommandBuilder, StringSelectMenuBuilder, } from "discord.js";
+import { User, Waifu } from "../models.js";
+import waifus from "../waifus.json" assert { type: "json" };
+export const data = new SlashCommandBuilder()
     .setName("delete")
     .setDescription("Deletes a (copy of) a waifu.")
     .addStringOption((option) => option
     .setName("name")
     .setDescription("The name of the waifu you want to delete.")
     .setRequired(true));
-async function execute(interaction) {
+export async function execute(interaction) {
     const name = interaction.options.getString("name");
     await interaction.deferReply();
-    const user = await models_1.User.findByPk(interaction.user.id);
+    const user = await User.findByPk(interaction.user.id);
     if (!user) {
         await interaction.followUp({
             content: "You don't have a profile yet. Use `/waifus` or `/stats` first.",
         });
     }
-    const waifusLowerCase = Object.keys(waifus_json_1.default).map((w) => w.toLowerCase());
+    const waifusLowerCase = Object.keys(waifus).map((w) => w.toLowerCase());
     if (!waifusLowerCase.includes(name.toLowerCase())) {
         await interaction.editReply({
             content: "That waifu doesn't exist!",
         });
         return;
     }
-    const waifuName = Object.keys(waifus_json_1.default)[waifusLowerCase.indexOf(name.toLowerCase())];
+    const waifuName = Object.keys(waifus)[waifusLowerCase.indexOf(name.toLowerCase())];
     const userWaifus = await user.getWaifus({
         where: {
             name: waifuName,
@@ -43,8 +37,8 @@ async function execute(interaction) {
         });
         return;
     }
-    const selectId = crypto_1.default.randomBytes(6).toString("hex");
-    const row = new discord_js_1.ActionRowBuilder().addComponents(new discord_js_1.StringSelectMenuBuilder()
+    const selectId = crypto.randomBytes(6).toString("hex");
+    const row = new ActionRowBuilder().addComponents(new StringSelectMenuBuilder()
         .setCustomId(`delete-waifu-${selectId}`)
         .setPlaceholder("Select a copy to delete"));
     userWaifus.forEach((waifu) => {
@@ -59,7 +53,7 @@ async function execute(interaction) {
     });
     const filter = (i) => i.customId === `delete-waifu-${selectId}`;
     const collector = interaction.channel?.createMessageComponentCollector({
-        componentType: discord_js_1.ComponentType.StringSelect,
+        componentType: ComponentType.StringSelect,
         filter,
         time: 30000,
     });
@@ -71,7 +65,7 @@ async function execute(interaction) {
             });
             return;
         }
-        const waifu = await models_1.Waifu.findByPk(i.values[0]);
+        const waifu = await Waifu.findByPk(i.values[0]);
         await waifu.destroy();
         await interaction.editReply({
             content: `You have successfully deleted your copy of ${waifu.name}!`,
@@ -79,4 +73,3 @@ async function execute(interaction) {
         });
     });
 }
-exports.execute = execute;

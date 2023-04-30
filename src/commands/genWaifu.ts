@@ -1,10 +1,10 @@
 import { ChatInputCommandInteraction, SlashCommandBuilder } from "discord.js";
 
-import { User } from "../models";
-import { WaifuBaseData } from "./airrec";
-import waifus from "../waifus.json";
+import { User } from "../models.js";
+import { WaifuBaseData } from "./airrec.js";
+import waifus from "../waifus.json" assert { type: "json" };
 
-const wait = require("node:timers/promises").setTimeout;
+const wait = (await import("node:timers/promises")).setTimeout;
 
 export const data = new SlashCommandBuilder()
 	.setName("gen-waifu")

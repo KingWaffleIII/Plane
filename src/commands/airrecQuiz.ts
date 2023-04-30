@@ -12,18 +12,18 @@ import {
 	SlashCommandBuilder,
 } from "discord.js";
 
-import { User } from "../models";
+import { User } from "../models.js";
 import {
 	Aircraft,
 	getImage,
 	makeEmbedWithImage,
 	WaifuBaseData,
 	WaifuData,
-} from "./airrec";
-import airrec from "../air_rec.json";
-import waifus from "../waifus.json";
+} from "./airrec.js";
+import airrec from "../air_rec.json" assert { type: "json" };
+import waifus from "../waifus.json" assert { type: "json" };
 
-const wait = require("node:timers/promises").setTimeout;
+const wait = (await import("node:timers/promises")).setTimeout;
 
 interface Players {
 	[userId: string]: {

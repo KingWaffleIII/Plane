@@ -1,137 +1,129 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.Waifu = exports.User = exports.db = void 0;
-const sequelize_1 = require("sequelize");
-const waifus_json_1 = __importDefault(require("./waifus.json"));
-exports.db = new sequelize_1.Sequelize({
+import { DataTypes, Model, Sequelize, } from "sequelize";
+import waifus from "./waifus.json" assert { type: "json" };
+export const db = new Sequelize({
     dialect: "sqlite",
     storage: "db.sqlite",
     logging: false,
 });
-class User extends sequelize_1.Model {
+export class User extends Model {
 }
-exports.User = User;
-class Waifu extends sequelize_1.Model {
+export class Waifu extends Model {
 }
-exports.Waifu = Waifu;
 User.init({
     id: {
-        type: sequelize_1.DataTypes.STRING,
+        type: DataTypes.STRING,
         autoIncrement: false,
         primaryKey: true,
     },
     username: {
-        type: sequelize_1.DataTypes.STRING(32 + 5),
+        type: DataTypes.STRING(32 + 5),
         allowNull: false,
     },
     discriminator: {
-        type: sequelize_1.DataTypes.STRING(4),
+        type: DataTypes.STRING(4),
         allowNull: false,
     },
     avatarUrl: {
-        type: sequelize_1.DataTypes.STRING,
+        type: DataTypes.STRING,
         allowNull: true,
     },
     lockedWaifus: {
-        type: sequelize_1.DataTypes.JSON,
+        type: DataTypes.JSON,
         allowNull: false,
-        defaultValue: Object.keys(waifus_json_1.default),
+        defaultValue: Object.keys(waifus),
     },
     dogfightKills: {
-        type: sequelize_1.DataTypes.INTEGER,
+        type: DataTypes.INTEGER,
         allowNull: false,
         defaultValue: 0,
     },
     dogfightDeaths: {
-        type: sequelize_1.DataTypes.INTEGER,
+        type: DataTypes.INTEGER,
         allowNull: false,
         defaultValue: 0,
     },
     dogfightWinstreak: {
-        type: sequelize_1.DataTypes.INTEGER,
+        type: DataTypes.INTEGER,
         allowNull: false,
         defaultValue: 0,
     },
     airrecQuizWins: {
-        type: sequelize_1.DataTypes.INTEGER,
+        type: DataTypes.INTEGER,
         allowNull: false,
         defaultValue: 0,
     },
     airrecQuizLosses: {
-        type: sequelize_1.DataTypes.INTEGER,
+        type: DataTypes.INTEGER,
         allowNull: false,
         defaultValue: 0,
     },
     airrecQuizWinstreak: {
-        type: sequelize_1.DataTypes.INTEGER,
+        type: DataTypes.INTEGER,
         allowNull: false,
         defaultValue: 0,
     },
     guaranteeWaifu: {
-        type: sequelize_1.DataTypes.STRING,
+        type: DataTypes.STRING,
         allowNull: true,
     },
     guaranteeCounter: {
-        type: sequelize_1.DataTypes.INTEGER,
+        type: DataTypes.INTEGER,
         allowNull: true,
     },
-    createdAt: sequelize_1.DataTypes.DATE,
-    updatedAt: sequelize_1.DataTypes.DATE,
+    createdAt: DataTypes.DATE,
+    updatedAt: DataTypes.DATE,
 }, {
-    sequelize: exports.db,
+    sequelize: db,
     tableName: "Users",
 });
 Waifu.init({
     id: {
-        type: sequelize_1.DataTypes.INTEGER,
+        type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true,
     },
     name: {
-        type: sequelize_1.DataTypes.STRING,
+        type: DataTypes.STRING,
         allowNull: false,
     },
     atk: {
-        type: sequelize_1.DataTypes.INTEGER,
+        type: DataTypes.INTEGER,
         allowNull: false,
         defaultValue: 0,
     },
     hp: {
-        type: sequelize_1.DataTypes.INTEGER,
+        type: DataTypes.INTEGER,
         allowNull: false,
         defaultValue: 0,
     },
     spd: {
-        type: sequelize_1.DataTypes.INTEGER,
+        type: DataTypes.INTEGER,
         allowNull: false,
         defaultValue: 0,
     },
     spec: {
-        type: sequelize_1.DataTypes.BOOLEAN,
+        type: DataTypes.BOOLEAN,
         allowNull: false,
     },
     generated: {
-        type: sequelize_1.DataTypes.BOOLEAN,
+        type: DataTypes.BOOLEAN,
         allowNull: false,
         defaultValue: false,
     },
     kills: {
-        type: sequelize_1.DataTypes.INTEGER,
+        type: DataTypes.INTEGER,
         allowNull: false,
         defaultValue: 0,
     },
     deaths: {
-        type: sequelize_1.DataTypes.INTEGER,
+        type: DataTypes.INTEGER,
         allowNull: false,
         defaultValue: 0,
     },
-    createdAt: sequelize_1.DataTypes.DATE,
-    updatedAt: sequelize_1.DataTypes.DATE,
+    createdAt: DataTypes.DATE,
+    updatedAt: DataTypes.DATE,
 }, {
-    sequelize: exports.db,
+    sequelize: db,
     tableName: "Waifus",
 });
 // Here we associate which actually populates out pre-declared `association` static and other methods.

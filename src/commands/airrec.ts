@@ -13,9 +13,9 @@ import {
 	SlashCommandBuilder,
 } from "discord.js";
 
-import { User } from "../models";
-import airrec from "../air_rec.json";
-import waifus from "../waifus.json";
+import { User } from "../models.js";
+import airrec from "../air_rec.json" assert { type: "json" };
+import waifus from "../waifus.json" assert { type: "json" };
 
 export interface Aircraft {
 	readonly name: string;

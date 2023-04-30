@@ -4,8 +4,8 @@ import {
 	SlashCommandBuilder,
 } from "discord.js";
 
-import { Aircraft, getImage } from "./airrec";
-import airrec from "../air_rec.json";
+import { Aircraft, getImage } from "./airrec.js";
+import airrec from "../air_rec.json" assert { type: "json" };
 
 function checkMatch(matchAgainst: string, aircraft: Aircraft): Aircraft | null {
 	if (aircraft.name.toLowerCase().includes(matchAgainst)) {

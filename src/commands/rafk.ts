@@ -9,7 +9,7 @@ import {
 	SlashCommandBuilder,
 } from "discord.js";
 
-import rafk from "../RAFK.json";
+import rafk from "../RAFK.json" assert { type: "json" };
 
 const wait = require("node:timers/promises").setTimeout;
 

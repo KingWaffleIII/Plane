@@ -1,29 +1,23 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.execute = exports.data = void 0;
-const discord_js_1 = require("discord.js");
-const models_1 = require("../models");
-const waifus_json_1 = __importDefault(require("../waifus.json"));
-exports.data = new discord_js_1.SlashCommandBuilder()
+import { EmbedBuilder, SlashCommandBuilder, } from "discord.js";
+import { User } from "../models.js";
+import waifus from "../waifus.json" assert { type: "json" };
+export const data = new SlashCommandBuilder()
     .setName("stats")
     .setDescription("Get your Plane stats.")
     .addUserOption((option) => option
     .setName("user")
     .setDescription("The user you want to view the stats of. Defaults to you."));
-async function execute(interaction) {
+export async function execute(interaction) {
     const targetUser = interaction.options.getUser("user") ?? interaction.user;
     await interaction.deferReply();
-    let user = await models_1.User.findByPk(targetUser.id);
+    let user = await User.findByPk(targetUser.id);
     if (!user && targetUser.id === interaction.user.id) {
-        await models_1.User.create({
+        await User.create({
             id: interaction.user.id,
             username: interaction.user.username,
             discriminator: interaction.user.discriminator,
             avatarUrl: interaction.user.avatarURL(),
-            lockedWaifus: Object.keys(waifus_json_1.default),
+            lockedWaifus: Object.keys(waifus),
             dogfightKills: 0,
             dogfightDeaths: 0,
             dogfightWinstreak: 0,
@@ -31,7 +25,7 @@ async function execute(interaction) {
             airrecQuizLosses: 0,
             airrecQuizWinstreak: 0,
         });
-        user = await models_1.User.findByPk(interaction.user.id);
+        user = await User.findByPk(interaction.user.id);
     }
     else if (!user && targetUser.id !== interaction.user.id) {
         await interaction.editReply({
@@ -47,7 +41,7 @@ async function execute(interaction) {
     const { dogfightKills, dogfightDeaths } = user;
     const dogfightTotal = dogfightKills + dogfightDeaths;
     const { dogfightWinstreak } = user;
-    const embed = new discord_js_1.EmbedBuilder()
+    const embed = new EmbedBuilder()
         .setColor(0x0099ff)
         .setTitle(`${targetUser.username}'s Stats`)
         .setAuthor({
@@ -68,4 +62,3 @@ async function execute(interaction) {
         .setTimestamp();
     await interaction.editReply({ embeds: [embed] });
 }
-exports.execute = execute;
