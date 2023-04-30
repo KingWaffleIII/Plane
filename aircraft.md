@@ -117,7 +117,7 @@ None
 **Aliases:**
 - ERJ-145
 - ERJ 145
-- EMB135
+- EMB145
 - EMB 145
 - EMB-145
 - R99A
@@ -424,11 +424,7 @@ None
 
 ### BAe Harrier
 **Aliases:**
-- Harrier II
-- Harrier 2
-- AV-8B
-- AV8B
-- AV 8B
+None
 
 
 ### McDonnell Douglas KC-10 Extender
