@@ -57,7 +57,7 @@ export async function execute(interaction) {
         value: `Kills: ${dogfightKills}\nDeaths: ${dogfightDeaths}\nWinstreak: ${dogfightWinstreak}`,
     })
         .setFooter({
-        text: "You can view specific waifu stats with /waifus.",
+        text: "You can view specific waifu stats with /waifus. If you are the only player (and by thus, the winner) in an airrec quiz, it doesn't count towards any stats.",
     })
         .setTimestamp();
     await interaction.editReply({ embeds: [embed] });

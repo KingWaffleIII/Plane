@@ -342,8 +342,7 @@ If you want to play, click the button below.
             if (sortedPlayers.length !== 1) {
                 // check if there's a tie and how many people are tied
                 if (players[sortedPlayers[0]].score ===
-                    players[sortedPlayers[1]].score &&
-                    players[sortedPlayers[0]].score !== 0) {
+                    players[sortedPlayers[1]].score) {
                     for (let i = 1; i < sortedPlayers.length; i++) {
                         if (players[sortedPlayers[i]].score ===
                             players[sortedPlayers[0]].score) {
@@ -368,17 +367,19 @@ If you want to play, click the button below.
             embeds: [leaderboard],
             components: [],
         });
-        sortedPlayers
-            .filter((p) => !winners.includes(p))
-            .forEach(async (p) => {
-            const user = await User.findByPk(p);
-            if (user) {
-                await user.update({
-                    airrecQuizLosses: user.airrecQuizLosses + 1,
-                    airrecQuizWinstreak: 0,
-                });
-            }
-        });
+        if (winners.length > 1) {
+            sortedPlayers
+                .filter((p) => !winners.includes(p))
+                .forEach(async (p) => {
+                const user = await User.findByPk(p);
+                if (user) {
+                    await user.update({
+                        airrecQuizLosses: user.airrecQuizLosses + 1,
+                        airrecQuizWinstreak: 0,
+                    });
+                }
+            });
+        }
         winners.forEach(async (u) => {
             // check if user exists in db
             const user = await User.findByPk(u);
@@ -388,10 +389,12 @@ If you want to play, click the button below.
                 });
             }
             else {
-                await user.update({
-                    airrecQuizWins: user.airrecQuizWins + 1,
-                    airrecQuizWinstreak: user.airrecQuizWinstreak + 1,
-                });
+                if (winners.length > 1) {
+                    await user.update({
+                        airrecQuizWins: user.airrecQuizWins + 1,
+                        airrecQuizWinstreak: user.airrecQuizWinstreak + 1,
+                    });
+                }
                 const isGuaranteed = user.guaranteeWaifu &&
                     user.guaranteeCounter >= 10 &&
                     !waifus[user.guaranteeWaifu].spec;

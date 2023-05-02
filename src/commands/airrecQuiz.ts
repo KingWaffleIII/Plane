@@ -179,7 +179,7 @@ export const data = new SlashCommandBuilder()
 					"The number of rounds you want to play. Defaults to 10 rounds."
 				)
 				.setMinValue(1)
-				// .setMaxValue(20)
+		// .setMaxValue(20)
 	);
 
 export async function execute(interaction: ChatInputCommandInteraction) {
@@ -450,8 +450,7 @@ If you want to play, click the button below.
 				// check if there's a tie and how many people are tied
 				if (
 					players[sortedPlayers[0]].score ===
-						players[sortedPlayers[1]].score &&
-					players[sortedPlayers[0]].score !== 0
+					players[sortedPlayers[1]].score
 				) {
 					for (let i = 1; i < sortedPlayers.length; i++) {
 						if (
@@ -486,17 +485,19 @@ If you want to play, click the button below.
 			components: [],
 		});
 
-		sortedPlayers
-			.filter((p) => !winners.includes(p))
-			.forEach(async (p) => {
-				const user = await User.findByPk(p);
-				if (user) {
-					await user.update({
-						airrecQuizLosses: user.airrecQuizLosses + 1,
-						airrecQuizWinstreak: 0,
-					});
-				}
-			});
+		if (winners.length > 1) {
+			sortedPlayers
+				.filter((p) => !winners.includes(p))
+				.forEach(async (p) => {
+					const user = await User.findByPk(p);
+					if (user) {
+						await user.update({
+							airrecQuizLosses: user.airrecQuizLosses + 1,
+							airrecQuizWinstreak: 0,
+						});
+					}
+				});
+		}
 
 		winners.forEach(async (u) => {
 			// check if user exists in db
@@ -506,10 +507,12 @@ If you want to play, click the button below.
 					content: `**<@${u}>, you doesn't have a profile yet! Use \`/waifus\` or \`/stats\` to get one!**`,
 				});
 			} else {
-				await user.update({
-					airrecQuizWins: user.airrecQuizWins + 1,
-					airrecQuizWinstreak: user.airrecQuizWinstreak + 1,
-				});
+				if (winners.length > 1) {
+					await user.update({
+						airrecQuizWins: user.airrecQuizWins + 1,
+						airrecQuizWinstreak: user.airrecQuizWinstreak + 1,
+					});
+				}
 
 				const isGuaranteed =
 					user!.guaranteeWaifu &&
