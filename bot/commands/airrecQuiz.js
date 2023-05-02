@@ -122,7 +122,8 @@ export const data = new SlashCommandBuilder()
     .setName("rounds")
     .setDescription("The number of rounds you want to play. Defaults to 10 rounds.")
     .setMinValue(1)
-    .setMaxValue(20));
+// .setMaxValue(20)
+);
 export async function execute(interaction) {
     const rounds = interaction.options.getInteger("rounds") ?? 10;
     await interaction.reply({

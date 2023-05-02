@@ -11,7 +11,7 @@ import {
 
 import rafk from "../RAFK.json" assert { type: "json" };
 
-const wait = require("node:timers/promises").setTimeout;
+const wait = (await import("node:timers/promises")).setTimeout;
 
 export interface Question {
 	question: string;

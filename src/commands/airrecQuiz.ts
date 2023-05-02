@@ -171,14 +171,15 @@ export const data = new SlashCommandBuilder()
 	.setDescription(
 		"Gives you a series of aircraft images for you and others to identify with scoring."
 	)
-	.addIntegerOption((option) =>
-		option
-			.setName("rounds")
-			.setDescription(
-				"The number of rounds you want to play. Defaults to 10 rounds."
-			)
-			.setMinValue(1)
-			.setMaxValue(20)
+	.addIntegerOption(
+		(option) =>
+			option
+				.setName("rounds")
+				.setDescription(
+					"The number of rounds you want to play. Defaults to 10 rounds."
+				)
+				.setMinValue(1)
+				// .setMaxValue(20)
 	);
 
 export async function execute(interaction: ChatInputCommandInteraction) {
