@@ -126,10 +126,10 @@ export const data = new SlashCommandBuilder()
     .addStringOption((option) => option
     .setName("spec")
     .setDescription("The spec you want to use (mRAST is RAF past/present). Defaults to RAST.")
-    .addChoices({ name: "RAST", value: "rast" }, { name: "mRAST", value: "mrast" }));
+    .addChoices({ name: "RAST", value: "RAST" }, { name: "mRAST", value: "mRAST" }));
 export async function execute(interaction) {
     const rounds = interaction.options.getInteger("rounds") ?? 10;
-    const spec = interaction.options.getString("spec") ?? "rast";
+    const spec = interaction.options.getString("spec") ?? "RAST";
     await interaction.reply({
         content: "Creating a new thread...",
     });
@@ -160,7 +160,7 @@ export async function execute(interaction) {
     ]);
     const msg = await thread.send({
         content: `
-__**Aircraft Recognition Quiz**__
+__**${spec} Aircraft Recognition Quiz**__
 You will be shown pictures of **${rounds}** aircraft and you will have to reply with the name of the aircraft.
 You will be given 15 seconds for an answer (**you will only be allowed one response so don't send any messages unless you are sending an answer**).
 
@@ -254,7 +254,7 @@ If you want to play, click the button below.
             // Math.floor(Math.random() * Object.keys(airrec).length)
             Math.floor(Math.random() * 2) //! for some reason there's a key called "default" in the object?? - setting max to 2
             ]];
-            if (spec === "mrast") {
+            if (spec.toLowerCase() === "mrast") {
                 type = type.filter((a) => a.mrast);
             }
             const aircraft = type[Math.floor(Math.random() * type.length)];
