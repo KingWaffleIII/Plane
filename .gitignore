@@ -15,6 +15,10 @@ db.sqlite
 
 # Project
 config.json
+incomplete.txt
+
+delete_user_waifus.sql
+
 src/assets/waifus/Unused/
 src/josh.ts
 

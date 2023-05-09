@@ -1,27 +1,35 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.execute = exports.data = void 0;
-const discord_js_1 = require("discord.js");
-const models_1 = require("../models");
-exports.data = new discord_js_1.SlashCommandBuilder()
+import { EmbedBuilder, SlashCommandBuilder, } from "discord.js";
+import { User } from "../models.js";
+import waifus from "../waifus.json" assert { type: "json" };
+export const data = new SlashCommandBuilder()
     .setName("stats")
     .setDescription("Get your Plane stats.")
     .addUserOption((option) => option
     .setName("user")
     .setDescription("The user you want to view the stats of. Defaults to you."));
-async function execute(interaction) {
+export async function execute(interaction) {
     const targetUser = interaction.options.getUser("user") ?? interaction.user;
     await interaction.deferReply();
-    const user = await models_1.User.findByPk(targetUser.id);
+    let user = await User.findByPk(targetUser.id);
     if (!user && targetUser.id === interaction.user.id) {
-        await interaction.editReply({
-            content: `You don't have waifu collection yet! Use \`/waifus\` to create one!`,
+        await User.create({
+            id: interaction.user.id,
+            username: interaction.user.username,
+            discriminator: interaction.user.discriminator,
+            avatarUrl: interaction.user.avatarURL(),
+            lockedWaifus: Object.keys(waifus),
+            dogfightKills: 0,
+            dogfightDeaths: 0,
+            dogfightWinstreak: 0,
+            airrecQuizWins: 0,
+            airrecQuizLosses: 0,
+            airrecQuizWinstreak: 0,
         });
-        return;
+        user = await User.findByPk(interaction.user.id);
     }
-    if (!user && targetUser.id !== interaction.user.id) {
+    else if (!user && targetUser.id !== interaction.user.id) {
         await interaction.editReply({
-            content: `This user doesn't have a waifu collection yet. They need to run \`/waifus\` first.`,
+            content: "This user doesn't have a profile yet. They need to use `/waifus` or `/stats` first.",
         });
         return;
     }
@@ -33,7 +41,7 @@ async function execute(interaction) {
     const { dogfightKills, dogfightDeaths } = user;
     const dogfightTotal = dogfightKills + dogfightDeaths;
     const { dogfightWinstreak } = user;
-    const embed = new discord_js_1.EmbedBuilder()
+    const embed = new EmbedBuilder()
         .setColor(0x0099ff)
         .setTitle(`${targetUser.username}'s Stats`)
         .setAuthor({
@@ -49,9 +57,8 @@ async function execute(interaction) {
         value: `Kills: ${dogfightKills}\nDeaths: ${dogfightDeaths}\nWinstreak: ${dogfightWinstreak}`,
     })
         .setFooter({
-        text: "You can view specific waifu stats with /waifus.",
+        text: "You can view specific waifu stats with /waifus. If you are the only player (and by thus, the winner) in an airrec quiz, it doesn't count towards any stats.",
     })
         .setTimestamp();
     await interaction.editReply({ embeds: [embed] });
 }
-exports.execute = execute;

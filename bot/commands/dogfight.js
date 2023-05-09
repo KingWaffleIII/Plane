@@ -1,23 +1,17 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.execute = exports.data = void 0;
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-promise-executor-return */
-const crypto_1 = __importDefault(require("crypto"));
-const discord_js_1 = require("discord.js");
-const models_1 = require("../models");
-const waifus_json_1 = __importDefault(require("../waifus.json"));
-exports.data = new discord_js_1.SlashCommandBuilder()
+import crypto from "crypto";
+import { ActionRowBuilder, ComponentType, SlashCommandBuilder, StringSelectMenuBuilder, EmbedBuilder, ButtonBuilder, ButtonStyle, } from "discord.js";
+import { User, Waifu } from "../models.js";
+import waifus from "../waifus.json" assert { type: "json" };
+export const data = new SlashCommandBuilder()
     .setName("dogfight")
     .setDescription("Starts a waifu dogfight with another user.")
     .addUserOption((option) => option
     .setName("user")
     .setDescription("The user you want to dogfight.")
     .setRequired(true));
-async function execute(interaction) {
+export async function execute(interaction) {
     const targetUser = interaction.options.getUser("user");
     await interaction.deferReply();
     if (interaction.user.id === targetUser.id) {
@@ -26,15 +20,15 @@ async function execute(interaction) {
         });
         return;
     }
-    const initialUserModel = await models_1.User.findByPk(interaction.user.id, {
-        include: { model: models_1.Waifu, as: "waifus" },
+    const initialUserModel = await User.findByPk(interaction.user.id, {
+        include: { model: Waifu, as: "waifus" },
     });
-    const targetUserModel = await models_1.User.findByPk(targetUser.id, {
-        include: { model: models_1.Waifu, as: "waifus" },
+    const targetUserModel = await User.findByPk(targetUser.id, {
+        include: { model: Waifu, as: "waifus" },
     });
     if (!initialUserModel || !targetUserModel) {
         await interaction.editReply({
-            content: "Either you or the user you want to dogfight don't have waifu collections yet! Use `/waifus` to create one!",
+            content: "Either you or the user you want to dogfight don't have profiles yet. Use `/waifus` or `/stats` first.",
         });
         return;
     }
@@ -54,8 +48,8 @@ async function execute(interaction) {
     }
     let initialWaifu;
     let targetWaifu;
-    const initialWaifuSelectId = crypto_1.default.randomBytes(8).toString("hex");
-    const initialWaifuSelect = new discord_js_1.ActionRowBuilder().addComponents(new discord_js_1.StringSelectMenuBuilder()
+    const initialWaifuSelectId = crypto.randomBytes(8).toString("hex");
+    const initialWaifuSelect = new ActionRowBuilder().addComponents(new StringSelectMenuBuilder()
         .setCustomId(`dogfight-select-waifu-${initialWaifuSelectId}`)
         .setPlaceholder("Select a waifu"));
     initialUserWaifus.forEach((waifu) => {
@@ -70,7 +64,7 @@ async function execute(interaction) {
     });
     const initialWaifuSelectFilter = (i) => i.customId === `dogfight-select-waifu-${initialWaifuSelectId}`;
     const initialWaifuSelectCollector = interaction.channel.createMessageComponentCollector({
-        componentType: discord_js_1.ComponentType.StringSelect,
+        componentType: ComponentType.StringSelect,
         filter: initialWaifuSelectFilter,
         time: 60000,
     });
@@ -83,11 +77,11 @@ async function execute(interaction) {
             return;
         }
         await initialWaifuSelectInteraction.deferUpdate();
-        initialWaifu = (await models_1.Waifu.findByPk(initialWaifuSelectInteraction.values[0], {
-            include: { model: models_1.User, as: "user" },
+        initialWaifu = (await Waifu.findByPk(initialWaifuSelectInteraction.values[0], {
+            include: { model: User, as: "user" },
         }));
-        const targetWaifuSelectId = crypto_1.default.randomBytes(8).toString("hex");
-        const targetWaifuSelect = new discord_js_1.ActionRowBuilder().addComponents(new discord_js_1.StringSelectMenuBuilder()
+        const targetWaifuSelectId = crypto.randomBytes(8).toString("hex");
+        const targetWaifuSelect = new ActionRowBuilder().addComponents(new StringSelectMenuBuilder()
             .setCustomId(`dogfight-select-waifu-${targetWaifuSelectId}`)
             .setPlaceholder("Select a waifu"));
         targetUserWaifus.forEach((waifu) => {
@@ -102,7 +96,7 @@ async function execute(interaction) {
         });
         const targetWaifuSelectFilter = (i) => i.customId === `dogfight-select-waifu-${targetWaifuSelectId}`;
         const targetWaifuSelectCollector = interaction.channel.createMessageComponentCollector({
-            componentType: discord_js_1.ComponentType.StringSelect,
+            componentType: ComponentType.StringSelect,
             filter: targetWaifuSelectFilter,
             time: 60000,
         });
@@ -115,8 +109,8 @@ async function execute(interaction) {
                 return;
             }
             await targetWaifuSelectInteraction.deferUpdate();
-            targetWaifu = (await models_1.Waifu.findByPk(targetWaifuSelectInteraction.values[0], {
-                include: { model: models_1.User, as: "user" },
+            targetWaifu = (await Waifu.findByPk(targetWaifuSelectInteraction.values[0], {
+                include: { model: User, as: "user" },
             }));
             await interaction.editReply({
                 content: "Creating a new thread...",
@@ -170,8 +164,8 @@ async function execute(interaction) {
             };
             const firstWaifu = waifuList[first.id];
             const secondWaifu = waifuList[second.id];
-            const firstWaifuData = waifus_json_1.default[first.name];
-            const secondWaifuData = waifus_json_1.default[second.name];
+            const firstWaifuData = waifus[first.name];
+            const secondWaifuData = waifus[second.name];
             const doCalculations = async (attacker, attackerModel, opponent, opponentModel) => {
                 switch (attacker.move) {
                     case "attack": {
@@ -182,7 +176,7 @@ async function execute(interaction) {
                         ) {
                             // waifu abilities
                             if (attacker.equipment) {
-                                const waifuData = waifus_json_1.default[attacker.equipment
+                                const waifuData = waifus[attacker.equipment
                                     .name];
                                 switch (waifuData.ability) {
                                     case "crit": {
@@ -323,10 +317,10 @@ async function execute(interaction) {
                         break;
                     }
                     case "equip": {
-                        const weaponEquipId = crypto_1.default
+                        const weaponEquipId = crypto
                             .randomBytes(6)
                             .toString("hex");
-                        const weaponEquip = new discord_js_1.ActionRowBuilder().addComponents(new discord_js_1.StringSelectMenuBuilder()
+                        const weaponEquip = new ActionRowBuilder().addComponents(new StringSelectMenuBuilder()
                             .setCustomId(`dogfight-equip-weapon-${weaponEquipId}`)
                             .setPlaceholder("Select a weapon"));
                         const userWaifus = (await attackerModel.user.getWaifus({
@@ -348,7 +342,7 @@ async function execute(interaction) {
                         const weaponEquipCollector = thread.createMessageComponentCollector({
                             filter: weaponEquipFilter,
                             time: 30000,
-                            componentType: discord_js_1.ComponentType.StringSelect,
+                            componentType: ComponentType.StringSelect,
                         });
                         const weaponEquipMsg = await thread.send({
                             content: `<@${attackerModel.user.id}>, select a weapon to equip!`,
@@ -366,12 +360,12 @@ async function execute(interaction) {
                                 }
                                 await weaponEquipMsg.delete();
                                 attacker.equipment =
-                                    (await models_1.Waifu.findByPk(int.values[0]));
+                                    (await Waifu.findByPk(int.values[0]));
                                 attacker.atk +=
                                     attacker.equipment.atk;
-                                const equipmentData = waifus_json_1.default[attacker.equipment
+                                const equipmentData = waifus[attacker.equipment
                                     .name];
-                                const waifuData = waifus_json_1.default[attackerModel.name];
+                                const waifuData = waifus[attackerModel.name];
                                 if (equipmentData.ability ===
                                     "heavy")
                                     attacker.canEvade = false;
@@ -476,7 +470,7 @@ async function execute(interaction) {
                     firstWaifu.hasbeenStunned = true;
                 }
                 else {
-                    const firstWaifuEmbed = new discord_js_1.EmbedBuilder()
+                    const firstWaifuEmbed = new EmbedBuilder()
                         .setTitle(first.name)
                         .setColor(0xff00ff)
                         .setAuthor({
@@ -506,26 +500,26 @@ async function execute(interaction) {
                         inline: true,
                     });
                     if (firstWaifu.equipment) {
-                        const equipmentData = waifus_json_1.default[firstWaifu.equipment
+                        const equipmentData = waifus[firstWaifu.equipment
                             .name];
                         firstWaifuEmbed.setThumbnail(`attachment://${equipmentData.urlFriendlyName ??
                             firstWaifu.equipment.name}.jpg`);
                     }
-                    const firstDogfightId = crypto_1.default
+                    const firstDogfightId = crypto
                         .randomBytes(6)
                         .toString("hex");
-                    const firstDogfight = new discord_js_1.ActionRowBuilder().addComponents(new discord_js_1.ButtonBuilder()
+                    const firstDogfight = new ActionRowBuilder().addComponents(new ButtonBuilder()
                         .setCustomId(`dogfight-attack-${firstDogfightId}`)
-                        .setStyle(discord_js_1.ButtonStyle.Danger)
-                        .setLabel("Attack"), new discord_js_1.ButtonBuilder()
+                        .setStyle(ButtonStyle.Danger)
+                        .setLabel("Attack"), new ButtonBuilder()
                         .setCustomId(`dogfight-evade-${firstDogfightId}`)
-                        .setStyle(discord_js_1.ButtonStyle.Success)
-                        .setLabel("Evade"), new discord_js_1.ButtonBuilder()
+                        .setStyle(ButtonStyle.Success)
+                        .setLabel("Evade"), new ButtonBuilder()
                         .setCustomId(`dogfight-equip-${firstDogfightId}`)
-                        .setStyle(discord_js_1.ButtonStyle.Primary)
+                        .setStyle(ButtonStyle.Primary)
                         .setLabel("Equip a weapon"));
                     if (firstWaifu.equipment ||
-                        (await models_1.Waifu.count({
+                        (await Waifu.count({
                             where: {
                                 userId: first.user.id,
                                 hp: 0,
@@ -543,7 +537,7 @@ async function execute(interaction) {
                             `dogfight-equip-${firstDogfightId}`;
                     const firstFiles = [firstWaifuData.path];
                     if (firstWaifu.equipment)
-                        firstFiles.push(waifus_json_1.default[firstWaifu.equipment
+                        firstFiles.push(waifus[firstWaifu.equipment
                             .name].path);
                     const firstTurn = await thread.send({
                         content: `<@${first.user.id}>'s turn with **${first.name}**!`,
@@ -554,7 +548,7 @@ async function execute(interaction) {
                     const firstDogfightCollector = thread.createMessageComponentCollector({
                         filter: firstDogfightFilter,
                         time: 30000,
-                        componentType: discord_js_1.ComponentType.Button,
+                        componentType: ComponentType.Button,
                     });
                     const firstResolve = await doMove(first, firstWaifu, firstDogfightId, firstDogfightCollector, firstTurn);
                     if (!firstResolve) {
@@ -567,7 +561,7 @@ async function execute(interaction) {
                     secondWaifu.hasbeenStunned = true;
                 }
                 else {
-                    const secondWaifuEmbed = new discord_js_1.EmbedBuilder()
+                    const secondWaifuEmbed = new EmbedBuilder()
                         .setTitle(second.name)
                         .setColor(0xff00ff)
                         .setAuthor({
@@ -597,26 +591,26 @@ async function execute(interaction) {
                         inline: true,
                     });
                     if (secondWaifu.equipment) {
-                        const equipmentData = waifus_json_1.default[secondWaifu.equipment
+                        const equipmentData = waifus[secondWaifu.equipment
                             .name];
                         secondWaifuEmbed.setThumbnail(`attachment://${equipmentData.urlFriendlyName ??
                             secondWaifu.equipment.name}.jpg`);
                     }
-                    const secondDogfightId = crypto_1.default
+                    const secondDogfightId = crypto
                         .randomBytes(6)
                         .toString("hex");
-                    const secondDogfight = new discord_js_1.ActionRowBuilder().addComponents(new discord_js_1.ButtonBuilder()
+                    const secondDogfight = new ActionRowBuilder().addComponents(new ButtonBuilder()
                         .setCustomId(`dogfight-attack-${secondDogfightId}`)
-                        .setStyle(discord_js_1.ButtonStyle.Danger)
-                        .setLabel("Attack"), new discord_js_1.ButtonBuilder()
+                        .setStyle(ButtonStyle.Danger)
+                        .setLabel("Attack"), new ButtonBuilder()
                         .setCustomId(`dogfight-evade-${secondDogfightId}`)
-                        .setStyle(discord_js_1.ButtonStyle.Success)
-                        .setLabel("Evade"), new discord_js_1.ButtonBuilder()
+                        .setStyle(ButtonStyle.Success)
+                        .setLabel("Evade"), new ButtonBuilder()
                         .setCustomId(`dogfight-equip-${secondDogfightId}`)
-                        .setStyle(discord_js_1.ButtonStyle.Primary)
+                        .setStyle(ButtonStyle.Primary)
                         .setLabel("Equip a weapon"));
                     if (secondWaifu.equipment ||
-                        (await models_1.Waifu.count({
+                        (await Waifu.count({
                             where: {
                                 userId: second.user.id,
                                 hp: 0,
@@ -634,7 +628,7 @@ async function execute(interaction) {
                             `dogfight-equip-${secondDogfightId}`;
                     const secondFiles = [secondWaifuData.path];
                     if (secondWaifu.equipment)
-                        secondFiles.push(waifus_json_1.default[secondWaifu.equipment
+                        secondFiles.push(waifus[secondWaifu.equipment
                             .name].path);
                     const secondTurn = await thread.send({
                         content: `<@${second.user.id}>'s turn with **${second.name}**!`,
@@ -645,7 +639,7 @@ async function execute(interaction) {
                     const secondDogfightCollector = thread.createMessageComponentCollector({
                         filter: secondDogfightFilter,
                         time: 30000,
-                        componentType: discord_js_1.ComponentType.Button,
+                        componentType: ComponentType.Button,
                     });
                     const secondResolve = await doMove(second, secondWaifu, secondDogfightId, secondDogfightCollector, secondTurn);
                     if (!secondResolve) {
@@ -656,7 +650,7 @@ async function execute(interaction) {
                 await doCalculations(secondWaifu, second, firstWaifu, first);
             }
             if (firstWaifu.hp <= 0) {
-                const victorEmbed = new discord_js_1.EmbedBuilder()
+                const victorEmbed = new EmbedBuilder()
                     .setTitle(second.name)
                     .setColor(0xff00ff)
                     .setAuthor({
@@ -667,7 +661,7 @@ async function execute(interaction) {
                     second.name}.jpg`)
                     .setDescription("You are the victor!");
                 if (secondWaifu.equipment) {
-                    const equipmentData = waifus_json_1.default[secondWaifu.equipment
+                    const equipmentData = waifus[secondWaifu.equipment
                         .name];
                     victorEmbed.setThumbnail(`attachment://${equipmentData.urlFriendlyName ??
                         secondWaifu.equipment.name}.jpg`);
@@ -675,7 +669,7 @@ async function execute(interaction) {
                 const content = `<@${first.user.id}>'s **${first.name}** has been defeated! <@${second.user.id}>'s **${second.name}** wins!`;
                 const files = [secondWaifuData.path];
                 if (secondWaifu.equipment)
-                    files.push(waifus_json_1.default[secondWaifu.equipment
+                    files.push(waifus[secondWaifu.equipment
                         .name].path);
                 await thread.send({
                     content,
@@ -703,7 +697,7 @@ async function execute(interaction) {
                 });
             }
             else if (secondWaifu.hp <= 0) {
-                const victorEmbed = new discord_js_1.EmbedBuilder()
+                const victorEmbed = new EmbedBuilder()
                     .setTitle(first.name)
                     .setColor(0xff00ff)
                     .setAuthor({
@@ -713,7 +707,7 @@ async function execute(interaction) {
                     .setImage(`attachment://${firstWaifuData.urlFriendlyName ?? first.name}.jpg`)
                     .setDescription("You are the victor!");
                 if (firstWaifu.equipment) {
-                    const equipmentData = waifus_json_1.default[firstWaifu.equipment
+                    const equipmentData = waifus[firstWaifu.equipment
                         .name];
                     victorEmbed.setThumbnail(`attachment://${equipmentData.urlFriendlyName ??
                         firstWaifu.equipment.name}.jpg`);
@@ -721,7 +715,7 @@ async function execute(interaction) {
                 const content = `<@${second.user.id}>'s **${second.name}** has been defeated! <@${first.user.id}>'s **${first.name}** wins!`;
                 const files = [firstWaifuData.path];
                 if (firstWaifu.equipment)
-                    files.push(waifus_json_1.default[firstWaifu.equipment
+                    files.push(waifus[firstWaifu.equipment
                         .name].path);
                 await thread.send({
                     content,
@@ -771,4 +765,3 @@ async function execute(interaction) {
         }
     });
 }
-exports.execute = execute;

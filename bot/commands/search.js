@@ -1,12 +1,6 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.execute = exports.data = void 0;
-const discord_js_1 = require("discord.js");
-const airrec_1 = require("./airrec");
-const air_rec_json_1 = __importDefault(require("../air_rec.json"));
+import { EmbedBuilder, SlashCommandBuilder, } from "discord.js";
+import { getImage } from "./airrec.js";
+import airrec from "../air_rec.json" assert { type: "json" };
 function checkMatch(matchAgainst, aircraft) {
     if (aircraft.name.toLowerCase().includes(matchAgainst)) {
         return aircraft;
@@ -16,18 +10,18 @@ function checkMatch(matchAgainst, aircraft) {
     }
     return null;
 }
-exports.data = new discord_js_1.SlashCommandBuilder()
+export const data = new SlashCommandBuilder()
     .setName("search")
     .setDescription("Search for and view and aircraft profile.")
     .addStringOption((option) => option
     .setName("name")
     .setDescription("The name/alias/model/etc. of the aircraft you want to search for (e.g. F-22 or Raptor).")
     .setRequired(true));
-async function execute(interaction) {
+export async function execute(interaction) {
     const name = interaction.options.getString("name").toLowerCase();
     await interaction.deferReply();
-    const civilianAircraft = air_rec_json_1.default.civilian;
-    const militaryAircraft = air_rec_json_1.default.military;
+    const civilianAircraft = airrec.civilian;
+    const militaryAircraft = airrec.military;
     let match = false;
     let matchedAircraft = null;
     for (const aircraft of civilianAircraft) {
@@ -54,8 +48,8 @@ async function execute(interaction) {
         });
     }
     else {
-        const image = await (0, airrec_1.getImage)(matchedAircraft.image);
-        const embed = new discord_js_1.EmbedBuilder()
+        const image = await getImage(matchedAircraft.image);
+        const embed = new EmbedBuilder()
             .setColor(0x0099ff)
             .setTitle(matchedAircraft.name)
             .setDescription(matchedAircraft.role)
@@ -88,4 +82,3 @@ async function execute(interaction) {
         });
     }
 }
-exports.execute = execute;

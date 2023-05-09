@@ -13,9 +13,9 @@ import {
 	SlashCommandBuilder,
 } from "discord.js";
 
-import { User } from "../models";
-import airrec from "../air_rec.json";
-import waifus from "../waifus.json";
+import { User } from "../models.js";
+import airrec from "../air_rec.json" assert { type: "json" };
+import waifus from "../waifus.json" assert { type: "json" };
 
 export interface Aircraft {
 	readonly name: string;
@@ -27,6 +27,7 @@ export interface Aircraft {
 	readonly image: string;
 	readonly waifuImage?: string;
 	readonly wiki: string;
+	readonly mrast: boolean;
 }
 
 export interface WaifuBaseData {
@@ -52,12 +53,10 @@ export async function getImage(url: string): Promise<string | null> {
 		const images: string[] = [];
 
 		// get every a element with class pgthumb
-		$("a.pgthumb").each((i, element) => {
+		$("a.pgthumb").each((_i, element) => {
 			// get the src attribute of the child img element
 			const image = $(element).children("img").attr("src");
-			if (image) {
-				images.push(image);
-			}
+			if (image) images.push(image);
 		});
 
 		const image = images[Math.floor(Math.random() * images.length)];
@@ -68,49 +67,44 @@ export async function getImage(url: string): Promise<string | null> {
 	}
 }
 
-export async function spawnWaifu(
-	user: User,
-	name?: string
-): Promise<WaifuData | null> {
+export function makeEmbedWithImage(img: string): EmbedBuilder {
+	return new EmbedBuilder()
+		.setColor(0x0099ff)
+		.setTitle("What is the name of this aircraft?")
+		.setImage(img)
+		.setTimestamp()
+		.setFooter({
+			text: "Photo credit: https://www.airfighters.com",
+		});
+}
+
+async function spawnWaifu(user: User, name: string): Promise<WaifuData | null> {
 	let isGuaranteed = false;
 	if (user.guaranteeWaifu) {
 		isGuaranteed =
 			user.guaranteeWaifu !== undefined && user.guaranteeCounter! >= 10;
 	}
 	if (isGuaranteed || Math.floor(Math.random() * 3) === 0) {
-		if (
-			(isGuaranteed && name === user.guaranteeWaifu) ||
-			name === user.guaranteeWaifu
-		) {
+		if (name === user.guaranteeWaifu) {
 			await user!.update({
 				guaranteeWaifu: null,
 				guaranteeCounter: null,
 			});
 		} else if (user.guaranteeWaifu) {
-			await user!.update({
-				guaranteeCounter: user.guaranteeCounter! + 1,
-			});
+			if (user.guaranteeCounter! < 10) {
+				await user!.update({
+					guaranteeCounter: user.guaranteeCounter! + 1,
+				});
+			}
 		}
 
-		if (name) {
-			if (Object.keys(waifus).includes(name)) {
-				const waifu: WaifuBaseData =
-					waifus[name as keyof typeof waifus];
+		if (Object.keys(waifus).includes(name)) {
+			const waifu: WaifuBaseData = waifus[name as keyof typeof waifus];
 
-				if (waifu.urlFriendlyName) {
-					return {
-						name,
-						urlFriendlyName: waifu.urlFriendlyName,
-						path: waifu.path,
-						type: waifu.type,
-						spec: waifu.spec,
-						abilityName: waifu.abilityName,
-						abilityDescription: waifu.abilityDescription,
-					};
-				}
+			if (waifu.urlFriendlyName) {
 				return {
 					name,
-					urlFriendlyName: name,
+					urlFriendlyName: waifu.urlFriendlyName,
 					path: waifu.path,
 					type: waifu.type,
 					spec: waifu.spec,
@@ -118,22 +112,9 @@ export async function spawnWaifu(
 					abilityDescription: waifu.abilityDescription,
 				};
 			}
-			return null;
-		}
-
-		const nonSpecWaifus = Object.keys(waifus).filter((w) => {
-			const waifuData = waifus[w as keyof typeof waifus];
-			return !waifuData.spec;
-		});
-		const waifuName = nonSpecWaifus[
-			Math.floor(Math.random() * Object.keys(nonSpecWaifus).length)
-		] as keyof typeof waifus;
-		const waifu: WaifuBaseData = waifus[waifuName];
-
-		if (waifu.urlFriendlyName) {
 			return {
-				name: waifuName,
-				urlFriendlyName: waifu.urlFriendlyName,
+				name,
+				urlFriendlyName: name,
 				path: waifu.path,
 				type: waifu.type,
 				spec: waifu.spec,
@@ -141,15 +122,7 @@ export async function spawnWaifu(
 				abilityDescription: waifu.abilityDescription,
 			};
 		}
-		return {
-			name: waifuName,
-			urlFriendlyName: waifuName,
-			path: waifu.path,
-			type: waifu.type,
-			spec: waifu.spec,
-			abilityName: waifu.abilityName,
-			abilityDescription: waifu.abilityDescription,
-		};
+		return null;
 	}
 	return null;
 }
@@ -157,13 +130,6 @@ export async function spawnWaifu(
 export const data = new SlashCommandBuilder()
 	.setName("airrec")
 	.setDescription("Gives you an aircraft image for you to identify.")
-	.addBooleanOption((option) =>
-		option
-			.setName("random")
-			.setDescription(
-				"Whether to show a specific aircraft type or a random aircraft. Defaults to a random aircraft."
-			)
-	)
 	.addStringOption((option) =>
 		option
 			.setName("type")
@@ -174,10 +140,22 @@ export const data = new SlashCommandBuilder()
 				{ name: "Civilian", value: "civilian" },
 				{ name: "Military", value: "military" }
 			)
+	)
+	.addStringOption((option) =>
+		option
+			.setName("spec")
+			.setDescription(
+				"The spec you want to use (mRAST is RAF past/present). Defaults to RAST."
+			)
+			.addChoices(
+				{ name: "RAST", value: "rast" },
+				{ name: "mRAST", value: "mrast" }
+			)
 	);
 
 export async function execute(interaction: ChatInputCommandInteraction) {
 	const requestedType = interaction.options.getString("type") ?? false;
+	const spec = interaction.options.getString("spec") ?? "rast";
 
 	await interaction.deferReply();
 
@@ -193,6 +171,10 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 
 	if (requestedType) {
 		type = airrec[requestedType as keyof typeof airrec];
+	}
+
+	if (spec === "mrast") {
+		type = type.filter((a) => a.mrast);
 	}
 
 	let aircraft: Aircraft = type[Math.floor(Math.random() * type.length)];
@@ -222,12 +204,13 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 	const row = new ActionRowBuilder<ButtonBuilder>().addComponents(
 		new ButtonBuilder()
 			.setCustomId(`reveal-airrec-${buttonId}`)
-			.setLabel("Reveal answer")
+			.setLabel("Revenal answer")
 			.setStyle(ButtonStyle.Primary)
 	);
 
+	const embed = makeEmbedWithImage(image);
 	await interaction.editReply({
-		content: `**What is the name of this aircraft?**\n${image}`,
+		embeds: [embed],
 		components: [row],
 	});
 
@@ -288,12 +271,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 					user,
 					aircraft.waifuImage
 				);
-				if (
-					waifu &&
-					(await user!.countWaifus({
-						where: { name: waifu.name },
-					})) <= 5
-				) {
+				if (waifu) {
 					const atk = Math.floor(Math.random() * 10);
 					const hp = Math.floor(Math.random() * (100 - 50) + 50);
 					const spd = Math.floor(Math.random() * 10);

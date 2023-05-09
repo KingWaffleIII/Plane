@@ -1,18 +1,16 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.execute = exports.data = void 0;
-const crypto_1 = __importDefault(require("crypto"));
-const discord_js_1 = require("discord.js");
-const redis_1 = require("redis");
-const models_1 = require("../models");
-const airrec_1 = require("./airrec");
-const air_rec_json_1 = __importDefault(require("../air_rec.json"));
-const wait = require("node:timers/promises").setTimeout;
-const joshId = "1084882617964441610";
-const joshUsername = "J0sh";
+import crypto from "crypto";
+import { ActionRowBuilder, ButtonBuilder, ButtonStyle, ComponentType, EmbedBuilder, SlashCommandBuilder, } from "discord.js";
+import { User } from "../models.js";
+import { getImage, makeEmbedWithImage, } from "./airrec.js";
+import airrec from "../air_rec.json" assert { type: "json" };
+import waifus from "../waifus.json" assert { type: "json" };
+const wait = (await import("node:timers/promises")).setTimeout;
+// stop crashing if thread is deleted pre-emptively
+process.on("unhandledRejection", (error) => {
+    if (error.name === "Error [ChannelNotCached]")
+        return;
+    console.error("Unhandled promise rejection:", error);
+});
 function checkAnswer(message, aircraft) {
     if (message.toLowerCase() === aircraft.name.toLowerCase()) {
         return 2;
@@ -23,16 +21,115 @@ function checkAnswer(message, aircraft) {
     }
     return 0;
 }
-exports.data = new discord_js_1.SlashCommandBuilder()
+async function spawnWaifu(user, rounds, score, name) {
+    let isGuaranteed = false;
+    if (user.guaranteeWaifu) {
+        isGuaranteed =
+            user.guaranteeWaifu !== undefined && user.guaranteeCounter >= 10;
+    }
+    const doSpawn = () => {
+        // If the user has a guaranteed waifu, spawn it
+        if (isGuaranteed) {
+            return true;
+        }
+        // Set a minimum number of rounds before a waifu can spawn
+        if (rounds < 5) {
+            return false;
+        }
+        // Generate a random number between 0 and 1
+        const randomNum = Math.random();
+        // Calculate the probability of returning true based on the score (score is halved as you can earn 2 points in each round)
+        const probability = score / 2 / rounds;
+        // Return true if the random number is less than the probability, otherwise return false
+        if (randomNum < probability) {
+            return true;
+        }
+        return false;
+    };
+    if (doSpawn()) {
+        if (name === user.guaranteeWaifu) {
+            await user.update({
+                guaranteeWaifu: null,
+                guaranteeCounter: null,
+            });
+        }
+        else if (user.guaranteeWaifu) {
+            if (user.guaranteeCounter < 10) {
+                await user.update({
+                    guaranteeCounter: user.guaranteeCounter + 1,
+                });
+            }
+        }
+        if (name) {
+            if (Object.keys(waifus).includes(name)) {
+                const waifu = waifus[name];
+                if (waifu.urlFriendlyName) {
+                    return {
+                        name,
+                        urlFriendlyName: waifu.urlFriendlyName,
+                        path: waifu.path,
+                        type: waifu.type,
+                        spec: waifu.spec,
+                        abilityName: waifu.abilityName,
+                        abilityDescription: waifu.abilityDescription,
+                    };
+                }
+                return {
+                    name,
+                    urlFriendlyName: name,
+                    path: waifu.path,
+                    type: waifu.type,
+                    spec: waifu.spec,
+                    abilityName: waifu.abilityName,
+                    abilityDescription: waifu.abilityDescription,
+                };
+            }
+            return null;
+        }
+        const nonSpecWaifus = Object.keys(waifus).filter((w) => {
+            const waifuData = waifus[w];
+            return !waifuData.spec;
+        });
+        const waifuName = nonSpecWaifus[Math.floor(Math.random() * Object.keys(nonSpecWaifus).length)];
+        const waifu = waifus[waifuName];
+        if (waifu.urlFriendlyName) {
+            return {
+                name: waifuName,
+                urlFriendlyName: waifu.urlFriendlyName,
+                path: waifu.path,
+                type: waifu.type,
+                spec: waifu.spec,
+                abilityName: waifu.abilityName,
+                abilityDescription: waifu.abilityDescription,
+            };
+        }
+        return {
+            name: waifuName,
+            urlFriendlyName: waifuName,
+            path: waifu.path,
+            type: waifu.type,
+            spec: waifu.spec,
+            abilityName: waifu.abilityName,
+            abilityDescription: waifu.abilityDescription,
+        };
+    }
+    return null;
+}
+export const data = new SlashCommandBuilder()
     .setName("airrec-quiz")
     .setDescription("Gives you a series of aircraft images for you and others to identify with scoring.")
     .addIntegerOption((option) => option
     .setName("rounds")
     .setDescription("The number of rounds you want to play. Defaults to 10 rounds.")
     .setMinValue(1)
-    .setMaxValue(20));
-async function execute(interaction) {
+    .setMaxValue(30))
+    .addStringOption((option) => option
+    .setName("spec")
+    .setDescription("The spec you want to use (mRAST is RAF past/present). Defaults to RAST.")
+    .addChoices({ name: "RAST", value: "rast" }, { name: "mRAST", value: "mrast" }));
+export async function execute(interaction) {
     const rounds = interaction.options.getInteger("rounds") ?? 10;
+    const spec = interaction.options.getString("spec") ?? "rast";
     await interaction.reply({
         content: "Creating a new thread...",
     });
@@ -45,21 +142,21 @@ async function execute(interaction) {
     await interaction.editReply({
         content: "Thread created! Click here:",
     });
-    const buttonId = crypto_1.default.randomBytes(6).toString("hex");
-    const row = new discord_js_1.ActionRowBuilder().addComponents([
-        new discord_js_1.ButtonBuilder()
+    const buttonId = crypto.randomBytes(6).toString("hex");
+    const row = new ActionRowBuilder().addComponents([
+        new ButtonBuilder()
             .setCustomId(`play-${buttonId}`)
             .setLabel("Play")
-            .setStyle(discord_js_1.ButtonStyle.Primary),
-        new discord_js_1.ButtonBuilder()
+            .setStyle(ButtonStyle.Primary),
+        new ButtonBuilder()
             .setCustomId(`skip-${buttonId}`)
             .setLabel("Start now")
-            .setStyle(discord_js_1.ButtonStyle.Secondary)
+            .setStyle(ButtonStyle.Secondary)
             .setDisabled(true),
-        new discord_js_1.ButtonBuilder()
+        new ButtonBuilder()
             .setCustomId(`cancel-${buttonId}`)
             .setLabel("Cancel")
-            .setStyle(discord_js_1.ButtonStyle.Danger),
+            .setStyle(ButtonStyle.Danger),
     ]);
     const msg = await thread.send({
         content: `
@@ -83,48 +180,10 @@ If you want to play, click the button below.
         i.customId === `skip-${buttonId}` ||
         i.customId === `cancel-${buttonId}`;
     const collector = thread.createMessageComponentCollector({
-        componentType: discord_js_1.ComponentType.Button,
+        componentType: ComponentType.Button,
         time: 60000,
         filter: playFilter,
     });
-    let isJoshOnline = false;
-    try {
-        const conn = (0, redis_1.createClient)({
-            url: "redis://host.docker.internal:6379",
-        });
-        await conn.connect();
-        isJoshOnline = true;
-    }
-    catch (err) {
-        isJoshOnline = false;
-    }
-    let pub;
-    let sub;
-    if (isJoshOnline) {
-        const listener = async (message, channel) => {
-            if (channel !== "josh-new-quiz" || message !== "accept")
-                return;
-            players[joshId] = {
-                username: joshUsername,
-                score: 0,
-                lastScore: 0,
-            };
-            await thread.send({
-                content: `<@${joshId}> has joined the game!`,
-            });
-            await sub.disconnect();
-        };
-        pub = (0, redis_1.createClient)({
-            url: "redis://host.docker.internal:6379",
-        });
-        pub.on("error", (err) => console.error(err));
-        sub = pub.duplicate();
-        sub.on("error", (err) => console.error(err));
-        await sub.connect();
-        await sub.subscribe("josh-new-quiz", listener);
-        await pub.connect();
-        await pub.publish("josh-new-quiz", thread.id);
-    }
     collector?.on("collect", async (i) => {
         if (i.customId === `cancel-${buttonId}`) {
             if (i.user.id !== interaction.user.id) {
@@ -191,29 +250,27 @@ If you want to play, click the button below.
             components: [],
         });
         for (let i = 0; i < rounds; i++) {
-            const type = air_rec_json_1.default[Object.keys(air_rec_json_1.default)[
+            let type = airrec[Object.keys(airrec)[
             // Math.floor(Math.random() * Object.keys(airrec).length)
             Math.floor(Math.random() * 2) //! for some reason there's a key called "default" in the object?? - setting max to 2
             ]];
+            if (spec === "mrast") {
+                type = type.filter((a) => a.mrast);
+            }
             const aircraft = type[Math.floor(Math.random() * type.length)];
-            const image = await (0, airrec_1.getImage)(aircraft.image);
+            const image = await getImage(aircraft.image);
             if (!image) {
                 await thread.send({
                     content: "Sorry, I encountered an issue in retrieving an image. Please try again later.",
                 });
                 return;
             }
+            const embed = makeEmbedWithImage(image);
             const question = await thread.send({
-                content: `**Round ${i + 1} of ${rounds}:**\nWhat is the name of this aircraft?\n${image}`,
+                content: `**Round ${i + 1} of ${rounds}:**`,
+                embeds: [embed],
                 components: [],
             });
-            if (Object.keys(players).includes(joshId)) {
-                await pub.publish("josh-do-quiz", aircraft.name);
-            }
-            //! cheat mode
-            // await thread.send({
-            // 	content: aircraft.name,
-            // });
             const answered = [];
             const answerFilter = (m) => {
                 if (!answered.includes(m.author.id)) {
@@ -235,13 +292,9 @@ If you want to play, click the button below.
                 messages.forEach(async (message) => {
                     const score = checkAnswer(message.content, aircraft);
                     players[message.author.id].score += score;
-                    //! too spammy
-                    // await message.reply({
-                    // 	content: `You got **${score}** point(s)!`,
-                    // });
                 });
             }
-            const answer = new discord_js_1.EmbedBuilder()
+            const answer = new EmbedBuilder()
                 .setColor(0x0099ff)
                 .setTitle(aircraft.name)
                 .setDescription(aircraft.role)
@@ -270,7 +323,7 @@ If you want to play, click the button below.
                 inline: true,
             });
             const sortedPlayers = Object.keys(players).sort((a, b) => players[b].score - players[a].score);
-            const leaderboard = new discord_js_1.EmbedBuilder()
+            const leaderboard = new EmbedBuilder()
                 .setColor(0x0099ff)
                 .setTitle("Leaderboard")
                 .setTimestamp()
@@ -289,8 +342,24 @@ If you want to play, click the button below.
             });
             await wait(10000);
         }
+        const winners = [];
         const sortedPlayers = Object.keys(players).sort((a, b) => players[b].score - players[a].score);
-        const leaderboard = new discord_js_1.EmbedBuilder()
+        if (players[sortedPlayers[0]].score !== 0) {
+            winners.push(sortedPlayers[0]);
+            if (sortedPlayers.length !== 1) {
+                // check if there's a tie and how many people are tied
+                if (players[sortedPlayers[0]].score ===
+                    players[sortedPlayers[1]].score) {
+                    for (let i = 1; i < sortedPlayers.length; i++) {
+                        if (players[sortedPlayers[i]].score ===
+                            players[sortedPlayers[0]].score) {
+                            winners.push(sortedPlayers[i]);
+                        }
+                    }
+                }
+            }
+        }
+        const leaderboard = new EmbedBuilder()
             .setColor(0x0099ff)
             .setTitle("Final Leaderboard")
             .setDescription(sortedPlayers
@@ -305,49 +374,49 @@ If you want to play, click the button below.
             embeds: [leaderboard],
             components: [],
         });
-        if (Object.keys(players).includes(joshId)) {
-            await pub.publish("josh-do-quiz", "end");
+        if (winners.length > 1) {
+            sortedPlayers
+                .filter((p) => !winners.includes(p))
+                .forEach(async (p) => {
+                const user = await User.findByPk(p);
+                if (user) {
+                    await user.update({
+                        airrecQuizLosses: user.airrecQuizLosses + 1,
+                        airrecQuizWinstreak: 0,
+                    });
+                }
+            });
         }
-        sortedPlayers
-            .filter((p) => p !== sortedPlayers[0])
-            .forEach(async (p) => {
-            const user = await models_1.User.findByPk(p);
-            if (user) {
-                await user.update({
-                    airrecQuizLosses: user.airrecQuizLosses + 1,
-                    airrecQuizWinstreak: 0,
+        winners.forEach(async (u) => {
+            // check if user exists in db
+            const user = await User.findByPk(u);
+            if (!user) {
+                await thread.send({
+                    content: `**<@${u}>, you doesn't have a profile yet! Use \`/waifus\` or \`/stats\` to get one!**`,
                 });
             }
-        });
-        // check if user exists in db
-        const user = await models_1.User.findByPk(sortedPlayers[0]);
-        if (!user) {
-            await thread.send({
-                content: `**<@${sortedPlayers[0]}>, you don't have waifu collection yet! Use \`/waifus\` to create one!**`,
-            });
-        }
-        else {
-            await user.update({
-                airrecQuizWins: user.airrecQuizWins + 1,
-                airrecQuizWinstreak: user.airrecQuizWinstreak + 1,
-            });
-            const isGuaranteed = user.guaranteeWaifu && user.guaranteeCounter >= 10;
-            if (isGuaranteed ||
-                (rounds >= 5 &&
-                    players[sortedPlayers[0]].score >= 0.25 * rounds)) {
-                let waifuName;
-                if (isGuaranteed) {
-                    waifuName = user.guaranteeWaifu;
+            else {
+                if (winners.length > 1) {
+                    await user.update({
+                        airrecQuizWins: user.airrecQuizWins + 1,
+                        airrecQuizWinstreak: user.airrecQuizWinstreak + 1,
+                    });
                 }
-                const waifu = await (0, airrec_1.spawnWaifu)(user, waifuName);
-                if (waifu &&
-                    (await user.countWaifus({
-                        where: { name: waifu.name },
-                    })) <= 5) {
+                const isGuaranteed = user.guaranteeWaifu &&
+                    user.guaranteeCounter >= 10 &&
+                    !waifus[user.guaranteeWaifu].spec;
+                let waifu;
+                if (isGuaranteed) {
+                    waifu = await spawnWaifu(user, rounds, players[u].score, user.guaranteeWaifu);
+                }
+                else {
+                    waifu = await spawnWaifu(user, rounds, players[u].score);
+                }
+                if (waifu) {
                     const atk = Math.floor(Math.random() * 10);
                     const hp = Math.floor(Math.random() * (100 - 50) + 50);
                     const spd = Math.floor(Math.random() * 10);
-                    const waifuEmbed = new discord_js_1.EmbedBuilder()
+                    const waifuEmbed = new EmbedBuilder()
                         .setColor(0xff00ff)
                         .setTitle(waifu.name)
                         .setImage(`attachment://${waifu.urlFriendlyName}.jpg`)
@@ -375,7 +444,7 @@ If you want to play, click the button below.
                         });
                     }
                     await thread.send({
-                        content: `<@${interaction.user.id}> has unlocked a new waifu!`,
+                        content: `<@${user.id}> has unlocked a new waifu!`,
                         embeds: [waifuEmbed],
                         files: [waifu.path],
                     });
@@ -393,11 +462,7 @@ If you want to play, click the button below.
                     });
                 }
             }
-        }
-        if (isJoshOnline) {
-            await pub.disconnect();
-        }
+        });
         await thread.setArchived(true);
     });
 }
-exports.execute = execute;

@@ -1,14 +1,11 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.execute = exports.data = void 0;
-const discord_js_1 = require("discord.js");
-exports.data = new discord_js_1.SlashCommandBuilder()
+import { EmbedBuilder, SlashCommandBuilder, } from "discord.js";
+export const data = new SlashCommandBuilder()
     .setName("help")
     .setDescription("Information about Plane and how to contact the developer.");
-async function execute(interaction) {
-    const embed = new discord_js_1.EmbedBuilder()
+export async function execute(interaction) {
+    const embed = new EmbedBuilder()
         .setColor(0x0099ff)
-        .setTitle('Plane v1.4.3 "Foxing Match"')
+        .setTitle("Plane v1.5.0 'Unlimited Planeworks'")
         .setURL("https://github.com/KingWaffleIII/plane")
         .setAuthor({
         name: "KingWaffleIII @ PlanetWaffle",
@@ -16,7 +13,7 @@ async function execute(interaction) {
         url: "https://github.com/KingWaffleIII/",
     })
         .setDescription(`
-Plane focuses on supplementing RAF cadets' RAFK (RAF Knowledge) and their aircraft recognition skills (especially in preparation for mRAST).
+Plane focuses on supplementing RAF cadets' RAFK (RAF Knowledge) and their aircraft recognition skills (especially in preparation for RAST).
 \n
 __**Known issues/suggestions**__
 https://github.com/KingWaffleIII/plane/issues
@@ -41,4 +38,3 @@ If you feel you've helped with the bot and I missed you out, please let me know!
     });
     await interaction.reply({ embeds: [embed] });
 }
-exports.execute = execute;

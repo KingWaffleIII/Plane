@@ -4,7 +4,7 @@ An extremely modular Discord bot designed to help RAF students with their RAFK (
 
 ## Usage & Invite
 
-If you want to use the bot, we heavily recommend you use the bot hosted by Planet Waffle; you can do so [here](https://discord.com/api/oauth2/authorize?client_id=1044710491110522940&permissions=326417599488&scope=bot). This bot will always use the latest version from the main branch (I update the bot every time I merge a PR).
+If you want to use the bot, we heavily recommend you use the bot hosted by Planet Waffle; you can do so [here](https://discord.com/api/oauth2/authorize?client_id=1044710491110522940&permissions=326417566720&scope=bot). This bot will always use the latest version from the main branch (I update the bot every time I merge a PR). You can join the Planet Waffle server [here](https://discord.gg/4mnGJpYBmF) so you can subscribe to Plane announcements (e.g. when I update the bot, etc.)
 
 If you really want to host the bot yourself, you can do so by following these steps:
 (note: Docker and Docker Compose are required to run the bot)
@@ -21,6 +21,20 @@ If you really want to host the bot yourself, you can do so by following these st
 
 3. run the `npm prod` script to compile the TypeScript code
 4. run `docker compose up -d` to start the bot
+
+## Aircraft
+
+### RAST Spec
+
+The RAST spec is inconsistent in its use of aircraft names. Sometimes, it uses the most up-to-date model with the latest manufacturer and sometimes it likes to stay in the past. An example is the CASA/IPTN CN-235, which the spec calls the Airbus CN-235. Another example is the Breguet 1150 Atlantic, which the spec calls the Dassault Atlantic.
+
+As a result, I've compromised and tried to use the most accurate name possible, whilst avoiding going against the spec.
+
+You can see the aircraft supported in the bot [here](https://github.com/KingWaffleIII/plane/blob/main/aircraft.md).
+
+### Images
+
+If you have any issues with the images given for \`/airrec\` and \`/airrec-quiz\`, please understand that these are randomly picked from a website. There is no way to control the quality of the images so if you find a bad image, just try again.
 
 ## Waifus
 
@@ -63,7 +77,7 @@ Waifus can be obtained in two ways depending on her type:
 -   winning airrec quizzes (**non-spec** aircraft waifus and weapon waifus)
 
 With `/airrec`, there is a **~21% chance** of getting an **eligible** aircraft, and a further **33% chance** of a waifu spawning from that eligible aircraft. This means that there is a **~7% chance** of getting a waifu from `/airrec`.
-With airrec quizzes, there is a **~33% chance** of getting a waifu **when you win a quiz**. To stop people spamming quizzes with just themselves, the quiz must have at least **5 rounds** and the winner needs to have gained at least **1/4 of the total points** (e.g. if there are 10 rounds, there are 20 points available and 2.5 are needed) to be eligible for a waifu.
+With airrec quizzes, there is a **~33% chance** of getting a waifu **when you win a quiz**. To stop people spamming quizzes, the quiz must have at least **5 rounds** and the winner needs to have gained at least **1/4 of the total points** (e.g. if there are 10 rounds, there are 20 points available and 2.5 are needed) to be eligible for a waifu.
 
 ### Guaranteeing waifus
 
@@ -71,7 +85,7 @@ RNGesus can be a bitch, so you can target a waifu to unlock. Once you do that, y
 
 ### Trading & Duplicates
 
-Duplicate waifus can be obtained, each with their own unique stats. Up to 5 duplicates are permitted per waifu per user (this is a soft limit; since this is not enforced by the database, more waifus can be generated in by an admin).
+Duplicate waifus can be obtained, each with their own unique stats.
 Waifus can be traded with other users. Once the first user submits a type of waifu for trading and then a dupe of that waifu, the second user is able to accept and put up their own waifu dupe for trade. If both users agree, the waifus are traded.
 
 Note: due to Discord limitations, only 25 items can be in a dropdown menu at once. This means that if a user has more than 25 waifus, they will only be able to trade the 25 waifus with the highest ATK stat.
@@ -97,8 +111,8 @@ Note: due to Discord limitations, only 25 items can be in a dropdown menu at onc
 There are three builds that are currently considered the best:
 
 -   Using a high SPD aircraft, equipped with a high ATK Hellfire - this allows you to consistently evade, whilst still dealing passive DMG. If you have high ATK on your high SPD aircraft too, you will struggle to lose.
--   Using a high ATK American aircraft, equipped with a high ATK Sparrow. This allows for a very high total ATK (a maximum of 25).
 -   Using a high ATK aircraft with a high ATK Paveway II can deal up to 60 DMG in one turn with perfect ATK rolls. However, with average rolls, it could potentially lead to a two-turn or three-turn KO.
+-   Using a high ATK American aircraft, equipped with a high ATK Sparrow. This allows for a very high total ATK (a maximum of 25).
 
 ## Changelog
 
@@ -120,7 +134,3 @@ https://github.com/KingWaffleIII/plane/issues
 ## Licence
 
 This project is licensed under the GNU General Public Licence 3.0 - see the [LICENCE](LICENCE) file for details
-
-```
-
-```

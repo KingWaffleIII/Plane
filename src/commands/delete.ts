@@ -8,8 +8,8 @@ import {
 	StringSelectMenuInteraction,
 } from "discord.js";
 
-import { User, Waifu } from "../models";
-import waifus from "../waifus.json";
+import { User, Waifu } from "../models.js";
+import waifus from "../waifus.json" assert { type: "json" };
 
 export const data = new SlashCommandBuilder()
 	.setName("delete")
@@ -29,7 +29,8 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 	const user = await User.findByPk(interaction.user.id);
 	if (!user) {
 		await interaction.followUp({
-			content: `You don't have waifu collection yet! Use \`/waifus\` to create one!`,
+			content:
+				"You don't have a profile yet. Use `/waifus` or `/stats` first.",
 		});
 	}
 

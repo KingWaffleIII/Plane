@@ -16,9 +16,9 @@ import {
 	Message,
 	InteractionCollector,
 } from "discord.js";
-import { User, Waifu } from "../models";
-import { WaifuBaseData } from "./airrec";
-import waifus from "../waifus.json";
+import { User, Waifu } from "../models.js";
+import { WaifuBaseData } from "./airrec.js";
+import waifus from "../waifus.json" assert { type: "json" };
 
 interface WaifuData {
 	atk: number;
@@ -71,7 +71,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 	if (!initialUserModel || !targetUserModel) {
 		await interaction.editReply({
 			content:
-				"Either you or the user you want to dogfight don't have waifu collections yet! Use `/waifus` to create one!",
+				"Either you or the user you want to dogfight don't have profiles yet. Use `/waifus` or `/stats` first.",
 		});
 		return;
 	}

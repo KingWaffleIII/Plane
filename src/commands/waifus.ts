@@ -4,9 +4,9 @@ import {
 	SlashCommandBuilder,
 } from "discord.js";
 
-import { Guild, User, Waifu } from "../models";
-import { WaifuBaseData } from "./airrec";
-import waifus from "../waifus.json";
+import { User, Waifu } from "../models.js";
+import { WaifuBaseData } from "./airrec.js";
+import waifus from "../waifus.json" assert { type: "json" };
 
 export const data = new SlashCommandBuilder()
 	.setName("waifus")
@@ -32,12 +32,11 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 
 	await interaction.deferReply();
 
-	const guild = await Guild.findByPk(interaction.guildId as string);
 	let user = await User.findByPk(targetUser.id, {
 		include: { model: Waifu, as: "waifus" },
 	});
 	if (!user && targetUser.id === interaction.user.id) {
-		await guild!.createUser({
+		await User.create({
 			id: interaction.user.id,
 			username: interaction.user.username,
 			discriminator: interaction.user.discriminator,
@@ -54,7 +53,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 	} else if (!user && targetUser.id !== interaction.user.id) {
 		await interaction.editReply({
 			content:
-				"This user doesn't have a waifu collection yet. They need to run `/waifus` first.",
+				"This user doesn't have a profile yet. They need to use `/waifus` or `/stats` first.",
 		});
 		return;
 	}

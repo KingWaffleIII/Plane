@@ -1,14 +1,8 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.execute = exports.data = void 0;
-const discord_js_1 = require("discord.js");
-const models_1 = require("../models");
-const waifus_json_1 = __importDefault(require("../waifus.json"));
-const wait = require("node:timers/promises").setTimeout;
-exports.data = new discord_js_1.SlashCommandBuilder()
+import { SlashCommandBuilder } from "discord.js";
+import { User } from "../models.js";
+import waifus from "../waifus.json" assert { type: "json" };
+const wait = (await import("node:timers/promises")).setTimeout;
+export const data = new SlashCommandBuilder()
     .setName("gen-waifu")
     .setDescription("Generate a waifu.")
     // .setDefaultMemberPermissions(8)
@@ -41,7 +35,7 @@ exports.data = new discord_js_1.SlashCommandBuilder()
     .addIntegerOption((option) => option
     .setName("deaths")
     .setDescription("The deaths stat of the waifu to generate (only for aircraft). Defaults to 0."));
-async function execute(interaction) {
+export async function execute(interaction) {
     const targetUser = interaction.options.getUser("user") ?? interaction.user;
     const name = interaction.options.getString("name");
     const amount = interaction.options.getInteger("amount") ?? 1;
@@ -51,7 +45,7 @@ async function execute(interaction) {
     const showAsLegit = interaction.options.getBoolean("show_as_legit") ?? false;
     const kills = interaction.options.getInteger("kills") ?? 0;
     const deaths = interaction.options.getInteger("deaths") ?? 0;
-    const waifusLowerCase = Object.keys(waifus_json_1.default).map((w) => w.toLowerCase());
+    const waifusLowerCase = Object.keys(waifus).map((w) => w.toLowerCase());
     if (!waifusLowerCase.includes(name.toLowerCase())) {
         await interaction.reply({
             content: "That waifu doesn't exist!",
@@ -59,8 +53,8 @@ async function execute(interaction) {
         });
         return;
     }
-    const waifuName = Object.keys(waifus_json_1.default)[waifusLowerCase.indexOf(name.toLowerCase())];
-    const waifuData = waifus_json_1.default[waifuName];
+    const waifuName = Object.keys(waifus)[waifusLowerCase.indexOf(name.toLowerCase())];
+    const waifuData = waifus[waifuName];
     await interaction.client.application.fetch();
     if (interaction.user !== interaction.client.application.owner) {
         await interaction.reply({
@@ -76,10 +70,10 @@ async function execute(interaction) {
         content: "Generating waifu...",
         ephemeral: true,
     });
-    const user = await models_1.User.findByPk(targetUser.id);
+    const user = await User.findByPk(targetUser.id);
     if (!user) {
         await interaction.editReply({
-            content: "This user doesn't have a waifu collection yet. They need to run `/waifus` first.",
+            content: "This user doesn't have a profile yet. They need to use `/waifus` or `/stats` first.",
         });
         return;
     }
@@ -130,4 +124,3 @@ async function execute(interaction) {
         content: `Successfully generated ${amount} ${waifuName} waifu(s) (use \`/waifus user:${targetUser}\`) for ${targetUser.username}!`,
     });
 }
-exports.execute = execute;

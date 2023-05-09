@@ -13,7 +13,7 @@ export const data = new SlashCommandBuilder()
 export async function execute(interaction: ChatInputCommandInteraction) {
 	const embed = new EmbedBuilder()
 		.setColor(0x0099ff)
-		.setTitle('Plane v1.4.3 "Foxing Match"')
+		.setTitle("Plane v1.5.0 'Unlimited Planeworks'")
 		.setURL("https://github.com/KingWaffleIII/plane")
 		.setAuthor({
 			name: "KingWaffleIII @ PlanetWaffle",
@@ -22,7 +22,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 		})
 		.setDescription(
 			`
-Plane focuses on supplementing RAF cadets' RAFK (RAF Knowledge) and their aircraft recognition skills (especially in preparation for mRAST).
+Plane focuses on supplementing RAF cadets' RAFK (RAF Knowledge) and their aircraft recognition skills (especially in preparation for RAST).
 \n
 __**Known issues/suggestions**__
 https://github.com/KingWaffleIII/plane/issues

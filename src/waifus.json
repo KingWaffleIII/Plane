@@ -23,7 +23,7 @@
 	},
 	"Black Hawk": {
 		"path": "./assets/waifus/Black_Hawk.jpg",
-		"spec": false,
+		"spec": true,
 		"type": "aircraft",
 		"urlFriendlyName": "Black_Hawk",
 		"country": "USA"
@@ -36,6 +36,12 @@
 	},
 	"Corsair": {
 		"path": "./assets/waifus/Corsair.jpg",
+		"spec": false,
+		"type": "aircraft",
+		"country": "USA"
+	},
+	"Crusader": {
+		"path": "./assets/waifus/Crusader.jpg",
 		"spec": false,
 		"type": "aircraft",
 		"country": "USA"
@@ -62,7 +68,7 @@
 		"path": "./assets/waifus/Fighting_Eagle.jpg",
 		"spec": false,
 		"type": "aircraft",
-		"country": "USA",
+		"country": "South Korea",
 		"urlFriendlyName": "Fighting_Eagle"
 	},
 	"Fire Scout": {
@@ -130,7 +136,7 @@
 	},
 	"Hawkeye": {
 		"path": "./assets/waifus/Hawkeye.jpg",
-		"spec": false,
+		"spec": true,
 		"type": "aircraft",
 		"country": "USA"
 	},
@@ -142,11 +148,12 @@
 		"spec": false,
 		"type": "weapon"
 	},
-	"Hornet": {
-		"path": "./assets/waifus/Hornet.jpg",
+	"Super Hornet": {
+		"path": "./assets/waifus/Super_Hornet.jpg",
 		"spec": true,
 		"type": "aircraft",
-		"country": "USA"
+		"country": "USA",
+		"urlFriendlyName": "Super_Hornet"
 	},
 	"LaGG-3": {
 		"path": "./assets/waifus/LaGG-3.jpg",
@@ -156,7 +163,7 @@
 	},
 	"Lancer": {
 		"path": "./assets/waifus/Lancer.jpg",
-		"spec": false,
+		"spec": true,
 		"type": "aircraft",
 		"country": "USA"
 	},
@@ -181,13 +188,13 @@
 	},
 	"Mustang": {
 		"path": "./assets/waifus/Mustang.jpg",
-		"spec": false,
+		"spec": true,
 		"type": "aircraft",
 		"country": "USA"
 	},
 	"Nighthawk": {
 		"path": "./assets/waifus/Nighthawk.jpg",
-		"spec": false,
+		"spec": true,
 		"type": "aircraft",
 		"country": "USA"
 	},
@@ -209,7 +216,7 @@
 	},
 	"Pegasus": {
 		"path": "./assets/waifus/Pegasus.jpg",
-		"spec": false,
+		"spec": true,
 		"type": "aircraft",
 		"country": "USA"
 	},
@@ -283,7 +290,7 @@
 	},
 	"Spirit": {
 		"path": "./assets/waifus/Spirit.jpg",
-		"spec": false,
+		"spec": true,
 		"type": "aircraft",
 		"country": "USA"
 	},
@@ -311,7 +318,7 @@
 		"abilityDescription": "After equipping this weapon, your next attack will call in a support strike, dealing damage equivalent to this weapon's ATK to the opponent, on top of any attacks this round.",
 		"abilityName": "Call for Support",
 		"path": "./assets/waifus/Trident_II.jpg",
-		"spec": true,
+		"spec": false,
 		"type": "weapon",
 		"urlFriendlyName": "Trident_II"
 	},

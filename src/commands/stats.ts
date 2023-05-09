@@ -4,7 +4,8 @@ import {
 	SlashCommandBuilder,
 } from "discord.js";
 
-import { User } from "../models";
+import { User } from "../models.js";
+import waifus from "../waifus.json" assert { type: "json" };
 
 export const data = new SlashCommandBuilder()
 	.setName("stats")
@@ -22,16 +23,26 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 
 	await interaction.deferReply();
 
-	const user = await User.findByPk(targetUser.id);
+	let user = await User.findByPk(targetUser.id);
 	if (!user && targetUser.id === interaction.user.id) {
-		await interaction.editReply({
-			content: `You don't have waifu collection yet! Use \`/waifus\` to create one!`,
+		await User.create({
+			id: interaction.user.id,
+			username: interaction.user.username,
+			discriminator: interaction.user.discriminator,
+			avatarUrl: interaction.user.avatarURL(),
+			lockedWaifus: Object.keys(waifus),
+			dogfightKills: 0,
+			dogfightDeaths: 0,
+			dogfightWinstreak: 0,
+			airrecQuizWins: 0,
+			airrecQuizLosses: 0,
+			airrecQuizWinstreak: 0,
 		});
-		return;
-	}
-	if (!user && targetUser.id !== interaction.user.id) {
+		user = await User.findByPk(interaction.user.id);
+	} else if (!user && targetUser.id !== interaction.user.id) {
 		await interaction.editReply({
-			content: `This user doesn't have a waifu collection yet. They need to run \`/waifus\` first.`,
+			content:
+				"This user doesn't have a profile yet. They need to use `/waifus` or `/stats` first.",
 		});
 		return;
 	}
@@ -65,7 +76,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 			}
 		)
 		.setFooter({
-			text: "You can view specific waifu stats with /waifus.",
+			text: "You can view specific waifu stats with /waifus. If you are the only player (and by thus, the winner) in an airrec quiz, it doesn't count towards any stats.",
 		})
 		.setTimestamp();
 

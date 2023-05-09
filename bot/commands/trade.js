@@ -1,27 +1,21 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.execute = exports.data = void 0;
-const crypto_1 = __importDefault(require("crypto"));
-const discord_js_1 = require("discord.js");
-const models_1 = require("../models");
-exports.data = new discord_js_1.SlashCommandBuilder()
+import crypto from "crypto";
+import { ActionRowBuilder, ButtonBuilder, ButtonStyle, ComponentType, SlashCommandBuilder, StringSelectMenuBuilder, } from "discord.js";
+import { User, Waifu } from "../models.js";
+export const data = new SlashCommandBuilder()
     .setName("trade")
     .setDescription("Starts a waifu trade with another user.")
     .addUserOption((option) => option
     .setName("user")
     .setDescription("The user you want to trade with.")
     .setRequired(true));
-async function execute(interaction) {
+export async function execute(interaction) {
     const targetUser = interaction.options.getUser("user");
     await interaction.deferReply();
-    const initialUserModel = await models_1.User.findByPk(interaction.user.id);
-    const targetUserModel = await models_1.User.findByPk(targetUser.id);
+    const initialUserModel = await User.findByPk(interaction.user.id);
+    const targetUserModel = await User.findByPk(targetUser.id);
     if (!initialUserModel || !targetUserModel) {
         await interaction.followUp({
-            content: "**Either you or the user you want to trade with don't have waifu collections yet! Use `/waifus` to create one!**",
+            content: "Either you or the user you want to trade with don't have profiles yet. Use `/waifus` or `/stats` first.",
         });
         return;
     }
@@ -35,12 +29,12 @@ async function execute(interaction) {
     let targetWaifu;
     if (initialUserWaifus.length === 0 || targetUserWaifus.length === 0) {
         await interaction.followUp({
-            content: "Either you or the user you want to trade with don't have any waifus!",
+            content: "Either you or the user you want to trade with don't have waifus to dogfight with! Get collecting with `/airrec` and `/airrec-quiz`!",
         });
         return;
     }
-    const initialWaifuSelectId = crypto_1.default.randomBytes(6).toString("hex");
-    const initialWaifuSelectRow = new discord_js_1.ActionRowBuilder().addComponents(new discord_js_1.StringSelectMenuBuilder()
+    const initialWaifuSelectId = crypto.randomBytes(6).toString("hex");
+    const initialWaifuSelectRow = new ActionRowBuilder().addComponents(new StringSelectMenuBuilder()
         .setCustomId(`trade-select-waifu-${initialWaifuSelectId}`)
         .setPlaceholder("Select a waifu to trade"));
     const initialWaifuList = [];
@@ -60,7 +54,7 @@ async function execute(interaction) {
     });
     const initialWaifuSelectFilter = (i) => i.customId === `trade-select-waifu-${initialWaifuSelectId}`;
     const initialWaifuSelectCollector = interaction.channel.createMessageComponentCollector({
-        componentType: discord_js_1.ComponentType.StringSelect,
+        componentType: ComponentType.StringSelect,
         filter: initialWaifuSelectFilter,
         time: 30000,
     });
@@ -73,8 +67,8 @@ async function execute(interaction) {
             return;
         }
         await initialWaifuSelectInteraction.deferUpdate();
-        const initialCopySelectId = crypto_1.default.randomBytes(6).toString("hex");
-        const initialCopySelectRow = new discord_js_1.ActionRowBuilder().addComponents(new discord_js_1.StringSelectMenuBuilder()
+        const initialCopySelectId = crypto.randomBytes(6).toString("hex");
+        const initialCopySelectRow = new ActionRowBuilder().addComponents(new StringSelectMenuBuilder()
             .setCustomId(`trade-select-copy-${initialCopySelectId}`)
             .setPlaceholder("Select a copy to trade"));
         initialUserWaifus = (await initialUserModel.getWaifus({
@@ -96,7 +90,7 @@ async function execute(interaction) {
         });
         const initialCopySelectFilter = (i) => i.customId === `trade-select-copy-${initialCopySelectId}`;
         const initialCopySelectCollector = interaction.channel.createMessageComponentCollector({
-            componentType: discord_js_1.ComponentType.StringSelect,
+            componentType: ComponentType.StringSelect,
             filter: initialCopySelectFilter,
             time: 30000,
         });
@@ -110,11 +104,11 @@ async function execute(interaction) {
                 return;
             }
             await initialCopySelectInteraction.deferUpdate();
-            initialWaifu = (await models_1.Waifu.findByPk(initialCopySelectInteraction.values[0]));
-            const targetWaifuSelectId = crypto_1.default
+            initialWaifu = (await Waifu.findByPk(initialCopySelectInteraction.values[0]));
+            const targetWaifuSelectId = crypto
                 .randomBytes(6)
                 .toString("hex");
-            const targetWaifuSelectRow = new discord_js_1.ActionRowBuilder().addComponents(new discord_js_1.StringSelectMenuBuilder()
+            const targetWaifuSelectRow = new ActionRowBuilder().addComponents(new StringSelectMenuBuilder()
                 .setCustomId(`trade-select-waifu-${targetWaifuSelectId}`)
                 .setPlaceholder("Select a waifu to trade"));
             const targetWaifuList = [];
@@ -135,7 +129,7 @@ async function execute(interaction) {
             const targetWaifuSelectFilter = (select) => select.customId ===
                 `trade-select-waifu-${targetWaifuSelectId}`;
             const targetWaifuSelectCollector = interaction.channel.createMessageComponentCollector({
-                componentType: discord_js_1.ComponentType.StringSelect,
+                componentType: ComponentType.StringSelect,
                 filter: targetWaifuSelectFilter,
                 time: 30000,
             });
@@ -149,10 +143,10 @@ async function execute(interaction) {
                     return;
                 }
                 await targetWaifuSelectInteraction.deferUpdate();
-                const targetCopySelectId = crypto_1.default
+                const targetCopySelectId = crypto
                     .randomBytes(6)
                     .toString("hex");
-                const targetCopySelectRow = new discord_js_1.ActionRowBuilder().addComponents(new discord_js_1.StringSelectMenuBuilder()
+                const targetCopySelectRow = new ActionRowBuilder().addComponents(new StringSelectMenuBuilder()
                     .setCustomId(`trade-select-copy-${targetCopySelectId}`)
                     .setPlaceholder("Select a copy to trade"));
                 targetUserWaifus = (await targetUserModel.getWaifus({
@@ -176,7 +170,7 @@ async function execute(interaction) {
                 const targetCopySelectFilter = (i) => i.customId ===
                     `trade-select-copy-${targetCopySelectId}`;
                 const targetCopySelectCollector = interaction.channel.createMessageComponentCollector({
-                    componentType: discord_js_1.ComponentType.StringSelect,
+                    componentType: ComponentType.StringSelect,
                     filter: targetCopySelectFilter,
                     time: 30000,
                 });
@@ -189,17 +183,17 @@ async function execute(interaction) {
                         });
                     }
                     await targetCopySelectInteraction.deferUpdate();
-                    targetWaifu = (await models_1.Waifu.findByPk(targetCopySelectInteraction.values[0]));
-                    const confirmTradeId = crypto_1.default
+                    targetWaifu = (await Waifu.findByPk(targetCopySelectInteraction.values[0]));
+                    const confirmTradeId = crypto
                         .randomBytes(6)
                         .toString("hex");
-                    const confirmTradeRow = new discord_js_1.ActionRowBuilder().addComponents(new discord_js_1.ButtonBuilder()
+                    const confirmTradeRow = new ActionRowBuilder().addComponents(new ButtonBuilder()
                         .setCustomId(`trade-confirm-${confirmTradeId}`)
                         .setLabel("Confirm")
-                        .setStyle(discord_js_1.ButtonStyle.Success), new discord_js_1.ButtonBuilder()
+                        .setStyle(ButtonStyle.Success), new ButtonBuilder()
                         .setCustomId(`trade-cancel-${confirmTradeId}`)
                         .setLabel("Cancel")
-                        .setStyle(discord_js_1.ButtonStyle.Danger));
+                        .setStyle(ButtonStyle.Danger));
                     await interaction.editReply({
                         content: `<@${interaction.user.id}>, <@${targetUser.id}> wants to trade **${targetWaifu.name} (ATK: ${targetWaifu.atk} | HP: ${targetWaifu.hp} | SPD: ${targetWaifu.spd})** for **${initialWaifu.name} (ATK: ${initialWaifu.atk} | HP: ${initialWaifu.hp} | SPD: ${initialWaifu.spd})**! Do you want to confirm this trade? **This is irreversible!**`,
                         components: [confirmTradeRow],
@@ -209,7 +203,7 @@ async function execute(interaction) {
                         i.customId ===
                             `trade-cancel-${confirmTradeId}`;
                     const confirmTradeCollector = interaction.channel.createMessageComponentCollector({
-                        componentType: discord_js_1.ComponentType.Button,
+                        componentType: ComponentType.Button,
                         filter: confirmTradeFilter,
                         time: 30000,
                     });
@@ -296,4 +290,3 @@ async function execute(interaction) {
         }
     });
 }
-exports.execute = execute;

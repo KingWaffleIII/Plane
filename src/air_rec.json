@@ -1,10 +1,6 @@
 {
 	"civilian": [
 		{
-			"name": "AgustaWestland AW109",
-			"role": "Search/rescue and utility helicopter.",
-			"manufacturer": "AgustaWestland",
-			"model": "AW109",
 			"aliases": ["AW-109", "AW 109"],
 			"identification": [
 				"Pointed nose",
@@ -12,23 +8,25 @@
 				"Hook on the bottom of the tail"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=7975",
+			"manufacturer": "AgustaWestland",
+			"model": "AW109",
+			"mrast": true,
+			"name": "AgustaWestland AW109",
+			"role": "Search/rescue and utility helicopter.",
 			"wiki": "https://en.wikipedia.org/wiki/AgustaWestland_AW109"
 		},
 		{
-			"name": "Beechcraft Super King Air",
-			"role": "Civil utility aircraft.",
-			"manufacturer": "Beechcraft",
-			"model": "Super King Air",
-			"aliases": ["King Air"],
+			"aliases": ["King Air", "Shadow R1"],
 			"identification": ["Short length", "2 propeller engines"],
 			"image": "https://www.airfighters.com/photosearch.php?cra=1670",
+			"manufacturer": "Beechcraft",
+			"model": "Super King Air",
+			"mrast": true,
+			"name": "Beechcraft Super King Air",
+			"role": "Civil utility aircraft.",
 			"wiki": "https://en.wikipedia.org/wiki/Beechcraft_Super_King_Air"
 		},
 		{
-			"name": "Bell 412",
-			"role": "Multipurpose utility helicopter.",
-			"manufacturer": "Bell",
-			"model": "412",
 			"aliases": ["Griffin"],
 			"identification": [
 				"No landing gear",
@@ -36,13 +34,14 @@
 				"Two identical square windows in the middle"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=1945",
+			"manufacturer": "Bell",
+			"model": "412",
+			"mrast": true,
+			"name": "Bell 412",
+			"role": "Multipurpose utility helicopter.",
 			"wiki": "https://en.wikipedia.org/wiki/Bell_412"
 		},
 		{
-			"name": "BAe 146",
-			"role": "Airliner.",
-			"manufacturer": "BAe",
-			"model": "146",
 			"aliases": ["Avro RJ"],
 			"identification": [
 				"Short length",
@@ -50,13 +49,14 @@
 				"Four jet engines"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=2945",
+			"manufacturer": "BAe",
+			"model": "146",
+			"mrast": true,
+			"name": "BAe 146",
+			"role": "Airliner.",
 			"wiki": "https://en.wikipedia.org/wiki/British_Aerospace_146"
 		},
 		{
-			"name": "Airbus A300",
-			"role": "Wide-body airliner.",
-			"manufacturer": "Airbus",
-			"model": "A300",
 			"aliases": [],
 			"identification": [
 				"Medium length",
@@ -66,13 +66,14 @@
 				"Two jet engines"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=4856",
+			"manufacturer": "Airbus",
+			"model": "A300",
+			"mrast": false,
+			"name": "Airbus A300",
+			"role": "Wide-body airliner.",
 			"wiki": "https://en.wikipedia.org/wiki/Airbus_A300"
 		},
 		{
-			"name": "Airbus A310",
-			"role": "Wide-body airliner.",
-			"manufacturer": "Airbus",
-			"model": "A310",
 			"aliases": [],
 			"identification": [
 				"Medium length",
@@ -82,13 +83,14 @@
 				"Two jet engines"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=565",
+			"manufacturer": "Airbus",
+			"model": "A310",
+			"mrast": false,
+			"name": "Airbus A310",
+			"role": "Wide-body airliner.",
 			"wiki": "https://en.wikipedia.org/wiki/Airbus_A310"
 		},
 		{
-			"name": "Airbus A319",
-			"role": "Narrow-body airliner.",
-			"manufacturer": "Airbus",
-			"model": "A319",
 			"aliases": [],
 			"identification": [
 				"Short length",
@@ -98,13 +100,14 @@
 				"Two jet engines"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=568",
+			"manufacturer": "Airbus",
+			"model": "A319",
+			"mrast": false,
+			"name": "Airbus A319",
+			"role": "Narrow-body airliner.",
 			"wiki": "https://en.wikipedia.org/wiki/Airbus_A319"
 		},
 		{
-			"name": "Airbus A320",
-			"role": "Narrow-body airliner.",
-			"manufacturer": "Airbus",
-			"model": "A320",
 			"aliases": [],
 			"identification": [
 				"Medium length",
@@ -114,13 +117,14 @@
 				"Two jet engines"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=6454",
+			"manufacturer": "Airbus",
+			"model": "A320",
+			"mrast": false,
+			"name": "Airbus A320",
+			"role": "Narrow-body airliner.",
 			"wiki": "https://en.wikipedia.org/wiki/Airbus_A320"
 		},
 		{
-			"name": "Airbus A321",
-			"role": "Narrow-body airliner.",
-			"manufacturer": "Airbus",
-			"model": "A321",
 			"aliases": [],
 			"identification": [
 				"Long length",
@@ -131,13 +135,14 @@
 				"Two jet engines"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=7091",
+			"manufacturer": "Airbus",
+			"model": "A321",
+			"mrast": false,
+			"name": "Airbus A321",
+			"role": "Narrow-body airliner.",
 			"wiki": "https://en.wikipedia.org/wiki/Airbus_A321"
 		},
 		{
-			"name": "Airbus A330",
-			"role": "Wide-body airliner.",
-			"manufacturer": "Airbus",
-			"model": "A330",
 			"aliases": [],
 			"identification": [
 				"Medium-long length",
@@ -147,13 +152,14 @@
 				"Two jet engines"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=571",
+			"manufacturer": "Airbus",
+			"model": "A330",
+			"mrast": false,
+			"name": "Airbus A330",
+			"role": "Wide-body airliner.",
 			"wiki": "https://en.wikipedia.org/wiki/Airbus_A330"
 		},
 		{
-			"name": "Airbus A340",
-			"role": "Wide-body airliner.",
-			"manufacturer": "Airbus",
-			"model": "A340",
 			"aliases": [],
 			"identification": [
 				"Long length",
@@ -163,13 +169,14 @@
 				"4 jet engines"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=573",
+			"manufacturer": "Airbus",
+			"model": "A340",
+			"mrast": false,
+			"name": "Airbus A340",
+			"role": "Wide-body airliner.",
 			"wiki": "https://en.wikipedia.org/wiki/Airbus_A340"
 		},
 		{
-			"name": "Airbus A350",
-			"role": "Wide-body airliner.",
-			"manufacturer": "Airbus",
-			"model": "A350",
 			"aliases": [],
 			"identification": [
 				"Long length",
@@ -180,30 +187,14 @@
 				"Two jet engines"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=8423",
+			"manufacturer": "Airbus",
+			"model": "A350",
+			"mrast": false,
+			"name": "Airbus A350",
+			"role": "Wide-body airliner.",
 			"wiki": "https://en.wikipedia.org/wiki/Airbus_A350"
 		},
 		{
-			"name": "Boeing 707",
-			"role": "Narrow-body airliner.",
-			"manufacturer": "Boeing",
-			"model": "707",
-			"aliases": [],
-			"identification": [
-				"Medium length",
-				"No winglets",
-				"Pointed nose",
-				"8 rear landing gear wheels",
-				"Four jet engines - built into the wing and not below",
-				"Commonly seen with AWACS radar dome on top"
-			],
-			"image": "https://www.airfighters.com/photosearch.php?cra=656",
-			"wiki": "https://en.wikipedia.org/wiki/Boeing_707"
-		},
-		{
-			"name": "Boeing 727",
-			"role": "Narrow-body airliner.",
-			"manufacturer": "Boeing",
-			"model": "727",
 			"aliases": [],
 			"identification": [
 				"Medium length",
@@ -215,13 +206,14 @@
 				"3 jet engines at the rear - one built into the tail"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=678",
+			"manufacturer": "Boeing",
+			"model": "727",
+			"mrast": false,
+			"name": "Boeing 727",
+			"role": "Narrow-body airliner.",
 			"wiki": "https://en.wikipedia.org/wiki/Boeing_727"
 		},
 		{
-			"name": "Boeing 737",
-			"role": "Narrow-body airliner.",
-			"manufacturer": "Boeing",
-			"model": "737",
 			"aliases": [],
 			"identification": [
 				"Medium length",
@@ -231,13 +223,14 @@
 				"Two jet engines"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=681",
+			"manufacturer": "Boeing",
+			"model": "737",
+			"mrast": false,
+			"name": "Boeing 737",
+			"role": "Narrow-body airliner.",
 			"wiki": "https://en.wikipedia.org/wiki/Boeing_737"
 		},
 		{
-			"name": "Boeing 747",
-			"role": "Wide-body airliner.",
-			"manufacturer": "Boeing",
-			"model": "747",
 			"aliases": [],
 			"identification": [
 				"Long with a hump (incomplete 2nd deck) towards the front",
@@ -248,13 +241,14 @@
 				"4 jet engines"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=689",
+			"manufacturer": "Boeing",
+			"model": "747",
+			"mrast": false,
+			"name": "Boeing 747",
+			"role": "Wide-body airliner.",
 			"wiki": "https://en.wikipedia.org/wiki/Boeing_747"
 		},
 		{
-			"name": "Boeing 757",
-			"role": "Narrow-body airliner.",
-			"manufacturer": "Boeing",
-			"model": "757",
 			"aliases": [],
 			"identification": [
 				"Medium-long length",
@@ -264,13 +258,14 @@
 				"Two jet engines"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=694",
+			"manufacturer": "Boeing",
+			"model": "757",
+			"mrast": false,
+			"name": "Boeing 757",
+			"role": "Narrow-body airliner.",
 			"wiki": "https://www.airfighters.com/photosearch.php?cra=694"
 		},
 		{
-			"name": "Boeing 767",
-			"role": "Wide-body airliner.",
-			"manufacturer": "Boeing",
-			"model": "767",
 			"aliases": [],
 			"identification": [
 				"Medium length",
@@ -280,13 +275,14 @@
 				"Two jet engines"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=697",
+			"manufacturer": "Boeing",
+			"model": "767",
+			"mrast": false,
+			"name": "Boeing 767",
+			"role": "Wide-body airliner.",
 			"wiki": "https://en.wikipedia.org/wiki/Boeing_767"
 		},
 		{
-			"name": "Boeing 777",
-			"role": "Wide-body airliner.",
-			"manufacturer": "Boeing",
-			"model": "777",
 			"aliases": [],
 			"identification": [
 				"Long length",
@@ -296,13 +292,14 @@
 				"Two jet engines"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=8223",
+			"manufacturer": "Boeing",
+			"model": "777",
+			"mrast": false,
+			"name": "Boeing 777",
+			"role": "Wide-body airliner.",
 			"wiki": "https://en.wikipedia.org/wiki/Boeing_777"
 		},
 		{
-			"name": "Boeing 787 Dreamliner",
-			"role": "Wide-body airliner.",
-			"manufacturer": "Boeing",
-			"model": "787",
 			"aliases": ["Dreamliner"],
 			"identification": [
 				"Medium length",
@@ -312,13 +309,14 @@
 				"Two jet engines"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=7530",
+			"manufacturer": "Boeing",
+			"model": "787",
+			"mrast": false,
+			"name": "Boeing 787 Dreamliner",
+			"role": "Wide-body airliner.",
 			"wiki": "https://en.wikipedia.org/wiki/Boeing_787_Dreamliner"
 		},
 		{
-			"name": "Bombardier Global Express",
-			"role": "Business jet.",
-			"manufacturer": "Bombardier",
-			"model": "Global Express",
 			"aliases": [],
 			"identification": [
 				"Short length",
@@ -329,14 +327,15 @@
 				"2 jet engines at the rear"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=1810",
+			"manufacturer": "Bombardier",
+			"model": "Global Express",
+			"mrast": false,
+			"name": "Bombardier Global Express",
+			"role": "Business jet.",
 			"wiki": "https://en.wikipedia.org/wiki/Bombardier_Global_Express"
 		},
 		{
-			"name": "Embraer ERJ135",
-			"role": "Regional jet.",
-			"manufacturer": "Embraer",
-			"model": "ERJ135",
-			"aliases": ["ERJ-135", "ERJ 135"],
+			"aliases": ["ERJ-135", "ERJ 135", "EMB135", "EMB 135", "EMB-135"],
 			"identification": [
 				"Short length",
 				"Winglets pointing upwards",
@@ -346,14 +345,23 @@
 				"2 jet engines at the rear"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=3988",
+			"manufacturer": "Embraer",
+			"model": "ERJ135",
+			"mrast": false,
+			"name": "Embraer ERJ135",
+			"role": "Regional jet.",
 			"wiki": "https://en.wikipedia.org/wiki/Embraer_ERJ_family"
 		},
 		{
-			"name": "Embraer ERJ145",
-			"role": "Regional jet.",
-			"manufacturer": "Embraer",
-			"model": "ERJ145",
-			"aliases": ["ERJ-145", "ERJ 145"],
+			"aliases": [
+				"ERJ-145",
+				"ERJ 145",
+				"EMB145",
+				"EMB 145",
+				"EMB-145",
+				"R99A",
+				"R99B"
+			],
 			"identification": [
 				"Short-medium length",
 				"Winglets pointing upwards",
@@ -363,13 +371,14 @@
 				"2 jet engines at the rear"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=5856",
+			"manufacturer": "Embraer",
+			"model": "ERJ145",
+			"mrast": false,
+			"name": "Embraer ERJ145",
+			"role": "Regional jet.",
 			"wiki": "https://en.wikipedia.org/wiki/Embraer_ERJ_family"
 		},
 		{
-			"name": "Embraer EMB500 Phenom 100",
-			"role": "Light business jet.",
-			"manufacturer": "Embraer",
-			"model": "EMB500",
 			"aliases": ["EMB-500", "EMB 500", "Phenom", "Phenom 100"],
 			"identification": [
 				"Really short length",
@@ -380,31 +389,33 @@
 				"2 jet engines at the rear"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=8005",
+			"manufacturer": "Embraer",
+			"model": "EMB500",
+			"mrast": true,
+			"name": "Embraer EMB500 Phenom 100",
+			"role": "Light business jet.",
 			"wiki": "https://en.wikipedia.org/wiki/Embraer_Phenom_100"
 		},
 		{
-			"name": "Dassault Falcon 20",
-			"role": "Business jet.",
-			"manufacturer": "Dassault",
-			"model": "Falcon 20",
-			"aliases": ["Falcon"],
+			"aliases": ["Envoy"],
 			"identification": [
-				"Short-medium length",
+				"Short length",
 				"No winglets",
 				"Pointed nose",
 				"4 rear landing gear wheels",
 				"Elevator is in the middle of the tail",
-				"3 jet engines at the rear - one is in the tail"
+				"3 jet engines at the rear"
 			],
-			"image": "https://www.airfighters.com/photosearch.php?cra=802",
-			"wiki": "https://en.wikipedia.org/wiki/Dassault_Falcon_20"
+			"image": "https://www.airfighters.com/photosearch.php?cra=3933",
+			"manufacturer": "Dassault",
+			"model": "Falcon 900",
+			"mrast": true,
+			"name": "Dassault Falcon 900",
+			"role": "Business jet.",
+			"wiki": "https://en.wikipedia.org/wiki/Dassault_Falcon_900"
 		},
 		{
-			"name": "Britten-Norman BN-2 Islander",
-			"role": "Civil utility aircraft.",
-			"manufacturer": "Britten-Norman",
-			"model": "BN-2",
-			"aliases": ["BN2", "BN 2", "Islander"],
+			"aliases": ["Islander", "BN2", "BN 2"],
 			"identification": [
 				"Short length",
 				"No winglets",
@@ -414,13 +425,14 @@
 				"2 propeller engines"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=750",
+			"manufacturer": "Britten-Norman",
+			"model": "BN-2",
+			"mrast": true,
+			"name": "Britten-Norman BN-2 Islander",
+			"role": "Civil utility aircraft.",
 			"wiki": "https://en.wikipedia.org/wiki/Britten-Norman_BN-2_Islander"
 		},
 		{
-			"name": "Saab 340",
-			"role": "Turboprop regional airliner.",
-			"manufacturer": "Saab",
-			"model": "340",
 			"aliases": [],
 			"identification": [
 				"Short length",
@@ -430,13 +442,14 @@
 				"2 propeller engines"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=2749",
+			"manufacturer": "Saab",
+			"model": "340",
+			"mrast": false,
+			"name": "Saab 340",
+			"role": "Turboprop regional airliner.",
 			"wiki": "https://en.wikipedia.org/wiki/Saab_340"
 		},
 		{
-			"name": "Fokker 100",
-			"role": "Regional jet.",
-			"manufacturer": "Fokker",
-			"model": "100",
 			"aliases": [],
 			"identification": [
 				"Medium length",
@@ -447,13 +460,14 @@
 				"2 jet engines at the rear"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=7223",
+			"manufacturer": "Fokker",
+			"model": "100",
+			"mrast": false,
+			"name": "Fokker 100",
+			"role": "Regional jet.",
 			"wiki": "https://en.wikipedia.org/wiki/Fokker_100"
 		},
 		{
-			"name": "Dornier 328",
-			"role": "Airliner.",
-			"manufacturer": "Dornier",
-			"model": "328",
 			"aliases": [],
 			"identification": [
 				"Short length",
@@ -465,15 +479,112 @@
 				"2 propeller engines"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=6700",
+			"manufacturer": "Dornier",
+			"model": "328",
+			"mrast": false,
+			"name": "Dornier 328",
+			"role": "Airliner.",
 			"wiki": "https://en.wikipedia.org/wiki/Dornier_328"
+		},
+		{
+			"aliases": ["Coaler", "An72", "An 72"],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=1712",
+			"manufacturer": "Antonov",
+			"model": "An-72",
+			"mrast": false,
+			"name": "Antonov An-72",
+			"role": "Transport aircraft.",
+			"wiki": "https://en.wikipedia.org/wiki/Antonov_An-72"
+		},
+		{
+			"aliases": ["Clank", "An30", "An 30"],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=596",
+			"manufacturer": "Antonov",
+			"model": "An-30",
+			"mrast": false,
+			"name": "Antonov An-30",
+			"role": "Aerial cartography, reconnaissance and transport.",
+			"wiki": "https://en.wikipedia.org/wiki/Antonov_An-30"
+		},
+		{
+			"aliases": ["Coke", "An24", "An 24"],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=3950",
+			"manufacturer": "Antonov",
+			"model": "An-24",
+			"mrast": false,
+			"name": "Antonov An-24",
+			"role": "Transport and turboprop regional airliner.",
+			"wiki": "https://en.wikipedia.org/wiki/Antonov_An-24"
+		},
+		{
+			"aliases": ["Altair", "Be200", "Be 200"],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=3471",
+			"manufacturer": "Beriev",
+			"model": "Be-200",
+			"mrast": false,
+			"name": "Beriev Be-200 Altair",
+			"role": "Multirole amphibious aircraft.",
+			"wiki": "https://en.wikipedia.org/wiki/Beriev_Be-200"
+		},
+		{
+			"aliases": ["Bo-105", "Bo 105"],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=1928",
+			"manufacturer": "MBB",
+			"model": "Bo 105",
+			"mrast": false,
+			"name": "MBB Bo 105",
+			"role": "Light utility helicopter.",
+			"wiki": "https://en.wikipedia.org/wiki/MBB_Bo_105"
+		},
+		{
+			"aliases": [],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=930",
+			"manufacturer": "Fokker",
+			"model": "50",
+			"mrast": false,
+			"name": "Fokker 50",
+			"role": "Turboprop regional airliner.",
+			"wiki": "https://en.wikipedia.org/wiki/Fokker_50"
+		},
+		{
+			"aliases": [],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=3920",
+			"manufacturer": "Fokker",
+			"model": "60",
+			"mrast": false,
+			"name": "Fokker 60",
+			"role": "Turboprop regional airliner.",
+			"wiki": "https://en.wikipedia.org/wiki/Fokker_50#Fokker_60"
+		},
+		{
+			"aliases": [
+				"Dominie",
+				"DH.125",
+				"DH-125",
+				"DH125",
+				"HS.125",
+				"HS125",
+				"HS-125"
+			],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=1537",
+			"manufacturer": "British Aerospace",
+			"model": "125",
+			"mrast": true,
+			"name": "British Aerospace 125",
+			"role": "Business jet.",
+			"wiki": "https://en.wikipedia.org/wiki/British_Aerospace_125"
 		}
 	],
 	"military": [
 		{
-			"name": "AgustaWestland AW149",
-			"role": "Medium-lift military helicopter.",
-			"manufacturer": "AgustaWestland",
-			"model": "AW149",
 			"aliases": ["AW-149", "AW 149"],
 			"identification": [
 				"Single rotor on top with a dome cover and a vertical rotor on the right side of the vertical stabliser",
@@ -483,13 +594,14 @@
 				"No hook on the tail"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=7568",
+			"manufacturer": "AgustaWestland",
+			"model": "AW149",
+			"mrast": false,
+			"name": "AgustaWestland AW149",
+			"role": "Medium-lift military helicopter.",
 			"wiki": "https://en.wikipedia.org/wiki/AgustaWestland_AW149"
 		},
 		{
-			"name": "Airbus A400M Atlas",
-			"role": "Strategic/tactical and aerial refuelling tanker airlifter.",
-			"manufacturer": "Airbus",
-			"model": "A400M",
 			"aliases": ["Atlas"],
 			"identification": [
 				"Has 4 turboprop (propeller) engines",
@@ -497,27 +609,29 @@
 				"On top of the rudder, there are raised elevators that sit at the top of the vertical stabliser"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=4099",
+			"manufacturer": "Airbus",
+			"model": "A400M",
+			"mrast": true,
+			"name": "Airbus A400M Atlas",
+			"role": "Strategic/tactical and aerial refuelling tanker airlifter.",
 			"wiki": "https://en.wikipedia.org/wiki/Airbus_A400M_Atlas"
 		},
 		{
-			"name": "Airbus A330 MRTT",
-			"role": "Aerial refuelling and transport tanker aircraft.",
-			"manufacturer": "Airbus",
-			"model": "A330 MRTT",
 			"aliases": ["A330", "Voyager", "KC-30"],
 			"identification": [
 				"Has 2 jet engines positioned by fuselage",
-				"Has a refueling boom (highlighted in red) at the rear of the aircraft for air to air refueling",
+				"Has a refueling boom at the rear of the aircraft for air to air refueling",
 				"Wing tips are raised on both ends"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=571",
+			"manufacturer": "Airbus",
+			"model": "A330 MRTT",
+			"mrast": true,
+			"name": "Airbus A330 MRTT",
+			"role": "Aerial refuelling and transport tanker aircraft.",
 			"wiki": "https://en.wikipedia.org/wiki/Airbus_A330_MRTT"
 		},
 		{
-			"name": "Boeing CH-47 Chinook",
-			"role": "Transport helicopter.",
-			"manufacturer": "Boeing",
-			"model": "CH-47",
 			"aliases": ["Chinook"],
 			"identification": [
 				"Has two rotors on oposite ends of airframe",
@@ -526,13 +640,14 @@
 				"That's really it, nothing looks like a Chinook except a Chinook"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=4371",
+			"manufacturer": "Boeing",
+			"model": "CH-47",
+			"mrast": true,
+			"name": "Boeing CH-47 Chinook",
+			"role": "Transport helicopter.",
 			"wiki": "https://en.wikipedia.org/wiki/Boeing_CH-47_Chinook"
 		},
 		{
-			"name": "Boeing C-17 Globemaster III",
-			"role": "Strategic and tactical airlifter.",
-			"manufacturer": "Boeing",
-			"model": "C-17",
 			"aliases": ["C17", "C 17", "Globemaster III", "Globemaster"],
 			"identification": [
 				"Has 4 jet engines on the wings",
@@ -541,29 +656,32 @@
 				"Has 4 pairs of 2 wheels in the rear landing gear"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=2685",
+			"manufacturer": "Boeing",
+			"model": "C-17",
+			"mrast": true,
+			"name": "Boeing C-17 Globemaster III",
+			"role": "Strategic and tactical airlifter.",
 			"waifuImage": "Globemaster",
 			"wiki": "https://en.wikipedia.org/wiki/Boeing_C-17_Globemaster_III"
 		},
 		{
-			"name": "Boeing E-3 Sentry",
-			"role": "Airborne early warning and control (AEW&C) aircraft.",
-			"manufacturer": "Boeing",
-			"model": "E-3",
 			"aliases": ["E3", "E 3", "Sentry"],
 			"identification": [
 				"4 small-ish, thing jet engines on the wings, further away from the airframe than to the wing tips",
 				"Big radar dish on top op plane that's circular and spins",
-				"Just look for the big circular radar dish"
+				"Just look for the big circular radar dish",
+				"IF IT DOESN'T HAVE A DISH, IT'S A BOEING 707"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=665",
+			"manufacturer": "Boeing",
+			"model": "E-3",
+			"mrast": true,
+			"name": "Boeing E-3 Sentry",
+			"role": "Airborne early warning and control (AEW&C) aircraft.",
 			"waifuImage": "Sentry",
 			"wiki": "https://en.wikipedia.org/wiki/Boeing_E-3_Sentry"
 		},
 		{
-			"name": "Boeing 737 AEW&C",
-			"role": "Airborne early warning and control (AEW&C) aircraft.",
-			"manufacturer": "Boeing",
-			"model": "737 AEW&C",
 			"aliases": ["Wedgetail", "Peace Eagle", "Peace Eye"],
 			"identification": [
 				"Two jet engines near the airframe, bigger than E-3",
@@ -571,14 +689,15 @@
 				"Again, look for the thing long radar dish"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=7400",
+			"manufacturer": "Boeing",
+			"model": "737 AEW&C",
+			"mrast": true,
+			"name": "Boeing 737 AEW&C",
+			"role": "Airborne early warning and control (AEW&C) aircraft.",
 			"waifuImage": "Peace Eye",
 			"wiki": "https://en.wikipedia.org/wiki/Boeing_737_AEW%26C"
 		},
 		{
-			"name": "Boeing P-8 Poseidon",
-			"role": "Maritime patrol aircraft.",
-			"manufacturer": "Boeing",
-			"model": "P-8",
 			"aliases": ["P8", "P 8", "Poseidon"],
 			"identification": [
 				"Two jet engines near airframe",
@@ -586,14 +705,15 @@
 				"Many angled spikes along the top of the airframe"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=5111",
+			"manufacturer": "Boeing",
+			"model": "P-8",
+			"mrast": true,
+			"name": "Boeing P-8 Poseidon",
+			"role": "Maritime patrol aircraft.",
 			"waifuImage": "Poseidon",
 			"wiki": "https://en.wikipedia.org/wiki/Boeing_P-8_Poseidon"
 		},
 		{
-			"name": "Boeing AH-64 Apache",
-			"role": "Attack helicopter.",
-			"manufacturer": "Boeing",
-			"model": "AH-64",
 			"aliases": ["Apache", "AH64", "AH 64"],
 			"identification": [
 				"Singular rotor with a vertical rotor on rudder at the rear",
@@ -602,13 +722,14 @@
 				"Landing gear can't be retracted"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=699",
+			"manufacturer": "Boeing",
+			"model": "AH-64",
+			"mrast": true,
+			"name": "Boeing AH-64 Apache",
+			"role": "Attack helicopter.",
 			"wiki": "https://en.wikipedia.org/wiki/Boeing_AH-64_Apache"
 		},
 		{
-			"name": "Boeing RC-135",
-			"role": "Reconnaissance aircraft.",
-			"manufacturer": "Boeing",
-			"model": "RC-135",
 			"aliases": ["Rivet Joint", "RC135", "RC 135"],
 			"identification": [
 				"Has 4 engines along side wings",
@@ -616,13 +737,14 @@
 				"Has enlared fuselage at the front of the plane making it look like a dog stung by a bee (use `/cheeks`)"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=2179",
+			"manufacturer": "Boeing",
+			"model": "RC-135",
+			"mrast": true,
+			"name": "Boeing RC-135",
+			"role": "Reconnaissance aircraft.",
 			"wiki": "https://en.wikipedia.org/wiki/Boeing_RC-135"
 		},
 		{
-			"name": "BAE Systems Hawk",
-			"role": "Advanced trainer aircraft.",
-			"manufacturer": "BAe",
-			"model": "Hawk",
 			"aliases": [],
 			"identification": [
 				"Has 2 engines in the rear",
@@ -632,13 +754,14 @@
 				"Very round shape compared to the Yak"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=1878",
+			"manufacturer": "BAe",
+			"model": "Hawk",
+			"mrast": true,
+			"name": "BAE Systems Hawk",
+			"role": "Advanced trainer aircraft.",
 			"wiki": "https://en.wikipedia.org/wiki/BAE_Systems_Hawk"
 		},
 		{
-			"name": "Eurofighter Typhoon",
-			"role": "Multirole and air superiority fighter.",
-			"manufacturer": "Eurofighter",
-			"model": "Typhoon",
 			"aliases": [],
 			"identification": [
 				"Twin engines next to each other at the rear, two inlets for the engine under the canopy and are rectangular",
@@ -647,14 +770,15 @@
 				"The inlets are split down the middle"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=2167",
+			"manufacturer": "Eurofighter",
+			"model": "Typhoon",
+			"mrast": true,
+			"name": "Eurofighter Typhoon",
+			"role": "Multirole and air superiority fighter.",
 			"wiki": "https://en.wikipedia.org/wiki/Eurofighter_Typhoon"
 		},
 		{
-			"name": "General Atomics MQ-9 Reaper",
-			"role": "Unmanned aerial combat vehicle.",
-			"manufacturer": "GA",
-			"model": "MQ-9",
-			"aliases": ["Reaper", "Predator B"],
+			"aliases": ["Reaper", "Predator B", "Protector"],
 			"identification": [
 				"Has no cockpit",
 				"Has a propeller engine in the back",
@@ -662,14 +786,15 @@
 				"Again… it doesn't have a cockpit, it's a drone"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=2873",
+			"manufacturer": "GA",
+			"model": "MQ-9",
+			"mrast": true,
+			"name": "General Atomics MQ-9 Reaper",
+			"role": "Unmanned aerial combat vehicle.",
 			"waifuImage": "Reaper",
 			"wiki": "https://en.wikipedia.org/wiki/General_Atomics_MQ-9_Reaper"
 		},
 		{
-			"name": "Grob G115",
-			"role": "Basic trainer aircraft.",
-			"manufacturer": "Grob",
-			"model": "G115",
 			"aliases": ["Tutor"],
 			"identification": [
 				"Singular 3 rotor turboprop engine at front",
@@ -677,13 +802,14 @@
 				"It's ugly"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=2553",
+			"manufacturer": "Grob",
+			"model": "G115",
+			"mrast": true,
+			"name": "Grob G115",
+			"role": "Basic trainer aircraft.",
 			"wiki": "https://en.wikipedia.org/wiki/Grob_G_115"
 		},
 		{
-			"name": "Grob G103a Twin II",
-			"role": "Two-seater class glider.",
-			"manufacturer": "Grob",
-			"model": "G103a",
 			"aliases": ["Twin II", "Viking"],
 			"identification": [
 				"It doesn't have an engine",
@@ -691,13 +817,14 @@
 				"You don't need more, look for the lack of engine"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=2550",
+			"manufacturer": "Grob",
+			"model": "G103a",
+			"mrast": true,
+			"name": "Grob G103a Twin II",
+			"role": "Two-seater class glider.",
 			"wiki": "https://en.wikipedia.org/wiki/Grob_G103a_Twin_II"
 		},
 		{
-			"name": "Grob G109",
-			"role": "Motor glider.",
-			"manufacturer": "Grob",
-			"model": "G109",
 			"aliases": ["Vigilant"],
 			"identification": [
 				"Unlike G115 it has its rear landing gear all the way at the back of the airframe",
@@ -705,13 +832,14 @@
 				"It has 2 propellers unlike G115"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=2555",
+			"manufacturer": "Grob",
+			"model": "G109",
+			"mrast": true,
+			"name": "Grob G109",
+			"role": "Motor glider.",
 			"wiki": "https://en.wikipedia.org/wiki/Grob_G_109"
 		},
 		{
-			"name": "Grob G120 TP",
-			"role": "Trainer aircraft.",
-			"manufacturer": "Grob",
-			"model": "G120TP",
 			"aliases": ["Prefect"],
 			"identification": [
 				"Has 5 rotors",
@@ -720,13 +848,14 @@
 				"Has the elevators lower on the stabiliser"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=8187",
+			"manufacturer": "Grob",
+			"model": "G120TP",
+			"mrast": true,
+			"name": "Grob G120 TP",
+			"role": "Trainer aircraft.",
 			"wiki": "https://en.wikipedia.org/wiki/Grob_G_120TP"
 		},
 		{
-			"name": "Lockheed C-130 Hercules",
-			"role": "Military transport aircraft.",
-			"manufacturer": "Lockheed",
-			"model": "C-130",
 			"aliases": ["Hercules"],
 			"identification": [
 				"4 turboprop (propeller) engines all near airframe and close together",
@@ -735,13 +864,14 @@
 				"Has flat rectangular wings"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=2999",
+			"manufacturer": "Lockheed",
+			"model": "C-130",
+			"mrast": true,
+			"name": "Lockheed C-130 Hercules",
+			"role": "Military transport aircraft.",
 			"wiki": "https://en.wikipedia.org/wiki/Lockheed_C-130_Hercules"
 		},
 		{
-			"name": "Lockheed Martin F-35 Lightning II",
-			"role": "Multirole fighter.",
-			"manufacturer": "Lockheed Martin",
-			"model": "F-35",
 			"aliases": ["F35", "F 35", "Lightning II", "Lightning"],
 			"identification": [
 				"Single engine with 2 air inlets on the sides of the canopy",
@@ -752,14 +882,15 @@
 				"2 angled verticle stabilisers"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=2992",
+			"manufacturer": "Lockheed Martin",
+			"model": "F-35",
+			"mrast": true,
+			"name": "Lockheed Martin F-35 Lightning II",
+			"role": "Multirole fighter.",
 			"waifuImage": "Lightning II",
 			"wiki": "https://en.wikipedia.org/wiki/Lockheed_Martin_F-35_Lightning_II"
 		},
 		{
-			"name": "Panavia Tornado",
-			"role": "Multirole and strike fighter.",
-			"manufacturer": "Panavia",
-			"model": "Tornado",
 			"aliases": [],
 			"identification": [
 				"Has 2 big af engines with chonky and square air inlets on the sides of canopy",
@@ -768,13 +899,14 @@
 				"Has variable sweep wings so the wings can sweep back and forth, there is gonna be a small gap by the wing and the airframe"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=1477",
+			"manufacturer": "Panavia",
+			"model": "Tornado",
+			"mrast": true,
+			"name": "Panavia Tornado",
+			"role": "Multirole and strike fighter.",
 			"wiki": "https://en.wikipedia.org/wiki/Panavia_Tornado"
 		},
 		{
-			"name": "Raytheon Sentinel",
-			"role": "Airborne battlefield and ground surveillance aircraft.",
-			"manufacturer": "Raytheon",
-			"model": "Sentinel",
 			"aliases": [],
 			"identification": [
 				"WHAT THE FUCK IS THAT",
@@ -784,13 +916,14 @@
 				"Has elevators at top of the Vertical stabiliser"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=1811",
+			"manufacturer": "Raytheon",
+			"model": "true",
+			"mrast": true,
+			"name": "Raytheon Sentinel",
+			"role": "Airborne battlefield and ground surveillance aircraft.",
 			"wiki": "https://en.wikipedia.org/wiki/Raytheon_Sentinel"
 		},
 		{
-			"name": "Short Tucano",
-			"role": "Trainer aircraft.",
-			"manufacturer": "Short",
-			"model": "Tucano",
 			"aliases": [],
 			"identification": [
 				"Has 4 propellers on the nose of aircraft",
@@ -798,13 +931,14 @@
 				"Distinct slope of cockpit for the two seats"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=1628",
+			"manufacturer": "Short",
+			"model": "Tucano",
+			"mrast": true,
+			"name": "Short Tucano",
+			"role": "Trainer aircraft.",
 			"wiki": "https://en.wikipedia.org/wiki/Short_Tucano"
 		},
 		{
-			"name": "Aerospatiale SA330 Puma",
-			"role": "Utility helicopter.",
-			"manufacturer": "Aerospatiale",
-			"model": "SA330",
 			"aliases": ["Puma"],
 			"identification": [
 				"Two \"projections\" above the cockpit",
@@ -812,26 +946,28 @@
 				"Tail rotor has 5 blades"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=3145",
+			"manufacturer": "Aerospatiale",
+			"model": "SA330",
+			"mrast": true,
+			"name": "Aerospatiale SA330 Puma",
+			"role": "Utility helicopter.",
 			"wiki": "https://en.wikipedia.org/wiki/A%C3%A9rospatiale_SA_330_Puma"
 		},
 		{
-			"name": "Aerospatiale SA332 Super Puma",
-			"role": "Medium utility helicopter.",
-			"manufacturer": "Aerospatiale",
-			"model": "SA332",
 			"aliases": ["Super Puma"],
 			"identification": [
 				"Longer than the Puma",
 				"Nose is sharper than the Puma and cockpit extends out more"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=1778",
+			"manufacturer": "Aerospatiale",
+			"model": "SA332",
+			"mrast": true,
+			"name": "Aerospatiale SA332 Super Puma",
+			"role": "Medium utility helicopter.",
 			"wiki": "https://en.wikipedia.org/wiki/Eurocopter_AS332_Super_Puma"
 		},
 		{
-			"name": "Aerospatiale SA340 Gazelle",
-			"role": "Utility helicopter.",
-			"manufacturer": "Aerospatiale",
-			"model": "SA340",
 			"aliases": ["Gazelle"],
 			"identification": [
 				"Has the back rotors inside a thingy (it looks cool)",
@@ -840,55 +976,85 @@
 				"Has a massive glass frontal view (main use is for recconassiance)"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=1784",
+			"manufacturer": "Aerospatiale",
+			"model": "SA340",
+			"mrast": true,
+			"name": "Aerospatiale SA340 Gazelle",
+			"role": "Utility helicopter.",
 			"wiki": "https://en.wikipedia.org/wiki/A%C3%A9rospatiale_Gazelle"
 		},
 		{
-			"name": "Eurocopter EC135",
-			"role": "Light utility helicopter.",
-			"manufacturer": "Eurocopter",
-			"model": "EC135",
-			"aliases": [],
+			"aliases": ["Juno", "H-135", "H 135", "EC135", "EC 135", "EC-135"],
 			"identification": [
 				"Big glass cockpit like the Gazelle",
 				"Nose is pointier than the Gazelle",
 				"No weird tube thing at the back of the rotor"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=1853",
+			"manufacturer": "Airbus Helicopters",
+			"model": "H135",
+			"mrast": true,
+			"name": "Airbus Helicopters H135",
+			"role": "Light utility helicopter.",
 			"wiki": "https://en.wikipedia.org/wiki/Eurocopter_EC135"
 		},
 		{
-			"name": "Eurocopter AS365 Dauphin",
-			"role": "Medium utility helicopter.",
-			"manufacturer": "Eurocopter",
-			"model": "AS365",
-			"aliases": ["Dauphin"],
+			"aliases": [
+				"Jupiter",
+				"H-145",
+				"H 145",
+				"EC145",
+				"EC 145",
+				"EC-145"
+			],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=3801",
+			"manufacturer": "Airbus Helicopters",
+			"model": "H135",
+			"mrast": true,
+			"name": "Airbus Helicopters H135",
+			"role": "Light utility helicopter.",
+			"wiki": "https://en.wikipedia.org/wiki/Eurocopter_EC145"
+		},
+		{
+			"aliases": ["Dauphin", "SA365", "SA-365", "SA 365"],
 			"identification": [
 				"Similar to the AW109/AW149",
 				"Back rotors inside a thingy and not exposed",
 				"Has winglet-like things extending out the rear"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=3219",
+			"manufacturer": "Airbus Helicopters",
+			"model": "AS365",
+			"mrast": true,
+			"name": "Airbus Helicopters AS365 Dauphin",
+			"role": "Medium utility helicopter.",
 			"wiki": "https://en.wikipedia.org/wiki/Eurocopter_AS365_Dauphin"
 		},
 		{
-			"name": "Eurocopter AS350 Ecureuil",
-			"role": "Light utility helicopter.",
-			"manufacturer": "Eurocopter",
-			"model": "AS350",
-			"aliases": ["Ecureuil", "Squirrel"],
+			"aliases": [
+				"Ecureuil",
+				"Squirrel",
+				"H-125",
+				"H 125",
+				"AS350",
+				"AS 350",
+				"AS-350"
+			],
 			"identification": [
 				"Really long tail",
 				"Pipe coming out of the back of the rotor",
 				"Tail is like the AW109"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=2352",
+			"manufacturer": "Airbus Helicopters",
+			"model": "H125",
+			"mrast": true,
+			"name": "Airbus Helicopters H125 Ecureuil",
+			"role": "Light utility helicopter.",
 			"wiki": "https://en.wikipedia.org/wiki/Eurocopter_AS350_%C3%89cureuil"
 		},
 		{
-			"name": "Avro Lancaster",
-			"role": "Heavy bomber.",
-			"manufacturer": "Avro",
-			"model": "Lancaster",
 			"aliases": [],
 			"identification": [
 				"4 propeller engines with 3 propellers each situated on the wings near the airframe ",
@@ -897,27 +1063,29 @@
 				"Has 2 gunner turrets on nose"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=610",
+			"manufacturer": "Avro",
+			"model": "Lancaster",
+			"mrast": true,
+			"name": "Avro Lancaster",
+			"role": "Heavy bomber.",
 			"wiki": "https://en.wikipedia.org/wiki/Avro_Lancaster"
 		},
 		{
-			"name": "de Havilland Canada DHC-1 Chipmunk",
-			"role": "Trainer aircraft.",
-			"manufacturer": "de Havilland Canada",
-			"model": "DHC-1",
-			"aliases": ["Chipmunk", "DHC 1", "DHC!"],
+			"aliases": ["Chipmunk", "DHC 1", "DHC1"],
 			"identification": [
 				"It has 2 propellers on the front",
 				"Retractable gear on the front of plane and a singular wheel on the back",
 				"Two seater so long canopy and two seats"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=2770",
+			"manufacturer": "de Havilland Canada",
+			"model": "DHC-1",
+			"mrast": true,
+			"name": "de Havilland Canada DHC-1 Chipmunk",
+			"role": "Trainer aircraft.",
 			"wiki": "https://en.wikipedia.org/wiki/De_Havilland_Canada_DHC-1_Chipmunk"
 		},
 		{
-			"name": "Hawker Hurricane",
-			"role": "Fighter aircraft.",
-			"manufacturer": "Hawker",
-			"model": "Hurricane",
 			"aliases": [],
 			"identification": [
 				"Has propeller engine with 3 propellers on nose",
@@ -926,13 +1094,14 @@
 				"Roof of nose is curved unlike spitfire's which is more square"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=2010",
+			"manufacturer": "Hawker",
+			"model": "Hurricane",
+			"mrast": true,
+			"name": "Hawker Hurricane",
+			"role": "Fighter aircraft.",
 			"wiki": "https://en.wikipedia.org/wiki/Hawker_Hurricane"
 		},
 		{
-			"name": "Supermarine Spitfire",
-			"role": "Fighter and interceptor aircraft.",
-			"manufacturer": "Supermarine",
-			"model": "Spitfire",
 			"aliases": [],
 			"identification": [
 				"Has propeller engine on nose with 3 propellers ",
@@ -941,13 +1110,14 @@
 				"Spitfire's wings are much thinner height wise than the Hurricane's"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=1461",
+			"manufacturer": "Supermarine",
+			"model": "Spitfire",
+			"mrast": true,
+			"name": "Supermarine Spitfire",
+			"role": "Fighter and interceptor aircraft.",
 			"wiki": "https://en.wikipedia.org/wiki/Supermarine_Spitfire"
 		},
 		{
-			"name": "Grumman F4F Wildcat",
-			"role": "Carrier-based fighter aircraft.",
-			"manufacturer": "Grumman",
-			"model": "F4F",
 			"aliases": ["Wildcat"],
 			"identification": [
 				"Nose has propeller engine with 3 propellers",
@@ -957,13 +1127,14 @@
 				"Wings are rectangular and have a flat tip"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=3410",
+			"manufacturer": "Grumman",
+			"model": "F4F",
+			"mrast": false,
+			"name": "Grumman F4F Wildcat",
+			"role": "Carrier-based fighter aircraft.",
 			"wiki": "https://en.wikipedia.org/wiki/Grumman_F4F_Wildcat"
 		},
 		{
-			"name": "AgustaWestland AW101",
-			"role": "Search/rescue and medium-lift utility helicopter.",
-			"manufacturer": "AgustaWestland",
-			"model": "AW101",
 			"aliases": ["Merlin"],
 			"identification": [
 				"Rotor has 5 blades",
@@ -971,14 +1142,15 @@
 				"Longer than the other AgustaWestland helicopters"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=7571",
+			"manufacturer": "AgustaWestland",
+			"model": "AW101",
+			"mrast": true,
+			"name": "AgustaWestland AW101",
+			"role": "Search/rescue and medium-lift utility helicopter.",
 			"wiki": "https://en.wikipedia.org/wiki/AgustaWestland_AW101"
 		},
 		{
-			"name": "BAe Harrier",
-			"role": "V/STOL strike aircraft.",
-			"manufacturer": "BAe",
-			"model": "Harrier",
-			"aliases": ["Harrier II", "Harrier 2", "AV-8B", "AV8B", "AV 8B"],
+			"aliases": [],
 			"identification": [
 				"No rear exhaust for engines, it has 4 smaller ports that can swivel on either side on both ends of aircraft",
 				"Has 4 hard points on either wing",
@@ -987,14 +1159,15 @@
 				"It is chonk"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=734",
+			"manufacturer": "BAe",
+			"model": "Harrier",
+			"mrast": true,
+			"name": "BAe Harrier",
+			"role": "V/STOL strike aircraft.",
 			"waifuImage": "Harrier",
 			"wiki": "https://en.wikipedia.org/wiki/Harrier_jump_jet"
 		},
 		{
-			"name": "McDonnell Douglas KC-10 Extender",
-			"role": "Multirole aerial refuelling tanker aircraft.",
-			"manufacturer": "McDonnell Douglas",
-			"model": "KC-10",
 			"aliases": ["Extender", "KC10", "KC 10", "DC-10", "DC10", "DC 10"],
 			"identification": [
 				"Has 2 jet engines on either wing which are close to the airframe, has 1 engine on the vertical stabiliser",
@@ -1002,13 +1175,14 @@
 				"It has 3 landing gears, 1 at the front and 2 at the middle-rear"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=1150",
+			"manufacturer": "McDonnell Douglas",
+			"model": "KC-10",
+			"mrast": false,
+			"name": "McDonnell Douglas KC-10 Extender",
+			"role": "Multirole aerial refuelling tanker aircraft.",
 			"wiki": "https://en.wikipedia.org/wiki/McDonnell_Douglas_KC-10_Extender"
 		},
 		{
-			"name": "Douglas C-47 Skytrain",
-			"role": "Military transport aircraft.",
-			"manufacturer": "Douglas",
-			"model": "C-47",
 			"aliases": ["Skytrain", "Dakota", "C47", "C 47"],
 			"identification": [
 				"Has two propeller engines with 3 propellers each",
@@ -1016,13 +1190,14 @@
 				"Has two landings gears at the front of plane and singular wheel at the rear"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=856",
+			"manufacturer": "Douglas",
+			"model": "C-47",
+			"mrast": true,
+			"name": "Douglas C-47 Skytrain",
+			"role": "Military transport aircraft.",
 			"wiki": "https://en.wikipedia.org/wiki/Douglas_C-47_Skytrain"
 		},
 		{
-			"name": "Bell UH-1 Iroquois",
-			"role": "Utility helicopter.",
-			"manufacturer": "Bell",
-			"model": "UH-1",
 			"aliases": ["Iroquois", "Huey", "UH1", "UH 1"],
 			"identification": [
 				"Really long tail like the Squirrel",
@@ -1030,13 +1205,14 @@
 				"Rear rotor only has 2 blades"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=1949",
+			"manufacturer": "Bell",
+			"model": "UH-1",
+			"mrast": false,
+			"name": "Bell UH-1 Iroquois",
+			"role": "Utility helicopter.",
 			"wiki": "https://en.wikipedia.org/wiki/Bell_UH-1_Iroquois"
 		},
 		{
-			"name": "Antonov An-124 Ruslan",
-			"role": "Heavy transport aircraft.",
-			"manufacturer": "Antonov",
-			"model": "An-124",
 			"aliases": ["Ruslan", "Condor", "An124", "An 124"],
 			"identification": [
 				"It has 4 jet engines along the two wings which are close to airframe",
@@ -1045,13 +1221,14 @@
 				"Will always have a livery of either Russian (red and blue) or Ukrainian (blue and yellow)"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=5403",
+			"manufacturer": "Antonov",
+			"model": "An-124",
+			"mrast": false,
+			"name": "Antonov An-124",
+			"role": "Heavy transport aircraft.",
 			"wiki": "https://en.wikipedia.org/wiki/Antonov_An-124_Ruslan"
 		},
 		{
-			"name": "Fairchild Republic A-10 Thunderbolt II",
-			"role": "Close air support attack aircraft.",
-			"manufacturer": "Fairchild Republic",
-			"model": "A-10",
 			"aliases": ["Thunderbolt II", "Thunderbolt", "A10", "A 10"],
 			"identification": [
 				"Big gun in nose of plane",
@@ -1062,14 +1239,15 @@
 				"Vertical stabilisers are outside the elevators and situated on the tip of them"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=1470",
+			"manufacturer": "Fairchild Republic",
+			"model": "A-10",
+			"mrast": false,
+			"name": "Fairchild Republic A-10 Thunderbolt II",
+			"role": "Close air support attack aircraft.",
 			"waifuImage": "Warthog",
 			"wiki": "https://en.wikipedia.org/wiki/Fairchild_Republic_A-10_Thunderbolt_II"
 		},
 		{
-			"name": "Grumman F-14 Tomcat",
-			"role": "Multirole air superiority fighter.",
-			"manufacturer": "Grumman",
-			"model": "F-14",
 			"aliases": ["Tomcat", "F14", "F 14"],
 			"identification": [
 				"Top Gun",
@@ -1082,14 +1260,15 @@
 				"Top Gun"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=978",
+			"manufacturer": "Grumman",
+			"model": "F-14",
+			"mrast": false,
+			"name": "Grumman F-14 Tomcat",
+			"role": "Multirole air superiority fighter.",
 			"waifuImage": "Tomcat",
 			"wiki": "https://en.wikipedia.org/wiki/Grumman_F-14_Tomcat"
 		},
 		{
-			"name": "Lockheed Martin F-22 Raptor",
-			"role": "Stealth air superiority fighter.",
-			"manufacturer": "Lockheed Martin",
-			"model": "F-22",
 			"aliases": ["Raptor", "F22", "F 22"],
 			"identification": [
 				"Has two engines with thrust vectoring capabilites, exhaust looks like a sandwhich",
@@ -1100,13 +1279,14 @@
 				"Unlike F-35 it is thin and very manuverable"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=2997",
+			"manufacturer": "Lockheed Martin",
+			"model": "F-22",
+			"mrast": false,
+			"name": "Lockheed Martin F-22 Raptor",
+			"role": "Stealth air superiority fighter.",
 			"wiki": "https://en.wikipedia.org/wiki/Lockheed_Martin_F-22_Raptor"
 		},
 		{
-			"name": "General Dynamics F-16 Fighting Falcon",
-			"role": "Multirole and air superiority fighter.",
-			"manufacturer": "General Dynamics",
-			"model": "F-16",
 			"aliases": ["Fighting Falcon", "F16", "F 16"],
 			"identification": [
 				"Has a singular engine with a singular air intake bellow the canopy",
@@ -1116,14 +1296,15 @@
 				"Has 3 landing gears which have the rear ones placed on the air intake and very close together"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=954",
+			"manufacturer": "General Dynamics",
+			"model": "F-16",
+			"mrast": false,
+			"name": "General Dynamics F-16 Fighting Falcon",
+			"role": "Multirole and air superiority fighter.",
 			"waifuImage": "Falcon",
 			"wiki": "https://en.wikipedia.org/wiki/General_Dynamics_F-16_Fighting_Falcon"
 		},
 		{
-			"name": "McDonnell Douglas F-15 Eagle",
-			"role": "Air superiority fighter.",
-			"manufacturer": "McDonnell Douglas",
-			"model": "F-15",
 			"aliases": ["Strike Eagle", "Eagle", "F15", "F 15"],
 			"identification": [
 				"Has two engines in the rear",
@@ -1134,23 +1315,16 @@
 				"Has 3 thin landing gears which have the rear ones in the middle and spaced out from each other"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=1133",
+			"manufacturer": "McDonnell Douglas",
+			"model": "F-15",
+			"mrast": false,
+			"name": "McDonnell Douglas F-15 Eagle",
+			"role": "Air superiority fighter.",
 			"waifuImage": "Eagle",
 			"wiki": "https://en.wikipedia.org/wiki/McDonnell_Douglas_F-15_Eagle"
 		},
 		{
-			"name": "McDonnell Douglas F/A-18 Hornet",
-			"role": "Multirole fighter.",
-			"manufacturer": "McDonnell Douglas",
-			"model": "F/A-18",
-			"aliases": [
-				"Hornet",
-				"Super Hornet",
-				"F/A18",
-				"F/A 18",
-				"F-18",
-				"F18",
-				"F 18"
-			],
+			"aliases": ["Hornet", "F/A18", "F/A 18", "F-18", "F18", "F 18"],
 			"identification": [
 				"Have two engines which are close",
 				"Has two angled vertical stabilisers",
@@ -1158,14 +1332,14 @@
 				"Has parts of the airframe thin and long by the canopy"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=1126",
-			"waifuImage": "Hornet",
+			"manufacturer": "McDonnell Douglas",
+			"model": "F/A-18",
+			"mrast": false,
+			"name": "McDonnell Douglas F/A-18 Hornet",
+			"role": "Multirole fighter.",
 			"wiki": "https://en.wikipedia.org/wiki/McDonnell_Douglas_F/A-18_Hornet"
 		},
 		{
-			"name": "Sukhoi Su-27",
-			"role": "Multirole and air superiority fighter.",
-			"manufacturer": "Sukhoi",
-			"model": "Su-27",
 			"aliases": ["Flanker", "Su27", "Su 27"],
 			"identification": [
 				"Has two engines which are spaces by a tail",
@@ -1174,14 +1348,15 @@
 				"Has 3 hardpoints on each wing"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=1346",
+			"manufacturer": "Sukhoi",
+			"model": "Su-27",
+			"mrast": false,
+			"name": "Sukhoi Su-27",
+			"role": "Multirole and air superiority fighter.",
 			"waifuImage": "Flanker",
 			"wiki": "https://en.wikipedia.org/wiki/Sukhoi_Su-27"
 		},
 		{
-			"name": "Sukhoi Su-35",
-			"role": "Multirole and air superiority fighter.",
-			"manufacturer": "Sukhoi",
-			"model": "Su-35",
 			"aliases": ["Flanker-E", "Su35", "Su 35"],
 			"identification": [
 				"Has 2 engines sepperated by a tail",
@@ -1191,13 +1366,14 @@
 				"Has 4 hardpoints on each wing"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=3211",
+			"manufacturer": "Sukhoi",
+			"model": "Su-35",
+			"mrast": false,
+			"name": "Sukhoi Su-35",
+			"role": "Multirole and air superiority fighter.",
 			"wiki": "https://en.wikipedia.org/wiki/Sukhoi_Su-35"
 		},
 		{
-			"name": "Sukhoi Su-57",
-			"role": "Stealth multirole fighter.",
-			"manufacturer": "Sukhoi",
-			"model": "Su-57",
 			"aliases": ["Felon", "Su57", "Su 57"],
 			"identification": [
 				"Has 2 engines seperated by a tail",
@@ -1208,14 +1384,15 @@
 				"Has 2 air intakes on both sides of the airframe"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=6057",
+			"manufacturer": "Sukhoi",
+			"model": "Su-57",
+			"mrast": false,
+			"name": "Sukhoi Su-57",
+			"role": "Stealth multirole fighter.",
 			"wiki": "https://en.wikipedia.org/wiki/Sukhoi_Su-57"
 		},
 		{
-			"name": "Mikoyan MiG-21",
-			"role": "Fighter and interceptor aircraft.",
-			"manufacturer": "Mikoyan",
-			"model": "MiG-21",
-			"aliases": ["Fishbed", "MiG21", "MiG 21"],
+			"aliases": ["Fishbed", "MiG21", "MiG 21", "J-7", "J7", "J 7"],
 			"identification": [
 				"Has 1 large engine at the rear",
 				"Has that is open with a cone inside it",
@@ -1223,14 +1400,15 @@
 				"Has a single verticle stabiliser"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=1444",
+			"manufacturer": "Mikoyan",
+			"model": "MiG-21",
+			"mrast": false,
+			"name": "Mikoyan MiG-21",
+			"role": "Fighter and interceptor aircraft.",
 			"waifuImage": "Fishbed",
 			"wiki": "https://en.wikipedia.org/wiki/Mikoyan_MiG-21"
 		},
 		{
-			"name": "Mikoyan MiG-29",
-			"role": "Multirole and air superiority fighter.",
-			"manufacturer": "Mikoyan",
-			"model": "MiG-29",
 			"aliases": ["Fulcrum", "MiG29", "MiG 29"],
 			"identification": [
 				"2 engines next to each other",
@@ -1240,14 +1418,15 @@
 				"Has two rectangular air intakes on both sides of airframe"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=1175",
+			"manufacturer": "Mikoyan",
+			"model": "MiG-29",
+			"mrast": false,
+			"name": "Mikoyan MiG-29",
+			"role": "Multirole and air superiority fighter.",
 			"waifuImage": "Fulcrum",
 			"wiki": "https://en.wikipedia.org/wiki/Mikoyan_MiG-29"
 		},
 		{
-			"name": "Mikoyan MiG-31",
-			"role": "Attack and interceptor aircraft.",
-			"manufacturer": "Mikoyan",
-			"model": "MiG-31",
 			"aliases": ["Foxhound", "MiG31", "MiG 31"],
 			"identification": [
 				"2 massive engines at the rear",
@@ -1258,14 +1437,15 @@
 				"Wings have 1 hardpoint and are quite short"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=2136",
+			"manufacturer": "Mikoyan",
+			"model": "MiG-31",
+			"mrast": false,
+			"name": "Mikoyan MiG-31",
+			"role": "Attack and interceptor aircraft.",
 			"waifuImage": "Foxhound",
 			"wiki": "https://en.wikipedia.org/wiki/Mikoyan_MiG-31"
 		},
 		{
-			"name": "Saab JAS39 Gripen",
-			"role": "Multirole fighter.",
-			"manufacturer": "Saab",
-			"model": "JAS39",
 			"aliases": ["Gripen", "JAS-39", "JAS 39"],
 			"identification": [
 				"Has single engine at the rear",
@@ -1276,14 +1456,15 @@
 				"Has a single verticle stabiliser"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=2022",
+			"manufacturer": "Saab",
+			"model": "JAS39",
+			"mrast": true,
+			"name": "Saab JAS39 Gripen",
+			"role": "Multirole fighter.",
 			"waifuImage": "Gripen",
 			"wiki": "https://en.wikipedia.org/wiki/Saab_JAS_39_Gripen"
 		},
 		{
-			"name": "Dassault Rafale",
-			"role": "Multirole fighter.",
-			"manufacturer": "Dassault",
-			"model": "Rafale",
 			"aliases": [],
 			"identification": [
 				"Has 2 engines in the rear",
@@ -1293,13 +1474,14 @@
 				"Single verticle stabiliser"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=823",
+			"manufacturer": "Dassault",
+			"model": "Rafale",
+			"mrast": false,
+			"name": "Dassault Rafale",
+			"role": "Multirole fighter.",
 			"wiki": "https://en.wikipedia.org/wiki/Dassault_Rafale"
 		},
 		{
-			"name": "McDonnell Douglas F-4 Phantom II",
-			"role": "Attack and interceptor aircraft.",
-			"manufacturer": "McDonnell Douglas",
-			"model": "F-4",
 			"aliases": ["Phantom", "Phantom II", "F4", "F 4"],
 			"identification": [
 				"2 engines underneath the tail and elevators",
@@ -1311,14 +1493,15 @@
 				"Elevators are angled downwards"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=1541",
+			"manufacturer": "McDonnell Douglas",
+			"model": "F-4",
+			"mrast": false,
+			"name": "McDonnell Douglas F-4 Phantom II",
+			"role": "Attack and interceptor aircraft.",
 			"waifuImage": "Phantom",
 			"wiki": "https://en.wikipedia.org/wiki/McDonnell_Douglas_F-4_Phantom_II"
 		},
 		{
-			"name": "Xian H-6",
-			"role": "Strategic bomber aircraft.",
-			"manufacturer": "Xian",
-			"model": "H-6",
 			"aliases": ["H6", "H 6", "Tu-16", "Tu16", "Tu 16"],
 			"identification": [
 				"Has two engines at the rear and seperated by the tail",
@@ -1327,13 +1510,14 @@
 				"Pointy nose that points down"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=5375",
+			"manufacturer": "Xian",
+			"model": "H-6",
+			"mrast": false,
+			"name": "Xian H-6",
+			"role": "Strategic bomber aircraft.",
 			"wiki": "https://en.wikipedia.org/wiki/Xian_H-6"
 		},
 		{
-			"name": "Xian JH-7",
-			"role": "Attack and interceptor aircraft.",
-			"manufacturer": "Xian",
-			"model": "JH-7",
 			"aliases": ["Flounder", "Flying Leopard", "JH7", "JH 7"],
 			"identification": [
 				"Has 2 engines in the rear",
@@ -1342,14 +1526,15 @@
 				"Has large verticle stabiliser"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=5505",
+			"manufacturer": "Xian",
+			"model": "JH-7",
+			"mrast": false,
+			"name": "Xian JH-7",
+			"role": "Attack and interceptor aircraft.",
 			"wiki": "https://en.wikipedia.org/wiki/Xi%27an_JH-7"
 		},
 		{
-			"name": "Chengdu J-7",
-			"role": "Fighter aircraft.",
-			"manufacturer": "Chengdu",
-			"model": "J-7",
-			"aliases": ["Fishcan", "MiG-21", "MiG21", "J7", "J 7"],
+			"aliases": ["Fishcan", "MiG-21", "MiG21", "MiG 21", "J7", "J 7"],
 			"identification": [
 				"Basically a repainted MiG-21",
 				"Has 1 large engine at the rear",
@@ -1358,13 +1543,14 @@
 				"Has a single verticle stabiliser"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=3642",
+			"manufacturer": "Chengdu",
+			"model": "J-7",
+			"mrast": false,
+			"name": "Chengdu J-7",
+			"role": "Fighter aircraft.",
 			"wiki": "https://en.wikipedia.org/wiki/Chengdu_J-7"
 		},
 		{
-			"name": "Chengdu J-10",
-			"role": "Multirole fighter.",
-			"manufacturer": "Chengdu",
-			"model": "J-10",
 			"aliases": ["Firebird", "Vigorous Dragon", "J10", "J 10"],
 			"identification": [
 				"Singular engine at the rear",
@@ -1373,13 +1559,14 @@
 				"Has no divider in air intake unlike the Eurofighter"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=5150",
+			"manufacturer": "Chengdu",
+			"model": "J-10",
+			"mrast": false,
+			"name": "Chengdu J-10",
+			"role": "Multirole fighter.",
 			"wiki": "https://en.wikipedia.org/wiki/Chengdu_J-10"
 		},
 		{
-			"name": "Chengdu J-20",
-			"role": "Stealth air superiority fighter.",
-			"manufacturer": "Chengdu",
-			"model": "J-20",
 			"aliases": ["Mighty Dragon", "J20"],
 			"identification": [
 				"Has 2 engines at the rear",
@@ -1390,13 +1577,14 @@
 				"No external hardpoints"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=7971",
+			"manufacturer": "Chengdu",
+			"model": "J-20",
+			"mrast": false,
+			"name": "Chengdu J-20",
+			"role": "Stealth air superiority fighter.",
 			"wiki": "https://en.wikipedia.org/wiki/Chengdu_J-20"
 		},
 		{
-			"name": "Xian Y-20",
-			"role": "Strategic and tactical airlifter.",
-			"manufacturer": "Xian",
-			"model": "Y-20",
 			"aliases": ["Kunpeng", "Y20", "Y 20"],
 			"identification": [
 				"4 jet engines near to the airframe",
@@ -1404,13 +1592,14 @@
 				"Unlike C-17 it has a pointier nose and engines are further back into the wing than sticking out as much"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=7279",
+			"manufacturer": "Xian",
+			"model": "Y-20",
+			"mrast": false,
+			"name": "Xian Y-20",
+			"role": "Strategic and tactical airlifter.",
 			"wiki": "https://en.wikipedia.org/wiki/Xi%27an_Y-20"
 		},
 		{
-			"name": "English Electric Lightning",
-			"role": "Multirole interceptor fighter.",
-			"manufacturer": "English Electric",
-			"model": "Lightning",
 			"aliases": [],
 			"identification": [
 				"Has 2 engines above each other at the rear",
@@ -1420,13 +1609,14 @@
 				"Has radar antenna on nose"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=1932",
+			"manufacturer": "English Electric",
+			"model": "Lightning",
+			"mrast": true,
+			"name": "English Electric Lightning",
+			"role": "Multirole interceptor fighter.",
 			"wiki": "https://en.wikipedia.org/wiki/English_Electric_Lightning"
 		},
 		{
-			"name": "Yakolev Yak-130",
-			"role": "Fighter trainer aircraft.",
-			"manufacturer": "Yakolev",
-			"model": "Yak-130",
 			"aliases": ["Mitten", "Yak130", "Yak 130"],
 			"identification": [
 				"Has 2 engines under the tail",
@@ -1437,7 +1627,965 @@
 				"Hardpoints on wing tips that extend forward"
 			],
 			"image": "https://www.airfighters.com/photosearch.php?cra=2242",
+			"manufacturer": "Yakolev",
+			"model": "Yak-130",
+			"mrast": false,
+			"name": "Yakolev Yak-130",
+			"role": "Fighter trainer aircraft.",
 			"wiki": "https://en.wikipedia.org/wiki/Yakovlev_Yak-130"
+		},
+		{
+			"aliases": ["Mangusta", "A-129", "A 129"],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=1745",
+			"manufacturer": "Agusta",
+			"model": "A129",
+			"mrast": false,
+			"name": "Agusta A129 Mangusta",
+			"role": "Attack helicopter.",
+			"wiki": "https://en.wikipedia.org/wiki/Agusta_A129_Mangusta"
+		},
+		{
+			"aliases": [
+				"Wildcat",
+				"Future Lynx",
+				"Lynx Wildcat",
+				"AW-159",
+				"AW 159"
+			],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=7617",
+			"manufacturer": "AgustaWestland",
+			"model": "AW159",
+			"mrast": true,
+			"name": "AgustaWestland AW159 Wildcat",
+			"role": "Utility, SAR and ASuW helicopter.",
+			"wiki": "https://en.wikipedia.org/wiki/AgustaWestland_AW159_Wildcat"
+		},
+		{
+			"aliases": ["Spartan", "C27", "C 27"],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=7608",
+			"manufacturer": "Alenia",
+			"model": "C-27",
+			"mrast": false,
+			"name": "Alenia C-27 Spartan",
+			"role": "Military transport aircraft.",
+			"wiki": "https://en.wikipedia.org/wiki/Alenia_C-27J_Spartan"
+		},
+		{
+			"aliases": ["MB339", "MB 339"],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=1647",
+			"manufacturer": "Aermacchi",
+			"model": "MB-339",
+			"mrast": false,
+			"name": "Aermacchi MB-339",
+			"role": "Advanced trainer and light attack aircraft.",
+			"wiki": "https://en.wikipedia.org/wiki/Aermacchi_MB-339"
+		},
+		{
+			"aliases": ["Ghibli", "A11", "A-11", "A 11"],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=1712",
+			"manufacturer": "AMX International",
+			"model": "AMX",
+			"mrast": false,
+			"name": "AMX International AMX",
+			"role": "Ground attack aircraft.",
+			"wiki": "https://en.wikipedia.org/wiki/AMX_International_AMX"
+		},
+		{
+			"aliases": ["Cline", "An32", "An 32"],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=598",
+			"manufacturer": "Antonov",
+			"model": "An-32",
+			"mrast": false,
+			"name": "Antonov An-32",
+			"role": "Military transport aircraft.",
+			"wiki": "https://en.wikipedia.org/wiki/Antonov_An-32"
+		},
+		{
+			"aliases": ["Curl", "An26", "An 26"],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=593",
+			"manufacturer": "Antonov",
+			"model": "An-26",
+			"mrast": false,
+			"name": "Antonov An-26",
+			"role": "Transport aircraft.",
+			"wiki": "https://en.wikipedia.org/wiki/Antonov_An-26"
+		},
+		{
+			"aliases": ["Cub", "An12", "An 12"],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=588",
+			"manufacturer": "Antonov",
+			"model": "An-12",
+			"mrast": false,
+			"name": "Antonov An-12",
+			"role": "Civil and military transport aircraft.",
+			"wiki": "https://en.wikipedia.org/wiki/Antonov_An-12"
+		},
+		{
+			"aliases": [],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=3947",
+			"manufacturer": "Avro",
+			"model": "Vulcan",
+			"mrast": true,
+			"name": "Avro Vulcan",
+			"role": "Strategic bomber aircraft.",
+			"wiki": "https://en.wikipedia.org/wiki/Avro_Vulcan"
+		},
+		{
+			"aliases": [],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=2267",
+			"manufacturer": "BAC",
+			"model": "Jet Provost",
+			"mrast": true,
+			"name": "BAC Jet Provost",
+			"role": "Trainer aircraft.",
+			"wiki": "https://en.wikipedia.org/wiki/BAC_Jet_Provost"
+		},
+		{
+			"aliases": [
+				"Cobra",
+				"HueyCobra",
+				"Huey Cobra",
+				"Snake",
+				"AH1",
+				"AH 1"
+			],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=639",
+			"manufacturer": "Bell",
+			"model": "AH-1",
+			"mrast": false,
+			"name": "Bell AH-1 Cobra",
+			"role": "Attack helicopter.",
+			"wiki": "https://en.wikipedia.org/wiki/Bell_AH-1_Cobra"
+		},
+		{
+			"aliases": ["Osprey", "V22", "V 22"],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=7596",
+			"manufacturer": "Bell Boeing",
+			"model": "V-22",
+			"mrast": false,
+			"name": "Bell Boeing V-22 Osprey",
+			"role": "V/STOL military transport aircraft",
+			"wiki": "https://en.wikipedia.org/wiki/Bell_Boeing_V-22_Osprey"
+		},
+		{
+			"aliases": ["Chayka", "Mail", "Be12", "Be 12"],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=652",
+			"manufacturer": "Beriev",
+			"model": "Be-12",
+			"mrast": false,
+			"name": "Beriev Be-12 Chayka",
+			"role": "Maritime patrol aircraft.",
+			"wiki": "https://en.wikipedia.org/wiki/Beriev_Be-12"
+		},
+		{
+			"aliases": ["Flying Fortress", "B17", "B 17"],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=1568",
+			"manufacturer": "Boeing",
+			"model": "B-17",
+			"mrast": false,
+			"name": "Boeing B-17 Flying Fortress",
+			"role": "Heavy bomber.",
+			"wiki": "https://en.wikipedia.org/wiki/Boeing_B-17_Flying_Fortress"
+		},
+		{
+			"aliases": ["Stratofortress", "B52", "B 52"],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=1571",
+			"manufacturer": "Boeing",
+			"model": "B-52",
+			"mrast": false,
+			"name": "Boeing B-52 Stratofortress",
+			"role": "Strategic bomber aircraft.",
+			"wiki": "https://en.wikipedia.org/wiki/Boeing_B-52_Stratofortress"
+		},
+		{
+			"aliases": [
+				"Stratotanker",
+				"KC135",
+				"KC 135",
+				"C-135",
+				"C135",
+				"C 135"
+			],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=1535",
+			"manufacturer": "Boeing",
+			"model": "KC-135",
+			"mrast": false,
+			"name": "Boeing KC-135 Stratotanker",
+			"role": "Aerial refuelling and transport tanker aircraft.",
+			"wiki": "https://en.wikipedia.org/wiki/Boeing_KC-135_Stratotanker"
+		},
+		{
+			"aliases": ["Pegasus"],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=7539",
+			"manufacturer": "Boeing",
+			"model": "KC-46",
+			"mrast": false,
+			"name": "Boeing KC-46 Pegasus",
+			"role": "Aerial refuelling and transport tanker aircraft.",
+			"waifuImage": "Pegasus",
+			"wiki": "https://en.wikipedia.org/wiki/Boeing_KC-46_Pegasus"
+		},
+		{
+			"aliases": [
+				"Super Hornet",
+				"Growler",
+				"F/A-18E",
+				"F/A-18F",
+				"F/A18E",
+				"F/A18F",
+				"EA-18G",
+				"EA18G"
+			],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=710",
+			"manufacturer": "Boeing",
+			"model": "F/A-18E/F",
+			"mrast": false,
+			"name": "Boeing F/A-18E/F Super Hornet",
+			"role": "Carrier-based multirole fighter aircraft.",
+			"waifuImage": "Super Hornet",
+			"wiki": "https://en.wikipedia.org/wiki/Boeing_F/A-18E/F_Super_Hornet"
+		},
+		{
+			"aliases": ["Beaufort", "Type-152", "Type152"],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=7928",
+			"manufacturer": "Bristol",
+			"model": "Type 152",
+			"mrast": true,
+			"name": "Bristol Type 152 Beaufort",
+			"role": "Torpedo bomber.",
+			"wiki": "https://en.wikipedia.org/wiki/Bristol_Beaufort"
+		},
+		{
+			"aliases": ["Sycamore", "Type172", "Type-172"],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=3082",
+			"manufacturer": "Bristol",
+			"model": "Type 172",
+			"mrast": true,
+			"name": "Bristol Type 172 Sycamore",
+			"role": "Rescue and anti-submarine helicopter.",
+			"wiki": "https://en.wikipedia.org/wiki/Bristol_Sycamore"
+		},
+		{
+			"aliases": ["Aviojet", "C101", "C-101"],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=766",
+			"manufacturer": "CASA",
+			"model": "C-101",
+			"mrast": false,
+			"name": "CASA C-101 Aviojet",
+			"role": "Advanced jet trainer and light attack aircraft.",
+			"wiki": "https://en.wikipedia.org/wiki/CASA_C-101_Aviojet"
+		},
+		{
+			"aliases": ["Aviocar", "C 212", "C212"],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=4644",
+			"manufacturer": "CASA",
+			"model": "C-212",
+			"mrast": false,
+			"name": "CASA C-212 Aviocar",
+			"role": "Medium STOL military transport aircraft.",
+			"wiki": "https://en.wikipedia.org/wiki/CASA_C-212_Aviocar"
+		},
+		{
+			"aliases": ["CN235", "CN 235"],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=2095",
+			"manufacturer": "CASA/IPTN",
+			"model": "CN-235",
+			"mrast": false,
+			"name": "CASA/IPTN CN-235",
+			"role": "Transport and maritime patrol aircraft.",
+			"wiki": "https://en.wikipedia.org/wiki/CASA/IPTN_CN-235"
+		},
+		{
+			"aliases": ["Rota", "C.30"],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=5097",
+			"manufacturer": "Avro",
+			"model": "671",
+			"mrast": true,
+			"name": "Avro 671 Rota",
+			"role": "Autogyro.",
+			"wiki": "https://en.wikipedia.org/wiki/Cierva_C.30"
+		},
+		{
+			"aliases": ["Mosquito", "DH98", "DH-98", "DH 98"],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=5468",
+			"manufacturer": "de Havilland",
+			"model": "DH.98",
+			"mrast": true,
+			"name": "de Havilland DH.98 Mosquito",
+			"role": "Fighter-bomber and night fighter aircraft.",
+			"wiki": "https://en.wikipedia.org/wiki/De_Havilland_Mosquito"
+		},
+		{
+			"aliases": [
+				"Vampire",
+				"DH100",
+				"DH-100",
+				"DH 100",
+				"DH.115",
+				"DH115",
+				"DH-115",
+				"DH 115"
+			],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=5468",
+			"manufacturer": "de Havilland",
+			"model": "DH.100",
+			"mrast": true,
+			"name": "de Havilland DH.100 Vampire",
+			"role": "Fighter aircraft.",
+			"wiki": "https://en.wikipedia.org/wiki/De_Havilland_Vampire"
+		},
+		{
+			"aliases": ["Sea Vixen", "DH110", "DH-110", "DH 110"],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=5472",
+			"manufacturer": "de Havilland",
+			"model": "DH.110",
+			"mrast": true,
+			"name": "de Havilland DH.110 Sea Vixen",
+			"role": "Carrier-based fighter aircraft.",
+			"wiki": "https://en.wikipedia.org/wiki/De_Havilland_Sea_Vixen"
+		},
+		{
+			"aliases": ["1150"],
+			"identification": [],
+			"image": "https://en.wikipedia.org/wiki/Br%C3%A9guet_1150_Atlantic",
+			"manufacturer": "Dassault",
+			"model": "Atlantic",
+			"mrast": false,
+			"name": "Dassault Atlantic",
+			"role": "Maritime patrol aircraft.",
+			"wiki": "https://en.wikipedia.org/wiki/Br%C3%A9guet_1150_Atlantic"
+		},
+		{
+			"aliases": [
+				"Mirage F1",
+				"MirageF1",
+				"Mirage-F1",
+				"Mirage 2000",
+				"Mirage2000",
+				"Mirage-2000"
+			],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=810",
+			"manufacturer": "Dassault",
+			"model": "Mirage",
+			"mrast": false,
+			"name": "Dassault Mirage",
+			"role": "Fighter aircraft.",
+			"wiki": "https://en.wikipedia.org/wiki/Dassault_Mirage"
+		},
+		{
+			"aliases": ["AlphaJet", "Alpha-Jet"],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=828",
+			"manufacturer": "Dassault/Dornier",
+			"model": "Alpha Jet",
+			"mrast": false,
+			"name": "Dassault/Dornier Alpha Jet",
+			"role": "Advanced jet trainer and light attack aircraft.",
+			"wiki": "https://en.wikipedia.org/wiki/Dassault/Dornier_Alpha_Jet"
+		},
+		{
+			"aliases": ["HC144", "HC 144"],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=4125",
+			"manufacturer": "EADS",
+			"model": "HC-144",
+			"mrast": false,
+			"name": "EADS HC-144 Ocean Sentry",
+			"role": "Search/rescue aircraft.",
+			"wiki": "https://en.wikipedia.org/wiki/EADS_HC-144_Ocean_Sentry"
+		},
+		{
+			"aliases": [],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=2457",
+			"manufacturer": "English Electric",
+			"model": "Canberra",
+			"mrast": true,
+			"name": "English Electric Canberra",
+			"role": "Bomber and reconnaissance aircraft.",
+			"wiki": "https://en.wikipedia.org/wiki/English_Electric_Canberra"
+		},
+		{
+			"aliases": [],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=4500",
+			"manufacturer": "Fairey",
+			"model": "Swordfish",
+			"mrast": true,
+			"name": "Fairey Swordfish",
+			"role": "Torpedo bomber.",
+			"wiki": "https://en.wikipedia.org/wiki/Fairey_Swordfish"
+		},
+		{
+			"aliases": ["Falco", "CR-42", "CR42", "CR 42"],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=5838",
+			"manufacturer": "Fiat",
+			"model": "CR.42",
+			"mrast": true,
+			"name": "Fiat CR.42 Falco",
+			"role": "Fighter aircraft.",
+			"wiki": "https://en.wikipedia.org/wiki/Fiat_CR.42_Falco"
+		},
+		{
+			"aliases": [],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=2463",
+			"manufacturer": "Folland",
+			"model": "true",
+			"mrast": true,
+			"name": "Folland Gnat",
+			"role": "Fighter trainer aircraft.",
+			"wiki": "https://en.wikipedia.org/wiki/Folland_Gnat"
+		},
+		{
+			"aliases": [],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=3418",
+			"manufacturer": "Gloster",
+			"model": "Javelin",
+			"mrast": true,
+			"name": "Gloster Javelin",
+			"role": "Fighter and interceptor aircraft.",
+			"wiki": "https://en.wikipedia.org/wiki/Gloster_Javelin"
+		},
+		{
+			"aliases": [],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=2212",
+			"manufacturer": "Gloster",
+			"model": "Meteor",
+			"mrast": true,
+			"name": "Gloster Meteor",
+			"role": "Fighter aircraft.",
+			"wiki": "https://en.wikipedia.org/wiki/Gloster_Meteor"
+		},
+		{
+			"aliases": [],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=2143",
+			"manufacturer": "Handley Page",
+			"model": "Victor",
+			"mrast": true,
+			"name": "Handley Page Victor",
+			"role": "Strategic bomber aircraft.",
+			"wiki": "https://en.wikipedia.org/wiki/Handley_Page_Victor"
+		},
+		{
+			"aliases": ["Hart 2", "Hart2", "Hart-2", "HartII"],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=5725",
+			"manufacturer": "Hawker",
+			"model": "Hart II",
+			"mrast": true,
+			"name": "Hawker Hart II",
+			"role": "Light bomber aircraft.",
+			"wiki": "https://en.wikipedia.org/wiki/Hawker_Hart"
+		},
+		{
+			"aliases": [],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=1455",
+			"manufacturer": "Hawker",
+			"model": "Hunter",
+			"mrast": true,
+			"name": "Hawker Hunter",
+			"role": "Fighter and bomber aircraft.",
+			"wiki": "https://en.wikipedia.org/wiki/Hawker_Hunter"
+		},
+		{
+			"aliases": [
+				"Candid",
+				"Midas",
+				"Il76",
+				"Il 76",
+				"Il-78",
+				"Il78",
+				"Il 78"
+			],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=2215",
+			"manufacturer": "Ilyushin",
+			"model": "Il-76",
+			"mrast": false,
+			"name": "Ilyushin Il-76",
+			"role": "Strategic and tactical airlifter.",
+			"wiki": "https://en.wikipedia.org/wiki/Ilyushin_Il-76"
+		},
+		{
+			"aliases": ["Dolphin", "May", "Il38", "Il 38"],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=1026",
+			"manufacturer": "Ilyushin",
+			"model": "Il-38",
+			"mrast": false,
+			"name": "Ilyushin Il-38 Dolphin",
+			"role": "Maritime patrol aircraft.",
+			"wiki": "https://en.wikipedia.org/wiki/Ilyushin_Il-38"
+		},
+		{
+			"aliases": ["Alligator", "Ka52", "Ka 52"],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=3489",
+			"manufacturer": "Kamov",
+			"model": "Ka-52",
+			"mrast": false,
+			"name": "Kamov Ka-52 Alligator",
+			"role": "Attack helicopter.",
+			"wiki": "https://en.wikipedia.org/wiki/Kamov_Ka-50"
+		},
+		{
+			"aliases": ["Dragon Lady"],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=3017",
+			"manufacturer": "Lockheed",
+			"model": "U-2",
+			"mrast": false,
+			"name": "Lockheed U-2",
+			"role": "High-altitude reconnaissance aircraft.",
+			"wiki": "https://en.wikipedia.org/wiki/Lockheed_U-2"
+		},
+		{
+			"aliases": ["Orion", "P3", "P 3"],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=1093",
+			"manufacturer": "Lockheed",
+			"model": "P-3",
+			"mrast": false,
+			"name": "Lockheed P-3 Orion",
+			"role": "Maritime patrol aircraft.",
+			"wiki": "https://en.wikipedia.org/wiki/Lockheed_P-3_Orion"
+		},
+		{
+			"aliases": ["Galaxy", "C5", "C 5"],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=1494",
+			"manufacturer": "Lockheed",
+			"model": "C-5",
+			"mrast": false,
+			"name": "Lockheed C-5 Galaxy",
+			"role": "Strategic and tactical airlifter.",
+			"wiki": "https://en.wikipedia.org/wiki/Lockheed_C-5_Galaxy"
+		},
+		{
+			"aliases": ["Foxbat", "MiG25", "MiG 25"],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=2724",
+			"manufacturer": "Mikoyan",
+			"model": "MiG-25",
+			"mrast": false,
+			"name": "Mikoyan MiG-25",
+			"role": "Interceptor and reconnaissance aircraft.",
+			"wiki": "https://en.wikipedia.org/wiki/Mikoyan-Gurevich_MiG-25"
+		},
+		{
+			"aliases": ["Flogger-D/J", "MiG27", "MiG 27"],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=1174",
+			"manufacturer": "Mikoyan",
+			"model": "MiG-27",
+			"mrast": false,
+			"name": "Mikoyan MiG-27",
+			"role": "Ground attack aircraft.",
+			"wiki": "https://en.wikipedia.org/wiki/Mikoyan_MiG-27"
+		},
+		{
+			"aliases": ["Flogger", "MiG23", "MiG 23"],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=1498",
+			"manufacturer": "Mikoyan",
+			"model": "MiG-23",
+			"mrast": false,
+			"name": "Mikoyan MiG-23",
+			"role": "Fighter and bomber aircraft.",
+			"wiki": "https://en.wikipedia.org/wiki/Mikoyan-Gurevich_MiG-23"
+		},
+		{
+			"aliases": ["Havoc", "Mi28", "Mi 28"],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=2305",
+			"manufacturer": "Mil",
+			"model": "Mi-28",
+			"mrast": false,
+			"name": "Mil Mi-28",
+			"role": "Attack helicopter.",
+			"wiki": "https://en.wikipedia.org/wiki/Mil_Mi-28"
+		},
+		{
+			"aliases": ["Haze", "Mi14", "Mi 14"],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=2738",
+			"manufacturer": "Mil",
+			"model": "Mi-14",
+			"mrast": false,
+			"name": "Mil Mi-14",
+			"role": "Anti-submarine helicopter.",
+			"wiki": "https://en.wikipedia.org/wiki/Mil_Mi-14"
+		},
+		{
+			"aliases": ["Hip", "Mi8", "Mi 8"],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=2239",
+			"manufacturer": "Mil",
+			"model": "Mi-8",
+			"mrast": false,
+			"name": "Mil Mi-8",
+			"role": "Transport helicopter.",
+			"wiki": "https://en.wikipedia.org/wiki/Mil_Mi-8"
+		},
+		{
+			"aliases": ["Mustang", "P51", "P 51"],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=1219",
+			"manufacturer": "North American",
+			"model": "P-51",
+			"mrast": false,
+			"name": "North American P-51 Mustang",
+			"role": "Fighter aircraft.",
+			"waifuImage": "Mustang",
+			"wiki": "https://en.wikipedia.org/wiki/North_American_P-51_Mustang"
+		},
+		{
+			"aliases": ["Greyhound", "C2", "C 2"],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=5453",
+			"manufacturer": "Grumman",
+			"model": "C-2",
+			"mrast": false,
+			"name": "Grumman C-2 Greyhound",
+			"role": "Carrier-capable transport aircraft.",
+			"wiki": "https://en.wikipedia.org/wiki/Grumman_C-2_Greyhound"
+		},
+		{
+			"aliases": ["Hawkeye", "E2", "E 2"],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=2258",
+			"manufacturer": "Northrop Grumman",
+			"model": "E-2",
+			"mrast": false,
+			"name": "Northrop Grumman E-2 Hawkeye",
+			"role": "Airborne early warning and control (AEW&C) aircraft.",
+			"waifuImage": "Hawkeye",
+			"wiki": "https://en.wikipedia.org/wiki/Northrop_Grumman_E-2_Hawkeye"
+		},
+		{
+			"aliases": ["Spirit", "B2", "B 2"],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=1625",
+			"manufacturer": "Northrop Grumman",
+			"model": "B-2",
+			"mrast": false,
+			"name": "Northrop Grumman B-2 Spirit",
+			"role": "Stealth strategic heavy bomber aircraft.",
+			"waifuImage": "Spirit",
+			"wiki": "https://en.wikipedia.org/wiki/Northrop_Grumman_B-2_Spirit"
+		},
+		{
+			"aliases": ["Joint STARS", "E8", "E 8"],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=2441",
+			"manufacturer": "Northrop Grumman",
+			"model": "E-8",
+			"mrast": false,
+			"name": "Northrop Grumman E-8 Joint STARS",
+			"role": "Airborne battle management aircraft.",
+			"wiki": "https://en.wikipedia.org/wiki/Northrop_Grumman_E-8_Joint_STARS"
+		},
+		{
+			"aliases": ["Prowler", "EA6B", "EA 6B"],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=971",
+			"manufacturer": "Northrop Grumman",
+			"model": "EA-6B",
+			"mrast": false,
+			"name": "Northrop Grumman EA-6B Prowler",
+			"role": "Electronic warfare attack aircraft.",
+			"wiki": "https://en.wikipedia.org/wiki/Northrop_Grumman_EA-6B_Prowler"
+		},
+		{
+			"aliases": ["Lancer", "B1", "B 1"],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=1986",
+			"manufacturer": "Rockwell",
+			"model": "B-1",
+			"mrast": false,
+			"name": "Rockwell B-1 Lancer",
+			"role": "Supersonic strategic bomber aircraft.",
+			"waifuImage": "Lancer",
+			"wiki": "https://en.wikipedia.org/wiki/Rockwell_B-1_Lancer"
+		},
+		{
+			"aliases": [],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=2333",
+			"manufacturer": "Saab",
+			"model": "105",
+			"mrast": false,
+			"name": "Saab 105",
+			"role": "Advanced jet trainer and light attack aircraft.",
+			"wiki": "https://en.wikipedia.org/wiki/Saab_105"
+		},
+		{
+			"aliases": [
+				"Supporter",
+				"Safari",
+				"MFI17",
+				"MFI 17",
+				"MFI-15",
+				"MFI 15",
+				"MFI15"
+			],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=3827",
+			"manufacturer": "Saab",
+			"model": "MFI-17",
+			"mrast": false,
+			"name": "Saab MFI-17 Supporter",
+			"role": "Primary trainer aircraft.",
+			"wiki": "https://en.wikipedia.org/wiki/Saab_Safari"
+		},
+		{
+			"aliases": [],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=1806",
+			"manufacturer": "Scottish Aviation",
+			"model": "Bulldog",
+			"mrast": true,
+			"name": "Scottish Aviation Bulldog",
+			"role": "Aerobatic basic trainer aircraft.",
+			"wiki": "https://en.wikipedia.org/wiki/Scottish_Aviation_Bulldog"
+		},
+		{
+			"aliases": ["Sea King", "SH3", "SH 3", "S-61", "S 61", "S61"],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=1994",
+			"manufacturer": "Sikorsky",
+			"model": "SH-3",
+			"mrast": false,
+			"name": "Sikorsky SH-3 Sea King",
+			"role": "Rescue and anti-submarine helicopter.",
+			"wiki": "https://en.wikipedia.org/wiki/Sikorsky_SH-3_Sea_King"
+		},
+		{
+			"aliases": [
+				"Chickasaw",
+				"Whirlwind",
+				"S55",
+				"S 55",
+				"H-19",
+				"H 19",
+				"H19"
+			],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=2324",
+			"manufacturer": "Sikorsky",
+			"model": "S-55",
+			"mrast": true,
+			"name": "Sikorsky S-55 Chickasaw",
+			"role": "Utility helicopter.",
+			"wiki": "https://en.wikipedia.org/wiki/Sikorsky_H-19_Chickasaw"
+		},
+		{
+			"aliases": [
+				"Choctaw",
+				"Wessex",
+				"S58",
+				"S 58",
+				"H-34",
+				"H 34",
+				"H34"
+			],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=5810",
+			"manufacturer": "Sikorsky",
+			"model": "S-58",
+			"mrast": true,
+			"name": "Sikorsky S-58 Choctaw",
+			"role": "Utility helicopter.",
+			"wiki": "https://en.wikipedia.org/wiki/Sikorsky_H-34"
+		},
+		{
+			"aliases": ["Sea Stallion", "CH53", "CH 53", "S-65", "S 65", "S65"],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=1989",
+			"manufacturer": "Sikorsky",
+			"model": "CH-53",
+			"mrast": false,
+			"name": "Sikorsky CH-53 Sea Stallion",
+			"role": "Heavy-lift cargo helicopter.",
+			"wiki": "https://en.wikipedia.org/wiki/Sikorsky_CH-53_Sea_Stallion"
+		},
+		{
+			"aliases": ["Cyclone", "CH148", "CH 148", "S-92", "S 92", "S92"],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=7528",
+			"manufacturer": "Sikorsky",
+			"model": "CH-148",
+			"mrast": false,
+			"name": "Sikorsky CH-148 Cyclone",
+			"role": "Maritime helicopter.",
+			"wiki": "https://en.wikipedia.org/wiki/Sikorsky_CH-148_Cyclone"
+		},
+		{
+			"aliases": ["Black Hawk", "UH60", "UH 60", "S-70", "S 70", "S70"],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=1316",
+			"manufacturer": "Sikorsky",
+			"model": "UH-60",
+			"mrast": false,
+			"name": "Sikorsky UH-60 Black Hawk",
+			"role": "Utility helicopter.",
+			"waifuImage": "Black Hawk",
+			"wiki": "https://en.wikipedia.org/wiki/Sikorsky_UH-60_Black_Hawk"
+		},
+		{
+			"aliases": [],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=1442",
+			"manufacturer": "SEPECAT",
+			"model": "Jaguar",
+			"mrast": false,
+			"name": "SEPECAT Jaguar",
+			"role": "Attack helicopter.",
+			"wiki": "https://en.wikipedia.org/wiki/SEPECAT_Jaguar"
+		},
+		{
+			"aliases": ["Fencer", "Su24", "Su 24"],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=1342",
+			"manufacturer": "Sukhoi",
+			"model": "Su-24",
+			"mrast": false,
+			"name": "Sukhoi Su-24",
+			"role": "Tactical bomber aircraft.",
+			"wiki": "https://en.wikipedia.org/wiki/Sukhoi_Su-24"
+		},
+		{
+			"aliases": ["Frogfoot", "Su25", "Su 25"],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=1344",
+			"manufacturer": "Sukhoi",
+			"model": "Su-25",
+			"mrast": false,
+			"name": "Sukhoi Su-25",
+			"role": "Close air support aircraft.",
+			"wiki": "https://en.wikipedia.org/wiki/Sukhoi_Su-25"
+		},
+		{
+			"aliases": ["Fullback", "Su34", "Su 34"],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=8648",
+			"manufacturer": "Sukhoi",
+			"model": "Su-34",
+			"mrast": false,
+			"name": "Sukhoi Su-34",
+			"role": "Fighter and bomber aircraft.",
+			"wiki": "https://en.wikipedia.org/wiki/Sukhoi_Su-34"
+		},
+		{
+			"aliases": [],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=8367",
+			"manufacturer": "Supermarine",
+			"model": "Stranraer",
+			"mrast": true,
+			"name": "Supermarine Stranraer",
+			"role": "Maritime reconnaissance aircraft.",
+			"wiki": "https://en.wikipedia.org/wiki/Supermarine_Stranraer"
+		},
+		{
+			"aliases": [],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=7242",
+			"manufacturer": "Supermarine",
+			"model": "Walrus",
+			"mrast": true,
+			"name": "Supermarine Walrus",
+			"role": "Amphibious reconnaissance aircraft.",
+			"wiki": "https://en.wikipedia.org/wiki/Supermarine_Walrus"
+		},
+		{
+			"aliases": ["C160", "C 160"],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=2384",
+			"manufacturer": "Transall",
+			"model": "C-160",
+			"mrast": false,
+			"name": "Transall C-160",
+			"role": "Military transport aircraft.",
+			"wiki": "https://en.wikipedia.org/wiki/Transall_C-160"
+		},
+		{
+			"aliases": ["Backfire", "Tu22M", "Tu 22M"],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=3755",
+			"manufacturer": "Tupolev",
+			"model": "Tu-22M",
+			"mrast": false,
+			"name": "Tupolev Tu-22M",
+			"role": "Strategic bomber aircraft.",
+			"wiki": "https://en.wikipedia.org/wiki/Tupolev_Tu-22M"
+		},
+		{
+			"aliases": ["Bear", "Tu95", "Tu 95"],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=3758",
+			"manufacturer": "Tupolev",
+			"model": "Tu-95",
+			"mrast": false,
+			"name": "Tupolev Tu-95",
+			"role": "Strategic heavy bomber aircraft.",
+			"wiki": "https://en.wikipedia.org/wiki/Tupolev_Tu-95"
+		},
+		{
+			"aliases": [],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=4941",
+			"manufacturer": "Vickers",
+			"model": "Valiant",
+			"mrast": true,
+			"name": "Vickers Valiant",
+			"role": "Strategic bomber and aerial refuelling tanker aircraft.",
+			"wiki": "https://en.wikipedia.org/wiki/Vickers_Valiant"
+		},
+		{
+			"aliases": ["Nighthawk", "F117", "F 117"],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=1604",
+			"manufacturer": "Lockheed",
+			"model": "F-117",
+			"mrast": false,
+			"name": "Lockheed F-117 Nighthawk",
+			"role": "Stealth attack aircraft.",
+			"wiki": "https://en.wikipedia.org/wiki/Lockheed_F-117_Nighthawk"
 		}
 	]
 }
