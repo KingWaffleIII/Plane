@@ -4,7 +4,7 @@ An extremely modular Discord bot designed to help RAF students with their RAFK (
 
 ## Usage & Invite
 
-If you want to use the bot, we heavily recommend you use the bot hosted by Planet Waffle; you can do so [here](https://discord.com/api/oauth2/authorize?client_id=1044710491110522940&permissions=326417566720&scope=bot). This bot will always use the latest version from the main branch (I update the bot every time I merge a PR).
+If you want to use the bot, we heavily recommend you use the bot hosted by Planet Waffle; you can do so [here](https://discord.com/api/oauth2/authorize?client_id=1044710491110522940&permissions=326417566720&scope=bot). This bot will always use the latest version from the main branch (I update the bot every time I merge a PR). You can join the Planet Waffle server [here](https://discord.gg/4mnGJpYBmF) so you can subscribe to Plane announcements (e.g. when I update the bot, etc.)
 
 If you really want to host the bot yourself, you can do so by following these steps:
 (note: Docker and Docker Compose are required to run the bot)
