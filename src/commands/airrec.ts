@@ -204,7 +204,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 	const row = new ActionRowBuilder<ButtonBuilder>().addComponents(
 		new ButtonBuilder()
 			.setCustomId(`reveal-airrec-${buttonId}`)
-			.setLabel("Revenal answer")
+			.setLabel("Reveal answer")
 			.setStyle(ButtonStyle.Primary)
 	);
 
@@ -338,8 +338,10 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 		await doReveal();
 	});
 	collector?.on("end", async (collected) => {
-		if (collected.size === 0) {
+		if (
+			collected.filter((i) => i.user.id === interaction.user.id).size ===
+			0
+		)
 			await doReveal();
-		}
 	});
 }

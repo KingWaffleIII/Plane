@@ -126,7 +126,7 @@ export async function execute(interaction) {
     const buttonId = crypto.randomBytes(6).toString("hex");
     const row = new ActionRowBuilder().addComponents(new ButtonBuilder()
         .setCustomId(`reveal-airrec-${buttonId}`)
-        .setLabel("Revenal answer")
+        .setLabel("Reveal answer")
         .setStyle(ButtonStyle.Primary));
     const embed = makeEmbedWithImage(image);
     await interaction.editReply({
@@ -232,8 +232,8 @@ export async function execute(interaction) {
         await doReveal();
     });
     collector?.on("end", async (collected) => {
-        if (collected.size === 0) {
+        if (collected.filter((i) => i.user.id === interaction.user.id).size ===
+            0)
             await doReveal();
-        }
     });
 }

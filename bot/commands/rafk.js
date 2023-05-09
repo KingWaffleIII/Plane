@@ -1,7 +1,6 @@
 import crypto from "crypto";
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle, ComponentType, SlashCommandBuilder, } from "discord.js";
 import rafk from "../RAFK.json" assert { type: "json" };
-const wait = (await import("node:timers/promises")).setTimeout;
 export const data = new SlashCommandBuilder()
     .setName("rafk")
     .setDescription("Gives you a question about RAFK.")
@@ -57,9 +56,12 @@ export async function execute(interaction) {
             });
         }
     });
-    await wait(30000);
-    await interaction.editReply({
-        content: `\n${question}\n**${answer}**`,
-        components: [],
+    collector?.on("end", async (collected) => {
+        if (collected.filter((i) => i.user.id === interaction.user.id).size ===
+            0)
+            await interaction.editReply({
+                content: `${question}\n**${answer}**`,
+                components: [],
+            });
     });
 }
