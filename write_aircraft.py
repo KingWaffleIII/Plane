@@ -4,13 +4,19 @@ import json
 
 
 def write_aircraft(f, data):
-    aliases = [f"- {alias}\n" for alias in data["aliases"]
-               ] if len(data["aliases"]) > 0 else ["None\n"]
-    f.write(f'''
+    aliases = (
+        [f"- {alias}\n" for alias in data["aliases"]]
+        if len(data["aliases"]) > 0
+        else ["None\n"]
+    )
+    f.write(
+        f"""
 ### {data["name"]}
+Spec: {'mRAST' if data['mrast'] else 'RAST'}
 **Aliases:**
 {"".join(aliases)}
-''')
+"""
+    )
 
 
 with open("src/air_rec.json") as f:

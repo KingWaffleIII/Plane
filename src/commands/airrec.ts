@@ -27,6 +27,7 @@ export interface Aircraft {
 	readonly image: string;
 	readonly waifuImage?: string;
 	readonly wiki: string;
+	readonly mrast: boolean;
 }
 
 export interface WaifuBaseData {
@@ -129,13 +130,6 @@ async function spawnWaifu(user: User, name: string): Promise<WaifuData | null> {
 export const data = new SlashCommandBuilder()
 	.setName("airrec")
 	.setDescription("Gives you an aircraft image for you to identify.")
-	.addBooleanOption((option) =>
-		option
-			.setName("random")
-			.setDescription(
-				"Whether to show a specific aircraft type or a random aircraft. Defaults to a random aircraft."
-			)
-	)
 	.addStringOption((option) =>
 		option
 			.setName("type")
@@ -146,10 +140,22 @@ export const data = new SlashCommandBuilder()
 				{ name: "Civilian", value: "civilian" },
 				{ name: "Military", value: "military" }
 			)
+	)
+	.addStringOption((option) =>
+		option
+			.setName("spec")
+			.setDescription(
+				"The spec you want to use (mRAST is RAF past/present). Defaults to RAST."
+			)
+			.addChoices(
+				{ name: "RAST", value: "rast" },
+				{ name: "mRAST", value: "mrast" }
+			)
 	);
 
 export async function execute(interaction: ChatInputCommandInteraction) {
 	const requestedType = interaction.options.getString("type") ?? false;
+	const spec = interaction.options.getString("spec") ?? "rast";
 
 	await interaction.deferReply();
 
@@ -165,6 +171,10 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 
 	if (requestedType) {
 		type = airrec[requestedType as keyof typeof airrec];
+	}
+
+	if (spec === "mrast") {
+		type = type.filter((a) => a.mrast);
 	}
 
 	let aircraft: Aircraft = type[Math.floor(Math.random() * type.length)];

@@ -171,19 +171,30 @@ export const data = new SlashCommandBuilder()
 	.setDescription(
 		"Gives you a series of aircraft images for you and others to identify with scoring."
 	)
-	.addIntegerOption(
-		(option) =>
-			option
-				.setName("rounds")
-				.setDescription(
-					"The number of rounds you want to play. Defaults to 10 rounds."
-				)
-				.setMinValue(1)
-		// .setMaxValue(20)
+	.addIntegerOption((option) =>
+		option
+			.setName("rounds")
+			.setDescription(
+				"The number of rounds you want to play. Defaults to 10 rounds."
+			)
+			.setMinValue(1)
+			.setMaxValue(30)
+	)
+	.addStringOption((option) =>
+		option
+			.setName("spec")
+			.setDescription(
+				"The spec you want to use (mRAST is RAF past/present). Defaults to RAST."
+			)
+			.addChoices(
+				{ name: "RAST", value: "rast" },
+				{ name: "mRAST", value: "mrast" }
+			)
 	);
 
 export async function execute(interaction: ChatInputCommandInteraction) {
 	const rounds = interaction.options.getInteger("rounds") ?? 10;
+	const spec = interaction.options.getString("spec") ?? "rast";
 
 	await interaction.reply({
 		content: "Creating a new thread...",
@@ -318,13 +329,16 @@ If you want to play, click the button below.
 		});
 
 		for (let i = 0; i < rounds; i++) {
-			const type: Aircraft[] =
+			let type: Aircraft[] =
 				airrec[
 					Object.keys(airrec)[
 						// Math.floor(Math.random() * Object.keys(airrec).length)
 						Math.floor(Math.random() * 2) //! for some reason there's a key called "default" in the object?? - setting max to 2
 					] as keyof typeof airrec
 				];
+			if (spec === "mrast") {
+				type = type.filter((a) => a.mrast);
+			}
 			const aircraft: Aircraft =
 				type[Math.floor(Math.random() * type.length)];
 			const image = await getImage(aircraft.image);

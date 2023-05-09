@@ -86,15 +86,17 @@ async function spawnWaifu(user, name) {
 export const data = new SlashCommandBuilder()
     .setName("airrec")
     .setDescription("Gives you an aircraft image for you to identify.")
-    .addBooleanOption((option) => option
-    .setName("random")
-    .setDescription("Whether to show a specific aircraft type or a random aircraft. Defaults to a random aircraft."))
     .addStringOption((option) => option
     .setName("type")
     .setDescription("The type of aircraft you want to be shown. Defaults to a random aircraft.")
-    .addChoices({ name: "Civilian", value: "civilian" }, { name: "Military", value: "military" }));
+    .addChoices({ name: "Civilian", value: "civilian" }, { name: "Military", value: "military" }))
+    .addStringOption((option) => option
+    .setName("spec")
+    .setDescription("The spec you want to use (mRAST is RAF past/present). Defaults to RAST.")
+    .addChoices({ name: "RAST", value: "rast" }, { name: "mRAST", value: "mrast" }));
 export async function execute(interaction) {
     const requestedType = interaction.options.getString("type") ?? false;
+    const spec = interaction.options.getString("spec") ?? "rast";
     await interaction.deferReply();
     const user = await User.findByPk(interaction.user.id);
     let type = airrec[Object.keys(airrec)[
@@ -103,6 +105,9 @@ export async function execute(interaction) {
     ]];
     if (requestedType) {
         type = airrec[requestedType];
+    }
+    if (spec === "mrast") {
+        type = type.filter((a) => a.mrast);
     }
     let aircraft = type[Math.floor(Math.random() * type.length)];
     if (user) {

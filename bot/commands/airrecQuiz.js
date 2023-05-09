@@ -122,10 +122,14 @@ export const data = new SlashCommandBuilder()
     .setName("rounds")
     .setDescription("The number of rounds you want to play. Defaults to 10 rounds.")
     .setMinValue(1)
-// .setMaxValue(20)
-);
+    .setMaxValue(30))
+    .addStringOption((option) => option
+    .setName("spec")
+    .setDescription("The spec you want to use (mRAST is RAF past/present). Defaults to RAST.")
+    .addChoices({ name: "RAST", value: "rast" }, { name: "mRAST", value: "mrast" }));
 export async function execute(interaction) {
     const rounds = interaction.options.getInteger("rounds") ?? 10;
+    const spec = interaction.options.getString("spec") ?? "rast";
     await interaction.reply({
         content: "Creating a new thread...",
     });
@@ -246,10 +250,13 @@ If you want to play, click the button below.
             components: [],
         });
         for (let i = 0; i < rounds; i++) {
-            const type = airrec[Object.keys(airrec)[
+            let type = airrec[Object.keys(airrec)[
             // Math.floor(Math.random() * Object.keys(airrec).length)
             Math.floor(Math.random() * 2) //! for some reason there's a key called "default" in the object?? - setting max to 2
             ]];
+            if (spec === "mrast") {
+                type = type.filter((a) => a.mrast);
+            }
             const aircraft = type[Math.floor(Math.random() * type.length)];
             const image = await getImage(aircraft.image);
             if (!image) {
