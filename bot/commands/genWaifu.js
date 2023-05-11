@@ -90,9 +90,9 @@ export async function execute(interaction) {
         return;
     }
     for (let i = 0; i < amount; i++) {
-        const thisAtk = atk ?? Math.floor(Math.random() * 10);
-        let thisHp = hp ?? Math.floor(Math.random() * (100 - 50) + 50);
-        let thisSpd = spd ?? Math.floor(Math.random() * 10);
+        const thisAtk = atk ?? Math.ceil(Math.random() * 10);
+        let thisHp = hp ?? Math.ceil(Math.random() * (100 - 50) + 50);
+        let thisSpd = spd ?? Math.ceil(Math.random() * 10);
         let thisKills = kills;
         let thisDeaths = deaths;
         if (waifuData.type === "weapon") {

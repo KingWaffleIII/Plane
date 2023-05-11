@@ -10,7 +10,7 @@
 			"image": "https://www.airfighters.com/photosearch.php?cra=7975",
 			"manufacturer": "AgustaWestland",
 			"model": "AW109",
-			"mrast": true,
+			"mrast": false,
 			"name": "AgustaWestland AW109",
 			"role": "Search/rescue and utility helicopter.",
 			"wiki": "https://en.wikipedia.org/wiki/AgustaWestland_AW109"
@@ -208,7 +208,7 @@
 			"image": "https://www.airfighters.com/photosearch.php?cra=678",
 			"manufacturer": "Boeing",
 			"model": "727",
-			"mrast": false,
+			"mrast": true,
 			"name": "Boeing 727",
 			"role": "Narrow-body airliner.",
 			"wiki": "https://en.wikipedia.org/wiki/Boeing_727"
@@ -311,7 +311,7 @@
 			"image": "https://www.airfighters.com/photosearch.php?cra=7530",
 			"manufacturer": "Boeing",
 			"model": "787",
-			"mrast": false,
+			"mrast": true,
 			"name": "Boeing 787 Dreamliner",
 			"role": "Wide-body airliner.",
 			"wiki": "https://en.wikipedia.org/wiki/Boeing_787_Dreamliner"
@@ -391,7 +391,7 @@
 			"image": "https://www.airfighters.com/photosearch.php?cra=8005",
 			"manufacturer": "Embraer",
 			"model": "EMB500",
-			"mrast": true,
+			"mrast": false,
 			"name": "Embraer EMB500 Phenom 100",
 			"role": "Light business jet.",
 			"wiki": "https://en.wikipedia.org/wiki/Embraer_Phenom_100"
@@ -409,7 +409,7 @@
 			"image": "https://www.airfighters.com/photosearch.php?cra=3933",
 			"manufacturer": "Dassault",
 			"model": "Falcon 900",
-			"mrast": true,
+			"mrast": false,
 			"name": "Dassault Falcon 900",
 			"role": "Business jet.",
 			"wiki": "https://en.wikipedia.org/wiki/Dassault_Falcon_900"
@@ -575,10 +575,10 @@
 			],
 			"identification": [],
 			"image": "https://www.airfighters.com/photosearch.php?cra=1537",
-			"manufacturer": "British Aerospace",
+			"manufacturer": "BAe",
 			"model": "125",
 			"mrast": true,
-			"name": "British Aerospace 125",
+			"name": "BAe 125",
 			"role": "Business jet.",
 			"wiki": "https://en.wikipedia.org/wiki/British_Aerospace_125"
 		}
@@ -691,7 +691,7 @@
 			"image": "https://www.airfighters.com/photosearch.php?cra=7400",
 			"manufacturer": "Boeing",
 			"model": "737 AEW&C",
-			"mrast": true,
+			"mrast": false,
 			"name": "Boeing 737 AEW&C",
 			"role": "Airborne early warning and control (AEW&C) aircraft.",
 			"waifuImage": "Peace Eye",
@@ -707,7 +707,7 @@
 			"image": "https://www.airfighters.com/photosearch.php?cra=5111",
 			"manufacturer": "Boeing",
 			"model": "P-8",
-			"mrast": true,
+			"mrast": false,
 			"name": "Boeing P-8 Poseidon",
 			"role": "Maritime patrol aircraft.",
 			"waifuImage": "Poseidon",
@@ -739,7 +739,7 @@
 			"image": "https://www.airfighters.com/photosearch.php?cra=2179",
 			"manufacturer": "Boeing",
 			"model": "RC-135",
-			"mrast": true,
+			"mrast": false,
 			"name": "Boeing RC-135",
 			"role": "Reconnaissance aircraft.",
 			"wiki": "https://en.wikipedia.org/wiki/Boeing_RC-135"
@@ -772,7 +772,7 @@
 			"image": "https://www.airfighters.com/photosearch.php?cra=2167",
 			"manufacturer": "Eurofighter",
 			"model": "Typhoon",
-			"mrast": true,
+			"mrast": false,
 			"name": "Eurofighter Typhoon",
 			"role": "Multirole and air superiority fighter.",
 			"wiki": "https://en.wikipedia.org/wiki/Eurofighter_Typhoon"
@@ -788,7 +788,7 @@
 			"image": "https://www.airfighters.com/photosearch.php?cra=2873",
 			"manufacturer": "GA",
 			"model": "MQ-9",
-			"mrast": true,
+			"mrast": false,
 			"name": "General Atomics MQ-9 Reaper",
 			"role": "Unmanned aerial combat vehicle.",
 			"waifuImage": "Reaper",
@@ -819,7 +819,7 @@
 			"image": "https://www.airfighters.com/photosearch.php?cra=2550",
 			"manufacturer": "Grob",
 			"model": "G103a",
-			"mrast": true,
+			"mrast": false,
 			"name": "Grob G103a Twin II",
 			"role": "Two-seater class glider.",
 			"wiki": "https://en.wikipedia.org/wiki/Grob_G103a_Twin_II"
@@ -834,7 +834,7 @@
 			"image": "https://www.airfighters.com/photosearch.php?cra=2555",
 			"manufacturer": "Grob",
 			"model": "G109",
-			"mrast": true,
+			"mrast": false,
 			"name": "Grob G109",
 			"role": "Motor glider.",
 			"wiki": "https://en.wikipedia.org/wiki/Grob_G_109"
@@ -850,7 +850,7 @@
 			"image": "https://www.airfighters.com/photosearch.php?cra=8187",
 			"manufacturer": "Grob",
 			"model": "G120TP",
-			"mrast": true,
+			"mrast": false,
 			"name": "Grob G120 TP",
 			"role": "Trainer aircraft.",
 			"wiki": "https://en.wikipedia.org/wiki/Grob_G_120TP"
@@ -993,7 +993,7 @@
 			"image": "https://www.airfighters.com/photosearch.php?cra=1853",
 			"manufacturer": "Airbus Helicopters",
 			"model": "H135",
-			"mrast": true,
+			"mrast": false,
 			"name": "Airbus Helicopters H135",
 			"role": "Light utility helicopter.",
 			"wiki": "https://en.wikipedia.org/wiki/Eurocopter_EC135"
@@ -1011,7 +1011,7 @@
 			"image": "https://www.airfighters.com/photosearch.php?cra=3801",
 			"manufacturer": "Airbus Helicopters",
 			"model": "H135",
-			"mrast": true,
+			"mrast": false,
 			"name": "Airbus Helicopters H135",
 			"role": "Light utility helicopter.",
 			"wiki": "https://en.wikipedia.org/wiki/Eurocopter_EC145"
@@ -1026,7 +1026,7 @@
 			"image": "https://www.airfighters.com/photosearch.php?cra=3219",
 			"manufacturer": "Airbus Helicopters",
 			"model": "AS365",
-			"mrast": true,
+			"mrast": false,
 			"name": "Airbus Helicopters AS365 Dauphin",
 			"role": "Medium utility helicopter.",
 			"wiki": "https://en.wikipedia.org/wiki/Eurocopter_AS365_Dauphin"
@@ -1049,7 +1049,7 @@
 			"image": "https://www.airfighters.com/photosearch.php?cra=2352",
 			"manufacturer": "Airbus Helicopters",
 			"model": "H125",
-			"mrast": true,
+			"mrast": false,
 			"name": "Airbus Helicopters H125 Ecureuil",
 			"role": "Light utility helicopter.",
 			"wiki": "https://en.wikipedia.org/wiki/Eurocopter_AS350_%C3%89cureuil"
@@ -1080,7 +1080,7 @@
 			"image": "https://www.airfighters.com/photosearch.php?cra=2770",
 			"manufacturer": "de Havilland Canada",
 			"model": "DHC-1",
-			"mrast": true,
+			"mrast": false,
 			"name": "de Havilland Canada DHC-1 Chipmunk",
 			"role": "Trainer aircraft.",
 			"wiki": "https://en.wikipedia.org/wiki/De_Havilland_Canada_DHC-1_Chipmunk"
@@ -1144,7 +1144,7 @@
 			"image": "https://www.airfighters.com/photosearch.php?cra=7571",
 			"manufacturer": "AgustaWestland",
 			"model": "AW101",
-			"mrast": true,
+			"mrast": false,
 			"name": "AgustaWestland AW101",
 			"role": "Search/rescue and medium-lift utility helicopter.",
 			"wiki": "https://en.wikipedia.org/wiki/AgustaWestland_AW101"
@@ -1161,7 +1161,7 @@
 			"image": "https://www.airfighters.com/photosearch.php?cra=734",
 			"manufacturer": "BAe",
 			"model": "Harrier",
-			"mrast": true,
+			"mrast": false,
 			"name": "BAe Harrier",
 			"role": "V/STOL strike aircraft.",
 			"waifuImage": "Harrier",
@@ -1183,7 +1183,15 @@
 			"wiki": "https://en.wikipedia.org/wiki/McDonnell_Douglas_KC-10_Extender"
 		},
 		{
-			"aliases": ["Skytrain", "Dakota", "C47", "C 47"],
+			"aliases": [
+				"Skytrain",
+				"Dakota",
+				"C47",
+				"C 47",
+				"DC-3",
+				"DC3",
+				"DC 3"
+			],
 			"identification": [
 				"Has two propeller engines with 3 propellers each",
 				"Has windows across the airframe",
@@ -1192,7 +1200,7 @@
 			"image": "https://www.airfighters.com/photosearch.php?cra=856",
 			"manufacturer": "Douglas",
 			"model": "C-47",
-			"mrast": true,
+			"mrast": false,
 			"name": "Douglas C-47 Skytrain",
 			"role": "Military transport aircraft.",
 			"wiki": "https://en.wikipedia.org/wiki/Douglas_C-47_Skytrain"
@@ -1298,7 +1306,7 @@
 			"image": "https://www.airfighters.com/photosearch.php?cra=954",
 			"manufacturer": "General Dynamics",
 			"model": "F-16",
-			"mrast": false,
+			"mrast": true,
 			"name": "General Dynamics F-16 Fighting Falcon",
 			"role": "Multirole and air superiority fighter.",
 			"waifuImage": "Falcon",
@@ -1386,7 +1394,7 @@
 			"image": "https://www.airfighters.com/photosearch.php?cra=6057",
 			"manufacturer": "Sukhoi",
 			"model": "Su-57",
-			"mrast": false,
+			"mrast": true,
 			"name": "Sukhoi Su-57",
 			"role": "Stealth multirole fighter.",
 			"wiki": "https://en.wikipedia.org/wiki/Sukhoi_Su-57"
@@ -1458,7 +1466,7 @@
 			"image": "https://www.airfighters.com/photosearch.php?cra=2022",
 			"manufacturer": "Saab",
 			"model": "JAS39",
-			"mrast": true,
+			"mrast": false,
 			"name": "Saab JAS39 Gripen",
 			"role": "Multirole fighter.",
 			"waifuImage": "Gripen",
@@ -1611,7 +1619,7 @@
 			"image": "https://www.airfighters.com/photosearch.php?cra=1932",
 			"manufacturer": "English Electric",
 			"model": "Lightning",
-			"mrast": true,
+			"mrast": false,
 			"name": "English Electric Lightning",
 			"role": "Multirole interceptor fighter.",
 			"wiki": "https://en.wikipedia.org/wiki/English_Electric_Lightning"
@@ -1657,7 +1665,7 @@
 			"image": "https://www.airfighters.com/photosearch.php?cra=7617",
 			"manufacturer": "AgustaWestland",
 			"model": "AW159",
-			"mrast": true,
+			"mrast": false,
 			"name": "AgustaWestland AW159 Wildcat",
 			"role": "Utility, SAR and ASuW helicopter.",
 			"wiki": "https://en.wikipedia.org/wiki/AgustaWestland_AW159_Wildcat"
@@ -1745,7 +1753,7 @@
 			"image": "https://www.airfighters.com/photosearch.php?cra=2267",
 			"manufacturer": "BAC",
 			"model": "Jet Provost",
-			"mrast": true,
+			"mrast": false,
 			"name": "BAC Jet Provost",
 			"role": "Trainer aircraft.",
 			"wiki": "https://en.wikipedia.org/wiki/BAC_Jet_Provost"
@@ -1869,7 +1877,7 @@
 			"image": "https://www.airfighters.com/photosearch.php?cra=7928",
 			"manufacturer": "Bristol",
 			"model": "Type 152",
-			"mrast": true,
+			"mrast": false,
 			"name": "Bristol Type 152 Beaufort",
 			"role": "Torpedo bomber.",
 			"wiki": "https://en.wikipedia.org/wiki/Bristol_Beaufort"
@@ -1880,7 +1888,7 @@
 			"image": "https://www.airfighters.com/photosearch.php?cra=3082",
 			"manufacturer": "Bristol",
 			"model": "Type 172",
-			"mrast": true,
+			"mrast": false,
 			"name": "Bristol Type 172 Sycamore",
 			"role": "Rescue and anti-submarine helicopter.",
 			"wiki": "https://en.wikipedia.org/wiki/Bristol_Sycamore"
@@ -1924,7 +1932,7 @@
 			"image": "https://www.airfighters.com/photosearch.php?cra=5097",
 			"manufacturer": "Avro",
 			"model": "671",
-			"mrast": true,
+			"mrast": false,
 			"name": "Avro 671 Rota",
 			"role": "Autogyro.",
 			"wiki": "https://en.wikipedia.org/wiki/Cierva_C.30"
@@ -1935,7 +1943,7 @@
 			"image": "https://www.airfighters.com/photosearch.php?cra=5468",
 			"manufacturer": "de Havilland",
 			"model": "DH.98",
-			"mrast": true,
+			"mrast": false,
 			"name": "de Havilland DH.98 Mosquito",
 			"role": "Fighter-bomber and night fighter aircraft.",
 			"wiki": "https://en.wikipedia.org/wiki/De_Havilland_Mosquito"
@@ -1955,7 +1963,7 @@
 			"image": "https://www.airfighters.com/photosearch.php?cra=2782",
 			"manufacturer": "de Havilland",
 			"model": "DH.100",
-			"mrast": true,
+			"mrast": false,
 			"name": "de Havilland DH.100 Vampire",
 			"role": "Fighter aircraft.",
 			"wiki": "https://en.wikipedia.org/wiki/De_Havilland_Vampire"
@@ -1966,7 +1974,7 @@
 			"image": "https://www.airfighters.com/photosearch.php?cra=5472",
 			"manufacturer": "de Havilland",
 			"model": "DH.110",
-			"mrast": true,
+			"mrast": false,
 			"name": "de Havilland DH.110 Sea Vixen",
 			"role": "Carrier-based fighter aircraft.",
 			"wiki": "https://en.wikipedia.org/wiki/De_Havilland_Sea_Vixen"
@@ -2028,7 +2036,7 @@
 			"image": "https://www.airfighters.com/photosearch.php?cra=2457",
 			"manufacturer": "English Electric",
 			"model": "Canberra",
-			"mrast": true,
+			"mrast": false,
 			"name": "English Electric Canberra",
 			"role": "Bomber and reconnaissance aircraft.",
 			"wiki": "https://en.wikipedia.org/wiki/English_Electric_Canberra"
@@ -2039,7 +2047,7 @@
 			"image": "https://www.airfighters.com/photosearch.php?cra=4500",
 			"manufacturer": "Fairey",
 			"model": "Swordfish",
-			"mrast": true,
+			"mrast": false,
 			"name": "Fairey Swordfish",
 			"role": "Torpedo bomber.",
 			"wiki": "https://en.wikipedia.org/wiki/Fairey_Swordfish"
@@ -2050,7 +2058,7 @@
 			"image": "https://www.airfighters.com/photosearch.php?cra=5838",
 			"manufacturer": "Fiat",
 			"model": "CR.42",
-			"mrast": true,
+			"mrast": false,
 			"name": "Fiat CR.42 Falco",
 			"role": "Fighter aircraft.",
 			"wiki": "https://en.wikipedia.org/wiki/Fiat_CR.42_Falco"
@@ -2061,7 +2069,7 @@
 			"image": "https://www.airfighters.com/photosearch.php?cra=2463",
 			"manufacturer": "Folland",
 			"model": "true",
-			"mrast": true,
+			"mrast": false,
 			"name": "Folland Gnat",
 			"role": "Fighter trainer aircraft.",
 			"wiki": "https://en.wikipedia.org/wiki/Folland_Gnat"
@@ -2072,7 +2080,7 @@
 			"image": "https://www.airfighters.com/photosearch.php?cra=3418",
 			"manufacturer": "Gloster",
 			"model": "Javelin",
-			"mrast": true,
+			"mrast": false,
 			"name": "Gloster Javelin",
 			"role": "Fighter and interceptor aircraft.",
 			"wiki": "https://en.wikipedia.org/wiki/Gloster_Javelin"
@@ -2083,7 +2091,7 @@
 			"image": "https://www.airfighters.com/photosearch.php?cra=2212",
 			"manufacturer": "Gloster",
 			"model": "Meteor",
-			"mrast": true,
+			"mrast": false,
 			"name": "Gloster Meteor",
 			"role": "Fighter aircraft.",
 			"wiki": "https://en.wikipedia.org/wiki/Gloster_Meteor"
@@ -2094,7 +2102,7 @@
 			"image": "https://www.airfighters.com/photosearch.php?cra=2143",
 			"manufacturer": "Handley Page",
 			"model": "Victor",
-			"mrast": true,
+			"mrast": false,
 			"name": "Handley Page Victor",
 			"role": "Strategic bomber aircraft.",
 			"wiki": "https://en.wikipedia.org/wiki/Handley_Page_Victor"
@@ -2105,7 +2113,7 @@
 			"image": "https://www.airfighters.com/photosearch.php?cra=5725",
 			"manufacturer": "Hawker",
 			"model": "Hart II",
-			"mrast": true,
+			"mrast": false,
 			"name": "Hawker Hart II",
 			"role": "Light bomber aircraft.",
 			"wiki": "https://en.wikipedia.org/wiki/Hawker_Hart"
@@ -2116,7 +2124,7 @@
 			"image": "https://www.airfighters.com/photosearch.php?cra=1455",
 			"manufacturer": "Hawker",
 			"model": "Hunter",
-			"mrast": true,
+			"mrast": false,
 			"name": "Hawker Hunter",
 			"role": "Fighter and bomber aircraft.",
 			"wiki": "https://en.wikipedia.org/wiki/Hawker_Hunter"
@@ -2163,12 +2171,12 @@
 			"wiki": "https://en.wikipedia.org/wiki/Kamov_Ka-50"
 		},
 		{
-			"aliases": ["Dragon Lady"],
+			"aliases": ["Dragon Lady", "U2", "U 2"],
 			"identification": [],
 			"image": "https://www.airfighters.com/photosearch.php?cra=3017",
 			"manufacturer": "Lockheed",
 			"model": "U-2",
-			"mrast": false,
+			"mrast": true,
 			"name": "Lockheed U-2",
 			"role": "High-altitude reconnaissance aircraft.",
 			"wiki": "https://en.wikipedia.org/wiki/Lockheed_U-2"
@@ -2190,7 +2198,7 @@
 			"image": "https://www.airfighters.com/photosearch.php?cra=1494",
 			"manufacturer": "Lockheed",
 			"model": "C-5",
-			"mrast": false,
+			"mrast": true,
 			"name": "Lockheed C-5 Galaxy",
 			"role": "Strategic and tactical airlifter.",
 			"wiki": "https://en.wikipedia.org/wiki/Lockheed_C-5_Galaxy"
@@ -2378,7 +2386,7 @@
 			"image": "https://www.airfighters.com/photosearch.php?cra=1806",
 			"manufacturer": "Scottish Aviation",
 			"model": "Bulldog",
-			"mrast": true,
+			"mrast": false,
 			"name": "Scottish Aviation Bulldog",
 			"role": "Aerobatic basic trainer aircraft.",
 			"wiki": "https://en.wikipedia.org/wiki/Scottish_Aviation_Bulldog"
@@ -2408,7 +2416,7 @@
 			"image": "https://www.airfighters.com/photosearch.php?cra=2324",
 			"manufacturer": "Sikorsky",
 			"model": "S-55",
-			"mrast": true,
+			"mrast": false,
 			"name": "Sikorsky S-55 Chickasaw",
 			"role": "Utility helicopter.",
 			"wiki": "https://en.wikipedia.org/wiki/Sikorsky_H-19_Chickasaw"
@@ -2427,7 +2435,7 @@
 			"image": "https://www.airfighters.com/photosearch.php?cra=5810",
 			"manufacturer": "Sikorsky",
 			"model": "S-58",
-			"mrast": true,
+			"mrast": false,
 			"name": "Sikorsky S-58 Choctaw",
 			"role": "Utility helicopter.",
 			"wiki": "https://en.wikipedia.org/wiki/Sikorsky_H-34"
@@ -2516,7 +2524,7 @@
 			"image": "https://www.airfighters.com/photosearch.php?cra=8367",
 			"manufacturer": "Supermarine",
 			"model": "Stranraer",
-			"mrast": true,
+			"mrast": false,
 			"name": "Supermarine Stranraer",
 			"role": "Maritime reconnaissance aircraft.",
 			"wiki": "https://en.wikipedia.org/wiki/Supermarine_Stranraer"
@@ -2527,7 +2535,7 @@
 			"image": "https://www.airfighters.com/photosearch.php?cra=7242",
 			"manufacturer": "Supermarine",
 			"model": "Walrus",
-			"mrast": true,
+			"mrast": false,
 			"name": "Supermarine Walrus",
 			"role": "Amphibious reconnaissance aircraft.",
 			"wiki": "https://en.wikipedia.org/wiki/Supermarine_Walrus"
@@ -2571,7 +2579,7 @@
 			"image": "https://www.airfighters.com/photosearch.php?cra=4941",
 			"manufacturer": "Vickers",
 			"model": "Valiant",
-			"mrast": true,
+			"mrast": false,
 			"name": "Vickers Valiant",
 			"role": "Strategic bomber and aerial refuelling tanker aircraft.",
 			"wiki": "https://en.wikipedia.org/wiki/Vickers_Valiant"
@@ -2586,6 +2594,17 @@
 			"name": "Lockheed F-117 Nighthawk",
 			"role": "Stealth attack aircraft.",
 			"wiki": "https://en.wikipedia.org/wiki/Lockheed_F-117_Nighthawk"
+		},
+		{
+			"aliases": ["Blackbird", "SR71", "SR 71"],
+			"identification": [],
+			"image": "https://www.airfighters.com/photosearch.php?cra=1969",
+			"manufacturer": "Lockheed",
+			"model": "SR-71",
+			"mrast": true,
+			"name": "Lockheed SR-71 Blackbird",
+			"role": "Strategic reconnaissance aircraft",
+			"wiki": "https://en.wikipedia.org/wiki/Lockheed_SR-71_Blackbird"
 		}
 	]
 }

@@ -8,8 +8,8 @@
 
 **Thank you to these people for helping me make and develop this bot!**
 
--   **ApocalypticTofu#4278** - Lead adviser
--   **Cranium#2516** - Adviser and aircraft recognition tips
+-   **Cranium#2516** - Lead adviser and aircraft recognition tips (love you James <3)
+-   **ApocalypticTofu#4278** - Adviser
 -   **Mew#4253** - Adviser and aircraft recognition tips
 -   **tecnoplayz#6181** - Adviser
 -   **\*Piplup\*#5802** - Adviser

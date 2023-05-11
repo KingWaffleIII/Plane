@@ -93,7 +93,7 @@ export const data = new SlashCommandBuilder()
     .addStringOption((option) => option
     .setName("spec")
     .setDescription("The spec you want to use (mRAST is RAF past/present). Defaults to RAST.")
-    .addChoices({ name: "RAST", value: "rast" }, { name: "mRAST", value: "mrast" }));
+    .addChoices({ name: "RAST", value: "RAST" }, { name: "mRAST", value: "mRAST" }));
 export async function execute(interaction) {
     const requestedType = interaction.options.getString("type") ?? false;
     const spec = interaction.options.getString("spec") ?? "rast";
@@ -106,7 +106,7 @@ export async function execute(interaction) {
     if (requestedType) {
         type = airrec[requestedType];
     }
-    if (spec === "mrast") {
+    if (spec === "mRAST") {
         type = type.filter((a) => a.mrast);
     }
     let aircraft = type[Math.floor(Math.random() * type.length)];
@@ -177,9 +177,9 @@ export async function execute(interaction) {
             if (aircraft.waifuImage) {
                 const waifu = await spawnWaifu(user, aircraft.waifuImage);
                 if (waifu) {
-                    const atk = Math.floor(Math.random() * 10);
-                    const hp = Math.floor(Math.random() * (100 - 50) + 50);
-                    const spd = Math.floor(Math.random() * 10);
+                    const atk = Math.ceil(Math.random() * 10);
+                    const hp = Math.ceil(Math.random() * (100 - 50) + 50);
+                    const spd = Math.ceil(Math.random() * 10);
                     const waifuEmbed = new EmbedBuilder()
                         .setColor(0xff00ff)
                         .setTitle(waifu.name)

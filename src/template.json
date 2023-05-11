@@ -1,10 +1,11 @@
 {
-	"name": "",
-	"role": "",
-	"manufacturer": "",
-	"model": "",
 	"aliases": [],
 	"identification": [],
 	"image": "",
+	"manufacturer": "",
+	"model": "",
+	"mrast": false,
+	"name": "",
+	"role": "",
 	"wiki": ""
 }
