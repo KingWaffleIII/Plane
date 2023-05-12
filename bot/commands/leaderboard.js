@@ -20,6 +20,10 @@ function calculateScore(user) {
         weights.losses * (1 - airrecQuizLosses) +
         weights.winStreak * airrecQuizWinstreak +
         weights.winPercentage * winPercentage;
+    console.log(user.username, score);
+    if (Number.isNaN(score)) {
+        return 0;
+    }
     return score;
 }
 export async function execute(interaction) {
@@ -28,6 +32,7 @@ export async function execute(interaction) {
     for (const member of await interaction.guild.members.fetch()) {
         const user = await User.findByPk(member[1].user.id);
         if (user) {
+            console.log(user.username);
             users[user.id] = {
                 username: user.username,
                 airrecQuizWins: user.airrecQuizWins,
@@ -40,9 +45,8 @@ export async function execute(interaction) {
             sortedUsers.push([user.id, calculateScore(user)]);
         }
     }
-    sortedUsers = sortedUsers
-        .sort((a, b) => b[1] - a[1])
-        .splice(Object.keys(users).length - 20, 20);
+    sortedUsers = sortedUsers.sort((a, b) => b[1] - a[1]).splice(0, 20);
+    // .splice(Object.keys(users).length - 20, 20);
     sortedUsers.map((m) => `${m[0]}: ${m[1]}`).join("\n");
     const embed = new EmbedBuilder()
         .setColor(0x0099ff)
