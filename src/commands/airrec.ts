@@ -148,8 +148,8 @@ export const data = new SlashCommandBuilder()
 				"The spec you want to use (mRAST is RAF past/present). Defaults to RAST."
 			)
 			.addChoices(
-				{ name: "RAST", value: "rast" },
-				{ name: "mRAST", value: "mrast" }
+				{ name: "RAST", value: "RAST" },
+				{ name: "mRAST", value: "mRAST" }
 			)
 	);
 
@@ -173,7 +173,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 		type = airrec[requestedType as keyof typeof airrec];
 	}
 
-	if (spec === "mrast") {
+	if (spec === "mRAST") {
 		type = type.filter((a) => a.mrast);
 	}
 
@@ -204,7 +204,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 	const row = new ActionRowBuilder<ButtonBuilder>().addComponents(
 		new ButtonBuilder()
 			.setCustomId(`reveal-airrec-${buttonId}`)
-			.setLabel("Revenal answer")
+			.setLabel("Reveal answer")
 			.setStyle(ButtonStyle.Primary)
 	);
 
@@ -272,9 +272,9 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 					aircraft.waifuImage
 				);
 				if (waifu) {
-					const atk = Math.floor(Math.random() * 10);
-					const hp = Math.floor(Math.random() * (100 - 50) + 50);
-					const spd = Math.floor(Math.random() * 10);
+					const atk = Math.ceil(Math.random() * 10);
+					const hp = Math.ceil(Math.random() * (100 - 50) + 50);
+					const spd = Math.ceil(Math.random() * 10);
 
 					const waifuEmbed = new EmbedBuilder()
 						.setColor(0xff00ff)
@@ -338,8 +338,10 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 		await doReveal();
 	});
 	collector?.on("end", async (collected) => {
-		if (collected.size === 0) {
+		if (
+			collected.filter((i) => i.user.id === interaction.user.id).size ===
+			0
+		)
 			await doReveal();
-		}
 	});
 }

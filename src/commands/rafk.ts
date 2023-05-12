@@ -11,8 +11,6 @@ import {
 
 import rafk from "../RAFK.json" assert { type: "json" };
 
-const wait = (await import("node:timers/promises")).setTimeout;
-
 export interface Question {
 	question: string;
 	answer: string;
@@ -112,10 +110,14 @@ export async function execute(
 			});
 		}
 	});
-
-	await wait(30000);
-	await interaction.editReply({
-		content: `\n${question}\n**${answer}**`,
-		components: [],
+	collector?.on("end", async (collected) => {
+		if (
+			collected.filter((i) => i.user.id === interaction.user.id).size ===
+			0
+		)
+			await interaction.editReply({
+				content: `${question}\n**${answer}**`,
+				components: [],
+			});
 	});
 }

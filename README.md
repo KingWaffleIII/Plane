@@ -19,7 +19,7 @@ If you really want to host the bot yourself, you can do so by following these st
 }
 ```
 
-3. run the `npm prod` script to compile the TypeScript code
+3. run the `npm build` script to compile the TypeScript code (optional)
 4. run `docker compose up -d` to start the bot
 
 ## Aircraft
@@ -34,12 +34,12 @@ You can see the aircraft supported in the bot [here](https://github.com/KingWaff
 
 ### Images
 
-If you have any issues with the images given for \`/airrec\` and \`/airrec-quiz\`, please understand that these are randomly picked from a website. There is no way to control the quality of the images so if you find a bad image, just try again.
+If you have any issues with the images given for `/airrec` and `/airrec-quiz`, please understand that these are randomly picked from a website. There is no way to control the quality of the images so if you find a bad image, just try again.
 
 ## Waifus
 
-Waifus are a complex, main [gacha](https://en.wikipedia.org/wiki/Gacha_game) feature of the bot.
-There are two types of waifus: **aircraft** and **weapon**, with 44 in total.
+Waifus are a [gacha](https://en.wikipedia.org/wiki/Gacha_game) feature of the bot.
+There are two types of waifus: **aircraft** and **weapon**, with 50 in total.
 
 ### Aircraft waifus
 

@@ -187,14 +187,14 @@ export const data = new SlashCommandBuilder()
 				"The spec you want to use (mRAST is RAF past/present). Defaults to RAST."
 			)
 			.addChoices(
-				{ name: "RAST", value: "rast" },
-				{ name: "mRAST", value: "mrast" }
+				{ name: "RAST", value: "RAST" },
+				{ name: "mRAST", value: "mRAST" }
 			)
 	);
 
 export async function execute(interaction: ChatInputCommandInteraction) {
 	const rounds = interaction.options.getInteger("rounds") ?? 10;
-	const spec = interaction.options.getString("spec") ?? "rast";
+	const spec = interaction.options.getString("spec") ?? "RAST";
 
 	await interaction.reply({
 		content: "Creating a new thread...",
@@ -203,9 +203,9 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 	const c = interaction.channel as BaseGuildTextChannel;
 
 	const thread = await c.threads.create({
-		name: `Aircraft Recognition Quiz`,
+		name: `${spec} Aircraft Recognition Quiz`,
 		autoArchiveDuration: 60,
-		reason: "Aircraft Recognition Quiz",
+		reason: `${spec} Aircraft Recognition Quiz`,
 	});
 
 	await interaction.editReply({
@@ -231,7 +231,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 
 	const msg = await thread.send({
 		content: `
-__**Aircraft Recognition Quiz**__
+__**${spec} Aircraft Recognition Quiz**__
 You will be shown pictures of **${rounds}** aircraft and you will have to reply with the name of the aircraft.
 You will be given 15 seconds for an answer (**you will only be allowed one response so don't send any messages unless you are sending an answer**).
 
@@ -336,7 +336,7 @@ If you want to play, click the button below.
 						Math.floor(Math.random() * 2) //! for some reason there's a key called "default" in the object?? - setting max to 2
 					] as keyof typeof airrec
 				];
-			if (spec === "mrast") {
+			if (spec === "mRAST") {
 				type = type.filter((a) => a.mrast);
 			}
 			const aircraft: Aircraft =
@@ -546,9 +546,9 @@ If you want to play, click the button below.
 				}
 
 				if (waifu) {
-					const atk = Math.floor(Math.random() * 10);
-					const hp = Math.floor(Math.random() * (100 - 50) + 50);
-					const spd = Math.floor(Math.random() * 10);
+					const atk = Math.ceil(Math.random() * 10);
+					const hp = Math.ceil(Math.random() * (100 - 50) + 50);
+					const spd = Math.ceil(Math.random() * 10);
 
 					const waifuEmbed = new EmbedBuilder()
 						.setColor(0xff00ff)
