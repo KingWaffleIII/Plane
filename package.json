@@ -1,6 +1,6 @@
 {
 	"name": "plane",
-	"version": "1.5.1",
+	"version": "1.5.2",
 	"description": "Discord bot frontend for the Plane aircraft recognition API, as well as other functionality provided by plugins.",
 	"main": "bot.js",
 	"type": "module",
