@@ -19,9 +19,13 @@ User.init({
         type: DataTypes.STRING(32 + 5),
         allowNull: false,
     },
+    discriminator: {
+        type: DataTypes.STRING(4),
+        allowNull: false,
+    },
     avatarUrl: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
     },
     lockedWaifus: {
         type: DataTypes.JSON,
