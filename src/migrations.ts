@@ -61,16 +61,22 @@ export async function updateLegacyHornetName(): Promise<void> {
 	}
 }
 
-export async function deleteGuildModel(): Promise<void> {
+export async function deleteGuildModel(
+	transaction: Transaction
+): Promise<void> {
 	// As of v1.4.4, Guilds are no longer used. This function deletes the Guild model from the DB.
 
 	// Create a new Guild table in case it doesn't exist (already deleted).
-	await queryInterface.createTable("Guilds", {
-		id: {
-			type: DataTypes.STRING,
-			primaryKey: true,
+	await queryInterface.createTable(
+		"Guilds",
+		{
+			id: {
+				type: DataTypes.STRING,
+				primaryKey: true,
+			},
 		},
-	});
+		{ transaction }
+	);
 
 	// Create temporary named FK constraint so it can be removed.
 	await queryInterface.addConstraint("Users", {
@@ -83,13 +89,16 @@ export async function deleteGuildModel(): Promise<void> {
 		},
 		onDelete: "CASCADE",
 		onUpdate: "CASCADE",
+		transaction,
 	});
 
-	await queryInterface.removeConstraint("Users", "users_ibfk_1");
+	await queryInterface.removeConstraint("Users", "users_ibfk_1", {
+		transaction,
+	});
 
-	await queryInterface.removeColumn("Users", "guildId");
+	await queryInterface.removeColumn("Users", "guildId", { transaction });
 
-	await queryInterface.dropTable("Guilds");
+	await queryInterface.dropTable("Guilds", { transaction });
 }
 
 export async function updateSpecWaifus(): Promise<void> {
@@ -110,15 +119,30 @@ export async function updateSpecWaifus(): Promise<void> {
 	}
 }
 
-export async function removeDiscriminator(): Promise<void> {
+export async function removeDiscriminator(
+	transaction: Transaction
+): Promise<void> {
 	// As of the latest Discord update, discriminators are no longer used as usernames are now unique. This function removes them from the DB.
-	await queryInterface.removeColumn("Users", "discriminator", {});
+	await queryInterface.removeColumn("Users", "discriminator", {
+		transaction,
+	});
 }
 
 export async function runAllMigrations(): Promise<void> {
-	await deleteGuildModel();
-	await updateLegacyHornetName();
-	await updateLockedWaifus();
-	await updateSpecWaifus();
-	await removeDiscriminator();
+	try {
+		await queryInterface.sequelize.transaction(async (transaction) => {
+			await updateLockedWaifus();
+			await updateLegacyHornetName();
+			await deleteGuildModel(transaction);
+			await updateSpecWaifus();
+			await removeDiscriminator(transaction);
+		});
+	} catch (error) {
+		console.error("Migration failed... assuming you are using a new database.");
+	}
+	// 	await deleteGuildModel();
+	// 	await updateLegacyHornetName();
+	// 	await updateLockedWaifus();
+	// 	await updateSpecWaifus();
+	// 	await removeDiscriminator();
 }
