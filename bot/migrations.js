@@ -1,7 +1,9 @@
 // DB migrations to update users using old data
 // On DB changes, e.g. a new field for User is added, migrations should be made to update users' data
+import { DataTypes } from "sequelize";
 import { db, User, Waifu } from "./models.js";
 import waifus from "./waifus.json" assert { type: "json" };
+const queryInterface = db.getQueryInterface();
 export async function updateLockedWaifus() {
     // If there's ever new waifus added, this will add them to the lockedWaifus array.
     // update column default value
@@ -46,7 +48,28 @@ export async function updateLegacyHornetName() {
 }
 export async function deleteGuildModel() {
     // As of v1.4.4, Guilds are no longer used. This function deletes the Guild model from the DB.
-    await db.getQueryInterface().dropTable("Guilds");
+    // Create a new Guild table in case it doesn't exist (already deleted).
+    await queryInterface.createTable("Guilds", {
+        id: {
+            type: DataTypes.STRING,
+            primaryKey: true,
+        },
+    });
+    // Create temporary named FK constraint so it can be removed.
+    await queryInterface.addConstraint("Users", {
+        fields: ["guildId"],
+        type: "foreign key",
+        name: "users_ibfk_1",
+        references: {
+            table: "Guilds",
+            field: "id",
+        },
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE",
+    });
+    await queryInterface.removeConstraint("Users", "users_ibfk_1");
+    await queryInterface.removeColumn("Users", "guildId");
+    await queryInterface.dropTable("Guilds");
 }
 export async function updateSpecWaifus() {
     // Some waifus' spec status may have changed. This function updates the spec status of all users' waifus.
@@ -65,9 +88,14 @@ export async function updateSpecWaifus() {
         }
     }
 }
+export async function removeDiscriminator() {
+    // As of the latest Discord update, discriminators are no longer used as usernames are now unique. This function removes them from the DB.
+    await queryInterface.removeColumn("Users", "discriminator", {});
+}
 export async function runAllMigrations() {
     await deleteGuildModel();
     await updateLegacyHornetName();
     await updateLockedWaifus();
     await updateSpecWaifus();
+    await removeDiscriminator();
 }
