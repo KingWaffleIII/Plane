@@ -13,7 +13,7 @@ export const data = new SlashCommandBuilder()
 export async function execute(interaction: ChatInputCommandInteraction) {
 	const embed = new EmbedBuilder()
 		.setColor(0x0099ff)
-		.setTitle("Plane v1.5.3 'Unlimited Planeworks'")
+		.setTitle("Plane v1.5.2 'Unlimited Planeworks'")
 		.setURL("https://github.com/KingWaffleIII/plane")
 		.setAuthor({
 			name: "KingWaffleIII @ PlanetWaffle",
