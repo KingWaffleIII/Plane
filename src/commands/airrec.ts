@@ -273,8 +273,13 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 				);
 				if (waifu) {
 					const atk = Math.ceil(Math.random() * 10);
-					const hp = Math.ceil(Math.random() * (100 - 50) + 50);
-					const spd = Math.ceil(Math.random() * 10);
+					let hp = Math.ceil(Math.random() * (100 - 50) + 50);
+					let spd = Math.ceil(Math.random() * 10);
+
+					if (waifu.type === "weapon") {
+						hp = 0;
+						spd = 0;
+					}
 
 					const waifuEmbed = new EmbedBuilder()
 						.setColor(0xff00ff)
