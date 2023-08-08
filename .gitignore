@@ -1,6 +1,7 @@
 # IDE
 .vscode
 .history/
+.idea/
 thunder-tests/
 .eslintcache
 
@@ -10,6 +11,7 @@ __pycache__/
 
 # DB
 postgres/
+backups/
 db.sqlite3
 db.sqlite
 
@@ -21,6 +23,7 @@ delete_user_waifus.sql
 
 src/assets/waifus/Unused/
 src/josh.ts
+src/tankrec
 
 bot/package.json
 bot/package-lock.json
