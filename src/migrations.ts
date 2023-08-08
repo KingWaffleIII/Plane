@@ -14,13 +14,13 @@ export async function updateLockedWaifus(): Promise<void> {
 		},
 	});
 
-	(await User.findAll()).forEach(async (user) => {
+	for (const user of await User.findAll()) {
 		const difference = Object.keys(waifus).filter(
 			(w) => !user.lockedWaifus.includes(w)
 		);
 
 		if (difference.length > 0) {
-			difference.forEach(async (w) => {
+			for (const w of difference) {
 				const userHasWaifu = await Waifu.findOne({
 					where: { userId: user.id, name: w },
 				});
@@ -30,34 +30,32 @@ export async function updateLockedWaifus(): Promise<void> {
 						lockedWaifus: [...user.lockedWaifus, w],
 					});
 				}
-			});
+			}
 		}
-	});
+	}
 }
 
 export async function updateLegacyHornetName(): Promise<void> {
 	// As of v1.4.4, the name of the Hornet waifu is changed from "Hornet" to "Super Hornet" for accuracy.
 
-	(await User.findAll()).forEach(async (user) => {
+	for (const user of await User.findAll()) {
 		if (user.lockedWaifus.includes("Hornet")) {
 			await user.update({
 				lockedWaifus: user.lockedWaifus.map((w) =>
 					w === "Hornet" ? "Super Hornet" : w
 				),
 			});
-			return;
+			continue;
 		}
 
-		(
-			await Waifu.findAll({
-				where: { userId: user.id, name: "Hornet" },
-			})
-		).forEach(async (waifu) => {
+		for (const waifu of await Waifu.findAll({
+			where: { userId: user.id, name: "Hornet" },
+		})) {
 			await waifu.update({
 				name: "Super Hornet",
 			});
-		});
-	});
+		}
+	}
 }
 
 export async function deleteGuildModel(): Promise<void> {
@@ -68,21 +66,19 @@ export async function deleteGuildModel(): Promise<void> {
 export async function updateSpecWaifus(): Promise<void> {
 	// Some waifus' spec status may have changed. This function updates the spec status of all users' waifus.
 
-	(await User.findAll()).forEach(async (user) => {
-		(await Waifu.findAll({ where: { userId: user.id } })).forEach(
-			async (w) => {
-				if (waifus[w.name as keyof typeof waifus].spec) {
-					await w.update({
-						spec: true,
-					});
-				} else {
-					await w.update({
-						spec: false,
-					});
-				}
+	for (const user of await User.findAll()) {
+		for (const w of await Waifu.findAll({ where: { userId: user.id } })) {
+			if (waifus[w.name as keyof typeof waifus].spec) {
+				await w.update({
+					spec: true,
+				});
+			} else {
+				await w.update({
+					spec: false,
+				});
 			}
-		);
-	});
+		}
+	}
 }
 
 export async function runAllMigrations(): Promise<void> {
