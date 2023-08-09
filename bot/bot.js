@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import fs from "fs";
 import path, { dirname } from "path";
 import { ActivityType, Client, Collection, Events, GatewayIntentBits, REST, Routes, ThreadChannel, } from "discord.js";

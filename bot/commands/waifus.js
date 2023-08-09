@@ -21,6 +21,7 @@ export async function execute(interaction) {
         await User.create({
             id: interaction.user.id,
             username: interaction.user.username,
+            discriminator: interaction.user.discriminator,
             avatarUrl: interaction.user.avatarURL(),
             lockedWaifus: Object.keys(waifus),
             dogfightKills: 0,
