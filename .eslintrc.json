@@ -1,78 +1,89 @@
 {
-	"env": {
-		"es2021": true
-	},
-	"extends": [
-		"eslint:recommended",
-		"plugin:@typescript-eslint/recommended",
-		"airbnb-base",
-		"prettier"
+  "env": {
+	"es2021": true
+  },
+  "extends": [
+	"eslint:recommended",
+	"plugin:@typescript-eslint/recommended",
+	"airbnb-base",
+	"prettier"
+  ],
+  "overrides": [],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+	"ecmaVersion": "latest",
+	"sourceType": "module"
+  },
+  "plugins": [
+	"@typescript-eslint"
+  ],
+  "rules": {
+	"quotes": [
+	  "warn",
+	  "double",
+	  {
+		"avoidEscape": true,
+		"allowTemplateLiterals": true
+	  }
 	],
-	"overrides": [],
-	"parser": "@typescript-eslint/parser",
-	"parserOptions": {
-		"ecmaVersion": "latest",
-		"sourceType": "module"
-	},
-	"plugins": ["@typescript-eslint"],
-	"rules": {
-		"quotes": [
-			"warn",
-			"double",
-			{ "avoidEscape": true, "allowTemplateLiterals": true }
-		],
-		"no-unused-vars": "off", // replace for ts one
-		"no-console": "off",
-		"no-bitwise": "off",
-		"no-plusplus": "off",
-		"no-await-in-loop": "off",
-		"dot-notation": "off",
-		// "indent": [
-		// 	"warn",
-		// 	"tab",
-		// 	{
-		// 		"ignoredNodes": [
-		// 			"PropertyDefinition",
-		// 			"TemplateLiteral > *",
-		// 			"TernaryExpressions"
-		// 		]
-		// 	}
-		// ],
-		"indent": "off",
-		"linebreak-style": ["warn", "unix"],
-		"no-restricted-syntax": "off",
-		"global-require": "off",
-		"max-classes-per-file": "off",
-		"radix": "off",
-		// "no-use-before-define": [
-		// 	"error",
-		// 	{ "functions": false, "classes": false }
-		// ],
-		"no-use-before-define": "off",
-		"lines-between-class-members": "off",
-		"no-continue": "off",
-
-		"import/no-dynamic-require": "off",
-		"import/no-import-module-exports": "off",
-		"import/no-extraneous-dependencies": [
-			"error",
-			{ "devDependencies": true }
-		],
-		// "import/extensions": [
-		// 	"error",
-		// 	"ignorePackages",
-		// 	{
-		// 		"js": "never",
-		// 		"jsx": "never",
-		// 		"ts": "never",
-		// 		"tsx": "never"
-		// 	}
-		// ],
-		"import/extensions": "off",
-		"import/no-unresolved": "off",
-
-		"@typescript-eslint/no-var-requires": "off",
-		"@typescript-eslint/no-unused-vars": "off", // conflicts with ts own rules
-		"@typescript-eslint/no-non-null-assertion": "off"
-	}
+	"no-unused-vars": "off",
+	// replace for ts one
+	"no-console": "off",
+	"no-bitwise": "off",
+	"no-plusplus": "off",
+	"no-await-in-loop": "off",
+	"dot-notation": "off",
+	"no-underscore-dangle": "off",
+	// "indent": [
+	// 	"warn",
+	// 	"tab",
+	// 	{
+	// 		"ignoredNodes": [
+	// 			"PropertyDefinition",
+	// 			"TemplateLiteral > *",
+	// 			"TernaryExpressions"
+	// 		]
+	// 	}
+	// ],
+	"indent": "off",
+	"linebreak-style": [
+	  "warn",
+	  "unix"
+	],
+	"no-restricted-syntax": "off",
+	"global-require": "off",
+	"max-classes-per-file": "off",
+	"radix": "off",
+	// "no-use-before-define": [
+	// 	"error",
+	// 	{ "functions": false, "classes": false }
+	// ],
+	"no-use-before-define": "off",
+	"lines-between-class-members": "off",
+	"no-continue": "off",
+	"import/no-dynamic-require": "off",
+	"import/no-import-module-exports": "off",
+	"import/no-extraneous-dependencies": [
+	  "error",
+	  {
+		"devDependencies": true
+	  }
+	],
+	// "import/extensions": [
+	// 	"error",
+	// 	"ignorePackages",
+	// 	{
+	// 		"js": "never",
+	// 		"jsx": "never",
+	// 		"ts": "never",
+	// 		"tsx": "never"
+	// 	}
+	// ],
+	"import/extensions": "off",
+	"import/no-unresolved": "off",
+	"@typescript-eslint/no-var-requires": "off",
+	"@typescript-eslint/no-unused-vars": "off",
+	// conflicts with ts own rules
+	"@typescript-eslint/no-non-null-assertion": "off"
+  }
 }

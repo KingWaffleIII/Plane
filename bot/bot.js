@@ -1,11 +1,9 @@
-/* eslint-disable no-underscore-dangle */
 import fs from "fs";
 import path, { dirname } from "path";
 import { ActivityType, Client, Collection, Events, GatewayIntentBits, REST, Routes, ThreadChannel, } from "discord.js";
 import { fileURLToPath } from "url";
 import { db } from "./models.js";
 import config from "./config.json" assert { type: "json" };
-import { runAllMigrations } from "./migrations.js";
 const client = new Client({
     intents: [
         GatewayIntentBits.Guilds,
@@ -83,5 +81,4 @@ catch (error) {
     console.error(error);
 }
 await db.sync();
-await runAllMigrations();
 await client.login(token);
