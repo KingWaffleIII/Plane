@@ -17,7 +17,6 @@ import { fileURLToPath } from "url";
 
 import { db } from "./models.js";
 import config from "./config.json" assert { type: "json" };
-import { runAllMigrations } from "./migrations.js";
 
 interface Command {
 	data: SlashCommandBuilder;
@@ -120,7 +119,5 @@ try {
 }
 
 await db.sync();
-
-await runAllMigrations();
 
 await client.login(token);
