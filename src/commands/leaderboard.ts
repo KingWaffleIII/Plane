@@ -56,7 +56,6 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 	for (const member of await interaction.guild!.members.fetch()) {
 		const user = await User.findByPk(member[1].user.id);
 		if (user) {
-			console.log(user.username);
 			users[user.id] = {
 				username: user.username,
 				airrecQuizWins: user.airrecQuizWins,

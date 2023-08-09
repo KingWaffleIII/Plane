@@ -36,7 +36,6 @@ export class User extends Model<
 	// by branding them using the `ForeignKey` type,
 	declare id: string;
 	declare username: string;
-	declare discriminator: string;
 	declare avatarUrl?: string | null;
 	declare lockedWaifus: string[];
 	declare guaranteeWaifu?: string | null;
@@ -115,13 +114,9 @@ User.init(
 			type: DataTypes.STRING(32 + 5),
 			allowNull: false,
 		},
-		discriminator: {
-			type: DataTypes.STRING(4),
-			allowNull: false,
-		},
 		avatarUrl: {
 			type: DataTypes.STRING,
-			allowNull: true,
+			allowNull: false,
 		},
 		lockedWaifus: {
 			type: DataTypes.JSON,
