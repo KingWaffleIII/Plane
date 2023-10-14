@@ -1,6 +1,6 @@
 import crypto from "crypto";
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle, ComponentType, SlashCommandBuilder, } from "discord.js";
-import rafk from "../RAFK.json" assert { type: "json" };
+import rafk from "../rafk.json" assert { type: "json" };
 export const data = new SlashCommandBuilder()
     .setName("rafk")
     .setDescription("Gives you a question about RAFK.")

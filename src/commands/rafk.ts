@@ -9,7 +9,7 @@ import {
 	SlashCommandBuilder,
 } from "discord.js";
 
-import rafk from "../RAFK.json" assert { type: "json" };
+import rafk from "../rafk.json" assert { type: "json" };
 
 export interface Question {
 	question: string;
