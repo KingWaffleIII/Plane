@@ -26,7 +26,8 @@ src/tankrec
 
 bot/package.json
 bot/package-lock.json
-bot/RAFK.json
-bot/air_rec.json
+bot/rafk.json
+bot/mrast.json
+bot/rast.json
 bot/waifus.json
 bot/assets/
