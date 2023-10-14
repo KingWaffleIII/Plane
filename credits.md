@@ -9,10 +9,10 @@
 **Thank you to these people for helping me make and develop this bot!**
 
 -   **cranium117** - Lead adviser and aircraft recognition tips (love you James <3)
--   **apocalyptictofu8** - Adviser
+-   **apocalyptictofu** - Adviser
 -   **hadesvanir** - Adviser and patch names
 -   **rainer367** - Adviser and aircraft recognition tips
--   **tecnoplayz1** - Adviser
+-   **tecnoplayz** - Adviser
 
 ### Sources
 
