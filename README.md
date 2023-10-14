@@ -35,6 +35,8 @@ If you have any issues with the images given for `/airrec` and `/airrec-quiz`, p
 Waifus are a [gacha](https://en.wikipedia.org/wiki/Gacha_game) feature of the bot.
 There are two types of waifus: **aircraft** and **weapon**, with 50 in total.
 
+Note: waifus are not enabled by default. To enable them, a user with the `Manage Server` permission should run `/enable-waifus status:True`.
+
 ### Aircraft waifus
 
 Aircraft waifus are the main type of waifu. They have an **ATK** (1-10), **HP** (50-100), and **SPD** (1-10) stat, which are randomly generated and used for [dogfighting](#Dogfighting). There is no bias for the stats - fighters can have high DEF stats but low ATK/SPD and utility aircraft can have high ATK/SPD but low DEF.

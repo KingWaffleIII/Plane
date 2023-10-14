@@ -1,8 +1,9 @@
-import { SlashCommandBuilder } from "discord.js";
+import { PermissionFlagsBits, SlashCommandBuilder, } from "discord.js";
 import { Guild } from "../models.js";
 export const data = new SlashCommandBuilder()
     .setName("enable-waifus")
     .setDescription("Enables/disables waifu spawning server-wide.")
+    .setDefaultMemberPermissions(PermissionFlagsBits.ManageGuild)
     .addBooleanOption((option) => option
     .setName("status")
     .setDescription("Whether to enable or disable waifu spawning. Defaults to enabled."));
