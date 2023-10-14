@@ -1,5 +1,5 @@
 import { EmbedBuilder, SlashCommandBuilder, } from "discord.js";
-import { User } from "../models.js";
+import { Guild, User } from "../models.js";
 import waifus from "../waifus.json" assert { type: "json" };
 export const data = new SlashCommandBuilder()
     .setName("stats")
@@ -10,6 +10,14 @@ export const data = new SlashCommandBuilder()
 export async function execute(interaction) {
     const targetUser = interaction.options.getUser("user") ?? interaction.user;
     await interaction.deferReply();
+    const guild = await Guild.findByPk(interaction.guildId);
+    if (!guild) {
+        await Guild.create({
+            id: interaction.guildId,
+            name: interaction.guild.name,
+            waifusEnabled: false,
+        });
+    }
     let user = await User.findByPk(targetUser.id);
     if (!user && targetUser.id === interaction.user.id) {
         await User.create({

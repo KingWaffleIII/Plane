@@ -13,10 +13,10 @@ export const data = new SlashCommandBuilder()
 export async function execute(interaction: ChatInputCommandInteraction) {
 	const embed = new EmbedBuilder()
 		.setColor(0x0099ff)
-		.setTitle("Plane v1.5.3 'Unlimited Planeworks'")
+		.setTitle("Plane v1.6.0 'Uchiha Plane Massacre'")
 		.setURL("https://github.com/KingWaffleIII/plane")
 		.setAuthor({
-			name: "KingWaffleIII @ PlanetWaffle",
+			name: "KingWaffleIII @ Planet Waffle",
 			iconURL: "https://i.imgur.com/TMhlCMb.jpeg",
 			url: "https://github.com/KingWaffleIII/",
 		})
@@ -28,16 +28,18 @@ __**Known issues/suggestions**__
 https://github.com/KingWaffleIII/plane/issues
 If you have any issues with the images given for \`/airrec\` and \`/airrec-quiz\`, please understand that these are randomly picked from a website. There is no way to control the quality of the images so if you find a bad image, just try again.
 \n
+__**Changelog**__
+https://github.com/KingWaffleIII/Plane/pulls?q=is%3Apr+is%3Aclosed
+See the latest pull request with the current version in its name to see the changelog.
+\n
 __**Contributing**__
 The bot is maintianed by me only so any help with questions and sources are always appeciated!
-If you have any questions, suggestions or find an error, you can contact me by:
-- Discord: DM me or ping me on a server this bot and I am in.
+If you have any questions, suggestions or find an error, you can submit an issue with the above link or contact me by:
+- Discord: kingwaffleiii
 - Email: support@planetwaffle.net
-Please note that simply using the bot counts as a contribution!
 \n
 __**Credits**__
 https://github.com/KingWaffleIII/plane/blob/main/credits.md
-If you feel you've helped with the bot and I missed you out, please let me know!
 			`
 		)
 		.setThumbnail("https://i.imgur.com/YnUnoQL.png")

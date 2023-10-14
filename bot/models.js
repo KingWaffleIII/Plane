@@ -5,10 +5,33 @@ export const db = new Sequelize({
     storage: "db.sqlite",
     logging: false,
 });
+export class Guild extends Model {
+}
 export class User extends Model {
 }
 export class Waifu extends Model {
 }
+Guild.init({
+    id: {
+        type: DataTypes.STRING,
+        autoIncrement: false,
+        primaryKey: true,
+    },
+    name: {
+        type: DataTypes.STRING(100),
+        allowNull: false,
+    },
+    waifusEnabled: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
+    },
+    createdAt: DataTypes.DATE,
+    updatedAt: DataTypes.DATE,
+}, {
+    sequelize: db,
+    tableName: "Guilds",
+});
 User.init({
     id: {
         type: DataTypes.STRING,
@@ -16,7 +39,7 @@ User.init({
         primaryKey: true,
     },
     username: {
-        type: DataTypes.STRING(32 + 5),
+        type: DataTypes.STRING(32),
         allowNull: false,
     },
     avatarUrl: {
@@ -96,10 +119,6 @@ Waifu.init({
         type: DataTypes.INTEGER,
         allowNull: false,
         defaultValue: 0,
-    },
-    spec: {
-        type: DataTypes.BOOLEAN,
-        allowNull: false,
     },
     generated: {
         type: DataTypes.BOOLEAN,

@@ -1,6 +1,6 @@
 # Plane
 
-An extremely modular Discord bot designed to help RAF students with their RAFK (RAF Knowledge) and aircraft recognition.
+An extremely modular Discord bot designed to help RAF students with their RAFK (RAF Knowledge) and aircraft recognition, especially for (m)RAST.
 
 ## Usage & Invite
 
@@ -23,12 +23,6 @@ If you really want to host the bot yourself, you can do so by following these st
 4. run `docker compose up -d` to start the bot
 
 ## Aircraft
-
-### RAST Spec
-
-The RAST spec is inconsistent in its use of aircraft names. Sometimes, it uses the most up-to-date model with the latest manufacturer and sometimes it likes to stay in the past. An example is the CASA/IPTN CN-235, which the spec calls the Airbus CN-235. Another example is the Breguet 1150 Atlantic, which the spec calls the Dassault Atlantic.
-
-As a result, I've compromised and tried to use the most accurate name possible, whilst avoiding going against the spec.
 
 You can see the aircraft supported in the bot [here](https://github.com/KingWaffleIII/plane/blob/main/aircraft.md).
 
@@ -71,13 +65,8 @@ Weapon waifus are the secondary type of waifu. They have just a randomly generat
 
 ### Obtaining waifus
 
-Waifus can be obtained in two ways depending on her type:
-
--   through `/airrec` (**spec** aircraft waifus)
--   winning airrec quizzes (**non-spec** aircraft waifus and weapon waifus)
-
-With `/airrec`, there is a **~21% chance** of getting an **eligible** aircraft, and a further **33% chance** of a waifu spawning from that eligible aircraft. This means that there is a **~7% chance** of getting a waifu from `/airrec`.
-With airrec quizzes, there is a **~33% chance** of getting a waifu **when you win a quiz**. To stop people spamming quizzes, the quiz must have at least **5 rounds** and the winner needs to have gained at least **1/4 of the total points** (e.g. if there are 10 rounds, there are 20 points available and 2.5 are needed) to be eligible for a waifu.
+Waifus can be obtained by winning airrec quizzes.
+There is a **~33% chance** of getting a waifu **when you win a quiz**. To stop people spamming quizzes, the quiz must have at least **5 rounds** and the winner needs to have gained at least **1/4 of the total points** (e.g. if there are 10 rounds, there are 20 points available and 2.5 are needed) to be eligible for a waifu.
 
 ### Guaranteeing waifus
 

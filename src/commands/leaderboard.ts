@@ -11,9 +11,17 @@ export const data = new SlashCommandBuilder()
 	.setName("leaderboard")
 	.setDescription("Shows a server leaderboard for airrec.");
 
-function calculateScore(user: User) {
-	const { airrecQuizWins, airrecQuizLosses, airrecQuizWinstreak } = user;
-	const total = airrecQuizWins + airrecQuizLosses;
+async function calculateScore(user: User) {
+	const {
+		airrecQuizWins,
+		airrecQuizLosses,
+		airrecQuizWinstreak,
+		dogfightKills,
+		dogfightDeaths,
+		dogfightWinstreak,
+	} = user;
+	const airrecTotal = airrecQuizWins + airrecQuizLosses;
+	const dogfightTotal = dogfightKills + dogfightDeaths;
 
 	// Assign weights to each attribute
 	const weights = {
@@ -21,17 +29,26 @@ function calculateScore(user: User) {
 		losses: -0.1,
 		winStreak: 0.3,
 		winPercentage: 0.2,
+		waifus: 0.2,
 	};
 
 	// Calculate the score
-	const winPercentage = airrecQuizWins / total;
+	// calculate winpercentage combining airrec and dogfight
+	let winPercentage =
+		(airrecQuizWins + dogfightKills) / (airrecTotal + dogfightTotal);
+	if (Number.isNaN(winPercentage)) {
+		winPercentage = 0;
+	}
+
 	const score =
 		weights.wins * airrecQuizWins +
+		weights.wins * dogfightKills +
 		weights.losses * (1 - airrecQuizLosses) +
+		weights.losses * (1 - dogfightDeaths) +
 		weights.winStreak * airrecQuizWinstreak +
-		weights.winPercentage * winPercentage;
-
-	console.log(user.username, score);
+		weights.winStreak * dogfightWinstreak +
+		weights.winPercentage * winPercentage +
+		weights.waifus * (await user.countWaifus());
 
 	if (Number.isNaN(score)) {
 		return 0;
@@ -54,7 +71,9 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 	let sortedUsers: Array<[string, number]> = [];
 
 	for (const member of await interaction.guild!.members.fetch()) {
-		const user = await User.findByPk(member[1].user.id);
+		const user = await User.findByPk(member[1].user.id, {
+			include: "waifus",
+		});
 		if (user) {
 			users[user.id] = {
 				username: user.username,
@@ -64,9 +83,9 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 				dogfightWinstreak: user.dogfightWinstreak,
 				unlockedWaifus:
 					Object.keys(waifus).length - user.lockedWaifus.length,
-				score: calculateScore(user),
+				score: await calculateScore(user),
 			};
-			sortedUsers.push([user.id, calculateScore(user)]);
+			sortedUsers.push([user.id, await calculateScore(user)]);
 		}
 	}
 

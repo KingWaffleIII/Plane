@@ -4,8 +4,8 @@ import {
 	SlashCommandBuilder,
 } from "discord.js";
 
-import { User, Waifu } from "../models.js";
-import { WaifuBaseData } from "./airrec.js";
+import { Guild, User, Waifu } from "../models.js";
+import { WaifuBaseData } from "./airrecQuiz.js";
 import waifus from "../waifus.json" assert { type: "json" };
 
 export const data = new SlashCommandBuilder()
@@ -32,6 +32,15 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 
 	await interaction.deferReply();
 
+	const guild = await Guild.findByPk(interaction.guildId!);
+	if (!guild) {
+		await Guild.create({
+			id: interaction.guildId!,
+			name: interaction.guild!.name,
+			waifusEnabled: false,
+		});
+	}
+
 	let user = await User.findByPk(targetUser.id, {
 		include: { model: Waifu, as: "waifus" },
 	});
@@ -57,23 +66,11 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 		return;
 	}
 
-	const specWaifus = Object.keys(waifus).filter((w) => {
-		const waifuData = waifus[w as keyof typeof waifus];
-		return waifuData!.spec;
-	});
-	const nonSpecWaifus = Object.keys(waifus).filter((w) => {
-		const waifuData = waifus[w as keyof typeof waifus];
-		return !waifuData!.spec;
-	});
-	const unlockedSpecWaifus: string[] = [];
-	const unlockedNonSpecWaifus: string[] = [];
+	const waifuNames = Object.keys(waifus);
+	const unlockedWaifus: string[] = [];
 	user!.waifus?.forEach((w) => {
 		if (w.generated) return;
-		if (!w.spec) {
-			if (!unlockedNonSpecWaifus.includes(w.name))
-				unlockedNonSpecWaifus.push(w.name);
-		} else if (!unlockedSpecWaifus.includes(w.name))
-			unlockedSpecWaifus.push(w.name);
+		unlockedWaifus.push(w.name);
 	});
 
 	if (name) {
@@ -99,13 +96,6 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 		});
 
 		if (userWaifus.length === 0) {
-			if (waifuData!.spec) {
-				await interaction.editReply({
-					content:
-						"You don't have this waifu unlocked! You can unlock her by using `/airrec`.",
-				});
-				return;
-			}
 			await interaction.editReply({
 				content:
 					"You don't have this waifu unlocked! You can unlock her by winning airrec quizzes.",
@@ -130,9 +120,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 			)
 			.setFooter({
 				text: `You can unlock ${
-					specWaifus.length - unlockedSpecWaifus.length
-				} more waifus with /airrec and ${
-					nonSpecWaifus.length - unlockedNonSpecWaifus.length
+					waifuNames.length - unlockedWaifus.length
 				} more waifus by winning airrec quizzes!`,
 			})
 			.setDescription(
@@ -145,19 +133,7 @@ ${
 		? "One or more of this waifu was generated."
 		: ""
 }${
-					userWaifus.some(
-						(w) =>
-							waifus[w.name as keyof typeof waifus].spec &&
-							!w.generated
-					)
-						? "One or more of this waifu was unlocked with `/airrec`!"
-						: ""
-				}${
-					userWaifus.some(
-						(w) =>
-							!waifus[w.name as keyof typeof waifus].spec &&
-							!w.generated
-					)
+					userWaifus.some((w) => !w.generated)
 						? "One or more of this waifu was unlocked by winning an airrec quiz!"
 						: ""
 				}
@@ -255,14 +231,8 @@ In dogfighting, this waifu has won ${won} time${
 			}
 		)
 		.setFooter({
-			text: `${
-				waifuList.filter((w) => w.startsWith("\\*")).length > 0
-					? "*This waifu was generated. Generated waifus do not count towards your stats."
-					: ""
-			}\nYou can unlock ${
-				specWaifus.length - unlockedSpecWaifus.length
-			} more waifus with /airrec and ${
-				nonSpecWaifus.length - unlockedNonSpecWaifus.length
+			text: `You can unlock ${
+				waifuNames.length - unlockedWaifus.length
 			} more waifus by winning airrec quizzes!`,
 		});
 
