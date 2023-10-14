@@ -1,7 +1,7 @@
 {
 	"name": "plane",
-	"version": "1.5.3",
-	"description": "Discord bot frontend for the Plane aircraft recognition API, as well as other functionality provided by plugins.",
+	"version": "1.6.0",
+	"description": "An extremely modular Discord bot designed to help RAF students with their RAFK (RAF Knowledge) and aircraft recognition. ",
 	"main": "bot.js",
 	"type": "module",
 	"scripts": {
@@ -11,7 +11,7 @@
 		"build": "tsc",
 		"prod": "npm i && npm run build",
 		"start": "node bot.js",
-		"quickstart": "docker compose stop && npm i && tsc && docker compose up -d"
+		"quickstart": "docker compose stop && npm i && tsc && docker compose up"
 	},
 	"repository": {
 		"type": "git",

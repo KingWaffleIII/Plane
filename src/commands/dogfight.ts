@@ -17,7 +17,7 @@ import {
 	InteractionCollector,
 } from "discord.js";
 import { User, Waifu } from "../models.js";
-import { WaifuBaseData } from "./airrec.js";
+import { WaifuBaseData } from "./airrecQuiz.js";
 import waifus from "../waifus.json" assert { type: "json" };
 
 interface WaifuData {

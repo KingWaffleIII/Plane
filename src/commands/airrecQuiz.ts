@@ -12,15 +12,10 @@ import {
 	SlashCommandBuilder,
 } from "discord.js";
 
-import { User } from "../models.js";
-import {
-	Aircraft,
-	getImage,
-	makeEmbedWithImage,
-	WaifuBaseData,
-	WaifuData,
-} from "./airrec.js";
-import airrec from "../air_rec.json" assert { type: "json" };
+import { Guild, User } from "../models.js";
+import { Aircraft, getImage, makeEmbedWithImage } from "./airrec.js";
+import mrast from "../mrast.json" assert { type: "json" };
+import rast from "../rast.json" assert { type: "json" };
 import waifus from "../waifus.json" assert { type: "json" };
 
 const wait = (await import("node:timers/promises")).setTimeout;
@@ -31,6 +26,21 @@ interface Players {
 		score: number;
 		lastScore: number;
 	};
+}
+
+export interface WaifuBaseData {
+	readonly path: string;
+	readonly type: string;
+	readonly urlFriendlyName?: string;
+	readonly ability?: string;
+	readonly abilityName?: string;
+	readonly abilityDescription?: string;
+	readonly country?: string;
+}
+
+interface WaifuData extends WaifuBaseData {
+	readonly name: string;
+	readonly urlFriendlyName: string;
 }
 
 // stop crashing if thread is deleted pre-emptively
@@ -55,6 +65,7 @@ function checkAnswer(message: string, aircraft: Aircraft): number {
 }
 
 async function spawnWaifu(
+	guild: Guild,
 	user: User,
 	rounds: number,
 	score: number,
@@ -67,6 +78,11 @@ async function spawnWaifu(
 	}
 
 	const doSpawn = () => {
+		// If waifus are disabled, don't spawn
+		if (!guild.waifusEnabled) {
+			return false;
+		}
+
 		// If the user has a guaranteed waifu, spawn it
 		if (isGuaranteed) {
 			return true;
@@ -115,7 +131,6 @@ async function spawnWaifu(
 						urlFriendlyName: waifu.urlFriendlyName,
 						path: waifu.path,
 						type: waifu.type,
-						spec: waifu.spec,
 						abilityName: waifu.abilityName,
 						abilityDescription: waifu.abilityDescription,
 					};
@@ -125,7 +140,6 @@ async function spawnWaifu(
 					urlFriendlyName: name,
 					path: waifu.path,
 					type: waifu.type,
-					spec: waifu.spec,
 					abilityName: waifu.abilityName,
 					abilityDescription: waifu.abilityDescription,
 				};
@@ -133,12 +147,8 @@ async function spawnWaifu(
 			return null;
 		}
 
-		const nonSpecWaifus = Object.keys(waifus).filter((w) => {
-			const waifuData = waifus[w as keyof typeof waifus];
-			return !waifuData.spec;
-		});
-		const waifuName = nonSpecWaifus[
-			Math.floor(Math.random() * Object.keys(nonSpecWaifus).length)
+		const waifuName = Object.keys(waifus)[
+			Math.floor(Math.random() * Object.keys(waifus).length)
 		] as keyof typeof waifus;
 		const waifu: WaifuBaseData = waifus[waifuName];
 
@@ -148,7 +158,6 @@ async function spawnWaifu(
 				urlFriendlyName: waifu.urlFriendlyName,
 				path: waifu.path,
 				type: waifu.type,
-				spec: waifu.spec,
 				abilityName: waifu.abilityName,
 				abilityDescription: waifu.abilityDescription,
 			};
@@ -158,7 +167,6 @@ async function spawnWaifu(
 			urlFriendlyName: waifuName,
 			path: waifu.path,
 			type: waifu.type,
-			spec: waifu.spec,
 			abilityName: waifu.abilityName,
 			abilityDescription: waifu.abilityDescription,
 		};
@@ -187,14 +195,23 @@ export const data = new SlashCommandBuilder()
 				"The spec you want to use (mRAST is RAF past/present). Defaults to RAST."
 			)
 			.addChoices(
-				{ name: "RAST", value: "RAST" },
-				{ name: "mRAST", value: "mRAST" }
+				{ name: "mRAST", value: "mRAST" },
+				{ name: "RAST", value: "RAST" }
 			)
 	);
 
 export async function execute(interaction: ChatInputCommandInteraction) {
 	const rounds = interaction.options.getInteger("rounds") ?? 10;
 	const spec = interaction.options.getString("spec") ?? "RAST";
+
+	const guild = await Guild.findByPk(interaction.guildId!);
+	if (!guild) {
+		await Guild.create({
+			id: interaction.guildId!,
+			name: interaction.guild!.name,
+			waifusEnabled: false,
+		});
+	}
 
 	await interaction.reply({
 		content: "Creating a new thread...",
@@ -329,18 +346,9 @@ If you want to play, click the button below.
 		});
 
 		for (let i = 0; i < rounds; i++) {
-			let type: Aircraft[] =
-				airrec[
-					Object.keys(airrec)[
-						// Math.floor(Math.random() * Object.keys(airrec).length)
-						Math.floor(Math.random() * 2) //! for some reason there's a key called "default" in the object?? - setting max to 2
-					] as keyof typeof airrec
-				];
-			if (spec === "mRAST") {
-				type = type.filter((a) => a.mrast);
-			}
+			const list = spec === "RAST" ? rast : mrast;
 			const aircraft: Aircraft =
-				type[Math.floor(Math.random() * type.length)];
+				list[Math.floor(Math.random() * list.length)];
 			const image = await getImage(aircraft.image);
 			if (!image) {
 				await thread.send({
@@ -391,7 +399,7 @@ If you want to play, click the button below.
 				.setImage(image)
 				.setTimestamp()
 				.setFooter({
-					text: "Photo credit: https://www.airfighters.com",
+					text: "Photo credit: see bottom of image.",
 				})
 				.addFields(
 					{
@@ -529,20 +537,24 @@ If you want to play, click the button below.
 				}
 
 				const isGuaranteed =
-					user!.guaranteeWaifu &&
-					user!.guaranteeCounter! >= 10 &&
-					!waifus[user!.guaranteeWaifu as keyof typeof waifus].spec;
+					user!.guaranteeWaifu && user!.guaranteeCounter! >= 10;
 
 				let waifu: WaifuData | null;
 				if (isGuaranteed) {
 					waifu = await spawnWaifu(
+						guild!,
 						user!,
 						rounds,
 						players[u].score,
 						user.guaranteeWaifu!
 					);
 				} else {
-					waifu = await spawnWaifu(user!, rounds, players[u].score);
+					waifu = await spawnWaifu(
+						guild!,
+						user!,
+						rounds,
+						players[u].score
+					);
 				}
 
 				if (waifu) {
@@ -601,7 +613,6 @@ If you want to play, click the button below.
 						atk,
 						hp,
 						spd,
-						spec: waifu.spec,
 						kills: 0,
 						deaths: 0,
 					});

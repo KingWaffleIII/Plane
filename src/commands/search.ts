@@ -5,7 +5,8 @@ import {
 } from "discord.js";
 
 import { Aircraft, getImage } from "./airrec.js";
-import airrec from "../air_rec.json" assert { type: "json" };
+import mrast from "../mrast.json" assert { type: "json" };
+import rast from "../rast.json" assert { type: "json" };
 
 function checkMatch(matchAgainst: string, aircraft: Aircraft): Aircraft | null {
 	if (aircraft.name.toLowerCase().includes(matchAgainst)) {
@@ -38,12 +39,9 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 
 	await interaction.deferReply();
 
-	const civilianAircraft = airrec.civilian;
-	const militaryAircraft = airrec.military;
-
 	let match = false;
 	let matchedAircraft: Aircraft | null = null;
-	for (const aircraft of civilianAircraft) {
+	for (const aircraft of mrast) {
 		const result = checkMatch(name, aircraft);
 		if (result) {
 			match = true;
@@ -52,7 +50,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 		}
 	}
 	if (!match) {
-		for (const aircraft of militaryAircraft) {
+		for (const aircraft of rast) {
 			const result = checkMatch(name, aircraft);
 			if (result) {
 				match = true;

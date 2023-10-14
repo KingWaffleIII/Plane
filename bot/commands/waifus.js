@@ -1,5 +1,5 @@
 import { EmbedBuilder, SlashCommandBuilder, } from "discord.js";
-import { User, Waifu } from "../models.js";
+import { Guild, User, Waifu } from "../models.js";
 import waifus from "../waifus.json" assert { type: "json" };
 export const data = new SlashCommandBuilder()
     .setName("waifus")
@@ -14,6 +14,14 @@ export async function execute(interaction) {
     const name = interaction.options.getString("name") ?? null;
     const targetUser = interaction.options.getUser("user") ?? interaction.user;
     await interaction.deferReply();
+    const guild = await Guild.findByPk(interaction.guildId);
+    if (!guild) {
+        await Guild.create({
+            id: interaction.guildId,
+            name: interaction.guild.name,
+            waifusEnabled: false,
+        });
+    }
     let user = await User.findByPk(targetUser.id, {
         include: { model: Waifu, as: "waifus" },
     });
@@ -38,25 +46,12 @@ export async function execute(interaction) {
         });
         return;
     }
-    const specWaifus = Object.keys(waifus).filter((w) => {
-        const waifuData = waifus[w];
-        return waifuData.spec;
-    });
-    const nonSpecWaifus = Object.keys(waifus).filter((w) => {
-        const waifuData = waifus[w];
-        return !waifuData.spec;
-    });
-    const unlockedSpecWaifus = [];
-    const unlockedNonSpecWaifus = [];
+    const waifuNames = Object.keys(waifus);
+    const unlockedWaifus = [];
     user.waifus?.forEach((w) => {
         if (w.generated)
             return;
-        if (!w.spec) {
-            if (!unlockedNonSpecWaifus.includes(w.name))
-                unlockedNonSpecWaifus.push(w.name);
-        }
-        else if (!unlockedSpecWaifus.includes(w.name))
-            unlockedSpecWaifus.push(w.name);
+        unlockedWaifus.push(w.name);
     });
     if (name) {
         const waifusLowerCase = Object.keys(waifus).map((w) => w.toLowerCase());
@@ -74,12 +69,6 @@ export async function execute(interaction) {
             },
         });
         if (userWaifus.length === 0) {
-            if (waifuData.spec) {
-                await interaction.editReply({
-                    content: "You don't have this waifu unlocked! You can unlock her by using `/airrec`.",
-                });
-                return;
-            }
             await interaction.editReply({
                 content: "You don't have this waifu unlocked! You can unlock her by winning airrec quizzes.",
             });
@@ -98,17 +87,13 @@ export async function execute(interaction) {
             .setThumbnail(targetUser.avatarURL())
             .setImage(`attachment://${waifuData.urlFriendlyName ?? waifuName}.jpg`)
             .setFooter({
-            text: `You can unlock ${specWaifus.length - unlockedSpecWaifus.length} more waifus with /airrec and ${nonSpecWaifus.length - unlockedNonSpecWaifus.length} more waifus by winning airrec quizzes!`,
+            text: `You can unlock ${waifuNames.length - unlockedWaifus.length} more waifus by winning airrec quizzes!`,
         })
             .setDescription(`
 This user has ${userWaifus.length} cop${userWaifus.length === 1 ? "y" : "ies"} of this waifu!\n
 ${userWaifus.some((w) => w.generated)
             ? "One or more of this waifu was generated."
-            : ""}${userWaifus.some((w) => waifus[w.name].spec &&
-            !w.generated)
-            ? "One or more of this waifu was unlocked with `/airrec`!"
-            : ""}${userWaifus.some((w) => !waifus[w.name].spec &&
-            !w.generated)
+            : ""}${userWaifus.some((w) => !w.generated)
             ? "One or more of this waifu was unlocked by winning an airrec quiz!"
             : ""}
 In dogfighting, this waifu has won ${won} time${won === 1 ? "" : "s"} and lost ${lost} time${lost === 1 ? "" : "s"}.
@@ -178,9 +163,7 @@ In dogfighting, this waifu has won ${won} time${won === 1 ? "" : "s"} and lost $
         inline: true,
     })
         .setFooter({
-        text: `${waifuList.filter((w) => w.startsWith("\\*")).length > 0
-            ? "*This waifu was generated. Generated waifus do not count towards your stats."
-            : ""}\nYou can unlock ${specWaifus.length - unlockedSpecWaifus.length} more waifus with /airrec and ${nonSpecWaifus.length - unlockedNonSpecWaifus.length} more waifus by winning airrec quizzes!`,
+        text: `You can unlock ${waifuNames.length - unlockedWaifus.length} more waifus by winning airrec quizzes!`,
     });
     await interaction.editReply({
         embeds: [embed],

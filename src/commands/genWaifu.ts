@@ -1,7 +1,7 @@
 import { ChatInputCommandInteraction, SlashCommandBuilder } from "discord.js";
 
 import { User } from "../models.js";
-import { WaifuBaseData } from "./airrec.js";
+import { WaifuBaseData } from "./airrecQuiz.js";
 import waifus from "../waifus.json" assert { type: "json" };
 
 const wait = (await import("node:timers/promises")).setTimeout;
@@ -164,7 +164,6 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 
 		const waifu = await user.createWaifu({
 			name: waifuName,
-			spec: waifuData.spec,
 			atk: thisAtk,
 			hp: thisHp,
 			spd: thisSpd,

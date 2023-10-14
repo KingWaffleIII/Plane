@@ -103,7 +103,6 @@ export async function execute(interaction) {
         }
         const waifu = await user.createWaifu({
             name: waifuName,
-            spec: waifuData.spec,
             atk: thisAtk,
             hp: thisHp,
             spd: thisSpd,

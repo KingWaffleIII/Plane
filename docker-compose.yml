@@ -8,8 +8,9 @@ services:
             - ./package-lock.json:/bot/package-lock.json
             - ./src/config.json:/bot/config.json
 
-            - ./src/RAFK.json:/bot/RAFK.json
-            - ./src/air_rec.json:/bot/air_rec.json
+            - ./src/rafk.json:/bot/rafk.json
+            - ./src/mrast.json:/bot/mrast.json
+            - ./src/rast.json:/bot/rast.json
             - ./src/waifus.json:/bot/waifus.json
             - ./src/assets/:/bot/assets/
         working_dir: /bot

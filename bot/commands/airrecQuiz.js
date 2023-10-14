@@ -1,8 +1,9 @@
 import crypto from "crypto";
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle, ComponentType, EmbedBuilder, SlashCommandBuilder, } from "discord.js";
-import { User } from "../models.js";
-import { getImage, makeEmbedWithImage, } from "./airrec.js";
-import airrec from "../air_rec.json" assert { type: "json" };
+import { Guild, User } from "../models.js";
+import { getImage, makeEmbedWithImage } from "./airrec.js";
+import mrast from "../mrast.json" assert { type: "json" };
+import rast from "../rast.json" assert { type: "json" };
 import waifus from "../waifus.json" assert { type: "json" };
 const wait = (await import("node:timers/promises")).setTimeout;
 // stop crashing if thread is deleted pre-emptively
@@ -21,13 +22,17 @@ function checkAnswer(message, aircraft) {
     }
     return 0;
 }
-async function spawnWaifu(user, rounds, score, name) {
+async function spawnWaifu(guild, user, rounds, score, name) {
     let isGuaranteed = false;
     if (user.guaranteeWaifu) {
         isGuaranteed =
             user.guaranteeWaifu !== undefined && user.guaranteeCounter >= 10;
     }
     const doSpawn = () => {
+        // If waifus are disabled, don't spawn
+        if (!guild.waifusEnabled) {
+            return false;
+        }
         // If the user has a guaranteed waifu, spawn it
         if (isGuaranteed) {
             return true;
@@ -69,7 +74,6 @@ async function spawnWaifu(user, rounds, score, name) {
                         urlFriendlyName: waifu.urlFriendlyName,
                         path: waifu.path,
                         type: waifu.type,
-                        spec: waifu.spec,
                         abilityName: waifu.abilityName,
                         abilityDescription: waifu.abilityDescription,
                     };
@@ -79,18 +83,13 @@ async function spawnWaifu(user, rounds, score, name) {
                     urlFriendlyName: name,
                     path: waifu.path,
                     type: waifu.type,
-                    spec: waifu.spec,
                     abilityName: waifu.abilityName,
                     abilityDescription: waifu.abilityDescription,
                 };
             }
             return null;
         }
-        const nonSpecWaifus = Object.keys(waifus).filter((w) => {
-            const waifuData = waifus[w];
-            return !waifuData.spec;
-        });
-        const waifuName = nonSpecWaifus[Math.floor(Math.random() * Object.keys(nonSpecWaifus).length)];
+        const waifuName = Object.keys(waifus)[Math.floor(Math.random() * Object.keys(waifus).length)];
         const waifu = waifus[waifuName];
         if (waifu.urlFriendlyName) {
             return {
@@ -98,7 +97,6 @@ async function spawnWaifu(user, rounds, score, name) {
                 urlFriendlyName: waifu.urlFriendlyName,
                 path: waifu.path,
                 type: waifu.type,
-                spec: waifu.spec,
                 abilityName: waifu.abilityName,
                 abilityDescription: waifu.abilityDescription,
             };
@@ -108,7 +106,6 @@ async function spawnWaifu(user, rounds, score, name) {
             urlFriendlyName: waifuName,
             path: waifu.path,
             type: waifu.type,
-            spec: waifu.spec,
             abilityName: waifu.abilityName,
             abilityDescription: waifu.abilityDescription,
         };
@@ -126,10 +123,18 @@ export const data = new SlashCommandBuilder()
     .addStringOption((option) => option
     .setName("spec")
     .setDescription("The spec you want to use (mRAST is RAF past/present). Defaults to RAST.")
-    .addChoices({ name: "RAST", value: "RAST" }, { name: "mRAST", value: "mRAST" }));
+    .addChoices({ name: "mRAST", value: "mRAST" }, { name: "RAST", value: "RAST" }));
 export async function execute(interaction) {
     const rounds = interaction.options.getInteger("rounds") ?? 10;
     const spec = interaction.options.getString("spec") ?? "RAST";
+    const guild = await Guild.findByPk(interaction.guildId);
+    if (!guild) {
+        await Guild.create({
+            id: interaction.guildId,
+            name: interaction.guild.name,
+            waifusEnabled: false,
+        });
+    }
     await interaction.reply({
         content: "Creating a new thread...",
     });
@@ -250,14 +255,8 @@ If you want to play, click the button below.
             components: [],
         });
         for (let i = 0; i < rounds; i++) {
-            let type = airrec[Object.keys(airrec)[
-            // Math.floor(Math.random() * Object.keys(airrec).length)
-            Math.floor(Math.random() * 2) //! for some reason there's a key called "default" in the object?? - setting max to 2
-            ]];
-            if (spec === "mRAST") {
-                type = type.filter((a) => a.mrast);
-            }
-            const aircraft = type[Math.floor(Math.random() * type.length)];
+            const list = spec === "RAST" ? rast : mrast;
+            const aircraft = list[Math.floor(Math.random() * list.length)];
             const image = await getImage(aircraft.image);
             if (!image) {
                 await thread.send({
@@ -301,7 +300,7 @@ If you want to play, click the button below.
                 .setImage(image)
                 .setTimestamp()
                 .setFooter({
-                text: "Photo credit: https://www.airfighters.com",
+                text: "Photo credit: see bottom of image.",
             })
                 .addFields({
                 name: "Alternative names (aliases for /airrec-quiz):",
@@ -402,15 +401,13 @@ If you want to play, click the button below.
                         airrecQuizWinstreak: user.airrecQuizWinstreak + 1,
                     });
                 }
-                const isGuaranteed = user.guaranteeWaifu &&
-                    user.guaranteeCounter >= 10 &&
-                    !waifus[user.guaranteeWaifu].spec;
+                const isGuaranteed = user.guaranteeWaifu && user.guaranteeCounter >= 10;
                 let waifu;
                 if (isGuaranteed) {
-                    waifu = await spawnWaifu(user, rounds, players[u].score, user.guaranteeWaifu);
+                    waifu = await spawnWaifu(guild, user, rounds, players[u].score, user.guaranteeWaifu);
                 }
                 else {
-                    waifu = await spawnWaifu(user, rounds, players[u].score);
+                    waifu = await spawnWaifu(guild, user, rounds, players[u].score);
                 }
                 if (waifu) {
                     const atk = Math.ceil(Math.random() * 10);
@@ -457,7 +454,6 @@ If you want to play, click the button below.
                         atk,
                         hp,
                         spd,
-                        spec: waifu.spec,
                         kills: 0,
                         deaths: 0,
                     });

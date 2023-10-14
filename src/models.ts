@@ -28,6 +28,20 @@ export const db = new Sequelize({
 	logging: false,
 });
 
+export class Guild extends Model<
+	InferAttributes<Guild>,
+	InferCreationAttributes<Guild>
+> {
+	declare id: string;
+	declare name: string;
+	declare waifusEnabled: boolean;
+
+	// createdAt can be undefined during creation
+	declare createdAt: CreationOptional<Date>;
+	// updatedAt can be undefined during creation
+	declare updatedAt: CreationOptional<Date>;
+}
+
 export class User extends Model<
 	InferAttributes<User, { omit: "waifus" }>,
 	InferCreationAttributes<User, { omit: "waifus" }>
@@ -88,7 +102,6 @@ export class Waifu extends Model<
 	declare atk: number;
 	declare hp: number;
 	declare spd: number;
-	declare spec: boolean;
 	declare generated?: boolean; // if the waifu was generated in by an admin
 	declare kills: number;
 	declare deaths: number;
@@ -103,6 +116,31 @@ export class Waifu extends Model<
 	declare updatedAt: CreationOptional<Date>;
 }
 
+Guild.init(
+	{
+		id: {
+			type: DataTypes.STRING,
+			autoIncrement: false,
+			primaryKey: true,
+		},
+		name: {
+			type: DataTypes.STRING(100),
+			allowNull: false,
+		},
+		waifusEnabled: {
+			type: DataTypes.BOOLEAN,
+			allowNull: false,
+			defaultValue: false,
+		},
+		createdAt: DataTypes.DATE,
+		updatedAt: DataTypes.DATE,
+	},
+	{
+		sequelize: db,
+		tableName: "Guilds",
+	}
+);
+
 User.init(
 	{
 		id: {
@@ -111,7 +149,7 @@ User.init(
 			primaryKey: true,
 		},
 		username: {
-			type: DataTypes.STRING(32 + 5),
+			type: DataTypes.STRING(32),
 			allowNull: false,
 		},
 		avatarUrl: {
@@ -195,10 +233,6 @@ Waifu.init(
 			type: DataTypes.INTEGER,
 			allowNull: false,
 			defaultValue: 0,
-		},
-		spec: {
-			type: DataTypes.BOOLEAN,
-			allowNull: false,
 		},
 		generated: {
 			type: DataTypes.BOOLEAN,
