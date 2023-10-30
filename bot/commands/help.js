@@ -5,7 +5,7 @@ export const data = new SlashCommandBuilder()
 export async function execute(interaction) {
     const embed = new EmbedBuilder()
         .setColor(0x0099ff)
-        .setTitle("Plane v1.6.0 'Uchiha Plane Massacre'")
+        .setTitle("Plane v1.7.0 'Placeholder'")
         .setURL("https://github.com/KingWaffleIII/plane")
         .setAuthor({
         name: "KingWaffleIII @ Planet Waffle",
