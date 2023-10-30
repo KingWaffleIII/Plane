@@ -11,6 +11,7 @@
 -   **cranium117** - Lead adviser and aircraft recognition tips (love you James <3)
 -   **apocalyptictofu** - Adviser
 -   **hadesvanir** - Adviser and patch names
+-   **thegreen_one** - Adviser and supplier ;)
 -   **rainer367** - Adviser and aircraft recognition tips
 -   **tecnoplayz** - Adviser
 
