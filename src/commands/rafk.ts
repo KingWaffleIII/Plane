@@ -13,12 +13,8 @@ import rafk from "../rafk.json" assert { type: "json" };
 import ranks from "../ranks.json" assert { type: "json" };
 
 export interface Question {
-	question: string;
-	answer: string;
-}
-
-export interface RankQuestion {
-	image: string;
+	question?: string;
+	image?: string;
 	answer: string;
 }
 
@@ -53,7 +49,7 @@ export async function execute(
 	}
 
 	const subject: {
-		[category: string]: Question[] | RankQuestion[];
+		[category: string]: Question[];
 	} =
 		part[
 			Object.keys(part)[
@@ -61,13 +57,13 @@ export async function execute(
 			] as keyof typeof part
 		];
 
-	const category: Question[] | RankQuestion[] =
+	const category =
 		subject[
 			Object.keys(subject)[
 				Math.floor(Math.random() * Object.keys(subject).length)
 			]
 		];
-	const randomQuestion: Question | RankQuestion =
+	const randomQuestion =
 		category[Math.floor(Math.random() * category.length)];
 
 	const buttonId = crypto.randomBytes(6).toString("hex");
@@ -79,7 +75,7 @@ export async function execute(
 	);
 	let answer: string;
 	if (topic !== "ranks") {
-		const { question } = randomQuestion as Question;
+		const { question } = randomQuestion;
 		answer = randomQuestion.answer;
 
 		await interaction.editReply({
@@ -118,12 +114,12 @@ export async function execute(
 				});
 		});
 	} else {
-		const { image } = randomQuestion as RankQuestion;
+		const { image } = randomQuestion;
 		answer = randomQuestion.answer;
 
 		await interaction.editReply({
 			content: "What rank is this?",
-			files: [image],
+			files: [image!],
 			components: [row],
 		});
 
@@ -143,7 +139,7 @@ export async function execute(
 			} else {
 				await interaction.editReply({
 					content: `**${answer}**`,
-					files: [image],
+					files: [image!],
 					components: [],
 				});
 			}
@@ -155,7 +151,7 @@ export async function execute(
 			)
 				await interaction.editReply({
 					content: `**${answer}**`,
-					files: [image],
+					files: [image!],
 					components: [],
 				});
 		});
