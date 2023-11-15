@@ -2,15 +2,17 @@
 
 ### Developers
 
--   **KingWaffleIII** - Lead developer and maintainer
+-   **KingWaffleIII (kingwaffleiii)** - Lead developer and maintainer
 
 ### External contributors
 
 **Thank you to these people for helping me make and develop this bot!**
 
--   **cranium117** - Lead adviser and aircraft recognition tips (love you James <3)
+-   **cranium117** - Designer and aircraft recognition tips (love you James <3)
+-   **piplupneo** - Designer
+
 -   **apocalyptictofu** - Adviser
--   **hadesvanir** - Adviser and patch names
+-   **hadesvanir** - Adviser and version names
 -   **thegreen_one** - Adviser and supplier ;)
 -   **rainer367** - Adviser and aircraft recognition tips
 -   **tecnoplayz** - Adviser

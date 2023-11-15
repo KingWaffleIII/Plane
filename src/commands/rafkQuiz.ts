@@ -108,8 +108,9 @@ You will be given ${rounds} questions about ${
 
 				await wait(10000);
 
-				await msg.edit({
-					content: `**${answer}**`,
+				await msg.reply({
+					content: `**The answer was ${answer}!**\nContinuing in 10 seconds...`,
+					files: [image!],
 				});
 			} else {
 				const { question, answer } = randomQuestion;
@@ -120,8 +121,8 @@ You will be given ${rounds} questions about ${
 
 				await wait(10000);
 
-				await msg.edit({
-					content: `${question}\n**${answer}**`,
+				await msg.reply({
+					content: `${question}\n**${answer}**\nContinuing in 10 seconds...`,
 				});
 			}
 
@@ -153,7 +154,7 @@ You will be given ${rounds} questions about ${
 		questions.push(randomQuestion);
 
 		await doQuestion(randomQuestion);
-		await wait(5000);
+		await wait(10000);
 	}
 
 	await thread.send("The quiz has ended!");

@@ -65,8 +65,9 @@ You will be given ${rounds} questions about ${topic === "ranks" ? "ranks" : `Par
                 files: [image],
             });
             await wait(10000);
-            await msg.edit({
-                content: `**${answer}**`,
+            await msg.reply({
+                content: `**The answer was ${answer}!**\nContinuing in 10 seconds...`,
+                files: [image],
             });
         }
         else {
@@ -75,8 +76,8 @@ You will be given ${rounds} questions about ${topic === "ranks" ? "ranks" : `Par
                 content: `${question}\n**The answer will be revealed in 10 seconds...**`,
             });
             await wait(10000);
-            await msg.edit({
-                content: `${question}\n**${answer}**`,
+            await msg.reply({
+                content: `${question}\n**${answer}**\nContinuing in 10 seconds...`,
             });
         }
         resolve(true);
@@ -91,7 +92,7 @@ You will be given ${rounds} questions about ${topic === "ranks" ? "ranks" : `Par
         }
         questions.push(randomQuestion);
         await doQuestion(randomQuestion);
-        await wait(5000);
+        await wait(10000);
     }
     await thread.send("The quiz has ended!");
     await thread.setArchived(true);

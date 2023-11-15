@@ -5,7 +5,7 @@ export const data = new SlashCommandBuilder()
 export async function execute(interaction) {
     const embed = new EmbedBuilder()
         .setColor(0x0099ff)
-        .setTitle("Plane v1.7.0 'The Ranking'")
+        .setTitle("Plane v1.7.0-DEV 'The Ranking'")
         .setURL("https://github.com/KingWaffleIII/plane")
         .setAuthor({
         name: "KingWaffleIII @ Planet Waffle",
