@@ -4,18 +4,17 @@
 
 -   **KingWaffleIII (kingwaffleiii)** - Lead developer and maintainer
 
-### External contributors
+### External Contributors
 
 **Thank you to these people for helping me make and develop this bot!**
 
--   **cranium117** - Designer and aircraft recognition tips (love you James <3)
--   **piplupneo** - Designer
-
--   **apocalyptictofu** - Adviser
--   **hadesvanir** - Adviser and version names
--   **thegreen_one** - Adviser and supplier ;)
--   **rainer367** - Adviser and aircraft recognition tips
--   **tecnoplayz** - Adviser
+-   **cranium117** - Lead designer, consultant and aircraft recognition tips (love you James <3)
+-   **apocalyptictofu** - Lead consultant
+-   **piplupneo** - Designer and consultant
+-   **hadesvanir** - Consultant and version names
+-   **thegreen_one** - Consultant and supplier ;)
+-   **rainer367** - Consultant and aircraft recognition tips
+-   **tecnoplayz** - Consultant
 
 ### Sources
 
