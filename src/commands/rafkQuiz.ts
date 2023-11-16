@@ -11,9 +11,9 @@ import ranks from "../ranks.json" assert { type: "json" };
 const wait = (await import("node:timers/promises")).setTimeout;
 
 // stop crashing if thread is deleted pre-emptively
-process.on("unhandledRejection", (error: Error) => {
-	if (error.name === "Error [ChannelNotCached]") return;
-	console.error("Unhandled promise rejection:", error);
+process.on("unhandledRejection", (_error: Error) => {
+	// assume it's because the thread was deleted
+	console.error("Thread was deleted before it could finish.");
 });
 
 interface RafkPart {

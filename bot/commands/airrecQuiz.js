@@ -7,10 +7,9 @@ import rast from "../rast.json" assert { type: "json" };
 import waifus from "../waifus.json" assert { type: "json" };
 const wait = (await import("node:timers/promises")).setTimeout;
 // stop crashing if thread is deleted pre-emptively
-process.on("unhandledRejection", (error) => {
-    if (error.name === "Error [ChannelNotCached]")
-        return;
-    console.error("Unhandled promise rejection:", error);
+process.on("unhandledRejection", (_error) => {
+    // assume it's because the thread was deleted
+    console.error("Thread was deleted before it could finish.");
 });
 function checkAnswer(message, aircraft) {
     if (message.toLowerCase() === aircraft.name.toLowerCase()) {

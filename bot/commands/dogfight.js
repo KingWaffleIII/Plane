@@ -4,6 +4,11 @@ import crypto from "crypto";
 import { ActionRowBuilder, ComponentType, SlashCommandBuilder, StringSelectMenuBuilder, EmbedBuilder, ButtonBuilder, ButtonStyle, } from "discord.js";
 import { User, Waifu } from "../models.js";
 import waifus from "../waifus.json" assert { type: "json" };
+// stop crashing if thread is deleted pre-emptively
+process.on("unhandledRejection", (_error) => {
+    // assume it's because the thread was deleted
+    console.error("Thread was deleted before it could finish.");
+});
 export const data = new SlashCommandBuilder()
     .setName("dogfight")
     .setDescription("Starts a waifu dogfight with another user.")

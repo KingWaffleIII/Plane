@@ -44,9 +44,9 @@ interface WaifuData extends WaifuBaseData {
 }
 
 // stop crashing if thread is deleted pre-emptively
-process.on("unhandledRejection", (error: Error) => {
-	if (error.name === "Error [ChannelNotCached]") return;
-	console.error("Unhandled promise rejection:", error);
+process.on("unhandledRejection", (_error: Error) => {
+	// assume it's because the thread was deleted
+	console.error("Thread was deleted before it could finish.");
 });
 
 function checkAnswer(message: string, aircraft: Aircraft): number {
