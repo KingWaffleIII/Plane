@@ -44,6 +44,8 @@ export const data = new SlashCommandBuilder()
 			.setDescription(
 				"The number of questions you want to be asked. Defaults to 10."
 			)
+			.setMinValue(1)
+			.setMaxValue(30)
 	);
 
 export async function execute(

@@ -114,15 +114,15 @@ async function spawnWaifu(guild, user, rounds, score, name) {
 export const data = new SlashCommandBuilder()
     .setName("airrec-quiz")
     .setDescription("Gives you a series of aircraft images for you and others to identify with scoring.")
+    .addStringOption((option) => option
+    .setName("spec")
+    .setDescription("The spec you want to use (mRAST is RAF past/present). Defaults to RAST.")
+    .addChoices({ name: "mRAST", value: "mRAST" }, { name: "RAST", value: "RAST" }))
     .addIntegerOption((option) => option
     .setName("rounds")
     .setDescription("The number of rounds you want to play. Defaults to 10 rounds.")
     .setMinValue(1)
-    .setMaxValue(30))
-    .addStringOption((option) => option
-    .setName("spec")
-    .setDescription("The spec you want to use (mRAST is RAF past/present). Defaults to RAST.")
-    .addChoices({ name: "mRAST", value: "mRAST" }, { name: "RAST", value: "RAST" }));
+    .setMaxValue(30));
 export async function execute(interaction) {
     const rounds = interaction.options.getInteger("rounds") ?? 10;
     const spec = interaction.options.getString("spec") ?? "RAST";

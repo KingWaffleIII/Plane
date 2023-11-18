@@ -19,7 +19,9 @@ export const data = new SlashCommandBuilder()
     .setRequired(true))
     .addIntegerOption((option) => option
     .setName("questions")
-    .setDescription("The number of questions you want to be asked. Defaults to 10."));
+    .setDescription("The number of questions you want to be asked. Defaults to 10.")
+    .setMinValue(1)
+    .setMaxValue(30));
 export async function execute(interaction) {
     const topic = interaction.options.getString("topic");
     const rounds = interaction.options.getInteger("questions") ?? 10;
