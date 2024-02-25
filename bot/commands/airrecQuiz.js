@@ -116,7 +116,7 @@ export const data = new SlashCommandBuilder()
     .setDescription("Gives you a series of aircraft images for you and others to identify with scoring.")
     .addStringOption((option) => option
     .setName("spec")
-    .setDescription("The spec you want to use (mRAST is RAF past/present). Defaults to RAST.")
+    .setDescription("The spec you want to use (mRAST is RAF past/present). Defaults to mRAST.")
     .addChoices({ name: "mRAST", value: "mRAST" }, { name: "RAST", value: "RAST" }))
     .addIntegerOption((option) => option
     .setName("rounds")
@@ -125,7 +125,7 @@ export const data = new SlashCommandBuilder()
     .setMaxValue(30));
 export async function execute(interaction) {
     const rounds = interaction.options.getInteger("rounds") ?? 10;
-    const spec = interaction.options.getString("spec") ?? "RAST";
+    const spec = interaction.options.getString("spec") ?? "mRAST";
     const guild = await Guild.findByPk(interaction.guildId);
     if (!guild) {
         await Guild.create({

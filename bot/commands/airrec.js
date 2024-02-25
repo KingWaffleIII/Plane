@@ -50,10 +50,10 @@ export const data = new SlashCommandBuilder()
     .setDescription("Gives you an aircraft image for you to identify.")
     .addStringOption((option) => option
     .setName("spec")
-    .setDescription("The spec you want to use (mRAST is RAF past/present). Defaults to RAST.")
+    .setDescription("The spec you want to use (mRAST is RAF past/present). Defaults to mRAST.")
     .addChoices({ name: "mRAST", value: "mRAST" }, { name: "RAST", value: "RAST" }));
 export async function execute(interaction) {
-    const spec = interaction.options.getString("spec") ?? "RAST";
+    const spec = interaction.options.getString("spec") ?? "mRAST";
     await interaction.deferReply();
     const list = spec === "RAST" ? rast : mrast;
     const aircraft = list[Math.floor(Math.random() * list.length)];

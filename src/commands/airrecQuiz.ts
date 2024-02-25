@@ -183,7 +183,7 @@ export const data = new SlashCommandBuilder()
 		option
 			.setName("spec")
 			.setDescription(
-				"The spec you want to use (mRAST is RAF past/present). Defaults to RAST."
+				"The spec you want to use (mRAST is RAF past/present). Defaults to mRAST."
 			)
 			.addChoices(
 				{ name: "mRAST", value: "mRAST" },
@@ -202,7 +202,7 @@ export const data = new SlashCommandBuilder()
 
 export async function execute(interaction: ChatInputCommandInteraction) {
 	const rounds = interaction.options.getInteger("rounds") ?? 10;
-	const spec = interaction.options.getString("spec") ?? "RAST";
+	const spec = interaction.options.getString("spec") ?? "mRAST";
 
 	const guild = await Guild.findByPk(interaction.guildId!);
 	if (!guild) {
