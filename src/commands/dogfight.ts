@@ -20,6 +20,12 @@ import { User, Waifu } from "../models.js";
 import { WaifuBaseData } from "./airrecQuiz.js";
 import waifus from "../waifus.json" assert { type: "json" };
 
+// stop crashing if thread is deleted pre-emptively
+process.on("unhandledRejection", (_error: Error) => {
+	// assume it's because the thread was deleted
+	console.error("Thread was deleted before it could finish.");
+});
+
 interface WaifuData {
 	atk: number;
 	hp: number;

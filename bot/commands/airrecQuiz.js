@@ -7,10 +7,9 @@ import rast from "../rast.json" assert { type: "json" };
 import waifus from "../waifus.json" assert { type: "json" };
 const wait = (await import("node:timers/promises")).setTimeout;
 // stop crashing if thread is deleted pre-emptively
-process.on("unhandledRejection", (error) => {
-    if (error.name === "Error [ChannelNotCached]")
-        return;
-    console.error("Unhandled promise rejection:", error);
+process.on("unhandledRejection", (_error) => {
+    // assume it's because the thread was deleted
+    console.error("Thread was deleted before it could finish.");
 });
 function checkAnswer(message, aircraft) {
     if (message.toLowerCase() === aircraft.name.toLowerCase()) {
@@ -115,18 +114,18 @@ async function spawnWaifu(guild, user, rounds, score, name) {
 export const data = new SlashCommandBuilder()
     .setName("airrec-quiz")
     .setDescription("Gives you a series of aircraft images for you and others to identify with scoring.")
+    .addStringOption((option) => option
+    .setName("spec")
+    .setDescription("The spec you want to use (mRAST is RAF past/present). Defaults to mRAST.")
+    .addChoices({ name: "mRAST", value: "mRAST" }, { name: "RAST", value: "RAST" }))
     .addIntegerOption((option) => option
     .setName("rounds")
     .setDescription("The number of rounds you want to play. Defaults to 10 rounds.")
     .setMinValue(1)
-    .setMaxValue(30))
-    .addStringOption((option) => option
-    .setName("spec")
-    .setDescription("The spec you want to use (mRAST is RAF past/present). Defaults to RAST.")
-    .addChoices({ name: "mRAST", value: "mRAST" }, { name: "RAST", value: "RAST" }));
+    .setMaxValue(30));
 export async function execute(interaction) {
     const rounds = interaction.options.getInteger("rounds") ?? 10;
-    const spec = interaction.options.getString("spec") ?? "RAST";
+    const spec = interaction.options.getString("spec") ?? "mRAST";
     const guild = await Guild.findByPk(interaction.guildId);
     if (!guild) {
         await Guild.create({

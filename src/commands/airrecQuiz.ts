@@ -44,9 +44,9 @@ interface WaifuData extends WaifuBaseData {
 }
 
 // stop crashing if thread is deleted pre-emptively
-process.on("unhandledRejection", (error: Error) => {
-	if (error.name === "Error [ChannelNotCached]") return;
-	console.error("Unhandled promise rejection:", error);
+process.on("unhandledRejection", (_error: Error) => {
+	// assume it's because the thread was deleted
+	console.error("Thread was deleted before it could finish.");
 });
 
 function checkAnswer(message: string, aircraft: Aircraft): number {
@@ -179,6 +179,17 @@ export const data = new SlashCommandBuilder()
 	.setDescription(
 		"Gives you a series of aircraft images for you and others to identify with scoring."
 	)
+	.addStringOption((option) =>
+		option
+			.setName("spec")
+			.setDescription(
+				"The spec you want to use (mRAST is RAF past/present). Defaults to mRAST."
+			)
+			.addChoices(
+				{ name: "mRAST", value: "mRAST" },
+				{ name: "RAST", value: "RAST" }
+			)
+	)
 	.addIntegerOption((option) =>
 		option
 			.setName("rounds")
@@ -187,22 +198,11 @@ export const data = new SlashCommandBuilder()
 			)
 			.setMinValue(1)
 			.setMaxValue(30)
-	)
-	.addStringOption((option) =>
-		option
-			.setName("spec")
-			.setDescription(
-				"The spec you want to use (mRAST is RAF past/present). Defaults to RAST."
-			)
-			.addChoices(
-				{ name: "mRAST", value: "mRAST" },
-				{ name: "RAST", value: "RAST" }
-			)
 	);
 
 export async function execute(interaction: ChatInputCommandInteraction) {
 	const rounds = interaction.options.getInteger("rounds") ?? 10;
-	const spec = interaction.options.getString("spec") ?? "RAST";
+	const spec = interaction.options.getString("spec") ?? "mRAST";
 
 	const guild = await Guild.findByPk(interaction.guildId!);
 	if (!guild) {

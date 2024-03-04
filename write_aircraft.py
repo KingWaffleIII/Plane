@@ -26,6 +26,8 @@ with open("src/mrast.json") as f:
 with open("aircraft.md", "w+") as f:
     total_aircraft = len(rast + mrast)
     f.write(f"**Total aircraft: {total_aircraft}**\n\n")
+    f.write(f"**RAST: {len(rast)}**\n\n")
+    f.write(f"**mRAST: {len(mrast)}**\n\n")
 
     f.write("## RAST:\n")
     for i in rast:
