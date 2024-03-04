@@ -1,5 +1,9 @@
 **Total aircraft: 84**
 
+**RAST: 48**
+
+**mRAST: 36**
+
 ## RAST:
 
 ### Chengdu F-7 Fishcan
