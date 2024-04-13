@@ -55,7 +55,7 @@ function checkAnswer(message: string, aircraft: Aircraft): number {
 	}
 	if (
 		aircraft.aliases.some((alias) =>
-			message.toLowerCase().includes(alias.toLowerCase())
+			message.toLowerCase().includes(alias.toLowerCase()),
 		) ||
 		message.toLowerCase().includes(aircraft.model.toLowerCase())
 	) {
@@ -69,12 +69,12 @@ async function spawnWaifu(
 	user: User,
 	rounds: number,
 	score: number,
-	name?: string
+	name?: string,
 ): Promise<WaifuData | null> {
 	let isGuaranteed = false;
 	if (user.guaranteeWaifu) {
 		isGuaranteed =
-			user.guaranteeWaifu !== undefined && user.guaranteeCounter! >= 10;
+			user.guaranteeCounter! >= 10;
 	}
 
 	const doSpawn = () => {
@@ -100,10 +100,8 @@ async function spawnWaifu(
 		const probability = score / 2 / rounds;
 
 		// Return true if the random number is less than the probability, otherwise return false
-		if (randomNum < probability) {
-			return true;
-		}
-		return false;
+		return randomNum < probability;
+
 	};
 
 	if (doSpawn()) {
@@ -149,7 +147,7 @@ async function spawnWaifu(
 
 		const waifuName = Object.keys(waifus)[
 			Math.floor(Math.random() * Object.keys(waifus).length)
-		] as keyof typeof waifus;
+			] as keyof typeof waifus;
 		const waifu: WaifuBaseData = waifus[waifuName];
 
 		if (waifu.urlFriendlyName) {
@@ -177,27 +175,27 @@ async function spawnWaifu(
 export const data = new SlashCommandBuilder()
 	.setName("airrec-quiz")
 	.setDescription(
-		"Gives you a series of aircraft images for you and others to identify with scoring."
+		"Gives you a series of aircraft images for you and others to identify with scoring.",
 	)
 	.addStringOption((option) =>
 		option
 			.setName("spec")
 			.setDescription(
-				"The spec you want to use (mRAST is RAF past/present). Defaults to mRAST."
+				"The spec you want to use (mRAST is RAF past/present). Defaults to mRAST.",
 			)
 			.addChoices(
 				{ name: "mRAST", value: "mRAST" },
-				{ name: "RAST", value: "RAST" }
-			)
+				{ name: "RAST", value: "RAST" },
+			),
 	)
 	.addIntegerOption((option) =>
 		option
 			.setName("rounds")
 			.setDescription(
-				"The number of rounds you want to play. Defaults to 10 rounds."
+				"The number of rounds you want to play. Defaults to 10 rounds.",
 			)
 			.setMinValue(1)
-			.setMaxValue(30)
+			.setMaxValue(30),
 	);
 
 export async function execute(interaction: ChatInputCommandInteraction) {
@@ -279,7 +277,7 @@ If you want to play, click the button below.
 	collector?.on("collect", async (i: ButtonInteraction) => {
 		if (i.customId === `cancel-${buttonId}`) {
 			if (i.user.id !== interaction.user.id) {
-				i.reply({
+				await i.reply({
 					content: "You can't cancel this game.",
 					ephemeral: true,
 				});
@@ -295,7 +293,7 @@ If you want to play, click the button below.
 		}
 		if (i.customId === `skip-${buttonId}`) {
 			if (i.user.id !== interaction.user.id) {
-				i.reply({
+				await i.reply({
 					content: "You can't start this game.",
 					ephemeral: true,
 				});
@@ -311,11 +309,11 @@ If you want to play, click the button below.
 				score: 0,
 				lastScore: 0,
 			};
-			i.reply({
+			await i.reply({
 				content: `<@${i.user.id}> has joined the game!`,
 			});
 		} else {
-			i.reply({
+			await i.reply({
 				content: "You have already joined the game.",
 				ephemeral: true,
 			});
@@ -386,10 +384,10 @@ If you want to play, click the button below.
 			});
 
 			if (messages && messages.size > 0) {
-				messages.forEach(async (message: Message) => {
-					const score = checkAnswer(message.content, aircraft);
-					players[message.author.id].score += score;
-				});
+				for (const message of messages) {
+					const score = checkAnswer(message[1].content, aircraft);
+					players[message[1].author.id].score += score;
+				}
 			}
 
 			const answer = new EmbedBuilder()
@@ -412,7 +410,7 @@ If you want to play, click the button below.
 							aircraft.identification
 								.map(
 									(identification: string) =>
-										`- ${identification}\n`
+										`- ${identification}\n`,
 								)
 								.join("") || "None",
 					},
@@ -426,11 +424,11 @@ If you want to play, click the button below.
 						name: "See more images:",
 						value: aircraft.image,
 						inline: true,
-					}
+					},
 				);
 
 			const sortedPlayers = Object.keys(players).sort(
-				(a, b) => players[b].score - players[a].score
+				(a, b) => players[b].score - players[a].score,
 			);
 
 			const leaderboard = new EmbedBuilder()
@@ -445,7 +443,7 @@ If you want to play, click the button below.
 								player.username
 							}**: ${player.lastScore} -> **${player.score}**`;
 						})
-						.join("\n")
+						.join("\n"),
 				)
 				.setFooter({
 					text: `Round ${i + 1} of ${rounds}`,
@@ -462,7 +460,7 @@ If you want to play, click the button below.
 		const winners: string[] = [];
 
 		const sortedPlayers = Object.keys(players).sort(
-			(a, b) => players[b].score - players[a].score
+			(a, b) => players[b].score - players[a].score,
 		);
 
 		if (players[sortedPlayers[0]].score !== 0) {
@@ -497,7 +495,7 @@ If you want to play, click the button below.
 							player.username
 						}**: ${player.score}`;
 					})
-					.join("\n")
+					.join("\n"),
 			)
 			.setTimestamp();
 
@@ -508,20 +506,19 @@ If you want to play, click the button below.
 		});
 
 		if (winners.length > 1) {
-			sortedPlayers
-				.filter((p) => !winners.includes(p))
-				.forEach(async (p) => {
-					const user = await User.findByPk(p);
-					if (user) {
-						await user.update({
-							airrecQuizLosses: user.airrecQuizLosses + 1,
-							airrecQuizWinstreak: 0,
-						});
-					}
-				});
+			for (const p1 of sortedPlayers
+				.filter((p) => !winners.includes(p))) {
+				const user = await User.findByPk(p1);
+				if (user) {
+					await user.update({
+						airrecQuizLosses: user.airrecQuizLosses + 1,
+						airrecQuizWinstreak: 0,
+					});
+				}
+			}
 		}
 
-		winners.forEach(async (u) => {
+		for (const u of winners) {
 			// check if user exists in db
 			const user = await User.findByPk(u);
 			if (!user) {
@@ -546,14 +543,14 @@ If you want to play, click the button below.
 						user!,
 						rounds,
 						players[u].score,
-						user.guaranteeWaifu!
+						user.guaranteeWaifu!,
 					);
 				} else {
 					waifu = await spawnWaifu(
 						guild!,
 						user!,
 						rounds,
-						players[u].score
+						players[u].score,
 					);
 				}
 
@@ -572,7 +569,7 @@ If you want to play, click the button below.
 						.setTitle(waifu.name)
 						.setImage(`attachment://${waifu.urlFriendlyName}.jpg`)
 						.setDescription(
-							`You can view your waifu collection by using \`/waifus\`!`
+							`You can view your waifu collection by using \`/waifus\`!`,
 						)
 						.addFields(
 							{
@@ -589,7 +586,7 @@ If you want to play, click the button below.
 								name: "SPD",
 								value: spd.toString(),
 								inline: true,
-							}
+							},
 						)
 						.setFooter({
 							text: "You unlocked an waifu! Image credit: Atamonica",
@@ -619,12 +616,12 @@ If you want to play, click the button below.
 
 					await user!.update({
 						lockedWaifus: user!.lockedWaifus!.filter(
-							(w) => w !== waifu!.name
+							(w) => w !== waifu!.name,
 						),
 					});
 				}
 			}
-		});
+		}
 
 		await thread.setArchived(true);
 	});
