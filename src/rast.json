@@ -1,6 +1,10 @@
 [
 	{
-		"aliases": ["Fishcan", "F7", "F 7"],
+		"aliases": [
+			"Fishcan",
+			"F7",
+			"F 7"
+		],
 		"identification": [
 			"Basically a repainted MiG-21",
 			"Has 1 large engine at the rear",
@@ -9,14 +13,19 @@
 			"Has a single verticle stabiliser"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=3642",
-		"manufacturer": "Chengdu",
+		"full": "Chengdu",
 		"model": "F-7",
 		"name": "Chengdu F-7 Fishcan",
 		"role": "Fighter aircraft.",
 		"wiki": "https://en.wikipedia.org/wiki/Chengdu_J-7"
 	},
 	{
-		"aliases": ["Fightinghawk", "A4AR", "A 4AR", "Fighting Hawk"],
+		"aliases": [
+			"Fightinghawk",
+			"A4AR",
+			"A 4AR",
+			"Fighting Hawk"
+		],
 		"identification": [
 			"1 turbofan engine in rear",
 			"2 air inlets on side of cockpit",
@@ -24,14 +33,18 @@
 			"Has vertical stabilisers above the wings by a large gap"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=8501",
-		"manufacturer": "Lockheed Martin",
+		"full": "Lockheed Martin",
 		"model": "A-4AR",
 		"name": "Lockheed Martin A-4AR Fightinghawk",
 		"role": "Ground attack fighter.",
 		"wiki": "https://en.wikipedia.org/wiki/Lockheed_Martin_A-4AR_Fightinghawk"
 	},
 	{
-		"aliases": ["Mitten", "Yak 130", "Yak130"],
+		"aliases": [
+			"Mitten",
+			"Yak 130",
+			"Yak130"
+		],
 		"identification": [
 			"Has 2 engines under the tail",
 			"Has 2 seats so longer canopy",
@@ -41,14 +54,18 @@
 			"Hardpoints on wing tips that extend forward"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=2242",
-		"manufacturer": "Yakovlev",
+		"full": "Yakovlev",
 		"model": "Yak-130",
 		"name": "Yakovlev Yak-130",
 		"role": "Fighter trainer and light combat aircraft.",
 		"wiki": "https://en.wikipedia.org/wiki/Yakovlev_Yak-130"
 	},
 	{
-		"aliases": ["Fitter", "Su 22", "Su22"],
+		"aliases": [
+			"Fitter",
+			"Su 22",
+			"Su22"
+		],
 		"identification": [
 			"1 turbofan engine in the rear",
 			"Has a cone in the nose like the J-7 and Mig-21",
@@ -56,28 +73,41 @@
 			"Stubby nose compared to J-7/Mig-21 and the airframe dips slightly along the top"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=2160",
-		"manufacturer": "Sukhoi",
+		"full": "Sukhoi",
 		"model": "Su-22",
 		"name": "Sukhoi Su-22",
 		"role": "Fighter-bomber aircraft.",
 		"wiki": "https://en.wikipedia.org/wiki/Sukhoi_Su-17#Su-22M5"
 	},
 	{
-		"aliases": ["Kunpeng", "Y 20", "Y20", "Kungpen"],
+		"aliases": [
+			"Kunpeng",
+			"Y 20",
+			"Y20",
+			"Kungpen"
+		],
 		"identification": [
 			"4 jet engines near to the airframe",
 			"Has elevators at the top of the stabiliser like C-17",
 			"Unlike C-17 it has a pointier nose and engines are further back into the wing than sticking out as much"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=7279",
-		"manufacturer": "Xian",
+		"full": "Xian",
 		"model": "Y-20",
 		"name": "Xian Y-20 Kunpeng",
 		"role": "Strategic airlifter.",
 		"wiki": "https://en.wikipedia.org/wiki/Xi%27an_Y-20"
 	},
 	{
-		"aliases": ["Li Pang", "H Y6", "HY6", "H-6", "H 6", "H6", "Lipang"],
+		"aliases": [
+			"Li Pang",
+			"H Y6",
+			"HY6",
+			"H-6",
+			"H 6",
+			"H6",
+			"Lipang"
+		],
 		"identification": [
 			"Has two engines at the rear and seperated by the tail",
 			"Has 4 hardpoints across each wing",
@@ -85,14 +115,19 @@
 			"Pointy nose that points down"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=5375",
-		"manufacturer": "Xian",
+		"full": "Xian",
 		"model": "HY-6",
 		"name": "Xian HY-6 Li Pang",
 		"role": "Aerial refueling tanker aircraft.",
 		"wiki": "https://en.wikipedia.org/wiki/Xian_H-6#Variants"
 	},
 	{
-		"aliases": ["Flanker-E", "Su 35", "Su35", "Flanker"],
+		"aliases": [
+			"Flanker-E",
+			"Su 35",
+			"Su35",
+			"Flanker"
+		],
 		"identification": [
 			"Has 2 engines sepperated by a tail",
 			"Has 2 straight verticle stabilisers",
@@ -101,14 +136,18 @@
 			"Has 4 hardpoints on each wing"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=3211",
-		"manufacturer": "Sukhoi",
+		"full": "Sukhoi",
 		"model": "Su-35",
 		"name": "Sukhoi Su-35",
 		"role": "Multi-role and air superiority fighter.",
 		"wiki": "https://en.wikipedia.org/wiki/Sukhoi_Su-35"
 	},
 	{
-		"aliases": ["Haitun", "Z9", "Z 9"],
+		"aliases": [
+			"Haitun",
+			"Z9",
+			"Z 9"
+		],
 		"identification": [
 			"4 rotors on top",
 			"Rear rotors are incased within the tail",
@@ -116,14 +155,18 @@
 			"2 vertical stabilisers on either side of tail"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=5517",
-		"manufacturer": "Harbin",
+		"full": "Harbin",
 		"model": "Z=9",
 		"name": "Harbin Z-9",
 		"role": "Medium multi-purpose utility helicopter.",
 		"wiki": "https://en.wikipedia.org/wiki/Harbin_Z-9"
 	},
 	{
-		"aliases": ["Fullback", "Su 34", "Su34"],
+		"aliases": [
+			"Fullback",
+			"Su 34",
+			"Su34"
+		],
 		"identification": [
 			"2 turbofan engines in rear",
 			"Double cockpit with 2 pilots next to each other",
@@ -131,14 +174,18 @@
 			"Tail extends far past the engines like a furries' tail"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=8648",
-		"manufacturer": "Sukhoi",
+		"full": "Sukhoi",
 		"model": "Su-34",
 		"name": "Sukhoi Su-34",
 		"role": "Figher-bomber strike aircraft.",
 		"wiki": "https://en.wikipedia.org/wiki/Sukhoi_Su-34"
 	},
 	{
-		"aliases": ["Flanker", "Su 27", "Su 27"],
+		"aliases": [
+			"Flanker",
+			"Su 27",
+			"Su 27"
+		],
 		"identification": [
 			"Has two engines which are spaces by a tail",
 			"Has a nose antenna",
@@ -146,7 +193,7 @@
 			"Has 3 hardpoints on each wing"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=1346",
-		"manufacturer": "Sukhoi",
+		"full": "Sukhoi",
 		"model": "Su-27",
 		"name": "Sukhoi Su-27",
 		"role": "Multi-role and air superiority fighter.",
@@ -162,7 +209,7 @@
 			"2 propeller engines"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=2749",
-		"manufacturer": "Saab",
+		"full": "Saab",
 		"model": "340",
 		"name": "Saab 340",
 		"role": "Turboprop regional airliner.",
@@ -179,17 +226,21 @@
 			"2 jet engines at the rear"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=7223",
-		"manufacturer": "Fokker",
+		"full": "Fokker",
 		"model": "100",
 		"name": "Fokker 100",
 		"role": "Regional jet airliner.",
 		"wiki": "https://en.wikipedia.org/wiki/Fokker_100"
 	},
 	{
-		"aliases": ["EC 135", "H135", "H 135"],
+		"aliases": [
+			"EC 135",
+			"H135",
+			"H 135"
+		],
 		"identification": [],
 		"image": "https://www.airfighters.com/photosearch.php?cra=1853",
-		"manufacturer": "Eurocopter",
+		"full": "Eurocopter",
 		"model": "EC135",
 		"name": "Eurocopter EC135",
 		"role": "Light utility helicopter.",
@@ -203,14 +254,17 @@
 			"No weird tube thing at the back of the rotor"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=6700",
-		"manufacturer": "Dornier",
+		"full": "Dornier",
 		"model": "328",
 		"name": "Dornier 328",
 		"role": "Turboprop airliner.",
 		"wiki": "https://en.wikipedia.org/wiki/Dornier_328"
 	},
 	{
-		"aliases": ["DC10", "DC 10"],
+		"aliases": [
+			"DC10",
+			"DC 10"
+		],
 		"identification": [
 			"Trijet commercial airliner",
 			"Three engines, one under each wing and one at the base of the tail",
@@ -220,7 +274,7 @@
 			"Commonly accommodates around 250 passengers in a two-class seating arrangement"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=1150",
-		"manufacturer": "McDonnell Douglas",
+		"full": "McDonnell Douglas",
 		"model": "DC-10",
 		"name": "McDonnell Douglas DC-10",
 		"role": "Wide-body airliner.",
@@ -244,14 +298,19 @@
 			"3 jet engines at the rear"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=3933",
-		"manufacturer": "Dassault",
+		"full": "Dassault",
 		"model": "Falcon 900",
 		"name": "Dassault Falcon 900",
 		"role": "Business jet.",
 		"wiki": "https://en.wikipedia.org/wiki/Dassault_Falcon_900"
 	},
 	{
-		"aliases": ["Ruslan", "Condor", "An124", "An 124"],
+		"aliases": [
+			"Ruslan",
+			"Condor",
+			"An124",
+			"An 124"
+		],
 		"identification": [
 			"It has 4 jet engines along the two wings which are close to airframe",
 			"It has 5 sets of 2 wheels for its landing gear on both sides and a singular pair of wheels on the front",
@@ -259,15 +318,21 @@
 			"Will always have a livery of either Russian (red and blue) or Ukrainian (blue and yellow)"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=5403",
-		"manufacturer": "Antonov",
+		"full": "Antonov",
 		"model": "An-124",
-
 		"name": "Antonov An-124",
 		"role": "Heavy transport aircraft.",
 		"wiki": "https://en.wikipedia.org/wiki/Antonov_An-124_Ruslan"
 	},
 	{
-		"aliases": ["Hornet", "CF 188", "CF188", "CF-18", "CF 18", "CF18"],
+		"aliases": [
+			"Hornet",
+			"CF 188",
+			"CF188",
+			"CF-18",
+			"CF 18",
+			"CF18"
+		],
 		"identification": [
 			"Have two engines which are close",
 			"Has two angled vertical stabilisers",
@@ -276,14 +341,17 @@
 			"Likely will have Canadian livery"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=1128",
-		"manufacturer": "McDonnell Douglas",
+		"full": "McDonnell Douglas",
 		"model": "CF-188",
 		"name": "McDonnell Douglas CF-188 Hornet",
 		"role": "Multirole fighter.",
 		"wiki": "https://en.wikipedia.org/wiki/McDonnell_Douglas_CF-18_Hornet"
 	},
 	{
-		"aliases": ["C160", "C 160"],
+		"aliases": [
+			"C160",
+			"C 160"
+		],
 		"identification": [
 			"2 turboprop engines on the wings",
 			"Looks like a mini C-130 with 2 less engines",
@@ -291,7 +359,7 @@
 			"Literally just a mini C-130"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=2384",
-		"manufacturer": "Transall",
+		"full": "Transall",
 		"model": "C-160",
 		"name": "Transall C-160",
 		"role": "Military transport aircraft.",
@@ -316,14 +384,18 @@
 			"Used for anti-submarine warfare, search and rescue, and utility transport missions"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=2003",
-		"manufacturer": "Sikorsky",
+		"full": "Sikorsky",
 		"model": "SH-60B",
 		"name": "Sikorsky SH-60B Seahawk",
 		"role": "Utility maritime helicopter.",
 		"wiki": "https://en.wikipedia.org/wiki/Sikorsky_SH-60_Seahawk"
 	},
 	{
-		"aliases": ["Fighting Falcon", "F16", "F 16"],
+		"aliases": [
+			"Fighting Falcon",
+			"F16",
+			"F 16"
+		],
 		"identification": [
 			"Has a singular engine with a singular air intake bellow the canopy",
 			"Has a singular vertical stabiliser with two elevators at the level of the airframe",
@@ -332,7 +404,7 @@
 			"Has 3 landing gears which have the rear ones placed on the air intake and very close together"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=954",
-		"manufacturer": "General Dynamics",
+		"full": "General Dynamics",
 		"model": "F-16",
 		"name": "General Dynamics F-16 Fighting Falcon",
 		"role": "Multirole and air superiority fighter.",
@@ -354,14 +426,21 @@
 			"Looks similar to the Lynx also by AgustaWestland"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=8250",
-		"manufacturer": "AgustaWestland",
+		"full": "AgustaWestland",
 		"model": "AW119Kx",
 		"name": "AgustaWestland AW119Kx Koala",
 		"role": "Utility helicopter.",
 		"wiki": "https://en.wikipedia.org/wiki/AgustaWestland_AW119_Koala"
 	},
 	{
-		"aliases": ["Spartan", "C 27J", "C27J", "C-27", "C 27", "C27"],
+		"aliases": [
+			"Spartan",
+			"C 27J",
+			"C27J",
+			"C-27",
+			"C 27",
+			"C27"
+		],
 		"identification": [
 			"2 Turboprop engines on wings",
 			"Super duper mini C-130",
@@ -369,14 +448,18 @@
 			"Much smaller body than C-160"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=7609",
-		"manufacturer": "Alenia",
+		"full": "Alenia",
 		"model": "C-27J",
 		"name": "Alenia C-27J Spartan",
 		"role": "Military transport aircraft.",
 		"wiki": "https://en.wikipedia.org/wiki/Alenia_C-27J_Spartan"
 	},
 	{
-		"aliases": ["Osprey", "V 22", "V22"],
+		"aliases": [
+			"Osprey",
+			"V 22",
+			"V22"
+		],
 		"identification": [
 			"2 turboprop engines on wing",
 			"Looks like it has 2 arms",
@@ -384,7 +467,7 @@
 			"Retractable landing gear"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=7596",
-		"manufacturer": "Bell Boeing",
+		"full": "Bell Boeing",
 		"model": "V-22",
 		"name": "Bell Boeing V-22 Osprey",
 		"role": "Tiltrotor military transport aircraft",
@@ -399,14 +482,19 @@
 			"Has vertical stablisers high above the wings"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=5401",
-		"manufacturer": "Fairchild",
+		"full": "Fairchild",
 		"model": "C-26",
 		"name": "Fairchild C-26 Metroliner",
 		"role": "Military transport aircraft.",
 		"wiki": "https://en.wikipedia.org/wiki/Fairchild_C-26_Metroliner"
 	},
 	{
-		"aliases": ["Skytruck", "M 28", "M28", "Bryza"],
+		"aliases": [
+			"Skytruck",
+			"M 28",
+			"M28",
+			"Bryza"
+		],
 		"identification": [
 			"2 turboprop engines in wings",
 			"Wings are placed level with the airframe top",
@@ -414,7 +502,7 @@
 			"2 vertical stablisers on either side of tail"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=3008",
-		"manufacturer": "PZL",
+		"full": "PZL",
 		"model": "M28",
 		"name": "PZL M28 Skytruck",
 		"role": "STOL transport and patrol aircraft.",
@@ -429,14 +517,19 @@
 			"The inlets are split down the middle"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=2167",
-		"manufacturer": "Eurofighter",
+		"full": "Eurofighter",
 		"model": "Typhoon",
 		"name": "Eurofighter Typhoon",
 		"role": "Multirole and air superiority fighter.",
 		"wiki": "https://en.wikipedia.org/wiki/Eurofighter_Typhoon"
 	},
 	{
-		"aliases": ["Globemaster III", "C 17", "C17", "Globemaster"],
+		"aliases": [
+			"Globemaster III",
+			"C 17",
+			"C17",
+			"Globemaster"
+		],
 		"identification": [
 			"Has 4 jet engines on the wings",
 			"Has elevators raised onto top of vertical stabliser",
@@ -444,14 +537,19 @@
 			"Has 4 pairs of 2 wheels in the rear landing gear"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=2685",
-		"manufacturer": "Boeing",
+		"full": "Boeing",
 		"model": "C-17",
 		"name": "Boeing C-17 Globemaster III",
 		"role": "Strategic and tactical airlifter.",
 		"wiki": "https://en.wikipedia.org/wiki/Boeing_C-17_Globemaster_III"
 	},
 	{
-		"aliases": ["Texan", "T-6", "T 6", "T6"],
+		"aliases": [
+			"Texan",
+			"T-6",
+			"T 6",
+			"T6"
+		],
 		"identification": [
 			"1 Turboprop engine on nose",
 			"2 pilots and trainer so elongated cockpit",
@@ -459,14 +557,17 @@
 			"2 exhaussts on either side of nose"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=8545",
-		"manufacturer": "Beechcraft",
+		"full": "Beechcraft",
 		"model": "T-6",
 		"name": "Raytheon Texan T1",
 		"role": "Trainer aircraft.",
 		"wiki": "https://en.wikipedia.org/wiki/Beechcraft_T-6_Texan_II#United_Kingdom"
 	},
 	{
-		"aliases": ["King Air", "Shadow R1"],
+		"aliases": [
+			"King Air",
+			"Shadow R1"
+		],
 		"identification": [
 			"2 turboprop engines on wings near the cockpit",
 			"Very pointy nose",
@@ -474,14 +575,16 @@
 			"Has a fin at the bottom of the tail"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=1670",
-		"manufacturer": "Beechcraft",
+		"full": "Beechcraft",
 		"model": "Super King Air",
 		"name": "Beechcraft Super King Air",
 		"role": "Civil utility aircraft.",
 		"wiki": "https://en.wikipedia.org/wiki/Beechcraft_Super_King_Air"
 	},
 	{
-		"aliases": ["Prefect"],
+		"aliases": [
+			"Prefect"
+		],
 		"identification": [
 			"Has 5 rotors",
 			"Retractable gear which is near the front of the plane like the 115",
@@ -489,21 +592,25 @@
 			"Has the elevators lower on the stabiliser"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=8187",
-		"manufacturer": "Grob",
+		"full": "Grob",
 		"model": "G120TP",
 		"name": "Grob G120 TP",
 		"role": "Trainer aircraft.",
 		"wiki": "https://en.wikipedia.org/wiki/Grob_G_120TP"
 	},
 	{
-		"aliases": ["A330", "Voyager", "KC-30"],
+		"aliases": [
+			"A330",
+			"Voyager",
+			"KC-30"
+		],
 		"identification": [
 			"Has 2 jet engines positioned by fuselage",
 			"Has a refueling boom at the rear of the aircraft for air to air refueling",
 			"Wing tips are raised on both ends"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=571",
-		"manufacturer": "Airbus",
+		"full": "Airbus",
 		"model": "A330 MRTT",
 		"name": "Airbus A330 MRTT",
 		"role": "Aerial refuelling and transport tanker aircraft.",
@@ -524,14 +631,16 @@
 			"Hook on the bottom of the tail"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=7976",
-		"manufacturer": "AgustaWestland",
+		"full": "AgustaWestland",
 		"model": "AW109SP",
 		"name": "AgustaWestland AW109SP GrandNew",
 		"role": "Search/rescue and utility helicopter.",
 		"wiki": "https://en.wikipedia.org/wiki/AgustaWestland_AW109"
 	},
 	{
-		"aliases": ["Phenom"],
+		"aliases": [
+			"Phenom"
+		],
 		"identification": [
 			"Really short length",
 			"No winglets",
@@ -541,14 +650,18 @@
 			"2 jet engines at the rear"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=8006",
-		"manufacturer": "Embraer",
+		"full": "Embraer",
 		"model": "EMB500",
 		"name": "Embraer Phenom 100",
 		"role": "Light business jet.",
 		"wiki": "https://en.wikipedia.org/wiki/Embraer_Phenom_100"
 	},
 	{
-		"aliases": ["Jupiter", "H-145", "H 145"],
+		"aliases": [
+			"Jupiter",
+			"H-145",
+			"H 145"
+		],
 		"identification": [
 			"5 rotors on top",
 			"goofy looking ahh",
@@ -556,35 +669,41 @@
 			"very small airframe with long tail"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=3801",
-		"manufacturer": "Airbus Helicopters",
+		"full": "Airbus Helicopters",
 		"model": "H145",
 		"name": "Airbus Helicopters H145",
 		"role": "Light utility helicopter.",
 		"wiki": "https://en.wikipedia.org/wiki/Eurocopter_EC145"
 	},
 	{
-		"aliases": ["Chipmunk", "DHC 1", "DHC1"],
+		"aliases": [
+			"Chipmunk",
+			"DHC 1",
+			"DHC1"
+		],
 		"identification": [
 			"It has 2 propellers on the front",
 			"Retractable gear on the front of plane and a singular wheel on the back",
 			"Two seater so long canopy and two seats"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=2770",
-		"manufacturer": "de Havilland Canada",
+		"full": "de Havilland Canada",
 		"model": "DHC-1",
 		"name": "de Havilland Canada DHC-1 Chipmunk",
 		"role": "Trainer aircraft.",
 		"wiki": "https://en.wikipedia.org/wiki/De_Havilland_Canada_DHC-1_Chipmunk"
 	},
 	{
-		"aliases": ["Puma"],
+		"aliases": [
+			"Puma"
+		],
 		"identification": [
 			"Two \"projections\" above the cockpit",
 			"6 landing gears - 3 pairs of 2",
 			"Tail rotor has 5 blades"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=3145",
-		"manufacturer": "Aerospatiale",
+		"full": "Aerospatiale",
 		"model": "SA330",
 		"mrast": true,
 		"name": "Airbus Helicopters Puma HC2",
@@ -592,7 +711,12 @@
 		"wiki": "https://en.wikipedia.org/wiki/A%C3%A9rospatiale_SA_330_Puma"
 	},
 	{
-		"aliases": ["Phantom", "Phantom II", "F4", "F 4"],
+		"aliases": [
+			"Phantom",
+			"Phantom II",
+			"F4",
+			"F 4"
+		],
 		"identification": [
 			"2 engines underneath the tail and elevators",
 			"Wings are angled at upwards near the tips",
@@ -603,14 +727,19 @@
 			"Elevators are angled downwards"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=1541",
-		"manufacturer": "McDonnell Douglas",
+		"full": "McDonnell Douglas",
 		"model": "F-4",
 		"name": "McDonnell Douglas F-4 Phantom II",
 		"role": "Attack and interceptor aircraft.",
 		"wiki": "https://en.wikipedia.org/wiki/McDonnell_Douglas_F-4_Phantom_II"
 	},
 	{
-		"aliases": ["Vampire", "DH100", "DH-100", "DH 100"],
+		"aliases": [
+			"Vampire",
+			"DH100",
+			"DH-100",
+			"DH 100"
+		],
 		"identification": [
 			"Early British jet fighter aircraft",
 			"Single-engine jet with a straight-wing configuration",
@@ -619,14 +748,19 @@
 			"Used by various air forces and was one of the first jet fighters in Royal Air Force (RAF) service"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=2782",
-		"manufacturer": "de Havilland",
+		"full": "de Havilland",
 		"model": "DH.100",
 		"name": "de Havilland DH.100 Vampire",
 		"role": "Fighter aircraft.",
 		"wiki": "https://en.wikipedia.org/wiki/De_Havilland_Vampire"
 	},
 	{
-		"aliases": ["Sea Vixen", "DH110", "DH-110", "DH 110"],
+		"aliases": [
+			"Sea Vixen",
+			"DH110",
+			"DH-110",
+			"DH 110"
+		],
 		"identification": [
 			"Carrier-based twin-engine jet fighter aircraft",
 			"Swept-wing configuration with twin engines mounted under the wing",
@@ -635,7 +769,7 @@
 			"Served as a fleet defense interceptor in the Royal Navy"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=5472",
-		"manufacturer": "de Havilland",
+		"full": "de Havilland",
 		"model": "DH.110",
 		"name": "de Havilland DH.110 Sea Vixen",
 		"role": "Carrier-based fighter aircraft.",
@@ -651,7 +785,7 @@
 			"Used by the Royal Air Force (RAF) as part of the United Kingdom's V-Bomber force during the Cold War"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=4941",
-		"manufacturer": "Vickers",
+		"full": "Vickers",
 		"model": "Valiant",
 		"name": "Vickers Valiant",
 		"role": "Strategic bomber and aerial refuelling tanker aircraft.",
@@ -665,7 +799,7 @@
 			"Biplane"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=3736",
-		"manufacturer": "Sopwith",
+		"full": "Sopwith",
 		"model": "Camel",
 		"name": "Sopwith Camel",
 		"role": "Biplane fighter.",
@@ -681,7 +815,7 @@
 			"Has radar antenna on nose"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=1932",
-		"manufacturer": "English Electric",
+		"full": "English Electric",
 		"model": "Lightning",
 		"name": "English Electric Lightning",
 		"role": "Multirole interceptor fighter.",
@@ -697,7 +831,7 @@
 			"Used by the Royal Air Force (RAF) as an all-weather interceptor"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=3418",
-		"manufacturer": "Gloster",
+		"full": "Gloster",
 		"model": "Javelin",
 		"name": "Gloster Javelin",
 		"role": "Fighter and interceptor aircraft.",
@@ -712,7 +846,7 @@
 			"Wings look like triangles the way they form up at end however they have flat ends"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=2457",
-		"manufacturer": "English Electric",
+		"full": "English Electric",
 		"model": "Canberra",
 		"name": "English Electric Canberra",
 		"role": "Bomber and reconnaissance aircraft.",
@@ -727,14 +861,18 @@
 			"Has elevators atop the vertical stablisers"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=2493",
-		"manufacturer": "Blackburn",
+		"full": "Blackburn",
 		"model": "Buccaneer",
 		"name": "Blackburn Buccaneer",
 		"role": "Maritime strike aircraft.",
 		"wiki": "https://en.wikipedia.org/wiki/Blackburn_Buccaneer"
 	},
 	{
-		"aliases": ["Beverly", "B 101", "B101"],
+		"aliases": [
+			"Beverly",
+			"B 101",
+			"B101"
+		],
 		"identification": [
 			"4 turboprop engines, 2 on either wing",
 			"Very large airfame to store cargo, looks fat af",
@@ -742,14 +880,19 @@
 			"Has 2 vertical stabilisers"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=5407",
-		"manufacturer": "Blackburn",
+		"full": "Blackburn",
 		"model": "B-101",
 		"name": "Blackburn B-101 Beverly",
 		"role": "Military transport aircraft.",
 		"wiki": "https://en.wikipedia.org/wiki/Blackburn_Beverley"
 	},
 	{
-		"aliases": ["Belfast", "C-1", "C 1", "C1"],
+		"aliases": [
+			"Belfast",
+			"C-1",
+			"C 1",
+			"C1"
+		],
 		"identification": [
 			"4 turbojet engines, 2 on each wing",
 			"Has a very basic looking airframe",
@@ -757,7 +900,7 @@
 			"Has a pointy nose"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=3111",
-		"manufacturer": "Short",
+		"full": "Short",
 		"model": "C.1",
 		"name": "Short C.1 Belfast",
 		"role": "Heavy airfreighter.",

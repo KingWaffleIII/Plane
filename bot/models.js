@@ -44,7 +44,7 @@ User.init({
     },
     avatarUrl: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
     },
     lockedWaifus: {
         type: DataTypes.JSON,

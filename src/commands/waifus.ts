@@ -1,8 +1,4 @@
-import {
-	ChatInputCommandInteraction,
-	EmbedBuilder,
-	SlashCommandBuilder,
-} from "discord.js";
+import { ChatInputCommandInteraction, EmbedBuilder, SlashCommandBuilder } from "discord.js";
 
 import { Guild, User, Waifu } from "../models.js";
 import { WaifuBaseData } from "./airrecQuiz.js";
@@ -15,15 +11,15 @@ export const data = new SlashCommandBuilder()
 		option
 			.setName("name")
 			.setDescription(
-				"The name of the waifu you want to view. Defaults to all your waifus."
-			)
+				"The name of the waifu you want to view. Defaults to all your waifus.",
+			),
 	)
 	.addUserOption((option) =>
 		option
 			.setName("user")
 			.setDescription(
-				"The user to view the waifu collection of. Defaults to you."
-			)
+				"The user to view the waifu collection of. Defaults to you.",
+			),
 	);
 
 export async function execute(interaction: ChatInputCommandInteraction) {
@@ -116,7 +112,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 			})
 			.setThumbnail(targetUser.avatarURL() as string)
 			.setImage(
-				`attachment://${waifuData!.urlFriendlyName ?? waifuName}.jpg`
+				`attachment://${waifuData!.urlFriendlyName ?? waifuName}.jpg`,
 			)
 			.setFooter({
 				text: `You can unlock ${
@@ -129,10 +125,10 @@ This user has ${userWaifus.length} cop${
 					userWaifus.length === 1 ? "y" : "ies"
 				} of this waifu!\n
 ${
-	userWaifus.some((w) => w.generated)
-		? "One or more of this waifu was generated."
-		: ""
-}${
+					userWaifus.some((w) => w.generated)
+						? "One or more of this waifu was generated."
+						: ""
+				}${
 					userWaifus.some((w) => !w.generated)
 						? "One or more of this waifu was unlocked by winning an airrec quiz!"
 						: ""
@@ -140,7 +136,7 @@ ${
 In dogfighting, this waifu has won ${won} time${
 					won === 1 ? "" : "s"
 				} and lost ${lost} time${lost === 1 ? "" : "s"}.
-			`
+			`,
 			);
 
 		userWaifus.forEach((w) => {
@@ -204,11 +200,11 @@ In dogfighting, this waifu has won ${won} time${
 			}** waifus unlocked! ${
 				user!.guaranteeWaifu
 					? `You need to obtain **${
-							10 - user!.guaranteeCounter!
-					  }** more waifu(s) before you get a guaranteed **${user!
-							.guaranteeWaifu!}**.`
+						10 - user!.guaranteeCounter!
+					}** more waifu(s) before you get a guaranteed **${user!
+						.guaranteeWaifu!}**.`
 					: "You are not currently targetting a waifu."
-			}`
+			}`,
 		)
 		.addFields(
 			{
@@ -219,7 +215,7 @@ In dogfighting, this waifu has won ${won} time${
 							(w) =>
 								`**${w} (${
 									waifuCopies[w.replace("\\*", "")]
-								})**`
+								})**`,
 						)
 						.join(", ") || "None",
 				inline: true,
@@ -228,7 +224,7 @@ In dogfighting, this waifu has won ${won} time${
 				name: "Locked Waifus",
 				value: user!.lockedWaifus!.join(", ") || "None",
 				inline: true,
-			}
+			},
 		)
 		.setFooter({
 			text: `You can unlock ${

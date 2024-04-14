@@ -15,18 +15,17 @@
 			"2 propeller engines"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=1670",
-		"manufacturer": "Beechcraft",
+		"full": "Beechcraft Super King AIr",
 		"model": "Super King Air",
-		"name": "Beechcraft Super King Air",
+		"name": "Super King Air",
 		"role": "Civil utility aircraft.",
 		"wiki": "https://en.wikipedia.org/wiki/Beechcraft_Super_King_Air"
 	},
 	{
 		"aliases": [
-			"Griffin",
 			"CH-146",
-			"CH 146",
 			"CH146",
+			"CH 146",
 			"Griffon"
 		],
 		"identification": [
@@ -35,9 +34,9 @@
 			"Two identical square windows in the middle"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=1945",
-		"manufacturer": "Bell",
+		"full": "Bell 412 Griffin",
 		"model": "412",
-		"name": "Bell Griffin",
+		"name": "Griffin",
 		"role": "Multipurpose utility helicopter.",
 		"wiki": "https://en.wikipedia.org/wiki/Bell_412"
 	},
@@ -54,7 +53,7 @@
 			"Four jet engines"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=2945",
-		"manufacturer": "BAe",
+		"full": "BAe 146",
 		"model": "146",
 		"name": "BAe 146",
 		"role": "Airliner.",
@@ -72,9 +71,9 @@
 			"3 jet engines at the rear - one built into the tail"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=678",
-		"manufacturer": "Boeing",
+		"full": "Boeing 727",
 		"model": "727",
-		"name": "Boeing 727",
+		"name": "727",
 		"role": "Narrow-body airliner.",
 		"wiki": "https://en.wikipedia.org/wiki/Boeing_727"
 	},
@@ -90,15 +89,14 @@
 			"Two jet engines"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=7530",
-		"manufacturer": "Boeing",
+		"full": "Boeing 787 Dreamliner",
 		"model": "787",
-		"name": "Boeing 787",
+		"name": "787",
 		"role": "Wide-body airliner.",
 		"wiki": "https://en.wikipedia.org/wiki/Boeing_787_Dreamliner"
 	},
 	{
 		"aliases": [
-			"Islander",
 			"BN2",
 			"BN 2",
 			"Defender"
@@ -112,9 +110,9 @@
 			"2 propeller engines"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=750",
-		"manufacturer": "Britten Norman",
+		"full": "Britten Norman BN-2 Islander",
 		"model": "BN-2",
-		"name": "Britten Norman Islander",
+		"name": "Islander",
 		"role": "Civil utility aircraft.",
 		"wiki": "https://en.wikipedia.org/wiki/Britten-Norman_BN-2_Islander"
 	},
@@ -131,7 +129,7 @@
 			"Typically accommodates 6-8 passengers"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=1537",
-		"manufacturer": "BAe",
+		"full": "BAe 125",
 		"model": "125",
 		"name": "BAe 125",
 		"role": "Business jet.",
@@ -139,7 +137,6 @@
 	},
 	{
 		"aliases": [
-			"Voyager",
 			"KC-30",
 			"KC30",
 			"KC 30",
@@ -151,37 +148,34 @@
 			"Wing tips are raised on both ends"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=571",
-		"manufacturer": "Airbus",
+		"full": "Airbus A330 MRTT",
 		"model": "A330 MRTT",
-		"name": "Airbus Voyager",
+		"name": "Voyager",
 		"role": "Aerial refuelling and transport tanker aircraft.",
 		"wiki": "https://en.wikipedia.org/wiki/Airbus_A330_MRTT"
 	},
 	{
 		"aliases": [
-			"Chinook",
 			"CH47",
 			"CH 47"
 		],
 		"identification": [
-			"Has two rotors on oposite ends of airframe",
+			"Has two rotors on opposite ends of airframe",
 			"Circular windows along the side of the airframe",
 			"On top of the rudder, there are raised elevators that sit at the top of the vertical stabliser",
 			"That's really it, nothing looks like a Chinook except a Chinook"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=4371",
-		"manufacturer": "Boeing",
+		"full": "Boeing CH-47 Chinook",
 		"model": "CH-47",
-		"name": "Boeing Chinook",
+		"name": "Chinook",
 		"role": "Transport helicopter.",
 		"wiki": "https://en.wikipedia.org/wiki/Boeing_CH-47_Chinook"
 	},
 	{
 		"aliases": [
-			"Globemaster III",
 			"C17",
-			"C 17",
-			"Globemaster"
+			"C 17"
 		],
 		"identification": [
 			"Has 4 jet engines on the wings",
@@ -190,15 +184,14 @@
 			"Has 4 pairs of 2 wheels in the rear landing gear"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=2685",
-		"manufacturer": "Boeing",
+		"full": "Boeing C-17 Globemaster III",
 		"model": "C-17",
-		"name": "Boeing Globemaster III",
+		"name": "Globemaster III",
 		"role": "Strategic and tactical airlifter.",
 		"wiki": "https://en.wikipedia.org/wiki/Boeing_C-17_Globemaster_III"
 	},
 	{
 		"aliases": [
-			"Sentry",
 			"E3",
 			"E 3"
 		],
@@ -209,15 +202,14 @@
 			"IF IT DOESN'T HAVE A DISH, IT'S A BOEING 707"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=665",
-		"manufacturer": "Boeing",
+		"full": "Boeing E-3 Sentry",
 		"model": "E-3",
-		"name": "Boeing Sentry",
+		"name": "Sentry",
 		"role": "Airborne early warning and control (AEW&C) aircraft.",
 		"wiki": "https://en.wikipedia.org/wiki/Boeing_E-3_Sentry"
 	},
 	{
 		"aliases": [
-			"Apache",
 			"AH64",
 			"AH 64"
 		],
@@ -228,9 +220,9 @@
 			"Landing gear can't be retracted"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=699",
-		"manufacturer": "Boeing",
+		"full": "Boeing AH-64 Apache",
 		"model": "AH-64",
-		"name": "Boeing Apache",
+		"name": "Apache",
 		"role": "Attack helicopter.",
 		"wiki": "https://en.wikipedia.org/wiki/Boeing_AH-64_Apache"
 	},
@@ -249,15 +241,14 @@
 			"Very round shape compared to the Yak"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=1878",
-		"manufacturer": "BAe",
+		"full": "BAe Hawk",
 		"model": "Hawk",
-		"name": "BAe Hawk",
+		"name": "Hawk",
 		"role": "Advanced trainer aircraft.",
 		"wiki": "https://en.wikipedia.org/wiki/BAE_Systems_Hawk"
 	},
 	{
 		"aliases": [
-			"Tutor",
 			"G-115E",
 			"G115E"
 		],
@@ -266,15 +257,14 @@
 			"3 fixed landing gears all close and not down the tail"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=2553",
-		"manufacturer": "Grob",
+		"full": "Grob G 115E Tutor",
 		"model": "G 115E",
-		"name": "Grob Tutor",
+		"name": "Tutor",
 		"role": "Basic trainer aircraft.",
 		"wiki": "https://en.wikipedia.org/wiki/Grob_G_115"
 	},
 	{
 		"aliases": [
-			"Hercules",
 			"C130",
 			"C 130",
 			"L-100",
@@ -288,15 +278,14 @@
 			"Has flat rectangular wings"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=2999",
-		"manufacturer": "Lockheed Martin",
+		"full": "Lockheed Martin C-130 Hercules",
 		"model": "C-130",
-		"name": "Lockheed Martin Hercules",
+		"name": "Hercules",
 		"role": "Military transport aircraft.",
 		"wiki": "https://en.wikipedia.org/wiki/Lockheed_C-130_Hercules"
 	},
 	{
 		"aliases": [
-			"Lightning II",
 			"F35",
 			"F 35"
 		],
@@ -309,9 +298,9 @@
 			"2 angled verticle stabilisers"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=2992",
-		"manufacturer": "Lockheed Martin",
+		"full": "Lockheed Martin F-35 Lightning II",
 		"model": "F-35",
-		"name": "Lockheed Martin Lightning II",
+		"name": "Lightning II",
 		"role": "Multirole fighter.",
 		"wiki": "https://en.wikipedia.org/wiki/Lockheed_Martin_F-35_Lightning_II"
 	},
@@ -324,9 +313,9 @@
 			"Has variable sweep wings so the wings can sweep back and forth, there is gonna be a small gap by the wing and the airframe"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=1477",
-		"manufacturer": "Panavia",
+		"full": "Panavia Tornado",
 		"model": "Tornado",
-		"name": "Panavia Tornado",
+		"name": "Tornado",
 		"role": "Multirole and strike fighter.",
 		"wiki": "https://en.wikipedia.org/wiki/Panavia_Tornado"
 	},
@@ -342,9 +331,9 @@
 			"Has elevators at top of the Vertical stabiliser"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=1811",
-		"manufacturer": "Bombardier",
+		"full": "Bombardier Sentinel R1",
 		"model": "Sentinel R1",
-		"name": "Bombardier Sentinel R1",
+		"name": "Sentinel",
 		"role": "Airborne battlefield and ground surveillance aircraft.",
 		"wiki": "https://en.wikipedia.org/wiki/Raytheon_Sentinel"
 	},
@@ -360,15 +349,14 @@
 			"Distinct slope of cockpit for the two seats"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=1628",
-		"manufacturer": "Embraer",
+		"full": "Embraer EMB-312 Tucano",
 		"model": "EMB-312",
-		"name": "Embraer Tucano",
+		"name": "Tucano",
 		"role": "Trainer aircraft.",
 		"wiki": "https://en.wikipedia.org/wiki/Short_Tucano"
 	},
 	{
 		"aliases": [
-			"Puma",
 			"SA-330",
 			"SA330"
 		],
@@ -378,15 +366,14 @@
 			"Tail rotor has 5 blades"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=3145",
-		"manufacturer": "Aerospatiale",
+		"full": "Aerospatiale SA 330 Puma",
 		"model": "SA 330",
-		"name": "Aerospatiale Puma",
+		"name": "Puma",
 		"role": "Utility helicopter.",
 		"wiki": "https://en.wikipedia.org/wiki/A%C3%A9rospatiale_SA_330_Puma"
 	},
 	{
 		"aliases": [
-			"Super Puma",
 			"SA-532",
 			"SA532",
 			"Cougar"
@@ -396,15 +383,14 @@
 			"Nose is sharper than the Puma and cockpit extends out more"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=1778",
-		"manufacturer": "Aerospatiale",
+		"full": "Aerospatiale SA 532 Super Puma",
 		"model": "SA 532",
-		"name": "Aerospatiale Super Puma",
+		"name": "Super Puma",
 		"role": "Medium utility helicopter.",
 		"wiki": "https://en.wikipedia.org/wiki/Eurocopter_AS332_Super_Puma"
 	},
 	{
 		"aliases": [
-			"Gazelle",
 			"SA-340",
 			"SA340",
 			"SA-341",
@@ -421,9 +407,9 @@
 			"Has a massive glass frontal view (main use is for recconassiance)"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=1784",
-		"manufacturer": "Aerospatiale",
+		"full": "Aerospatiale SA 340 Gazelle",
 		"model": "SA 340",
-		"name": "Aerospatiale Gazelle",
+		"name": "Gazelle",
 		"role": "Utility helicopter.",
 		"wiki": "https://en.wikipedia.org/wiki/A%C3%A9rospatiale_Gazelle"
 	},
@@ -436,9 +422,9 @@
 			"Has 2 gunner turrets on nose"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=610",
-		"manufacturer": "Avro",
+		"full": "Avro Lancaster",
 		"model": "Lancaster",
-		"name": "Avro Lancaster",
+		"name": "Lancaster",
 		"role": "Heavy bomber.",
 		"wiki": "https://en.wikipedia.org/wiki/Avro_Lancaster"
 	},
@@ -451,9 +437,9 @@
 			"Roof of nose is curved unlike spitfire's which is more square"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=2010",
-		"manufacturer": "Hawker",
+		"full": "Hawker Hurricane",
 		"model": "Hurricane",
-		"name": "Hawker Hurricane",
+		"name": "Hurricane",
 		"role": "Fighter aircraft.",
 		"wiki": "https://en.wikipedia.org/wiki/Hawker_Hurricane"
 	},
@@ -466,15 +452,14 @@
 			"Spitfire's wings are much thinner height wise than the Hurricane's"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=1461",
-		"manufacturer": "Supermarine",
+		"full": "Supermarine Spitfire",
 		"model": "Spitfire",
-		"name": "Supermarine Spitfire",
+		"name": "Spitfire",
 		"role": "Fighter and interceptor aircraft.",
 		"wiki": "https://en.wikipedia.org/wiki/Supermarine_Spitfire"
 	},
 	{
 		"aliases": [
-			"Merlin",
 			"AW-101",
 			"AW 101",
 			"EH-101",
@@ -488,19 +473,14 @@
 			"Has 2 rectangular bulbs on either side at the rear for landing gear"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=7571",
-		"manufacturer": "Agusta Westland",
+		"full": "Agusta Westland AW101 Merlin",
 		"model": "AW101",
-		"name": "Agusta Westland Merlin",
+		"name": "Merlin",
 		"role": "Anti-submarine warfare, medium-lift transport, search and rescue and utility helicopter.",
 		"wiki": "https://en.wikipedia.org/wiki/AgustaWestland_AW101"
 	},
 	{
 		"aliases": [
-			"Skytrain",
-			"DC-3",
-			"DC3",
-			"DC 3",
-			"C-47",
 			"C47",
 			"C 47",
 			"C-53",
@@ -508,7 +488,11 @@
 			"C 53",
 			"C-117",
 			"C117",
-			"C 117"
+			"C 117",
+			"DC-3",
+			"DC3",
+			"DC 3",
+			"Skytrain"
 		],
 		"identification": [
 			"Classic twin-engine propeller-driven airliner",
@@ -518,9 +502,9 @@
 			"Iconic design with a distinctive curved nose and vertical stabilizer"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=856",
-		"manufacturer": "Douglas",
-		"model": "Dakota",
-		"name": "Douglas Dakota",
+		"full": "Douglas C-47 Dakota",
+		"model": "C-47",
+		"name": "Dakota",
 		"role": "Airliner and transport aircraft.",
 		"wiki": "https://en.wikipedia.org/wiki/Douglas_DC-3"
 	},
@@ -533,9 +517,9 @@
 			"Has 2 stories for passengers (big)"
 		],
 		"image": "https://www.jetphotos.com/showphotos.php?aircraft=Airbus+A380%3B",
-		"manufacturer": "Airbus",
+		"full": "Airbus A380",
 		"model": "A380",
-		"name": "Airbus A380",
+		"name": "A380",
 		"role": "Wide-body airliner.",
 		"wiki": "https://en.wikipedia.org/wiki/Airbus_A380"
 	},
@@ -554,9 +538,9 @@
 			"Primarily used for transporting parts for the Boeing 787 Dreamliner"
 		],
 		"image": "https://www.jetphotos.com/aircraft/Boeing%20747-4J6(LCF)",
-		"manufacturer": "Boeing",
+		"full": "Boeing 747-404 LCF Dreamlifter",
 		"model": "747-404 LCF",
-		"name": "Boeing 747-404 LCF",
+		"name": "747-404 LCF",
 		"role": "Outsize cargo freight aircraft.",
 		"wiki": "https://en.wikipedia.org/wiki/Boeing_Dreamlifter"
 	},
@@ -577,9 +561,9 @@
 			"It is chonk"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=734",
-		"manufacturer": "BAe",
+		"full": "BAe Harrier II",
 		"model": "Harrier II",
-		"name": "BAe Harrier II",
+		"name": "Harrier II",
 		"role": "V/STOL strike aircraft.",
 		"wiki": "https://en.wikipedia.org/wiki/British_Aerospace_Harrier_II"
 	},
@@ -593,9 +577,9 @@
 			"Two jet engines"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=4856",
-		"manufacturer": "Airbus",
+		"full": "Airbus A300",
 		"model": "A300",
-		"name": "Airbus A300",
+		"name": "A300",
 		"role": "Wide-body airliner.",
 		"wiki": "https://en.wikipedia.org/wiki/Airbus_A300"
 	},
@@ -615,9 +599,9 @@
 			"Two jet engines"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=565",
-		"manufacturer": "Airbus",
+		"full": "Airbus A310",
 		"model": "A310",
-		"name": "Airbus A310",
+		"name": "A310",
 		"role": "Wide-body airliner.",
 		"wiki": "https://en.wikipedia.org/wiki/Airbus_A310"
 	},
@@ -625,9 +609,9 @@
 		"aliases": [],
 		"identification": [],
 		"image": "https://www.jetphotos.com/showphotos.php?aircraft=Airbus+A318%3B",
-		"manufacturer": "Airbus",
+		"full": "Airbus A318",
 		"model": "A318",
-		"name": "Airbus A318",
+		"name": "A318",
 		"role": "Narrow-body airliner.",
 		"wiki": "https://en.wikipedia.org/wiki/Airbus_A318"
 	},
@@ -641,9 +625,9 @@
 			"Two jet engines"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=568",
-		"manufacturer": "Airbus",
+		"full": "Airbus A319",
 		"model": "A319",
-		"name": "Airbus A319",
+		"name": "A319",
 		"role": "Narrow-body airliner.",
 		"wiki": "https://en.wikipedia.org/wiki/Airbus_A319"
 	},
@@ -657,9 +641,9 @@
 			"Two jet engines"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=6454",
-		"manufacturer": "Airbus",
+		"full": "Airbus A320",
 		"model": "A320",
-		"name": "Airbus A320",
+		"name": "A320",
 		"role": "Narrow-body airliner.",
 		"wiki": "https://en.wikipedia.org/wiki/Airbus_A320"
 	},
@@ -674,9 +658,9 @@
 			"Two jet engines"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=7091",
-		"manufacturer": "Airbus",
+		"full": "Airbus A321",
 		"model": "A321",
-		"name": "Airbus A321",
+		"name": "A321",
 		"role": "Narrow-body airliner.",
 		"wiki": "https://en.wikipedia.org/wiki/Airbus_A321"
 	},
@@ -690,9 +674,9 @@
 			"Two jet engines"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=571",
-		"manufacturer": "Airbus",
+		"full": "Airbus A330",
 		"model": "A330",
-		"name": "Airbus A330",
+		"name": "A330",
 		"role": "Wide-body airliner.",
 		"wiki": "https://en.wikipedia.org/wiki/Airbus_A330"
 	},
@@ -706,9 +690,9 @@
 			"4 jet engines"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=573",
-		"manufacturer": "Airbus",
+		"full": "Airbus A340",
 		"model": "A340",
-		"name": "Airbus A340",
+		"name": "A340",
 		"role": "Wide-body airliner.",
 		"wiki": "https://en.wikipedia.org/wiki/Airbus_A340"
 	},
@@ -725,9 +709,9 @@
 			"Two jet engines"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=8423",
-		"manufacturer": "Airbus",
+		"full": "Airbus A350",
 		"model": "A350",
-		"name": "Airbus A350",
+		"name": "A350",
 		"role": "Wide-body airliner.",
 		"wiki": "https://en.wikipedia.org/wiki/Airbus_A350"
 	},
@@ -735,9 +719,9 @@
 		"aliases": [],
 		"identification": [],
 		"image": "https://airfighters.com/photosearch.php?cra=656",
-		"manufacturer": "Boeing",
+		"full": "Boeing 707",
 		"model": "707",
-		"name": "Boeing 707",
+		"name": "707",
 		"role": "Narrow-body airliner.",
 		"wiki": "https://en.wikipedia.org/wiki/Boeing_707"
 	},
@@ -756,9 +740,9 @@
 			"Two jet engines"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=681",
-		"manufacturer": "Boeing",
+		"full": "Boeing 737",
 		"model": "737",
-		"name": "Boeing 737",
+		"name": "737",
 		"role": "Narrow-body airliner.",
 		"wiki": "https://en.wikipedia.org/wiki/Boeing_737"
 	},
@@ -777,9 +761,9 @@
 			"4 jet engines"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=689",
-		"manufacturer": "Boeing",
+		"full": "Boeing 747",
 		"model": "747",
-		"name": "Boeing 747",
+		"name": "747",
 		"role": "Wide-body airliner.",
 		"wiki": "https://en.wikipedia.org/wiki/Boeing_747"
 	},
@@ -797,9 +781,9 @@
 			"Two jet engines"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=694",
-		"manufacturer": "Boeing",
+		"full": "Boeing 757",
 		"model": "757",
-		"name": "Boeing 757",
+		"name": "757",
 		"role": "Narrow-body airliner.",
 		"wiki": "https://www.airfighters.com/photosearch.php?cra=694"
 	},
@@ -813,9 +797,9 @@
 			"Two jet engines"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=697",
-		"manufacturer": "Boeing",
+		"full": "Boeing 767",
 		"model": "767",
-		"name": "Boeing 767",
+		"name": "767",
 		"role": "Wide-body airliner.",
 		"wiki": "https://en.wikipedia.org/wiki/Boeing_767"
 	},
@@ -829,15 +813,14 @@
 			"Two jet engines"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=8223",
-		"manufacturer": "Boeing",
+		"full": "Boeing 777",
 		"model": "777",
-		"name": "Boeing 777",
+		"name": "777",
 		"role": "Wide-body airliner.",
 		"wiki": "https://en.wikipedia.org/wiki/Boeing_777"
 	},
 	{
 		"aliases": [
-			"Rivet Joint",
 			"RC135W",
 			"RC 135W"
 		],
@@ -847,16 +830,14 @@
 			"Has enlared fuselage at the front of the plane making it look like a dog stung by a bee (use `/cheeks`)"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=2179",
-		"manufacturer": "Boeing",
+		"full": "Boeing RC-135W Rivet Joint",
 		"model": "RC-135W",
-		"name": "Boeing Rivet Joint",
+		"name": "Rivet Joint",
 		"role": "Reconnaissance aircraft.",
 		"wiki": "https://en.wikipedia.org/wiki/Boeing_RC-135"
 	},
 	{
 		"aliases": [
-			"Wedgetail",
-			"737 AEW&C",
 			"737 AEW",
 			"E-7",
 			"E7",
@@ -869,16 +850,15 @@
 			"Again, look for the thing long radar dish"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=7400",
-		"manufacturer": "Boeing",
-		"model": "Wedgetail",
-		"name": "Boeing Wedgetail",
+		"full": "Boeing 737 AEW&C Wedgetail",
+		"model": "737 AEW&C",
+		"name": "Wedgetail",
 		"role": "Airborne early warning and control (AEW&C) aircraft.",
 		"wiki": "https://en.wikipedia.org/wiki/Boeing_737_AEW%26C"
 	},
 	{
 		"aliases": [
-			"Poseidon",
-			"P-8",
+			"P8",
 			"P 8"
 		],
 		"identification": [
@@ -887,9 +867,9 @@
 			"Many angled spikes along the top of the airframe"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=5111",
-		"manufacturer": "Boeing",
-		"model": "P8",
-		"name": "Boeing Poseidon",
+		"full": "Boeing P-8 Poseidon",
+		"model": "P-8",
+		"name": "Poseidon",
 		"role": "Maritime patrol aircraft.",
 		"wiki": "https://en.wikipedia.org/wiki/Boeing_P-8_Poseidon"
 	},
@@ -905,24 +885,41 @@
 			"It has 3 landing gears, 1 at the front and 2 at the middle-rear"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=1150",
-		"manufacturer": "McDonnell Douglas",
+		"full": "McDonnell Douglas KC-10 Extender",
 		"model": "KC-10",
-		"name": "McDonnell Douglas KC-10",
+		"name": "KC-10",
 		"role": "Multirole aerial refuelling tanker aircraft.",
 		"wiki": "https://en.wikipedia.org/wiki/McDonnell_Douglas_KC-10_Extender"
 	},
 	{
 		"aliases": [
-			"MD-11",
+			"MD11",
 			"MD 11"
 		],
 		"identification": [],
 		"image": "https://www.jetphotos.com/showphotos.php?aircraft=McDonnell+Douglas+MD-11%3B",
-		"manufacturer": "McDonnell Douglas",
-		"model": "MD11",
-		"name": "McDonnell Douglas MD11",
+		"full": "McDonnell Douglas MD-11",
+		"model": "MD-11",
+		"name": "MD-11",
 		"role": "Wide-body airliner.",
 		"wiki": "https://en.wikipedia.org/wiki/McDonnell_Douglas_MD-11"
+	},
+	{
+		"aliases": [],
+		"identification": [
+			"Short length",
+			"Winglets pointing upwards",
+			"Pointed nose",
+			"4 rear landing gear wheels",
+			"Elevator is at the top of the tail",
+			"2 jet engines at the rear"
+		],
+		"image": "https://www.airfighters.com/photosearch.php?cra=1810",
+		"full": "Bombardier Global Express",
+		"model": "Global Express",
+		"name": "Global Express",
+		"role": "Business jet.",
+		"wiki": "https://en.wikipedia.org/wiki/Bombardier_Global_Express"
 	},
 	{
 		"aliases": [
@@ -933,9 +930,9 @@
 		],
 		"identification": [],
 		"image": "https://airfighters.com/photosearch.php?cra=806",
-		"manufacturer": "Dassault",
+		"full": "Dassault Falcon 20",
 		"model": "Falcon 20",
-		"name": "Dassault Falcon 20",
+		"name": "Falcon 20",
 		"role": "Business jet.",
 		"wiki": "https://en.wikipedia.org/wiki/Dassault_Falcon_20"
 	},
@@ -953,9 +950,9 @@
 			"2 jet engines at the rear"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=3988",
-		"manufacturer": "Embraer",
+		"full": "Embraer ERJ 135",
 		"model": "ERJ 135",
-		"name": "Embraer ERJ 135",
+		"name": "ERJ 135",
 		"role": "Regional jet.",
 		"wiki": "https://en.wikipedia.org/wiki/Embraer_ERJ_family"
 	},
@@ -973,9 +970,9 @@
 			"2 jet engines at the rear"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=5856",
-		"manufacturer": "Embraer",
+		"full": "Embraer ERJ 145",
 		"model": "ERJ 145",
-		"name": "Embraer ERJ 145",
+		"name": "ERJ 145",
 		"role": "Regional jet.",
 		"wiki": "https://en.wikipedia.org/wiki/Embraer_ERJ_family"
 	},
@@ -994,9 +991,9 @@
 			"2 jet engines at the rear"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=8005",
-		"manufacturer": "Embraer",
+		"full": "Embraer EMB 500 Phenom 100",
 		"model": "EMB 500",
-		"name": "Embraer EMB 500",
+		"name": "EMB 500",
 		"role": "Light business jet.",
 		"wiki": "https://en.wikipedia.org/wiki/Embraer_Phenom_100"
 	},
@@ -1009,18 +1006,17 @@
 			"The inlets are split down the middle"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=2167",
-		"manufacturer": "Eurofighter",
+		"full": "Eurofighter Typhoon",
 		"model": "Typhoon",
-		"name": "Eurofighter Typhoon",
+		"name": "Typhoon",
 		"role": "Multirole and air superiority fighter.",
 		"wiki": "https://en.wikipedia.org/wiki/Eurofighter_Typhoon"
 	},
 	{
 		"aliases": [
-			"Prefect",
 			"G-120TP",
 			"G120TP",
-			"Prefect T1"
+			"Prefect"
 		],
 		"identification": [
 			"Has 5 rotors",
@@ -1029,18 +1025,17 @@
 			"Has the elevators lower on the stabiliser"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=8187",
-		"manufacturer": "Grob",
+		"full": "Grob G 120TP Prefect T1",
 		"model": "G 120TP",
-		"name": "Grob Prefect T1",
+		"name": "Prefect T1",
 		"role": "Trainer aircraft.",
 		"wiki": "https://en.wikipedia.org/wiki/Grob_G_120TP"
 	},
 	{
 		"aliases": [
-			"Vigilant",
 			"G-109",
 			"G109",
-			"Vigilant T1"
+			"Vigilant"
 		],
 		"identification": [
 			"Unlike G115 it has its rear landing gear all the way at the back of the airframe",
@@ -1048,9 +1043,9 @@
 			"It has 2 propellers unlike G115"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=2555",
-		"manufacturer": "Grob",
+		"full": "Grob G 109 Vigilant T1",
 		"model": "G 109",
-		"name": "Grob Vigilant T1",
+		"name": "Vigilant T1",
 		"role": "Motor glider.",
 		"wiki": "https://en.wikipedia.org/wiki/Grob_G_109"
 	},
@@ -1064,9 +1059,9 @@
 		],
 		"identification": [],
 		"image": "https://www.jetphotos.com/showphotos.php?aircraft=Cessna+150%3B",
-		"manufacturer": "Cessna",
+		"full": "Cessna C150",
 		"model": "C150",
-		"name": "Cessna C150",
+		"name": "C150",
 		"role": "Light utility aircraft and basic trainer.",
 		"wiki": "https://en.wikipedia.org/wiki/Cessna_150"
 	},
@@ -1082,9 +1077,9 @@
 			"Hook on the bottom of the tail"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=7975",
-		"manufacturer": "Agusta Westland",
+		"full": "Agusta Westland AW-109",
 		"model": "AW-109",
-		"name": "Agusta Westland AW-109",
+		"name": "AW-109",
 		"role": "Search/rescue and utility helicopter.",
 		"wiki": "https://en.wikipedia.org/wiki/AgustaWestland_AW109"
 	},
@@ -1101,15 +1096,14 @@
 			"No hook on the tail"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=7568",
-		"manufacturer": "Agusta Westland",
+		"full": "Agusta Westland AW-149",
 		"model": "AW-149",
-		"name": "Agusta Westland AW-149",
+		"name": "AW-149",
 		"role": "Medium-lift military helicopter.",
 		"wiki": "https://en.wikipedia.org/wiki/AgustaWestland_AW149"
 	},
 	{
 		"aliases": [
-			"Iroquois",
 			"UH1",
 			"UH 1"
 		],
@@ -1119,15 +1113,14 @@
 			"Rear rotor only has 2 blades"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=1949",
-		"manufacturer": "Bell",
+		"full": "Bell UH-1 Iroquois",
 		"model": "UH-1",
-		"name": "Bell Iroquois",
+		"name": "Iroquois",
 		"role": "Utility helicopter.",
 		"wiki": "https://en.wikipedia.org/wiki/Bell_UH-1_Iroquois"
 	},
 	{
 		"aliases": [
-			"Dauphin",
 			"AS365",
 			"AS 365",
 			"AS-565",
@@ -1141,15 +1134,14 @@
 			"Has winglet-like things extending out the rear"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=3219",
-		"manufacturer": "Eurocopter",
+		"full": "Eurocopter AS-365 Dauphin",
 		"model": "AS-365",
-		"name": "Eurocopter Dauphin",
+		"name": "Dauphin",
 		"role": "Medium utility helicopter.",
 		"wiki": "https://en.wikipedia.org/wiki/Eurocopter_AS365_Dauphin"
 	},
 	{
 		"aliases": [
-			"Ecureuil",
 			"AS350",
 			"AS 350",
 			"AS-155",
@@ -1164,9 +1156,9 @@
 			"Tail is like the AW109"
 		],
 		"image": "https://www.airfighters.com/photosearch.php?cra=2352",
-		"manufacturer": "Eurocopter",
+		"full": "Eurocopter AS-350 Ecureuil",
 		"model": "AS-350",
-		"name": "Eurocopter Ecureuil",
+		"name": "Ecureuil",
 		"role": "Light utility helicopter.",
 		"wiki": "https://en.wikipedia.org/wiki/Eurocopter_AS350_%C3%89cureuil"
 	}

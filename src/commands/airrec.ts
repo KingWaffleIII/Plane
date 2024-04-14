@@ -17,13 +17,13 @@ import mrast from "../mrast.json" assert { type: "json" };
 import rast from "../rast.json" assert { type: "json" };
 
 export interface Aircraft {
-	readonly name: string;
-	readonly role: string;
-	readonly manufacturer: string;
-	readonly model: string;
 	readonly aliases: string[];
 	readonly identification: string[];
 	readonly image: string;
+	readonly full: string;
+	readonly model: string;  // only used for score checking
+	readonly name: string;
+	readonly role: string;
 	readonly wiki: string;
 }
 
@@ -128,6 +128,10 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 		.setTimestamp()
 		.addFields(
 			{
+				name: "Full name:",
+				value: aircraft.full,
+			},
+			{
 				name: "Alternative names (aliases for /airrec-quiz):",
 				value: aircraft.aliases.join(", ") || "None",
 			},
@@ -166,7 +170,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 
 	const doReveal = async () => {
 		await interaction.editReply({
-			content: `**The answer was ${aircraft.name}!**`,
+			content: `**The answer was the ${aircraft.name}!**`,
 			embeds: [answer],
 			components: [],
 		});

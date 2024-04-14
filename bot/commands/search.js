@@ -55,6 +55,9 @@ export async function execute(interaction) {
             .setImage(image)
             .setTimestamp()
             .addFields({
+            name: "Full name:",
+            value: matchedAircraft.full,
+        }, {
             name: "Alternative names (aliases for /airrec-quiz):",
             value: matchedAircraft.aliases.join(", ") || "None",
         }, {

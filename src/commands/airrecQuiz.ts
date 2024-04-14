@@ -401,6 +401,10 @@ If you want to play, click the button below.
 				})
 				.addFields(
 					{
+						name: "Full name:",
+						value: aircraft.full,
+					},
+					{
 						name: "Alternative names (aliases for /airrec-quiz):",
 						value: aircraft.aliases.join(", ") || "None",
 					},
@@ -450,7 +454,7 @@ If you want to play, click the button below.
 				});
 
 			await question.reply({
-				content: `**The answer was ${aircraft.name}!**\nContinuing in 10 seconds...`,
+				content: `**The answer was the ${aircraft.name}!**\nContinuing in 10 seconds...`,
 				embeds: [answer, leaderboard],
 			});
 

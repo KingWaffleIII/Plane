@@ -1,23 +1,23 @@
 import {
 	Association,
+	CreationOptional,
 	DataTypes,
+	ForeignKey,
 	HasManyAddAssociationMixin,
+	HasManyAddAssociationsMixin,
 	HasManyCountAssociationsMixin,
 	HasManyCreateAssociationMixin,
 	HasManyGetAssociationsMixin,
 	HasManyHasAssociationMixin,
-	HasManySetAssociationsMixin,
-	HasManyAddAssociationsMixin,
 	HasManyHasAssociationsMixin,
 	HasManyRemoveAssociationMixin,
 	HasManyRemoveAssociationsMixin,
-	Model,
-	Sequelize,
+	HasManySetAssociationsMixin,
 	InferAttributes,
 	InferCreationAttributes,
-	CreationOptional,
+	Model,
 	NonAttribute,
-	ForeignKey,
+	Sequelize,
 } from "sequelize";
 
 import waifus from "./waifus.json" assert { type: "json" };
@@ -47,6 +47,9 @@ export class User extends Model<
 	InferCreationAttributes<User, { omit: "waifus" }>
 > {
 	// foreign keys are automatically added by associations methods (like User.belongsTo)
+	declare static associations: {
+		waifus: Association<User, Waifu>;
+	};
 	// by branding them using the `ForeignKey` type,
 	declare id: string;
 	declare username: string;
@@ -59,10 +62,10 @@ export class User extends Model<
 	declare dogfightWinstreak: number;
 	declare airrecQuizWins: number;
 	declare airrecQuizLosses: number;
-	declare airrecQuizWinstreak: number;
 
 	// Since TS cannot determine model association at compile time
 	// we have to declare them here purely virtually
+	declare airrecQuizWinstreak: number;
 	// these will not exist until `Model.init` was called.
 	declare getWaifus: HasManyGetAssociationsMixin<Waifu>; // Note the null assertions!
 	declare addWaifu: HasManyAddAssociationMixin<Waifu, number>;
@@ -73,16 +76,12 @@ export class User extends Model<
 	declare hasWaifu: HasManyHasAssociationMixin<Waifu, number>;
 	declare hasWaifus: HasManyHasAssociationsMixin<Waifu, number>;
 	declare countWaifus: HasManyCountAssociationsMixin;
-	declare createWaifu: HasManyCreateAssociationMixin<Waifu, "userId">;
 
 	// You can also pre-declare possible inclusions, these will only be populated if you
 	// actively include a relation.
+	declare createWaifu: HasManyCreateAssociationMixin<Waifu, "userId">;
 	// We tag it as `NonAttribute`
 	declare waifus?: NonAttribute<Waifu[]>; // Note this is optional since it's only populated when explicitly requested in code
-	declare static associations: {
-		waifus: Association<User, Waifu>;
-	};
-
 	// createdAt can be undefined during creation
 	declare createdAt: CreationOptional<Date>;
 	// updatedAt can be undefined during creation
@@ -138,7 +137,7 @@ Guild.init(
 	{
 		sequelize: db,
 		tableName: "Guilds",
-	}
+	},
 );
 
 User.init(
@@ -154,7 +153,7 @@ User.init(
 		},
 		avatarUrl: {
 			type: DataTypes.STRING,
-			allowNull: false,
+			allowNull: true,
 		},
 		lockedWaifus: {
 			type: DataTypes.JSON,
@@ -205,7 +204,7 @@ User.init(
 	{
 		sequelize: db,
 		tableName: "Users",
-	}
+	},
 );
 
 Waifu.init(
@@ -255,7 +254,7 @@ Waifu.init(
 	{
 		sequelize: db,
 		tableName: "Waifus",
-	}
+	},
 );
 
 // Here we associate which actually populates out pre-declared `association` static and other methods.

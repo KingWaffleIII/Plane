@@ -81,6 +81,9 @@ export async function execute(interaction) {
         .setImage(image)
         .setTimestamp()
         .addFields({
+        name: "Full name:",
+        value: aircraft.full,
+    }, {
         name: "Alternative names (aliases for /airrec-quiz):",
         value: aircraft.aliases.join(", ") || "None",
     }, {
@@ -110,7 +113,7 @@ export async function execute(interaction) {
     });
     const doReveal = async () => {
         await interaction.editReply({
-            content: `**The answer was ${aircraft.name}!**`,
+            content: `**The answer was the ${aircraft.name}!**`,
             embeds: [answer],
             components: [],
         });
