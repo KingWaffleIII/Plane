@@ -54,10 +54,11 @@ function checkAnswer(message: string, aircraft: Aircraft): number {
 		return 2;
 	}
 	if (
+		message.toLowerCase().includes(aircraft.name.toLowerCase()) ||
+		message.toLowerCase().includes(aircraft.model.toLowerCase()) ||
 		aircraft.aliases.some((alias) =>
 			message.toLowerCase().includes(alias.toLowerCase()),
-		) ||
-		message.toLowerCase().includes(aircraft.model.toLowerCase())
+		)
 	) {
 		return 1;
 	}

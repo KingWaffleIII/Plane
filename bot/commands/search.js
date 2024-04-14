@@ -1,4 +1,4 @@
-import { EmbedBuilder, SlashCommandBuilder, } from "discord.js";
+import { EmbedBuilder, SlashCommandBuilder } from "discord.js";
 import { getImage } from "./airrec.js";
 import mrast from "../mrast.json" assert { type: "json" };
 import rast from "../rast.json" assert { type: "json" };

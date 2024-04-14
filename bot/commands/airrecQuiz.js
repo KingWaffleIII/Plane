@@ -15,8 +15,9 @@ function checkAnswer(message, aircraft) {
     if (message.toLowerCase() === aircraft.name.toLowerCase()) {
         return 2;
     }
-    if (aircraft.aliases.some((alias) => message.toLowerCase().includes(alias.toLowerCase())) ||
-        message.toLowerCase().includes(aircraft.model.toLowerCase())) {
+    if (message.toLowerCase().includes(aircraft.name.toLowerCase()) ||
+        message.toLowerCase().includes(aircraft.model.toLowerCase()) ||
+        aircraft.aliases.some((alias) => message.toLowerCase().includes(alias.toLowerCase()))) {
         return 1;
     }
     return 0;
