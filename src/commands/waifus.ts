@@ -63,105 +63,6 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 	}
 
 	const waifuNames = Object.keys(waifus);
-	const unlockedWaifus: string[] = [];
-	user!.waifus?.forEach((w) => {
-		if (w.generated) return;
-		unlockedWaifus.push(w.name);
-	});
-
-	if (name) {
-		const waifusLowerCase = Object.keys(waifus).map((w) => w.toLowerCase());
-
-		if (!waifusLowerCase.includes(name.toLowerCase())) {
-			await interaction.editReply({
-				content: "That waifu doesn't exist!",
-			});
-			return;
-		}
-
-		const waifuName =
-			Object.keys(waifus)[waifusLowerCase.indexOf(name.toLowerCase())];
-
-		const waifuData: WaifuBaseData =
-			waifus[waifuName as keyof typeof waifus];
-
-		const userWaifus = await user!.getWaifus({
-			where: {
-				name: waifuName,
-			},
-		});
-
-		if (userWaifus.length === 0) {
-			await interaction.editReply({
-				content:
-					"You don't have this waifu unlocked! You can unlock her by winning airrec quizzes.",
-			});
-			return;
-		}
-
-		const won = userWaifus.reduce((acc, w) => acc + w.kills, 0);
-		const lost = userWaifus.reduce((acc, w) => acc + w.deaths, 0);
-
-		const waifuEmbed = new EmbedBuilder()
-			.setColor(0xff00ff)
-			.setTitle(waifuName)
-			.setTimestamp()
-			.setAuthor({
-				name: targetUser.username,
-				iconURL: targetUser.avatarURL() as string,
-			})
-			.setThumbnail(targetUser.avatarURL() as string)
-			.setImage(
-				`attachment://${waifuData!.urlFriendlyName ?? waifuName}.jpg`,
-			)
-			.setFooter({
-				text: `You can unlock ${
-					waifuNames.length - unlockedWaifus.length
-				} more waifus by winning airrec quizzes!`,
-			})
-			.setDescription(
-				`
-This user has ${userWaifus.length} cop${
-					userWaifus.length === 1 ? "y" : "ies"
-				} of this waifu!\n
-${
-					userWaifus.some((w) => w.generated)
-						? "One or more of this waifu was generated."
-						: ""
-				}${
-					userWaifus.some((w) => !w.generated)
-						? "One or more of this waifu was unlocked by winning an airrec quiz!"
-						: ""
-				}
-In dogfighting, this waifu has won ${won} time${
-					won === 1 ? "" : "s"
-				} and lost ${lost} time${lost === 1 ? "" : "s"}.
-			`,
-			);
-
-		userWaifus.forEach((w) => {
-			waifuEmbed.addFields({
-				name: `Copy #${userWaifus.indexOf(w) + 1}`,
-				value: `ATK: ${w.atk}\nHP: ${w.hp}\nSPD: ${w.spd}\n`,
-				inline: true,
-			});
-		});
-
-		if (waifuData.ability) {
-			waifuEmbed.addFields({
-				name: waifuData.abilityName!,
-				value: waifuData.abilityDescription!,
-			});
-		}
-
-		await interaction.editReply({
-			embeds: [waifuEmbed],
-			files: [waifuData!.path],
-			components: [],
-		});
-
-		return;
-	}
 
 	const waifuCopies: {
 		[name: string]: number;
@@ -185,6 +86,100 @@ In dogfighting, this waifu has won ${won} time${
 			waifuCopies[w.name]++;
 		}
 	});
+
+	if (name) {
+		const waifuNamesLowerCase = Object.keys(waifus).map((w) => w.toLowerCase());
+
+		if (!waifuNamesLowerCase.includes(name.toLowerCase())) {
+			await interaction.editReply({
+				content: "That waifu doesn't exist!",
+			});
+			return;
+		}
+
+		const waifuName =
+			Object.keys(waifus)[waifuNamesLowerCase.indexOf(name.toLowerCase())];
+
+		const waifuData: WaifuBaseData =
+			waifus[waifuName as keyof typeof waifus];
+
+		const namedWaifu = await user!.getWaifus({
+			where: {
+				name: waifuName,
+			},
+		});
+
+		if (namedWaifu.length === 0) {
+			await interaction.editReply({
+				content:
+					"You don't have this waifu unlocked! You can unlock her by winning airrec quizzes.",
+			});
+			return;
+		}
+
+		const won = namedWaifu.reduce((acc, w) => acc + w.kills, 0);
+		const lost = namedWaifu.reduce((acc, w) => acc + w.deaths, 0);
+
+		const waifuEmbed = new EmbedBuilder()
+			.setColor(0xff00ff)
+			.setTitle(waifuName)
+			.setTimestamp()
+			.setAuthor({
+				name: targetUser.username,
+				iconURL: targetUser.avatarURL() as string,
+			})
+			.setThumbnail(targetUser.avatarURL() as string)
+			.setImage(
+				`attachment://${waifuData!.urlFriendlyName ?? waifuName}.jpg`,
+			)
+			.setFooter({
+				text: `You can unlock ${
+					waifuNames.length - waifuList.length
+				} more waifus by winning airrec quizzes!`,
+			})
+			.setDescription(
+				`
+This user has ${namedWaifu.length} cop${
+					namedWaifu.length === 1 ? "y" : "ies"
+				} of this waifu!\n
+${
+					namedWaifu.some((w) => w.generated)
+						? "One or more of this waifu was generated."
+						: ""
+				}${
+					namedWaifu.some((w) => !w.generated)
+						? "One or more of this waifu was unlocked by winning an airrec quiz!"
+						: ""
+				}
+In dogfighting, this waifu has won ${won} time${
+					won === 1 ? "" : "s"
+				} and lost ${lost} time${lost === 1 ? "" : "s"}.
+			`,
+			);
+
+		namedWaifu.forEach((w) => {
+			waifuEmbed.addFields({
+				name: `Copy #${userWaifus.indexOf(w) + 1}`,
+				value: `ATK: ${w.atk}\nHP: ${w.hp}\nSPD: ${w.spd}\n`,
+				inline: true,
+			});
+		});
+
+		if (waifuData.ability) {
+			waifuEmbed.addFields({
+				name: waifuData.abilityName!,
+				value: waifuData.abilityDescription!,
+			});
+		}
+
+		await interaction.editReply({
+			embeds: [waifuEmbed],
+			files: [waifuData!.path],
+			components: [],
+		});
+
+		return;
+	}
 
 	const embed = new EmbedBuilder()
 		.setColor(0xff00ff)
@@ -228,7 +223,7 @@ In dogfighting, this waifu has won ${won} time${
 		)
 		.setFooter({
 			text: `You can unlock ${
-				waifuNames.length - unlockedWaifus.length
+				waifuNames.length - waifuList.length
 			} more waifus by winning airrec quizzes!`,
 		});
 

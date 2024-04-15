@@ -3,10 +3,13 @@ import { getImage } from "./airrec.js";
 import mrast from "../mrast.json" assert { type: "json" };
 import rast from "../rast.json" assert { type: "json" };
 function checkMatch(matchAgainst, aircraft) {
-    if (aircraft.name.toLowerCase().includes(matchAgainst)) {
+    if (matchAgainst.toLowerCase().includes(aircraft.name.toLowerCase())) {
         return aircraft;
     }
-    if (aircraft.aliases.some((alias) => alias.toLowerCase().includes(matchAgainst))) {
+    if (matchAgainst.toLowerCase().includes(aircraft.model.toLowerCase())) {
+        return aircraft;
+    }
+    if (aircraft.aliases.some((alias) => matchAgainst.toLowerCase().includes(alias.toLowerCase()))) {
         return aircraft;
     }
     return null;

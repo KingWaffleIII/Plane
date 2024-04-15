@@ -5,12 +5,15 @@ import mrast from "../mrast.json" assert { type: "json" };
 import rast from "../rast.json" assert { type: "json" };
 
 function checkMatch(matchAgainst: string, aircraft: Aircraft): Aircraft | null {
-	if (aircraft.name.toLowerCase().includes(matchAgainst)) {
+	if (matchAgainst.toLowerCase().includes(aircraft.name.toLowerCase())) {
+		return aircraft;
+	}
+	if (matchAgainst.toLowerCase().includes(aircraft.model.toLowerCase())) {
 		return aircraft;
 	}
 	if (
 		aircraft.aliases.some((alias) =>
-			alias.toLowerCase().includes(matchAgainst),
+			matchAgainst.toLowerCase().includes(alias.toLowerCase()),
 		)
 	) {
 		return aircraft;
