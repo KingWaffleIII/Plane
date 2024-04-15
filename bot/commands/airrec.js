@@ -35,14 +35,14 @@ export async function getImage(url) {
         return null;
     }
 }
-export function makeEmbedWithImage(img) {
+export function makeEmbedWithImage(img, spec) {
     return new EmbedBuilder()
         .setColor(0x0099ff)
         .setTitle("What is the name of this aircraft?")
         .setImage(img)
         .setTimestamp()
         .setFooter({
-        text: "Photo credit: see bottom of image.",
+        text: `Spec: ${spec} | Photo credit: see bottom of image.`,
     });
 }
 export const data = new SlashCommandBuilder()
@@ -69,7 +69,7 @@ export async function execute(interaction) {
         .setCustomId(`reveal-airrec-${buttonId}`)
         .setLabel("Reveal answer")
         .setStyle(ButtonStyle.Primary));
-    const embed = makeEmbedWithImage(image);
+    const embed = makeEmbedWithImage(image, spec);
     await interaction.editReply({
         embeds: [embed],
         components: [row],
@@ -84,16 +84,11 @@ export async function execute(interaction) {
         name: "Full name:",
         value: aircraft.full,
     }, {
-        name: "Alternative names (aliases for /airrec-quiz):",
-        value: aircraft.aliases.join(", ") || "None",
-    }, {
         name: "Aircraft features to help you identify it:",
         value: aircraft.identification
             .map((identification) => `- ${identification}\n`)
             .join("") || "None",
-    }, 
-    // { name: "\u200B", value: "\u200B" },
-    {
+    }, {
         name: "Wikipedia:",
         value: aircraft.wiki,
         inline: true,
@@ -103,7 +98,7 @@ export async function execute(interaction) {
         inline: true,
     })
         .setFooter({
-        text: "Photo credit: see bottom of image.",
+        text: `Spec: ${spec} | Photo credit: see bottom of image.`,
     });
     const filter = (i) => i.customId === `reveal-airrec-${buttonId}`;
     const collector = interaction.channel?.createMessageComponentCollector({

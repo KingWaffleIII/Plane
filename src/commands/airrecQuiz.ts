@@ -50,10 +50,8 @@ process.on("unhandledRejection", (_error: Error) => {
 });
 
 function checkAnswer(message: string, aircraft: Aircraft): number {
-	if (message.toLowerCase() === aircraft.name.toLowerCase()) {
-		return 2;
-	}
 	if (
+		message.toLowerCase() === aircraft.name.toLowerCase() ||
 		message.toLowerCase().includes(aircraft.name.toLowerCase()) ||
 		message.toLowerCase().includes(aircraft.model.toLowerCase()) ||
 		aircraft.aliases.some((alias) =>
@@ -97,8 +95,8 @@ async function spawnWaifu(
 		// Generate a random number between 0 and 1
 		const randomNum = Math.random();
 
-		// Calculate the probability of returning true based on the score (score is halved as you can earn 2 points in each round)
-		const probability = score / 2 / rounds;
+		// Calculate the probability of returning true based on the score
+		const probability = score / rounds;
 
 		// Return true if the random number is less than the probability, otherwise return false
 		return randomNum < probability;
@@ -252,10 +250,8 @@ You will be shown pictures of **${rounds}** aircraft and you will have to reply 
 You will be given 15 seconds for an answer (**you will only be allowed one response so don't send any messages unless you are sending an answer**).
 
 __**Scoring:**__
-You will get **2 points** for listing the aircraft manufacturer and model. For example: "Lockheed Martin F-22".
-You will get **1 point** for listing the aircraft model or alias(es) only. For example: "F-22" or "Raptor".
+You will get **1 point** for listing the aircraft name, model or alias(es). For example: if the aircraft was the F-35, you could say "F-35" or "Lightning II".
 The leaderboard will be shown every round.
-Note: it is **very hard** to consistently get 2 points, so don't worry if you only get 1 point.
 
 If you want to play, click the button below.
 **Starting in 60 seconds...**
@@ -357,7 +353,7 @@ If you want to play, click the button below.
 				return;
 			}
 
-			const embed = makeEmbedWithImage(image);
+			const embed = makeEmbedWithImage(image, spec);
 			const question = await thread.send({
 				content: `**Round ${i + 1} of ${rounds}:**`,
 				embeds: [embed],
@@ -398,16 +394,12 @@ If you want to play, click the button below.
 				.setImage(image)
 				.setTimestamp()
 				.setFooter({
-					text: "Photo credit: see bottom of image.",
+					text: `Spec: ${spec} | Photo credit: see bottom of image.`,
 				})
 				.addFields(
 					{
 						name: "Full name:",
 						value: aircraft.full,
-					},
-					{
-						name: "Alternative names (aliases for /airrec-quiz):",
-						value: aircraft.aliases.join(", ") || "None",
 					},
 					{
 						name: "Aircraft features to help you identify it:",
