@@ -716,16 +716,6 @@
 		"wiki": "https://en.wikipedia.org/wiki/Airbus_A350"
 	},
 	{
-		"aliases": [],
-		"identification": [],
-		"image": "https://airfighters.com/photosearch.php?cra=656",
-		"full": "Boeing 707",
-		"model": "707",
-		"name": "707",
-		"role": "Narrow-body airliner.",
-		"wiki": "https://en.wikipedia.org/wiki/Boeing_707"
-	},
-	{
 		"aliases": [
 			"C-40",
 			"C40",
