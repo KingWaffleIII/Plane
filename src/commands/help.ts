@@ -1,13 +1,9 @@
-import {
-	ChatInputCommandInteraction,
-	EmbedBuilder,
-	SlashCommandBuilder,
-} from "discord.js";
+import { ChatInputCommandInteraction, EmbedBuilder, SlashCommandBuilder } from "discord.js";
 
 export const data = new SlashCommandBuilder()
 	.setName("help")
 	.setDescription(
-		"Information about Plane and how to contact the developer."
+		"Information about Plane and how to contact the developer.",
 	);
 
 export async function execute(interaction: ChatInputCommandInteraction) {
@@ -40,14 +36,13 @@ If you have any questions, suggestions or find an error, you can submit an issue
 \n
 __**Credits**__
 https://github.com/KingWaffleIII/plane/blob/main/credits.md
-			`
+			`,
 		)
 		.setThumbnail("https://i.imgur.com/YnUnoQL.png")
-		.setTimestamp()
 		.setFooter({
 			text: "Plane - Help",
 			iconURL: "https://i.imgur.com/YnUnoQL.png",
 		});
 
-	await interaction.reply({ embeds: [embed] });
+	await interaction.reply({ embeds: [embed], ephemeral: true });
 }

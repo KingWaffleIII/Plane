@@ -370,7 +370,7 @@ If you want to play, click the button below.
 				return false;
 			};
 			const messages = await thread.awaitMessages({
-				time: 15000,
+				time: 20000,
 				max: Object.keys(players).length,
 				filter: answerFilter,
 				// errors: ["time"],
@@ -392,7 +392,6 @@ If you want to play, click the button below.
 				.setTitle(aircraft.name)
 				.setDescription(aircraft.role)
 				.setImage(image)
-				.setTimestamp()
 				.setFooter({
 					text: `Spec: ${spec} | Photo credit: see bottom of image.`,
 				})
@@ -431,7 +430,6 @@ If you want to play, click the button below.
 			const leaderboard = new EmbedBuilder()
 				.setColor(0x0099ff)
 				.setTitle("Leaderboard")
-				.setTimestamp()
 				.setDescription(
 					sortedPlayers
 						.map((userId) => {
@@ -493,8 +491,7 @@ If you want to play, click the button below.
 						}**: ${player.score}`;
 					})
 					.join("\n"),
-			)
-			.setTimestamp();
+			);
 
 		await thread.send({
 			content: "The game has ended! Here's the final leaderboard:",

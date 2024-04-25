@@ -40,7 +40,6 @@ export function makeEmbedWithImage(img, spec) {
         .setColor(0x0099ff)
         .setTitle("What is the name of this aircraft?")
         .setImage(img)
-        .setTimestamp()
         .setFooter({
         text: `Spec: ${spec} | Photo credit: see bottom of image.`,
     });
@@ -79,7 +78,6 @@ export async function execute(interaction) {
         .setTitle(aircraft.name)
         .setDescription(aircraft.role)
         .setImage(image)
-        .setTimestamp()
         .addFields({
         name: "Full name:",
         value: aircraft.full,

@@ -480,7 +480,7 @@ export async function execute(interaction) {
                         .setColor(0xff00ff)
                         .setAuthor({
                         name: first.user.username,
-                        iconURL: first.user.avatarUrl ?? undefined,
+                        iconURL: first.user.avatarUrl,
                     })
                         .setImage(`attachment://${firstWaifuData.urlFriendlyName ??
                         first.name}.jpg`)
@@ -501,7 +501,7 @@ export async function execute(interaction) {
                         name: "Equipped Weapon",
                         value: firstWaifu.equipment?.name
                             ? `${firstWaifu.equipment.name} (+${firstWaifu.equipment.atk.toString()} ATK)`
-                            : "None! Equip a weapon for more ATK!",
+                            : "None! Equip a weapon for more ATK and bonus effects!",
                         inline: true,
                     });
                     if (firstWaifu.equipment) {
@@ -509,6 +509,10 @@ export async function execute(interaction) {
                             .name];
                         firstWaifuEmbed.setThumbnail(`attachment://${equipmentData.urlFriendlyName ??
                             firstWaifu.equipment.name}.jpg`);
+                        firstWaifuEmbed.addFields({
+                            name: equipmentData.abilityName,
+                            value: equipmentData.abilityDescription,
+                        });
                     }
                     const firstDogfightId = crypto
                         .randomBytes(6)
@@ -571,7 +575,7 @@ export async function execute(interaction) {
                         .setColor(0xff00ff)
                         .setAuthor({
                         name: second.user.username,
-                        iconURL: second.user.avatarUrl ?? undefined,
+                        iconURL: second.user.avatarUrl,
                     })
                         .setImage(`attachment://${secondWaifuData.urlFriendlyName ??
                         second.name}.jpg`)
@@ -600,6 +604,10 @@ export async function execute(interaction) {
                             .name];
                         secondWaifuEmbed.setThumbnail(`attachment://${equipmentData.urlFriendlyName ??
                             secondWaifu.equipment.name}.jpg`);
+                        secondWaifuEmbed.addFields({
+                            name: equipmentData.abilityName,
+                            value: equipmentData.abilityDescription,
+                        });
                     }
                     const secondDogfightId = crypto
                         .randomBytes(6)

@@ -10,7 +10,9 @@ export const data = new SlashCommandBuilder()
     .setRequired(true));
 export async function execute(interaction) {
     const name = interaction.options.getString("name");
-    await interaction.deferReply();
+    await interaction.deferReply({
+        ephemeral: true,
+    });
     const user = await User.findByPk(interaction.user.id);
     if (!user) {
         await interaction.editReply({

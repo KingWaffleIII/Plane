@@ -69,7 +69,6 @@ export async function execute(interaction) {
         .join("\n"))
         .setFooter({
         text: `Airrec Quiz Wins | Dogfight Kills | Airrec Quiz Winstreak | Dogfight Winstreak | Unlocked Waifus`,
-    })
-        .setTimestamp();
+    });
     await interaction.reply({ embeds: [embed] });
 }

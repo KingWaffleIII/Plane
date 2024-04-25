@@ -33,10 +33,9 @@ __**Credits**__
 https://github.com/KingWaffleIII/plane/blob/main/credits.md
 			`)
         .setThumbnail("https://i.imgur.com/YnUnoQL.png")
-        .setTimestamp()
         .setFooter({
         text: "Plane - Help",
         iconURL: "https://i.imgur.com/YnUnoQL.png",
     });
-    await interaction.reply({ embeds: [embed] });
+    await interaction.reply({ embeds: [embed], ephemeral: true });
 }

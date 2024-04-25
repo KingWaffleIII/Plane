@@ -55,7 +55,6 @@ export async function execute(interaction) {
         name: targetUser.username,
         iconURL: targetUser.avatarURL(),
     })
-        .setThumbnail(targetUser.avatarURL())
         .addFields({
         name: `Airrec Quizzes (${quizTotal})`,
         value: `Wins: ${airrecQuizWins}\nLosses: ${airrecQuizLosses}\nWinstreak: ${airrecQuizWinstreak}`,
@@ -64,8 +63,7 @@ export async function execute(interaction) {
         value: `Kills: ${dogfightKills}\nDeaths: ${dogfightDeaths}\nWinstreak: ${dogfightWinstreak}`,
     })
         .setFooter({
-        text: "You can view specific waifu stats with /waifus. If you are the only player (and by thus, the winner) in an airrec quiz, it doesn't count towards any stats.",
-    })
-        .setTimestamp();
+        text: "You can view specific waifu stats with /waifus. If you are the only player (and thus, the winner) in an airrec quiz, it doesn't count towards any stats.",
+    });
     await interaction.editReply({ embeds: [embed] });
 }

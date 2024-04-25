@@ -272,7 +272,7 @@ If you want to play, click the button below.
                 return false;
             };
             const messages = await thread.awaitMessages({
-                time: 15000,
+                time: 20000,
                 max: Object.keys(players).length,
                 filter: answerFilter,
                 // errors: ["time"],
@@ -291,7 +291,6 @@ If you want to play, click the button below.
                 .setTitle(aircraft.name)
                 .setDescription(aircraft.role)
                 .setImage(image)
-                .setTimestamp()
                 .setFooter({
                 text: `Spec: ${spec} | Photo credit: see bottom of image.`,
             })
@@ -318,7 +317,6 @@ If you want to play, click the button below.
             const leaderboard = new EmbedBuilder()
                 .setColor(0x0099ff)
                 .setTitle("Leaderboard")
-                .setTimestamp()
                 .setDescription(sortedPlayers
                 .map((userId) => {
                 const player = players[userId];
@@ -359,8 +357,7 @@ If you want to play, click the button below.
             const player = players[userId];
             return `#${sortedPlayers.indexOf(userId) + 1} **${player.username}**: ${player.score}`;
         })
-            .join("\n"))
-            .setTimestamp();
+            .join("\n"));
         await thread.send({
             content: "The game has ended! Here's the final leaderboard:",
             embeds: [leaderboard],

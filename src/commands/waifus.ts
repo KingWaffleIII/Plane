@@ -123,12 +123,10 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 		const waifuEmbed = new EmbedBuilder()
 			.setColor(0xff00ff)
 			.setTitle(waifuName)
-			.setTimestamp()
 			.setAuthor({
 				name: targetUser.username,
 				iconURL: targetUser.avatarURL() as string,
 			})
-			.setThumbnail(targetUser.avatarURL() as string)
 			.setImage(
 				`attachment://${waifuData!.urlFriendlyName ?? waifuName}.jpg`,
 			)
@@ -159,7 +157,7 @@ In dogfighting, this waifu has won ${won} time${
 
 		namedWaifu.forEach((w) => {
 			waifuEmbed.addFields({
-				name: `Copy #${userWaifus.indexOf(w) + 1}`,
+				name: `Copy #${namedWaifu.indexOf(w) + 1}`,
 				value: `ATK: ${w.atk}\nHP: ${w.hp}\nSPD: ${w.spd}\n`,
 				inline: true,
 			});
@@ -188,7 +186,6 @@ In dogfighting, this waifu has won ${won} time${
 			name: targetUser.username,
 			iconURL: targetUser.avatarURL() as string,
 		})
-		.setThumbnail(targetUser.avatarURL() as string)
 		.setDescription(
 			`You have **${waifuList.filter((w) => !w.includes("\\*")).length}/${
 				Object.keys(waifus).length

@@ -66,7 +66,6 @@ export function makeEmbedWithImage(img: string, spec: string): EmbedBuilder {
 		.setColor(0x0099ff)
 		.setTitle("What is the name of this aircraft?")
 		.setImage(img)
-		.setTimestamp()
 		.setFooter({
 			text: `Spec: ${spec} | Photo credit: see bottom of image.`,
 		});
@@ -125,7 +124,6 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 		.setTitle(aircraft.name)
 		.setDescription(aircraft.role)
 		.setImage(image)
-		.setTimestamp()
 		.addFields(
 			{
 				name: "Full name:",

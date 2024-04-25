@@ -94,12 +94,10 @@ export async function execute(interaction) {
         const waifuEmbed = new EmbedBuilder()
             .setColor(0xff00ff)
             .setTitle(waifuName)
-            .setTimestamp()
             .setAuthor({
             name: targetUser.username,
             iconURL: targetUser.avatarURL(),
         })
-            .setThumbnail(targetUser.avatarURL())
             .setImage(`attachment://${waifuData.urlFriendlyName ?? waifuName}.jpg`)
             .setFooter({
             text: `You can unlock ${waifuNames.length - waifuList.length} more waifus by winning airrec quizzes!`,
@@ -115,7 +113,7 @@ In dogfighting, this waifu has won ${won} time${won === 1 ? "" : "s"} and lost $
 			`);
         namedWaifu.forEach((w) => {
             waifuEmbed.addFields({
-                name: `Copy #${userWaifus.indexOf(w) + 1}`,
+                name: `Copy #${namedWaifu.indexOf(w) + 1}`,
                 value: `ATK: ${w.atk}\nHP: ${w.hp}\nSPD: ${w.spd}\n`,
                 inline: true,
             });
@@ -140,7 +138,6 @@ In dogfighting, this waifu has won ${won} time${won === 1 ? "" : "s"} and lost $
         name: targetUser.username,
         iconURL: targetUser.avatarURL(),
     })
-        .setThumbnail(targetUser.avatarURL())
         .setDescription(`You have **${waifuList.filter((w) => !w.includes("\\*")).length}/${Object.keys(waifus).length}** waifus unlocked! ${user.guaranteeWaifu
         ? `You need to obtain **${10 - user.guaranteeCounter}** more waifu(s) before you get a guaranteed **${user
             .guaranteeWaifu}**.`

@@ -71,7 +71,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 			.setTitle(matchedAircraft!.name)
 			.setDescription(matchedAircraft!.role)
 			.setImage(image)
-			.setTimestamp()
+
 			.addFields(
 				{
 					name: "Full name:",

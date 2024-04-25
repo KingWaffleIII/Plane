@@ -56,7 +56,6 @@ export async function execute(interaction) {
             .setTitle(matchedAircraft.name)
             .setDescription(matchedAircraft.role)
             .setImage(image)
-            .setTimestamp()
             .addFields({
             name: "Full name:",
             value: matchedAircraft.full,
