@@ -10,10 +10,7 @@
 			"C 12",
 			"Huron"
 		],
-		"identification": [
-			"Short length",
-			"2 propeller engines"
-		],
+		"identification": ["Short length", "2 propeller engines"],
 		"image": "https://www.airfighters.com/photosearch.php?cra=1670",
 		"full": "Beechcraft Super King AIr",
 		"model": "Super King Air",
@@ -22,12 +19,7 @@
 		"wiki": "https://en.wikipedia.org/wiki/Beechcraft_Super_King_Air"
 	},
 	{
-		"aliases": [
-			"CH-146",
-			"CH146",
-			"CH 146",
-			"Griffon"
-		],
+		"aliases": ["CH-146", "CH146", "CH 146", "Griffon"],
 		"identification": [
 			"No landing gear",
 			"Rounded pointed nose",
@@ -41,12 +33,7 @@
 		"wiki": "https://en.wikipedia.org/wiki/Bell_412"
 	},
 	{
-		"aliases": [
-			"RJ-85",
-			"RJ85",
-			"RJ 85",
-			"Avro RJ"
-		],
+		"aliases": ["RJ-85", "RJ85", "RJ 85", "Avro RJ"],
 		"identification": [
 			"Short length",
 			"Wings are at the top of the fuselage",
@@ -78,9 +65,7 @@
 		"wiki": "https://en.wikipedia.org/wiki/Boeing_727"
 	},
 	{
-		"aliases": [
-			"Dreamliner"
-		],
+		"aliases": ["Dreamliner"],
 		"identification": [
 			"Medium length",
 			"No winglets",
@@ -96,11 +81,7 @@
 		"wiki": "https://en.wikipedia.org/wiki/Boeing_787_Dreamliner"
 	},
 	{
-		"aliases": [
-			"BN2",
-			"BN 2",
-			"Defender"
-		],
+		"aliases": ["BN2", "BN 2", "Defender"],
 		"identification": [
 			"Short length",
 			"No winglets",
@@ -117,10 +98,7 @@
 		"wiki": "https://en.wikipedia.org/wiki/Britten-Norman_BN-2_Islander"
 	},
 	{
-		"aliases": [
-			"Dominie",
-			"Hawker 100"
-		],
+		"aliases": ["Dominie", "Hawker 100"],
 		"identification": [
 			"Twin-engine business jet",
 			"T-tail configuration with two rear-mounted engines",
@@ -136,12 +114,7 @@
 		"wiki": "https://en.wikipedia.org/wiki/British_Aerospace_125"
 	},
 	{
-		"aliases": [
-			"KC-30",
-			"KC30",
-			"KC 30",
-			"Phoenix"
-		],
+		"aliases": ["KC-30", "KC30", "KC 30", "Phoenix"],
 		"identification": [
 			"Has fuel pods under the wings",
 			"Has 2 jet engines positioned by fuselage",
@@ -156,10 +129,7 @@
 		"wiki": "https://en.wikipedia.org/wiki/Airbus_A330_MRTT"
 	},
 	{
-		"aliases": [
-			"CH47",
-			"CH 47"
-		],
+		"aliases": ["CH47", "CH 47"],
 		"identification": [
 			"Has two rotors on opposite ends of airframe",
 			"Circular windows along the side of the airframe",
@@ -174,10 +144,7 @@
 		"wiki": "https://en.wikipedia.org/wiki/Boeing_CH-47_Chinook"
 	},
 	{
-		"aliases": [
-			"C17",
-			"C 17"
-		],
+		"aliases": ["C17", "C 17"],
 		"identification": [
 			"Has 4 jet engines on the wings",
 			"Has elevators raised onto top of vertical stabliser",
@@ -192,10 +159,7 @@
 		"wiki": "https://en.wikipedia.org/wiki/Boeing_C-17_Globemaster_III"
 	},
 	{
-		"aliases": [
-			"E3",
-			"E 3"
-		],
+		"aliases": ["E3", "E 3"],
 		"identification": [
 			"4 small-ish, thing jet engines on the wings, further away from the airframe than to the wing tips",
 			"Big radar dish on top op plane that's circular and spins",
@@ -210,10 +174,7 @@
 		"wiki": "https://en.wikipedia.org/wiki/Boeing_E-3_Sentry"
 	},
 	{
-		"aliases": [
-			"AH64",
-			"AH 64"
-		],
+		"aliases": ["AH64", "AH 64"],
 		"identification": [
 			"Singular rotor with a vertical rotor on rudder at the rear",
 			"Long armament racks alongside the side of the airframe with 2 hardpoints (places to fit weaponary)",
@@ -228,12 +189,7 @@
 		"wiki": "https://en.wikipedia.org/wiki/Boeing_AH-64_Apache"
 	},
 	{
-		"aliases": [
-			"Goshawk",
-			"T-45",
-			"T45",
-			"T45"
-		],
+		"aliases": ["Goshawk", "T-45", "T45", "T45"],
 		"identification": [
 			"Has 2 engines in the rear",
 			"Has 2 seats so long canopy",
@@ -249,10 +205,7 @@
 		"wiki": "https://en.wikipedia.org/wiki/BAE_Systems_Hawk"
 	},
 	{
-		"aliases": [
-			"G-115E",
-			"G115E"
-		],
+		"aliases": ["G-115E", "G115E"],
 		"identification": [
 			"Singular 3 rotor turboprop engine at front",
 			"3 fixed landing gears all close and not down the tail"
@@ -265,13 +218,7 @@
 		"wiki": "https://en.wikipedia.org/wiki/Grob_G_115"
 	},
 	{
-		"aliases": [
-			"C130",
-			"C 130",
-			"L-100",
-			"L100",
-			"L 100"
-		],
+		"aliases": ["C130", "C 130", "L-100", "L100", "L 100"],
 		"identification": [
 			"4 turboprop (propeller) engines all near airframe and close together",
 			"Pointier nose compared to the A400M",
@@ -286,10 +233,7 @@
 		"wiki": "https://en.wikipedia.org/wiki/Lockheed_C-130_Hercules"
 	},
 	{
-		"aliases": [
-			"F35",
-			"F 35"
-		],
+		"aliases": ["F35", "F 35"],
 		"identification": [
 			"Single engine with 2 air inlets on the sides of the canopy",
 			"No hard points on the wings to increase stealth",
@@ -321,9 +265,7 @@
 		"wiki": "https://en.wikipedia.org/wiki/Panavia_Tornado"
 	},
 	{
-		"aliases": [
-			"Sentinel"
-		],
+		"aliases": ["Sentinel"],
 		"identification": [
 			"WHAT THE FUCK IS THAT",
 			"It looks like a discord mod with no neck",
@@ -339,11 +281,7 @@
 		"wiki": "https://en.wikipedia.org/wiki/Raytheon_Sentinel"
 	},
 	{
-		"aliases": [
-			"Tucano",
-			"EMB312",
-			"EMB 312"
-		],
+		"aliases": ["Tucano", "EMB312", "EMB 312"],
 		"identification": [
 			"Has 4 propellers on the nose of aircraft",
 			"3 retractable landing gear which are near the front of the plane",
@@ -357,10 +295,7 @@
 		"wiki": "https://en.wikipedia.org/wiki/Short_Tucano"
 	},
 	{
-		"aliases": [
-			"SA-330",
-			"SA330"
-		],
+		"aliases": ["SA-330", "SA330"],
 		"identification": [
 			"Two \"projections\" above the cockpit",
 			"6 landing gears - 3 pairs of 2",
@@ -374,11 +309,7 @@
 		"wiki": "https://en.wikipedia.org/wiki/A%C3%A9rospatiale_SA_330_Puma"
 	},
 	{
-		"aliases": [
-			"SA-532",
-			"SA532",
-			"Cougar"
-		],
+		"aliases": ["SA-532", "SA532", "Cougar"],
 		"identification": [
 			"Longer than the Puma",
 			"Nose is sharper than the Puma and cockpit extends out more"
@@ -460,13 +391,7 @@
 		"wiki": "https://en.wikipedia.org/wiki/Supermarine_Spitfire"
 	},
 	{
-		"aliases": [
-			"AW-101",
-			"AW 101",
-			"EH-101",
-			"EH101",
-			"EH 101"
-		],
+		"aliases": ["AW-101", "AW 101", "EH-101", "EH101", "EH 101"],
 		"identification": [
 			"4 rotors on top with 4 in tail on left side when in cockpit",
 			"chonky chonk",
@@ -525,12 +450,7 @@
 		"wiki": "https://en.wikipedia.org/wiki/Airbus_A380"
 	},
 	{
-		"aliases": [
-			"Dreamlifter",
-			"747 404 LCF",
-			"747-404",
-			"747 404"
-		],
+		"aliases": ["Dreamlifter", "747 404 LCF", "747-404", "747 404"],
 		"identification": [
 			"Modified cargo transport aircraft based on the Boeing 747",
 			"Bulbous, oversized fuselage designed for transporting large aircraft components",
@@ -546,14 +466,7 @@
 		"wiki": "https://en.wikipedia.org/wiki/Boeing_Dreamlifter"
 	},
 	{
-		"aliases": [
-			"AV-8B",
-			"AV8B",
-			"AV 8B",
-			"TAV-8B",
-			"TAV8B",
-			"TAV 8B"
-		],
+		"aliases": ["AV-8B", "AV8B", "AV 8B", "TAV-8B", "TAV8B", "TAV 8B"],
 		"identification": [
 			"No rear exhaust for engines, it has 4 smaller ports that can swivel on either side on both ends of aircraft",
 			"Has 4 hard points on either wing",
@@ -585,13 +498,7 @@
 		"wiki": "https://en.wikipedia.org/wiki/Airbus_A300"
 	},
 	{
-		"aliases": [
-			"A310 MRTT",
-			"CC-150",
-			"CC150",
-			"CC 150",
-			"Polaris"
-		],
+		"aliases": ["A310 MRTT", "CC-150", "CC150", "CC 150", "Polaris"],
 		"identification": [
 			"Medium length",
 			"Y-shaped winglets",
@@ -698,9 +605,7 @@
 		"wiki": "https://en.wikipedia.org/wiki/Airbus_A340"
 	},
 	{
-		"aliases": [
-			"XWB"
-		],
+		"aliases": ["XWB"],
 		"identification": [
 			"Long length",
 			"Winglets pointing upwards",
@@ -717,12 +622,7 @@
 		"wiki": "https://en.wikipedia.org/wiki/Airbus_A350"
 	},
 	{
-		"aliases": [
-			"C-40",
-			"C40",
-			"C 40",
-			"Clipper"
-		],
+		"aliases": ["C-40", "C40", "C 40", "Clipper"],
 		"identification": [
 			"Medium length",
 			"Tall winglets pointing upwards",
@@ -738,11 +638,7 @@
 		"wiki": "https://en.wikipedia.org/wiki/Boeing_737"
 	},
 	{
-		"aliases": [
-			"747-SP",
-			"747SP",
-			"747 SP"
-		],
+		"aliases": ["747-SP", "747SP", "747 SP"],
 		"identification": [
 			"Long with a hump (incomplete 2nd deck) towards the front",
 			"No winglets",
@@ -759,11 +655,7 @@
 		"wiki": "https://en.wikipedia.org/wiki/Boeing_747"
 	},
 	{
-		"aliases": [
-			"C-32",
-			"C32",
-			"C 32"
-		],
+		"aliases": ["C-32", "C32", "C 32"],
 		"identification": [
 			"Medium-long length",
 			"Tall winglets pointing upwards",
@@ -811,10 +703,7 @@
 		"wiki": "https://en.wikipedia.org/wiki/Boeing_777"
 	},
 	{
-		"aliases": [
-			"RC135W",
-			"RC 135W"
-		],
+		"aliases": ["RC135W", "RC 135W"],
 		"identification": [
 			"Has 4 engines along side wings",
 			"Has a pointy and round nose at front of the plane",
@@ -828,13 +717,7 @@
 		"wiki": "https://en.wikipedia.org/wiki/Boeing_RC-135"
 	},
 	{
-		"aliases": [
-			"737 AEW",
-			"E-7",
-			"E7",
-			"E 7",
-			"Peace Eagle"
-		],
+		"aliases": ["737 AEW", "E-7", "E7", "E 7", "Peace Eagle"],
 		"identification": [
 			"Two jet engines near the airframe, bigger than E-3",
 			"Thing long radar along the airframe and supported by 1 beam not 2, thinner than the airframe",
@@ -848,10 +731,7 @@
 		"wiki": "https://en.wikipedia.org/wiki/Boeing_737_AEW%26C"
 	},
 	{
-		"aliases": [
-			"P8",
-			"P 8"
-		],
+		"aliases": ["P8", "P 8"],
 		"identification": [
 			"Two jet engines near airframe",
 			"Magnetic detector (Long stick from back of plane) used in detecting submarines",
@@ -865,11 +745,7 @@
 		"wiki": "https://en.wikipedia.org/wiki/Boeing_P-8_Poseidon"
 	},
 	{
-		"aliases": [
-			"Extender",
-			"KC10",
-			"KC 10"
-		],
+		"aliases": ["Extender", "KC10", "KC 10"],
 		"identification": [
 			"Has 2 jet engines on either wing which are close to the airframe, has 1 engine on the vertical stabiliser",
 			"Has a refueling boom on the rear than can extend or retract",
@@ -883,10 +759,7 @@
 		"wiki": "https://en.wikipedia.org/wiki/McDonnell_Douglas_KC-10_Extender"
 	},
 	{
-		"aliases": [
-			"MD11",
-			"MD 11"
-		],
+		"aliases": ["MD11", "MD 11"],
 		"identification": [],
 		"image": "https://www.jetphotos.com/showphotos.php?aircraft=McDonnell+Douglas+MD-11%3B",
 		"full": "McDonnell Douglas MD-11",
@@ -905,7 +778,7 @@
 			"Elevator is at the top of the tail",
 			"2 jet engines at the rear"
 		],
-		"image": "https://www.airfighters.com/photosearch.php?cra=1810",
+		"image": "https://airfighters.com/photosearch.php?cra=4719",
 		"full": "Bombardier Global Express",
 		"model": "Global Express",
 		"name": "Global Express",
@@ -913,12 +786,7 @@
 		"wiki": "https://en.wikipedia.org/wiki/Bombardier_Global_Express"
 	},
 	{
-		"aliases": [
-			"HU-25",
-			"HU 25",
-			"HU25",
-			"Guardian"
-		],
+		"aliases": ["HU-25", "HU 25", "HU25", "Guardian"],
 		"identification": [],
 		"image": "https://airfighters.com/photosearch.php?cra=806",
 		"full": "Dassault Falcon 20",
@@ -928,10 +796,7 @@
 		"wiki": "https://en.wikipedia.org/wiki/Dassault_Falcon_20"
 	},
 	{
-		"aliases": [
-			"ERJ-135",
-			"ERJ135"
-		],
+		"aliases": ["ERJ-135", "ERJ135"],
 		"identification": [
 			"Short length",
 			"Winglets pointing upwards",
@@ -948,10 +813,7 @@
 		"wiki": "https://en.wikipedia.org/wiki/Embraer_ERJ_family"
 	},
 	{
-		"aliases": [
-			"ERJ-145",
-			"ERJ145"
-		],
+		"aliases": ["ERJ-145", "ERJ145"],
 		"identification": [
 			"Short-medium length",
 			"Winglets pointing upwards",
@@ -968,11 +830,7 @@
 		"wiki": "https://en.wikipedia.org/wiki/Embraer_ERJ_family"
 	},
 	{
-		"aliases": [
-			"EMB-500",
-			"EMB500",
-			"Phenom 100"
-		],
+		"aliases": ["EMB-500", "EMB500", "Phenom 100"],
 		"identification": [
 			"Really short length",
 			"No winglets",
@@ -1004,11 +862,7 @@
 		"wiki": "https://en.wikipedia.org/wiki/Eurofighter_Typhoon"
 	},
 	{
-		"aliases": [
-			"G-120TP",
-			"G120TP",
-			"Prefect"
-		],
+		"aliases": ["G-120TP", "G120TP", "Prefect"],
 		"identification": [
 			"Has 5 rotors",
 			"Retractable gear which is near the front of the plane like the 115",
@@ -1023,11 +877,7 @@
 		"wiki": "https://en.wikipedia.org/wiki/Grob_G_120TP"
 	},
 	{
-		"aliases": [
-			"G-109",
-			"G109",
-			"Vigilant"
-		],
+		"aliases": ["G-109", "G109", "Vigilant"],
 		"identification": [
 			"Unlike G115 it has its rear landing gear all the way at the back of the airframe",
 			"It has the elevators on the top of the vertical stabiliser",
@@ -1041,13 +891,7 @@
 		"wiki": "https://en.wikipedia.org/wiki/Grob_G_109"
 	},
 	{
-		"aliases": [
-			"C-150",
-			"C 150",
-			"C-152",
-			"C152",
-			"C 152"
-		],
+		"aliases": ["C-150", "C 150", "C-152", "C152", "C 152"],
 		"identification": [],
 		"image": "https://www.jetphotos.com/showphotos.php?aircraft=Cessna+150%3B",
 		"full": "Cessna C150",
@@ -1057,11 +901,7 @@
 		"wiki": "https://en.wikipedia.org/wiki/Cessna_150"
 	},
 	{
-		"aliases": [
-			"AW109",
-			"AW 109",
-			"Power"
-		],
+		"aliases": ["AW109", "AW 109", "Power"],
 		"identification": [
 			"Pointed nose",
 			"Landing gear",
@@ -1075,10 +915,7 @@
 		"wiki": "https://en.wikipedia.org/wiki/AgustaWestland_AW109"
 	},
 	{
-		"aliases": [
-			"AW149",
-			"AW 149"
-		],
+		"aliases": ["AW149", "AW 149"],
 		"identification": [
 			"Single rotor on top with a dome cover and a vertical rotor on the right side of the vertical stabliser",
 			"3 retractable gears",
@@ -1094,10 +931,7 @@
 		"wiki": "https://en.wikipedia.org/wiki/AgustaWestland_AW149"
 	},
 	{
-		"aliases": [
-			"UH1",
-			"UH 1"
-		],
+		"aliases": ["UH1", "UH 1"],
 		"identification": [
 			"Really long tail like the Squirrel",
 			"Rotor only has 2 blades",
@@ -1111,14 +945,7 @@
 		"wiki": "https://en.wikipedia.org/wiki/Bell_UH-1_Iroquois"
 	},
 	{
-		"aliases": [
-			"AS365",
-			"AS 365",
-			"AS-565",
-			"AS565",
-			"AS 565",
-			"Panther"
-		],
+		"aliases": ["AS365", "AS 365", "AS-565", "AS565", "AS 565", "Panther"],
 		"identification": [
 			"Similar to the AW109/AW149",
 			"Back rotors inside a thingy and not exposed",
