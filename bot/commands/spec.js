@@ -1,4 +1,4 @@
-import { SlashCommandBuilder, } from "discord.js";
+import { SlashCommandBuilder } from "discord.js";
 export const data = new SlashCommandBuilder()
     .setName("spec")
     .setDescription("Sends a link to the airrec spec, containing both mRAST and RAST.");

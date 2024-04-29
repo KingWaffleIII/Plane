@@ -1,4 +1,4 @@
-import { EmbedBuilder, SlashCommandBuilder, } from "discord.js";
+import { EmbedBuilder, SlashCommandBuilder } from "discord.js";
 export const data = new SlashCommandBuilder()
     .setName("help")
     .setDescription("Information about Plane and how to contact the developer.");

@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-promise-executor-return */
 import crypto from "crypto";
-import { ActionRowBuilder, ComponentType, SlashCommandBuilder, StringSelectMenuBuilder, EmbedBuilder, ButtonBuilder, ButtonStyle, } from "discord.js";
+import { ActionRowBuilder, ButtonBuilder, ButtonStyle, ComponentType, EmbedBuilder, SlashCommandBuilder, StringSelectMenuBuilder, } from "discord.js";
 import { User, Waifu } from "../models.js";
 import waifus from "../waifus.json" assert { type: "json" };
 // stop crashing if thread is deleted pre-emptively
@@ -662,13 +662,59 @@ export async function execute(interaction) {
                 await doCalculations(firstWaifu, first, secondWaifu, second);
                 await doCalculations(secondWaifu, second, firstWaifu, first);
             }
-            if (firstWaifu.hp <= 0) {
+            if (secondWaifu.hp <= 0) {
+                const victorEmbed = new EmbedBuilder()
+                    .setTitle(first.name)
+                    .setColor(0xff00ff)
+                    .setAuthor({
+                    name: first.user.username,
+                    iconURL: first.user.avatarUrl,
+                })
+                    .setImage(`attachment://${firstWaifuData.urlFriendlyName ?? first.name}.jpg`)
+                    .setDescription("You are the victor!");
+                if (firstWaifu.equipment) {
+                    const equipmentData = waifus[firstWaifu.equipment
+                        .name];
+                    victorEmbed.setThumbnail(`attachment://${equipmentData.urlFriendlyName ??
+                        firstWaifu.equipment.name}.jpg`);
+                }
+                const content = `<@${second.user.id}>'s **${second.name}** has been defeated! <@${first.user.id}>'s **${first.name}** wins!`;
+                const files = [firstWaifuData.path];
+                if (firstWaifu.equipment)
+                    files.push(waifus[firstWaifu.equipment
+                        .name].path);
+                await thread.send({
+                    content,
+                    embeds: [victorEmbed],
+                    files,
+                });
+                await interaction.editReply({
+                    content,
+                    embeds: [victorEmbed],
+                    files,
+                });
+                await first.update({
+                    kills: first.kills + 1,
+                });
+                await second.update({
+                    deaths: second.deaths + 1,
+                });
+                await first.user.update({
+                    dogfightKills: first.user.dogfightKills + 1,
+                    dogfightWinstreak: first.user.dogfightWinstreak + 1,
+                });
+                await second.user.update({
+                    dogfightDeaths: second.user.dogfightDeaths + 1,
+                    dogfightWinstreak: 0,
+                });
+            }
+            else if (firstWaifu.hp <= 0) {
                 const victorEmbed = new EmbedBuilder()
                     .setTitle(second.name)
                     .setColor(0xff00ff)
                     .setAuthor({
                     name: second.user.username,
-                    iconURL: second.user.avatarUrl ?? undefined,
+                    iconURL: second.user.avatarUrl,
                 })
                     .setImage(`attachment://${secondWaifuData.urlFriendlyName ??
                     second.name}.jpg`)
@@ -706,52 +752,6 @@ export async function execute(interaction) {
                 });
                 await first.user.update({
                     dogfightDeaths: first.user.dogfightDeaths + 1,
-                    dogfightWinstreak: 0,
-                });
-            }
-            else if (secondWaifu.hp <= 0) {
-                const victorEmbed = new EmbedBuilder()
-                    .setTitle(first.name)
-                    .setColor(0xff00ff)
-                    .setAuthor({
-                    name: first.user.username,
-                    iconURL: first.user.avatarUrl ?? undefined,
-                })
-                    .setImage(`attachment://${firstWaifuData.urlFriendlyName ?? first.name}.jpg`)
-                    .setDescription("You are the victor!");
-                if (firstWaifu.equipment) {
-                    const equipmentData = waifus[firstWaifu.equipment
-                        .name];
-                    victorEmbed.setThumbnail(`attachment://${equipmentData.urlFriendlyName ??
-                        firstWaifu.equipment.name}.jpg`);
-                }
-                const content = `<@${second.user.id}>'s **${second.name}** has been defeated! <@${first.user.id}>'s **${first.name}** wins!`;
-                const files = [firstWaifuData.path];
-                if (firstWaifu.equipment)
-                    files.push(waifus[firstWaifu.equipment
-                        .name].path);
-                await thread.send({
-                    content,
-                    embeds: [victorEmbed],
-                    files,
-                });
-                await interaction.editReply({
-                    content,
-                    embeds: [victorEmbed],
-                    files,
-                });
-                await first.update({
-                    kills: first.kills + 1,
-                });
-                await second.update({
-                    deaths: second.deaths + 1,
-                });
-                await first.user.update({
-                    dogfightKills: first.user.dogfightKills + 1,
-                    dogfightWinstreak: first.user.dogfightWinstreak + 1,
-                });
-                await second.user.update({
-                    dogfightDeaths: second.user.dogfightDeaths + 1,
                     dogfightWinstreak: 0,
                 });
             }

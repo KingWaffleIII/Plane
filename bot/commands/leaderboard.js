@@ -1,4 +1,4 @@
-import { EmbedBuilder, SlashCommandBuilder, } from "discord.js";
+import { EmbedBuilder, SlashCommandBuilder } from "discord.js";
 import { User } from "../models.js";
 import waifus from "../waifus.json" assert { type: "json" };
 export const data = new SlashCommandBuilder()
