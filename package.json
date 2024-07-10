@@ -5,13 +5,8 @@
 	"main": "bot.js",
 	"type": "module",
 	"scripts": {
-		"format": "npx prettier src --write",
-		"lint": "npx eslint --cache src --ext .ts --fix",
-		"prebuild": "npm run format && npm run lint",
 		"build": "tsc",
-		"prod": "npm i && npm run build",
-		"start": "node bot.js",
-		"quickstart": "docker compose stop && npm i && tsc && docker compose up"
+		"start": "node bot/bot.js"
 	},
 	"repository": {
 		"type": "git",
@@ -39,6 +34,6 @@
 		"eslint-plugin-import": "^2.29.0",
 		"prettier": "^3.0.3",
 		"sequelize-cli": "^6.6.1",
-		"typescript": "^5.2.2"
+		"typescript": "^5.5.3"
 	}
 }
