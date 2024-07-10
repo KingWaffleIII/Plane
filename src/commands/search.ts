@@ -1,20 +1,19 @@
-import {
-	ChatInputCommandInteraction,
-	EmbedBuilder,
-	SlashCommandBuilder,
-} from "discord.js";
+import { ChatInputCommandInteraction, EmbedBuilder, SlashCommandBuilder } from "discord.js";
 
 import { Aircraft, getImage } from "./airrec.js";
 import mrast from "../mrast.json" assert { type: "json" };
 import rast from "../rast.json" assert { type: "json" };
 
 function checkMatch(matchAgainst: string, aircraft: Aircraft): Aircraft | null {
-	if (aircraft.name.toLowerCase().includes(matchAgainst)) {
+	if (matchAgainst.toLowerCase().includes(aircraft.name.toLowerCase())) {
+		return aircraft;
+	}
+	if (matchAgainst.toLowerCase().includes(aircraft.model.toLowerCase())) {
 		return aircraft;
 	}
 	if (
 		aircraft.aliases.some((alias) =>
-			alias.toLowerCase().includes(matchAgainst)
+			matchAgainst.toLowerCase().includes(alias.toLowerCase()),
 		)
 	) {
 		return aircraft;
@@ -29,9 +28,9 @@ export const data = new SlashCommandBuilder()
 		option
 			.setName("name")
 			.setDescription(
-				"The name/alias/model/etc. of the aircraft you want to search for (e.g. F-22 or Raptor)."
+				"The name/alias/model/etc. of the aircraft you want to search for (e.g. F-22 or Raptor).",
 			)
-			.setRequired(true)
+			.setRequired(true),
 	);
 
 export async function execute(interaction: ChatInputCommandInteraction) {
@@ -72,8 +71,12 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 			.setTitle(matchedAircraft!.name)
 			.setDescription(matchedAircraft!.role)
 			.setImage(image)
-			.setTimestamp()
+
 			.addFields(
+				{
+					name: "Full name:",
+					value: matchedAircraft!.full,
+				},
 				{
 					name: "Alternative names (aliases for /airrec-quiz):",
 					value: matchedAircraft!.aliases.join(", ") || "None",
@@ -84,7 +87,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 						matchedAircraft!.identification
 							.map(
 								(identification: string) =>
-									`- ${identification}\n`
+									`- ${identification}\n`,
 							)
 							.join("") || "None",
 				},
@@ -98,7 +101,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 					name: "See more images:",
 					value: matchedAircraft!.image,
 					inline: true,
-				}
+				},
 			)
 			.setFooter({
 				text: "Photo credit: https://www.airfighters.com",

@@ -18,13 +18,15 @@ export const data = new SlashCommandBuilder()
 		option
 			.setName("name")
 			.setDescription("The name of the waifu you want to delete.")
-			.setRequired(true)
+			.setRequired(true),
 	);
 
 export async function execute(interaction: ChatInputCommandInteraction) {
 	const name = interaction.options.getString("name")!;
 
-	await interaction.deferReply();
+	await interaction.deferReply({
+		ephemeral: true,
+	});
 
 	const user = await User.findByPk(interaction.user.id);
 	if (!user) {
@@ -63,7 +65,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 	const row = new ActionRowBuilder<StringSelectMenuBuilder>().addComponents(
 		new StringSelectMenuBuilder()
 			.setCustomId(`delete-waifu-${selectId}`)
-			.setPlaceholder("Select a copy to delete")
+			.setPlaceholder("Select a copy to delete"),
 	);
 
 	userWaifus.forEach((waifu) => {

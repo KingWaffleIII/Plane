@@ -10,13 +10,15 @@ export const data = new SlashCommandBuilder()
 		option
 			.setName("name")
 			.setDescription("The name of the waifu you want to target.")
-			.setRequired(true)
+			.setRequired(true),
 	);
 
 export async function execute(interaction: ChatInputCommandInteraction) {
 	const name = interaction.options.getString("name")!;
 
-	await interaction.deferReply();
+	await interaction.deferReply({
+		ephemeral: true,
+	});
 
 	const user = await User.findByPk(interaction.user.id);
 	if (!user) {

@@ -44,20 +44,19 @@ interface WaifuData extends WaifuBaseData {
 }
 
 // stop crashing if thread is deleted pre-emptively
-process.on("unhandledRejection", (error: Error) => {
-	if (error.name === "Error [ChannelNotCached]") return;
-	console.error("Unhandled promise rejection:", error);
+process.on("unhandledRejection", (_error: Error) => {
+	// assume it's because the thread was deleted
+	console.error("Thread was deleted before it could finish.");
 });
 
 function checkAnswer(message: string, aircraft: Aircraft): number {
-	if (message.toLowerCase() === aircraft.name.toLowerCase()) {
-		return 2;
-	}
 	if (
+		message.toLowerCase() === aircraft.name.toLowerCase() ||
+		message.toLowerCase().includes(aircraft.name.toLowerCase()) ||
+		message.toLowerCase().includes(aircraft.model.toLowerCase()) ||
 		aircraft.aliases.some((alias) =>
-			message.toLowerCase().includes(alias.toLowerCase())
-		) ||
-		message.toLowerCase().includes(aircraft.model.toLowerCase())
+			message.toLowerCase().includes(alias.toLowerCase()),
+		)
 	) {
 		return 1;
 	}
@@ -69,12 +68,12 @@ async function spawnWaifu(
 	user: User,
 	rounds: number,
 	score: number,
-	name?: string
+	name?: string,
 ): Promise<WaifuData | null> {
 	let isGuaranteed = false;
 	if (user.guaranteeWaifu) {
 		isGuaranteed =
-			user.guaranteeWaifu !== undefined && user.guaranteeCounter! >= 10;
+			user.guaranteeCounter! >= 10;
 	}
 
 	const doSpawn = () => {
@@ -96,14 +95,12 @@ async function spawnWaifu(
 		// Generate a random number between 0 and 1
 		const randomNum = Math.random();
 
-		// Calculate the probability of returning true based on the score (score is halved as you can earn 2 points in each round)
-		const probability = score / 2 / rounds;
+		// Calculate the probability of returning true based on the score
+		const probability = score / rounds;
 
 		// Return true if the random number is less than the probability, otherwise return false
-		if (randomNum < probability) {
-			return true;
-		}
-		return false;
+		return randomNum < probability;
+
 	};
 
 	if (doSpawn()) {
@@ -149,7 +146,7 @@ async function spawnWaifu(
 
 		const waifuName = Object.keys(waifus)[
 			Math.floor(Math.random() * Object.keys(waifus).length)
-		] as keyof typeof waifus;
+			] as keyof typeof waifus;
 		const waifu: WaifuBaseData = waifus[waifuName];
 
 		if (waifu.urlFriendlyName) {
@@ -177,32 +174,32 @@ async function spawnWaifu(
 export const data = new SlashCommandBuilder()
 	.setName("airrec-quiz")
 	.setDescription(
-		"Gives you a series of aircraft images for you and others to identify with scoring."
-	)
-	.addIntegerOption((option) =>
-		option
-			.setName("rounds")
-			.setDescription(
-				"The number of rounds you want to play. Defaults to 10 rounds."
-			)
-			.setMinValue(1)
-			.setMaxValue(30)
+		"Gives you a series of aircraft images for you and others to identify with scoring.",
 	)
 	.addStringOption((option) =>
 		option
 			.setName("spec")
 			.setDescription(
-				"The spec you want to use (mRAST is RAF past/present). Defaults to RAST."
+				"The spec you want to use (mRAST is RAF past/present). Defaults to mRAST.",
 			)
 			.addChoices(
 				{ name: "mRAST", value: "mRAST" },
-				{ name: "RAST", value: "RAST" }
+				{ name: "RAST", value: "RAST" },
+			),
+	)
+	.addIntegerOption((option) =>
+		option
+			.setName("rounds")
+			.setDescription(
+				"The number of rounds you want to play. Defaults to 10 rounds.",
 			)
+			.setMinValue(1)
+			.setMaxValue(30),
 	);
 
 export async function execute(interaction: ChatInputCommandInteraction) {
 	const rounds = interaction.options.getInteger("rounds") ?? 10;
-	const spec = interaction.options.getString("spec") ?? "RAST";
+	const spec = interaction.options.getString("spec") ?? "mRAST";
 
 	const guild = await Guild.findByPk(interaction.guildId!);
 	if (!guild) {
@@ -253,10 +250,8 @@ You will be shown pictures of **${rounds}** aircraft and you will have to reply 
 You will be given 15 seconds for an answer (**you will only be allowed one response so don't send any messages unless you are sending an answer**).
 
 __**Scoring:**__
-You will get **2 points** for listing the aircraft manufacturer and model. For example: "Lockheed Martin F-22".
-You will get **1 point** for listing the aircraft model or alias(es) only. For example: "F-22" or "Raptor".
+You will get **1 point** for listing the aircraft name, model or alias(es). For example: if the aircraft was the F-35, you could say "F-35" or "Lightning II".
 The leaderboard will be shown every round.
-Note: it is **very hard** to consistently get 2 points, so don't worry if you only get 1 point.
 
 If you want to play, click the button below.
 **Starting in 60 seconds...**
@@ -279,7 +274,7 @@ If you want to play, click the button below.
 	collector?.on("collect", async (i: ButtonInteraction) => {
 		if (i.customId === `cancel-${buttonId}`) {
 			if (i.user.id !== interaction.user.id) {
-				i.reply({
+				await i.reply({
 					content: "You can't cancel this game.",
 					ephemeral: true,
 				});
@@ -295,7 +290,7 @@ If you want to play, click the button below.
 		}
 		if (i.customId === `skip-${buttonId}`) {
 			if (i.user.id !== interaction.user.id) {
-				i.reply({
+				await i.reply({
 					content: "You can't start this game.",
 					ephemeral: true,
 				});
@@ -311,11 +306,11 @@ If you want to play, click the button below.
 				score: 0,
 				lastScore: 0,
 			};
-			i.reply({
+			await i.reply({
 				content: `<@${i.user.id}> has joined the game!`,
 			});
 		} else {
-			i.reply({
+			await i.reply({
 				content: "You have already joined the game.",
 				ephemeral: true,
 			});
@@ -358,7 +353,7 @@ If you want to play, click the button below.
 				return;
 			}
 
-			const embed = makeEmbedWithImage(image);
+			const embed = makeEmbedWithImage(image, spec);
 			const question = await thread.send({
 				content: `**Round ${i + 1} of ${rounds}:**`,
 				embeds: [embed],
@@ -375,7 +370,7 @@ If you want to play, click the button below.
 				return false;
 			};
 			const messages = await thread.awaitMessages({
-				time: 15000,
+				time: 20000,
 				max: Object.keys(players).length,
 				filter: answerFilter,
 				// errors: ["time"],
@@ -386,10 +381,10 @@ If you want to play, click the button below.
 			});
 
 			if (messages && messages.size > 0) {
-				messages.forEach(async (message: Message) => {
-					const score = checkAnswer(message.content, aircraft);
-					players[message.author.id].score += score;
-				});
+				for (const message of messages) {
+					const score = checkAnswer(message[1].content, aircraft);
+					players[message[1].author.id].score += score;
+				}
 			}
 
 			const answer = new EmbedBuilder()
@@ -397,14 +392,13 @@ If you want to play, click the button below.
 				.setTitle(aircraft.name)
 				.setDescription(aircraft.role)
 				.setImage(image)
-				.setTimestamp()
 				.setFooter({
-					text: "Photo credit: see bottom of image.",
+					text: `Spec: ${spec} | Photo credit: see bottom of image.`,
 				})
 				.addFields(
 					{
-						name: "Alternative names (aliases for /airrec-quiz):",
-						value: aircraft.aliases.join(", ") || "None",
+						name: "Full name:",
+						value: aircraft.full,
 					},
 					{
 						name: "Aircraft features to help you identify it:",
@@ -412,7 +406,7 @@ If you want to play, click the button below.
 							aircraft.identification
 								.map(
 									(identification: string) =>
-										`- ${identification}\n`
+										`- ${identification}\n`,
 								)
 								.join("") || "None",
 					},
@@ -426,17 +420,16 @@ If you want to play, click the button below.
 						name: "See more images:",
 						value: aircraft.image,
 						inline: true,
-					}
+					},
 				);
 
 			const sortedPlayers = Object.keys(players).sort(
-				(a, b) => players[b].score - players[a].score
+				(a, b) => players[b].score - players[a].score,
 			);
 
 			const leaderboard = new EmbedBuilder()
 				.setColor(0x0099ff)
 				.setTitle("Leaderboard")
-				.setTimestamp()
 				.setDescription(
 					sortedPlayers
 						.map((userId) => {
@@ -445,14 +438,14 @@ If you want to play, click the button below.
 								player.username
 							}**: ${player.lastScore} -> **${player.score}**`;
 						})
-						.join("\n")
+						.join("\n"),
 				)
 				.setFooter({
 					text: `Round ${i + 1} of ${rounds}`,
 				});
 
 			await question.reply({
-				content: `**The answer was ${aircraft.name}!**\nContinuing in 10 seconds...`,
+				content: `**The answer was the ${aircraft.name}!**\nContinuing in 10 seconds...`,
 				embeds: [answer, leaderboard],
 			});
 
@@ -462,7 +455,7 @@ If you want to play, click the button below.
 		const winners: string[] = [];
 
 		const sortedPlayers = Object.keys(players).sort(
-			(a, b) => players[b].score - players[a].score
+			(a, b) => players[b].score - players[a].score,
 		);
 
 		if (players[sortedPlayers[0]].score !== 0) {
@@ -497,9 +490,8 @@ If you want to play, click the button below.
 							player.username
 						}**: ${player.score}`;
 					})
-					.join("\n")
-			)
-			.setTimestamp();
+					.join("\n"),
+			);
 
 		await thread.send({
 			content: "The game has ended! Here's the final leaderboard:",
@@ -508,20 +500,19 @@ If you want to play, click the button below.
 		});
 
 		if (winners.length > 1) {
-			sortedPlayers
-				.filter((p) => !winners.includes(p))
-				.forEach(async (p) => {
-					const user = await User.findByPk(p);
-					if (user) {
-						await user.update({
-							airrecQuizLosses: user.airrecQuizLosses + 1,
-							airrecQuizWinstreak: 0,
-						});
-					}
-				});
+			for (const p1 of sortedPlayers
+				.filter((p) => !winners.includes(p))) {
+				const user = await User.findByPk(p1);
+				if (user) {
+					await user.update({
+						airrecQuizLosses: user.airrecQuizLosses + 1,
+						airrecQuizWinstreak: 0,
+					});
+				}
+			}
 		}
 
-		winners.forEach(async (u) => {
+		for (const u of winners) {
 			// check if user exists in db
 			const user = await User.findByPk(u);
 			if (!user) {
@@ -546,14 +537,14 @@ If you want to play, click the button below.
 						user!,
 						rounds,
 						players[u].score,
-						user.guaranteeWaifu!
+						user.guaranteeWaifu!,
 					);
 				} else {
 					waifu = await spawnWaifu(
 						guild!,
 						user!,
 						rounds,
-						players[u].score
+						players[u].score,
 					);
 				}
 
@@ -572,7 +563,7 @@ If you want to play, click the button below.
 						.setTitle(waifu.name)
 						.setImage(`attachment://${waifu.urlFriendlyName}.jpg`)
 						.setDescription(
-							`You can view your waifu collection by using \`/waifus\`!`
+							`You can view your waifu collection by using \`/waifus\`!`,
 						)
 						.addFields(
 							{
@@ -589,7 +580,7 @@ If you want to play, click the button below.
 								name: "SPD",
 								value: spd.toString(),
 								inline: true,
-							}
+							},
 						)
 						.setFooter({
 							text: "You unlocked an waifu! Image credit: Atamonica",
@@ -619,12 +610,12 @@ If you want to play, click the button below.
 
 					await user!.update({
 						lockedWaifus: user!.lockedWaifus!.filter(
-							(w) => w !== waifu!.name
+							(w) => w !== waifu!.name,
 						),
 					});
 				}
 			}
-		});
+		}
 
 		await thread.setArchived(true);
 	});

@@ -3,16 +3,7 @@ services:
         container_name: plane_bot
         image: node:slim
         volumes:
-            - ./bot/:/bot/
-            - ./package.json:/bot/package.json
-            - ./package-lock.json:/bot/package-lock.json
-            - ./src/config.json:/bot/config.json
-
-            - ./src/rafk.json:/bot/rafk.json
-            - ./src/mrast.json:/bot/mrast.json
-            - ./src/rast.json:/bot/rast.json
-            - ./src/waifus.json:/bot/waifus.json
-            - ./src/assets/:/bot/assets/
+            - ./:/bot/
         working_dir: /bot
         entrypoint: /bot/entrypoint.sh
         extra_hosts:
