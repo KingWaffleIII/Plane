@@ -18,7 +18,7 @@ import {
 } from "discord.js";
 import { User, Waifu } from "../models.js";
 import { WaifuBaseData } from "./airrecQuiz.js";
-import waifus from "../waifus.json" assert { type: "json" };
+import waifus from "../waifus.json" with { type: "json" };
 
 // stop crashing if thread is deleted pre-emptively
 process.on("unhandledRejection", (_error: Error) => {
@@ -52,7 +52,7 @@ export const data = new SlashCommandBuilder()
 		option
 			.setName("user")
 			.setDescription("The user you want to dogfight.")
-			.setRequired(true),
+			.setRequired(true)
 	);
 
 export async function execute(interaction: ChatInputCommandInteraction) {
@@ -107,7 +107,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 		new ActionRowBuilder<StringSelectMenuBuilder>().addComponents(
 			new StringSelectMenuBuilder()
 				.setCustomId(`dogfight-select-waifu-${initialWaifuSelectId}`)
-				.setPlaceholder("Select a waifu"),
+				.setPlaceholder("Select a waifu")
 		);
 
 	initialUserWaifus.forEach((waifu) => {
@@ -148,7 +148,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 				initialWaifuSelectInteraction.values[0],
 				{
 					include: { model: User, as: "user" },
-				},
+				}
 			)) as Waifu;
 
 			const targetWaifuSelectId = crypto.randomBytes(8).toString("hex");
@@ -156,9 +156,9 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 				new ActionRowBuilder<StringSelectMenuBuilder>().addComponents(
 					new StringSelectMenuBuilder()
 						.setCustomId(
-							`dogfight-select-waifu-${targetWaifuSelectId}`,
+							`dogfight-select-waifu-${targetWaifuSelectId}`
 						)
-						.setPlaceholder("Select a waifu"),
+						.setPlaceholder("Select a waifu")
 				);
 
 			targetUserWaifus.forEach((waifu) => {
@@ -201,7 +201,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 						targetWaifuSelectInteraction.values[0],
 						{
 							include: { model: User, as: "user" },
-						},
+						}
 					)) as Waifu;
 
 					await interaction.editReply({
@@ -222,10 +222,10 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 					});
 
 					const first = [initialWaifu, targetWaifu].sort(
-						(a, b) => b.spd - a.spd,
+						(a, b) => b.spd - a.spd
 					)[0];
 					const second = [initialWaifu, targetWaifu].sort(
-						(a, b) => b.spd - a.spd,
+						(a, b) => b.spd - a.spd
 					)[1];
 
 					const waifuList: {
@@ -278,7 +278,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 						attacker: WaifuData,
 						attackerModel: Waifu,
 						opponent: WaifuData,
-						opponentModel: Waifu,
+						opponentModel: Waifu
 					): Promise<boolean> => {
 						switch (attacker.move) {
 							case "attack": {
@@ -295,7 +295,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 											waifus[
 												attacker.equipment
 													.name as keyof typeof waifus
-												];
+											];
 
 										switch (waifuData.ability) {
 											case "crit": {
@@ -462,9 +462,9 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 										new StringSelectMenuBuilder()
 
 											.setCustomId(
-												`dogfight-equip-weapon-${weaponEquipId}`,
+												`dogfight-equip-weapon-${weaponEquipId}`
 											)
-											.setPlaceholder("Select a weapon"),
+											.setPlaceholder("Select a weapon")
 									);
 
 								const userWaifus = (
@@ -484,7 +484,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 									});
 								});
 								const weaponEquipFilter = (
-									int: StringSelectMenuInteraction,
+									int: StringSelectMenuInteraction
 								) =>
 									int.customId ===
 									`dogfight-equip-weapon-${weaponEquipId}`;
@@ -493,7 +493,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 										filter: weaponEquipFilter,
 										time: 30000,
 										componentType:
-										ComponentType.StringSelect,
+											ComponentType.StringSelect,
 									});
 								const weaponEquipMsg = await thread.send({
 									content: `<@${attackerModel.user.id}>, select a weapon to equip!`,
@@ -504,7 +504,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 									weaponEquipCollector.on(
 										"collect",
 										async (
-											int: StringSelectMenuInteraction,
+											int: StringSelectMenuInteraction
 										) => {
 											if (
 												int.user.id !==
@@ -522,7 +522,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 
 											attacker.equipment =
 												(await Waifu.findByPk(
-													int.values[0],
+													int.values[0]
 												)) as Waifu;
 											attacker.atk +=
 												attacker.equipment.atk;
@@ -531,11 +531,11 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 												waifus[
 													attacker.equipment
 														.name as keyof typeof waifus
-													];
+												];
 											const waifuData: WaifuBaseData =
 												waifus[
 													attackerModel.name as keyof typeof waifus
-													];
+												];
 											if (
 												equipmentData.ability ===
 												"heavy"
@@ -549,11 +549,11 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 													true;
 											if (
 												equipmentData.ability ===
-												"exclusive" &&
+													"exclusive" &&
 												waifuData.country === "USA"
 											)
 												attacker.atk += Math.ceil(
-													0.5 * attacker.equipment.atk,
+													0.5 * attacker.equipment.atk
 												);
 
 											await thread.send({
@@ -561,7 +561,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 											});
 
 											r(true);
-										},
+										}
 									);
 
 									weaponEquipCollector.on(
@@ -571,7 +571,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 												collected.filter(
 													(i) =>
 														i.user.id ===
-														attackerModel.user.id,
+														attackerModel.user.id
 												).size === 0
 											) {
 												await thread.send({
@@ -580,7 +580,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 												attacker.hp = 0;
 												r(false);
 											}
-										},
+										}
 									);
 								});
 								if (!p) return false;
@@ -599,7 +599,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 						if (attacker.isLaunchingBarrage) {
 							const atk = Math.ceil(
 								(attackerModel.atk + attacker.equipment!.atk) *
-								0.5,
+									0.5
 							);
 							await thread.send(
 								`<@${attackerModel.user.id}>'s ${
@@ -610,7 +610,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 									opponentModel.name
 								} from its ongoing barrage! (${
 									opponentModel.name
-								}: ${opponent.hp} -> **${opponent.hp - atk}**)`,
+								}: ${opponent.hp} -> **${opponent.hp - atk}**)`
 							);
 							opponent.hp -= atk;
 						}
@@ -625,7 +625,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 									opponentModel.name
 								} from its support strike! (${
 									opponentModel.name
-								}: ${opponent.hp} -> **${opponent.hp - atk}**)`,
+								}: ${opponent.hp} -> **${opponent.hp - atk}**)`
 							);
 							opponent.hp -= atk;
 							attacker.isBeingSupported = false;
@@ -641,7 +641,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 						mainData: WaifuData,
 						buttonId: string,
 						collector: InteractionCollector<ButtonInteraction>,
-						turnMsg: Message,
+						turnMsg: Message
 					) =>
 						new Promise((resolve) => {
 							collector.on(
@@ -680,13 +680,13 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 									}
 
 									resolve(true);
-								},
+								}
 							);
 
 							collector.on("end", async (collected) => {
 								if (
 									collected.filter(
-										(i) => i.user.id === main.user.id,
+										(i) => i.user.id === main.user.id
 									).size === 0
 								) {
 									await thread.send({
@@ -701,7 +701,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 					while (firstWaifu.hp > 0 && secondWaifu.hp > 0) {
 						if (firstWaifu.isStunned) {
 							await thread.send(
-								`<@${first.user.id}>'s **${first.name}** is stunned!`,
+								`<@${first.user.id}>'s **${first.name}** is stunned!`
 							);
 							firstWaifu.isStunned = false;
 							firstWaifu.hasbeenStunned = true;
@@ -717,10 +717,10 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 									`attachment://${
 										firstWaifuData.urlFriendlyName ??
 										first.name
-									}.jpg`,
+									}.jpg`
 								)
 								.setDescription(
-									"Mission objective: eliminate your opponent.",
+									"Mission objective: eliminate your opponent."
 								)
 								.addFields(
 									{
@@ -742,23 +742,23 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 										name: "Equipped Weapon",
 										value: firstWaifu.equipment?.name
 											? `${
-												firstWaifu.equipment.name
-											} (+${firstWaifu.equipment.atk.toString()} ATK)`
+													firstWaifu.equipment.name
+												} (+${firstWaifu.equipment.atk.toString()} ATK)`
 											: "None! Equip a weapon for more ATK and bonus effects!",
 										inline: true,
-									},
+									}
 								);
 							if (firstWaifu.equipment) {
 								const equipmentData: WaifuBaseData =
 									waifus[
 										firstWaifu.equipment
 											.name as keyof typeof waifus
-										];
+									];
 								firstWaifuEmbed.setThumbnail(
 									`attachment://${
 										equipmentData.urlFriendlyName ??
 										firstWaifu.equipment.name
-									}.jpg`,
+									}.jpg`
 								);
 								firstWaifuEmbed.addFields({
 									name: equipmentData.abilityName!,
@@ -773,22 +773,22 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 								new ActionRowBuilder<ButtonBuilder>().addComponents(
 									new ButtonBuilder()
 										.setCustomId(
-											`dogfight-attack-${firstDogfightId}`,
+											`dogfight-attack-${firstDogfightId}`
 										)
 										.setStyle(ButtonStyle.Danger)
 										.setLabel("Attack"),
 									new ButtonBuilder()
 										.setCustomId(
-											`dogfight-evade-${firstDogfightId}`,
+											`dogfight-evade-${firstDogfightId}`
 										)
 										.setStyle(ButtonStyle.Success)
 										.setLabel("Evade"),
 									new ButtonBuilder()
 										.setCustomId(
-											`dogfight-equip-${firstDogfightId}`,
+											`dogfight-equip-${firstDogfightId}`
 										)
 										.setStyle(ButtonStyle.Primary)
-										.setLabel("Equip a weapon"),
+										.setLabel("Equip a weapon")
 								);
 
 							if (
@@ -806,14 +806,14 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 								firstDogfight.components[1].setDisabled(true);
 
 							const firstDogfightFilter = (
-								i: ButtonInteraction,
+								i: ButtonInteraction
 							) =>
 								i.customId ===
-								`dogfight-attack-${firstDogfightId}` ||
+									`dogfight-attack-${firstDogfightId}` ||
 								i.customId ===
-								`dogfight-evade-${firstDogfightId}` ||
+									`dogfight-evade-${firstDogfightId}` ||
 								i.customId ===
-								`dogfight-equip-${firstDogfightId}`;
+									`dogfight-equip-${firstDogfightId}`;
 
 							const firstFiles = [firstWaifuData.path];
 							if (firstWaifu.equipment)
@@ -821,7 +821,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 									waifus[
 										firstWaifu.equipment!
 											.name as keyof typeof waifus
-										].path,
+									].path
 								);
 							const firstTurn = await thread.send({
 								content: `<@${first.user.id}>'s turn with **${first.name}**!`,
@@ -842,7 +842,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 								firstWaifu,
 								firstDogfightId,
 								firstDogfightCollector,
-								firstTurn,
+								firstTurn
 							);
 
 							if (!firstResolve) {
@@ -852,7 +852,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 
 						if (secondWaifu.isStunned) {
 							await thread.send(
-								`<@${second.user.id}>'s **${second.name}** is stunned!`,
+								`<@${second.user.id}>'s **${second.name}** is stunned!`
 							);
 							secondWaifu.isStunned = false;
 							secondWaifu.hasbeenStunned = true;
@@ -868,10 +868,10 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 									`attachment://${
 										secondWaifuData.urlFriendlyName ??
 										second.name
-									}.jpg`,
+									}.jpg`
 								)
 								.setDescription(
-									"Mission objective: eliminate your opponent.",
+									"Mission objective: eliminate your opponent."
 								)
 								.addFields(
 									{
@@ -893,23 +893,23 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 										name: "Equipped Weapon",
 										value: secondWaifu.equipment?.name
 											? `${
-												secondWaifu.equipment.name
-											} (+${secondWaifu.equipment.atk.toString()} ATK)`
+													secondWaifu.equipment.name
+												} (+${secondWaifu.equipment.atk.toString()} ATK)`
 											: "None! Equip a weapon for more ATK!",
 										inline: true,
-									},
+									}
 								);
 							if (secondWaifu.equipment) {
 								const equipmentData: WaifuBaseData =
 									waifus[
 										secondWaifu.equipment
 											.name as keyof typeof waifus
-										];
+									];
 								secondWaifuEmbed.setThumbnail(
 									`attachment://${
 										equipmentData.urlFriendlyName ??
 										secondWaifu.equipment.name
-									}.jpg`,
+									}.jpg`
 								);
 								secondWaifuEmbed.addFields({
 									name: equipmentData.abilityName!,
@@ -924,22 +924,22 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 								new ActionRowBuilder<ButtonBuilder>().addComponents(
 									new ButtonBuilder()
 										.setCustomId(
-											`dogfight-attack-${secondDogfightId}`,
+											`dogfight-attack-${secondDogfightId}`
 										)
 										.setStyle(ButtonStyle.Danger)
 										.setLabel("Attack"),
 									new ButtonBuilder()
 										.setCustomId(
-											`dogfight-evade-${secondDogfightId}`,
+											`dogfight-evade-${secondDogfightId}`
 										)
 										.setStyle(ButtonStyle.Success)
 										.setLabel("Evade"),
 									new ButtonBuilder()
 										.setCustomId(
-											`dogfight-equip-${secondDogfightId}`,
+											`dogfight-equip-${secondDogfightId}`
 										)
 										.setStyle(ButtonStyle.Primary)
-										.setLabel("Equip a weapon"),
+										.setLabel("Equip a weapon")
 								);
 
 							if (
@@ -956,14 +956,14 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 							if (!secondWaifu.canEvade)
 								secondDogfight.components[1].setDisabled(true);
 							const secondDogfightFilter = (
-								i: ButtonInteraction,
+								i: ButtonInteraction
 							) =>
 								i.customId ===
-								`dogfight-attack-${secondDogfightId}` ||
+									`dogfight-attack-${secondDogfightId}` ||
 								i.customId ===
-								`dogfight-evade-${secondDogfightId}` ||
+									`dogfight-evade-${secondDogfightId}` ||
 								i.customId ===
-								`dogfight-equip-${secondDogfightId}`;
+									`dogfight-equip-${secondDogfightId}`;
 
 							const secondFiles = [secondWaifuData.path];
 							if (secondWaifu.equipment)
@@ -971,7 +971,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 									waifus[
 										secondWaifu.equipment!
 											.name as keyof typeof waifus
-										].path,
+									].path
 								);
 							const secondTurn = await thread.send({
 								content: `<@${second.user.id}>'s turn with **${second.name}**!`,
@@ -992,7 +992,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 								secondWaifu,
 								secondDogfightId,
 								secondDogfightCollector,
-								secondTurn,
+								secondTurn
 							);
 
 							if (!secondResolve) {
@@ -1004,13 +1004,13 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 							firstWaifu,
 							first,
 							secondWaifu,
-							second,
+							second
 						);
 						await doCalculations(
 							secondWaifu,
 							second,
 							firstWaifu,
-							first,
+							first
 						);
 					}
 
@@ -1025,7 +1025,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 							.setImage(
 								`attachment://${
 									firstWaifuData.urlFriendlyName ?? first.name
-								}.jpg`,
+								}.jpg`
 							)
 							.setDescription("You are the victor!");
 						if (firstWaifu.equipment) {
@@ -1033,12 +1033,12 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 								waifus[
 									firstWaifu.equipment
 										.name as keyof typeof waifus
-									];
+								];
 							victorEmbed.setThumbnail(
 								`attachment://${
 									equipmentData.urlFriendlyName ??
 									firstWaifu.equipment.name
-								}.jpg`,
+								}.jpg`
 							);
 						}
 						const content = `<@${second.user.id}>'s **${second.name}** has been defeated! <@${first.user.id}>'s **${first.name}** wins!`;
@@ -1048,7 +1048,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 								waifus[
 									firstWaifu.equipment
 										.name as keyof typeof waifus
-									].path,
+								].path
 							);
 						await thread.send({
 							content,
@@ -1087,7 +1087,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 								`attachment://${
 									secondWaifuData.urlFriendlyName ??
 									second.name
-								}.jpg`,
+								}.jpg`
 							)
 							.setDescription("You are the victor!");
 						if (secondWaifu.equipment) {
@@ -1095,12 +1095,12 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 								waifus[
 									secondWaifu.equipment
 										.name as keyof typeof waifus
-									];
+								];
 							victorEmbed.setThumbnail(
 								`attachment://${
 									equipmentData.urlFriendlyName ??
 									secondWaifu.equipment.name
-								}.jpg`,
+								}.jpg`
 							);
 						}
 						const content = `<@${first.user.id}>'s **${first.name}** has been defeated! <@${second.user.id}>'s **${second.name}** wins!`;
@@ -1110,7 +1110,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 								waifus[
 									secondWaifu.equipment
 										.name as keyof typeof waifus
-									].path,
+								].path
 							);
 						await thread.send({
 							content,
@@ -1139,7 +1139,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 						});
 					}
 					await thread.setArchived(true);
-				},
+				}
 			);
 
 			targetWaifuSelectCollector.on("end", async (collected) => {
@@ -1153,7 +1153,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 					});
 				}
 			});
-		},
+		}
 	);
 
 	initialWaifuSelectCollector.on("end", async (collected) => {

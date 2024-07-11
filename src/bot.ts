@@ -16,7 +16,7 @@ import {
 import { fileURLToPath } from "url";
 
 import { db } from "./models.js";
-import config from "./config.json" assert { type: "json" };
+import config from "./config.json" with { type: "json" };
 
 interface Command {
 	data: SlashCommandBuilder;

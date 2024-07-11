@@ -1,8 +1,12 @@
-import { ChatInputCommandInteraction, EmbedBuilder, SlashCommandBuilder } from "discord.js";
+import {
+	ChatInputCommandInteraction,
+	EmbedBuilder,
+	SlashCommandBuilder,
+} from "discord.js";
 
 import { Guild, User, Waifu } from "../models.js";
 import { WaifuBaseData } from "./airrecQuiz.js";
-import waifus from "../waifus.json" assert { type: "json" };
+import waifus from "../waifus.json" with { type: "json" };
 
 export const data = new SlashCommandBuilder()
 	.setName("waifus")
@@ -11,15 +15,15 @@ export const data = new SlashCommandBuilder()
 		option
 			.setName("name")
 			.setDescription(
-				"The name of the waifu you want to view. Defaults to all your waifus.",
-			),
+				"The name of the waifu you want to view. Defaults to all your waifus."
+			)
 	)
 	.addUserOption((option) =>
 		option
 			.setName("user")
 			.setDescription(
-				"The user to view the waifu collection of. Defaults to you.",
-			),
+				"The user to view the waifu collection of. Defaults to you."
+			)
 	);
 
 export async function execute(interaction: ChatInputCommandInteraction) {
@@ -88,7 +92,9 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 	});
 
 	if (name) {
-		const waifuNamesLowerCase = Object.keys(waifus).map((w) => w.toLowerCase());
+		const waifuNamesLowerCase = Object.keys(waifus).map((w) =>
+			w.toLowerCase()
+		);
 
 		if (!waifuNamesLowerCase.includes(name.toLowerCase())) {
 			await interaction.editReply({
@@ -98,7 +104,9 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 		}
 
 		const waifuName =
-			Object.keys(waifus)[waifuNamesLowerCase.indexOf(name.toLowerCase())];
+			Object.keys(waifus)[
+				waifuNamesLowerCase.indexOf(name.toLowerCase())
+			];
 
 		const waifuData: WaifuBaseData =
 			waifus[waifuName as keyof typeof waifus];
@@ -128,7 +136,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 				iconURL: targetUser.avatarURL() as string,
 			})
 			.setImage(
-				`attachment://${waifuData!.urlFriendlyName ?? waifuName}.jpg`,
+				`attachment://${waifuData!.urlFriendlyName ?? waifuName}.jpg`
 			)
 			.setFooter({
 				text: `You can unlock ${
@@ -141,10 +149,10 @@ This user has ${namedWaifu.length} cop${
 					namedWaifu.length === 1 ? "y" : "ies"
 				} of this waifu!\n
 ${
-					namedWaifu.some((w) => w.generated)
-						? "One or more of this waifu was generated."
-						: ""
-				}${
+	namedWaifu.some((w) => w.generated)
+		? "One or more of this waifu was generated."
+		: ""
+}${
 					namedWaifu.some((w) => !w.generated)
 						? "One or more of this waifu was unlocked by winning an airrec quiz!"
 						: ""
@@ -152,7 +160,7 @@ ${
 In dogfighting, this waifu has won ${won} time${
 					won === 1 ? "" : "s"
 				} and lost ${lost} time${lost === 1 ? "" : "s"}.
-			`,
+			`
 			);
 
 		namedWaifu.forEach((w) => {
@@ -192,11 +200,11 @@ In dogfighting, this waifu has won ${won} time${
 			}** waifus unlocked! ${
 				user!.guaranteeWaifu
 					? `You need to obtain **${
-						10 - user!.guaranteeCounter!
-					}** more waifu(s) before you get a guaranteed **${user!
-						.guaranteeWaifu!}**.`
+							10 - user!.guaranteeCounter!
+						}** more waifu(s) before you get a guaranteed **${user!
+							.guaranteeWaifu!}**.`
 					: "You are not currently targetting a waifu."
-			}`,
+			}`
 		)
 		.addFields(
 			{
@@ -207,7 +215,7 @@ In dogfighting, this waifu has won ${won} time${
 							(w) =>
 								`**${w} (${
 									waifuCopies[w.replace("\\*", "")]
-								})**`,
+								})**`
 						)
 						.join(", ") || "None",
 				inline: true,
@@ -216,7 +224,7 @@ In dogfighting, this waifu has won ${won} time${
 				name: "Locked Waifus",
 				value: user!.lockedWaifus!.join(", ") || "None",
 				inline: true,
-			},
+			}
 		)
 		.setFooter({
 			text: `You can unlock ${

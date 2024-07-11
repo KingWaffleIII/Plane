@@ -20,7 +20,7 @@ import {
 	Sequelize,
 } from "sequelize";
 
-import waifus from "./waifus.json" assert { type: "json" };
+import waifus from "./waifus.json" with { type: "json" };
 
 export const db = new Sequelize({
 	dialect: "sqlite",
@@ -67,7 +67,7 @@ export class User extends Model<
 	// we have to declare them here purely virtually
 	declare airrecQuizWinstreak: number;
 	// these will not exist until `Model.init` was called.
-	declare getWaifus: HasManyGetAssociationsMixin<Waifu>; // Note the null assertions!
+	declare getWaifus: HasManyGetAssociationsMixin<Waifu>; // Note the null withions!
 	declare addWaifu: HasManyAddAssociationMixin<Waifu, number>;
 	declare addWaifus: HasManyAddAssociationsMixin<Waifu, number>;
 	declare setWaifus: HasManySetAssociationsMixin<Waifu, number>;
@@ -137,7 +137,7 @@ Guild.init(
 	{
 		sequelize: db,
 		tableName: "Guilds",
-	},
+	}
 );
 
 User.init(
@@ -204,7 +204,7 @@ User.init(
 	{
 		sequelize: db,
 		tableName: "Users",
-	},
+	}
 );
 
 Waifu.init(
@@ -254,7 +254,7 @@ Waifu.init(
 	{
 		sequelize: db,
 		tableName: "Waifus",
-	},
+	}
 );
 
 // Here we associate which actually populates out pre-declared `association` static and other methods.

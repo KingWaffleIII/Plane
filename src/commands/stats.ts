@@ -1,7 +1,11 @@
-import { ChatInputCommandInteraction, EmbedBuilder, SlashCommandBuilder } from "discord.js";
+import {
+	ChatInputCommandInteraction,
+	EmbedBuilder,
+	SlashCommandBuilder,
+} from "discord.js";
 
 import { Guild, User } from "../models.js";
-import waifus from "../waifus.json" assert { type: "json" };
+import waifus from "../waifus.json" with { type: "json" };
 
 export const data = new SlashCommandBuilder()
 	.setName("stats")
@@ -10,8 +14,8 @@ export const data = new SlashCommandBuilder()
 		option
 			.setName("user")
 			.setDescription(
-				"The user you want to view the stats of. Defaults to you.",
-			),
+				"The user you want to view the stats of. Defaults to you."
+			)
 	);
 
 export async function execute(interaction: ChatInputCommandInteraction) {
@@ -76,7 +80,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 			{
 				name: `Dogfights (${dogfightTotal})`,
 				value: `Kills: ${dogfightKills}\nDeaths: ${dogfightDeaths}\nWinstreak: ${dogfightWinstreak}`,
-			},
+			}
 		)
 		.setFooter({
 			text: "You can view specific waifu stats with /waifus. If you are the only player (and thus, the winner) in an airrec quiz, it doesn't count towards any stats.",

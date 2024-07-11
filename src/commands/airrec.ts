@@ -13,15 +13,15 @@ import {
 	SlashCommandBuilder,
 } from "discord.js";
 
-import mrast from "../mrast.json" assert { type: "json" };
-import rast from "../rast.json" assert { type: "json" };
+import mrast from "../mrast.json" with { type: "json" };
+import rast from "../rast.json" with { type: "json" };
 
 export interface Aircraft {
 	readonly aliases: string[];
 	readonly identification: string[];
 	readonly image: string;
 	readonly full: string;
-	readonly model: string;  // only used for score checking
+	readonly model: string; // only used for score checking
 	readonly name: string;
 	readonly role: string;
 	readonly wiki: string;
@@ -44,7 +44,7 @@ export async function getImage(url: string): Promise<string | null> {
 			const image = images[Math.floor(Math.random() * images.length)];
 			return `https://www.airfighters.com/${image.replace(
 				"400",
-				"9999",
+				"9999"
 			)}`;
 		}
 		// jetphotos.com
@@ -78,16 +78,16 @@ export const data = new SlashCommandBuilder()
 		option
 			.setName("spec")
 			.setDescription(
-				"The spec you want to use (mRAST is RAF past/present). Defaults to mRAST.",
+				"The spec you want to use (mRAST is RAF past/present). Defaults to RAST."
 			)
 			.addChoices(
 				{ name: "mRAST", value: "mRAST" },
-				{ name: "RAST", value: "RAST" },
-			),
+				{ name: "RAST", value: "RAST" }
+			)
 	);
 
 export async function execute(interaction: ChatInputCommandInteraction) {
-	const spec = interaction.options.getString("spec") ?? "mRAST";
+	const spec = interaction.options.getString("spec") ?? "RAST";
 
 	await interaction.deferReply();
 
@@ -110,7 +110,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 		new ButtonBuilder()
 			.setCustomId(`reveal-airrec-${buttonId}`)
 			.setLabel("Reveal answer")
-			.setStyle(ButtonStyle.Primary),
+			.setStyle(ButtonStyle.Primary)
 	);
 
 	const embed = makeEmbedWithImage(image, spec);
@@ -134,7 +134,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 				value:
 					aircraft.identification
 						.map(
-							(identification: string) => `- ${identification}\n`,
+							(identification: string) => `- ${identification}\n`
 						)
 						.join("") || "None",
 			},
@@ -147,7 +147,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 				name: "See more images:",
 				value: aircraft.image,
 				inline: true,
-			},
+			}
 		)
 		.setFooter({
 			text: `Spec: ${spec} | Photo credit: see bottom of image.`,

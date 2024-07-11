@@ -1,7 +1,7 @@
 import { ChatInputCommandInteraction, SlashCommandBuilder } from "discord.js";
 
 import { User } from "../models.js";
-import waifus from "../waifus.json" assert { type: "json" };
+import waifus from "../waifus.json" with { type: "json" };
 
 export const data = new SlashCommandBuilder()
 	.setName("target")
@@ -10,7 +10,7 @@ export const data = new SlashCommandBuilder()
 		option
 			.setName("name")
 			.setDescription("The name of the waifu you want to target.")
-			.setRequired(true),
+			.setRequired(true)
 	);
 
 export async function execute(interaction: ChatInputCommandInteraction) {

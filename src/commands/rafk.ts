@@ -9,8 +9,8 @@ import {
 	SlashCommandBuilder,
 } from "discord.js";
 
-import rafk from "../rafk.json" assert { type: "json" };
-import ranks from "../ranks.json" assert { type: "json" };
+import rafk from "../rafk.json" with { type: "json" };
+import ranks from "../ranks.json" with { type: "json" };
 
 export interface Question {
 	question?: string;

@@ -5,8 +5,8 @@ import {
 } from "discord.js";
 
 import { Question } from "./rafk.js";
-import rafk from "../rafk.json" assert { type: "json" };
-import ranks from "../ranks.json" assert { type: "json" };
+import rafk from "../rafk.json" with { type: "json" };
+import ranks from "../ranks.json" with { type: "json" };
 
 const wait = (await import("node:timers/promises")).setTimeout;
 

@@ -14,9 +14,9 @@ import {
 
 import { Guild, User } from "../models.js";
 import { Aircraft, getImage, makeEmbedWithImage } from "./airrec.js";
-import mrast from "../mrast.json" assert { type: "json" };
-import rast from "../rast.json" assert { type: "json" };
-import waifus from "../waifus.json" assert { type: "json" };
+import mrast from "../mrast.json" with { type: "json" };
+import rast from "../rast.json" with { type: "json" };
+import waifus from "../waifus.json" with { type: "json" };
 
 const wait = (await import("node:timers/promises")).setTimeout;
 
@@ -55,7 +55,7 @@ function checkAnswer(message: string, aircraft: Aircraft): number {
 		message.toLowerCase().includes(aircraft.name.toLowerCase()) ||
 		message.toLowerCase().includes(aircraft.model.toLowerCase()) ||
 		aircraft.aliases.some((alias) =>
-			message.toLowerCase().includes(alias.toLowerCase()),
+			message.toLowerCase().includes(alias.toLowerCase())
 		)
 	) {
 		return 1;
@@ -68,12 +68,11 @@ async function spawnWaifu(
 	user: User,
 	rounds: number,
 	score: number,
-	name?: string,
+	name?: string
 ): Promise<WaifuData | null> {
 	let isGuaranteed = false;
 	if (user.guaranteeWaifu) {
-		isGuaranteed =
-			user.guaranteeCounter! >= 10;
+		isGuaranteed = user.guaranteeCounter! >= 10;
 	}
 
 	const doSpawn = () => {
@@ -100,7 +99,6 @@ async function spawnWaifu(
 
 		// Return true if the random number is less than the probability, otherwise return false
 		return randomNum < probability;
-
 	};
 
 	if (doSpawn()) {
@@ -146,7 +144,7 @@ async function spawnWaifu(
 
 		const waifuName = Object.keys(waifus)[
 			Math.floor(Math.random() * Object.keys(waifus).length)
-			] as keyof typeof waifus;
+		] as keyof typeof waifus;
 		const waifu: WaifuBaseData = waifus[waifuName];
 
 		if (waifu.urlFriendlyName) {
@@ -174,32 +172,32 @@ async function spawnWaifu(
 export const data = new SlashCommandBuilder()
 	.setName("airrec-quiz")
 	.setDescription(
-		"Gives you a series of aircraft images for you and others to identify with scoring.",
+		"Gives you a series of aircraft images for you and others to identify with scoring."
 	)
 	.addStringOption((option) =>
 		option
 			.setName("spec")
 			.setDescription(
-				"The spec you want to use (mRAST is RAF past/present). Defaults to mRAST.",
+				"The spec you want to use (mRAST is RAF past/present). Defaults to RAST."
 			)
 			.addChoices(
 				{ name: "mRAST", value: "mRAST" },
-				{ name: "RAST", value: "RAST" },
-			),
+				{ name: "RAST", value: "RAST" }
+			)
 	)
 	.addIntegerOption((option) =>
 		option
 			.setName("rounds")
 			.setDescription(
-				"The number of rounds you want to play. Defaults to 10 rounds.",
+				"The number of rounds you want to play. Defaults to 10 rounds."
 			)
 			.setMinValue(1)
-			.setMaxValue(30),
+			.setMaxValue(30)
 	);
 
 export async function execute(interaction: ChatInputCommandInteraction) {
 	const rounds = interaction.options.getInteger("rounds") ?? 10;
-	const spec = interaction.options.getString("spec") ?? "mRAST";
+	const spec = interaction.options.getString("spec") ?? "RAST";
 
 	const guild = await Guild.findByPk(interaction.guildId!);
 	if (!guild) {
@@ -406,7 +404,7 @@ If you want to play, click the button below.
 							aircraft.identification
 								.map(
 									(identification: string) =>
-										`- ${identification}\n`,
+										`- ${identification}\n`
 								)
 								.join("") || "None",
 					},
@@ -420,11 +418,11 @@ If you want to play, click the button below.
 						name: "See more images:",
 						value: aircraft.image,
 						inline: true,
-					},
+					}
 				);
 
 			const sortedPlayers = Object.keys(players).sort(
-				(a, b) => players[b].score - players[a].score,
+				(a, b) => players[b].score - players[a].score
 			);
 
 			const leaderboard = new EmbedBuilder()
@@ -438,7 +436,7 @@ If you want to play, click the button below.
 								player.username
 							}**: ${player.lastScore} -> **${player.score}**`;
 						})
-						.join("\n"),
+						.join("\n")
 				)
 				.setFooter({
 					text: `Round ${i + 1} of ${rounds}`,
@@ -455,7 +453,7 @@ If you want to play, click the button below.
 		const winners: string[] = [];
 
 		const sortedPlayers = Object.keys(players).sort(
-			(a, b) => players[b].score - players[a].score,
+			(a, b) => players[b].score - players[a].score
 		);
 
 		if (players[sortedPlayers[0]].score !== 0) {
@@ -490,7 +488,7 @@ If you want to play, click the button below.
 							player.username
 						}**: ${player.score}`;
 					})
-					.join("\n"),
+					.join("\n")
 			);
 
 		await thread.send({
@@ -500,8 +498,9 @@ If you want to play, click the button below.
 		});
 
 		if (winners.length > 1) {
-			for (const p1 of sortedPlayers
-				.filter((p) => !winners.includes(p))) {
+			for (const p1 of sortedPlayers.filter(
+				(p) => !winners.includes(p)
+			)) {
 				const user = await User.findByPk(p1);
 				if (user) {
 					await user.update({
@@ -537,14 +536,14 @@ If you want to play, click the button below.
 						user!,
 						rounds,
 						players[u].score,
-						user.guaranteeWaifu!,
+						user.guaranteeWaifu!
 					);
 				} else {
 					waifu = await spawnWaifu(
 						guild!,
 						user!,
 						rounds,
-						players[u].score,
+						players[u].score
 					);
 				}
 
@@ -563,7 +562,7 @@ If you want to play, click the button below.
 						.setTitle(waifu.name)
 						.setImage(`attachment://${waifu.urlFriendlyName}.jpg`)
 						.setDescription(
-							`You can view your waifu collection by using \`/waifus\`!`,
+							`You can view your waifu collection by using \`/waifus\`!`
 						)
 						.addFields(
 							{
@@ -580,7 +579,7 @@ If you want to play, click the button below.
 								name: "SPD",
 								value: spd.toString(),
 								inline: true,
-							},
+							}
 						)
 						.setFooter({
 							text: "You unlocked an waifu! Image credit: Atamonica",
@@ -610,7 +609,7 @@ If you want to play, click the button below.
 
 					await user!.update({
 						lockedWaifus: user!.lockedWaifus!.filter(
-							(w) => w !== waifu!.name,
+							(w) => w !== waifu!.name
 						),
 					});
 				}
