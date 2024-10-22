@@ -1,564 +1,472 @@
-**Total aircraft: 84**
+**Total aircraft: 115**
+
+**[RAST](#RAST): 52**
+
+**[mRAST](#mRAST): 63**
+
+**Click on a spec to fast travel.**
+**Click on an aircraft to view images.**
 
 ## RAST:
 
-### Chengdu F-7 Fishcan
-**Aliases:**
-- Fishcan
-- F7
-- F 7
+### [Fishcan](https://www.airfighters.com/photosearch.php?cra=3642)
 
+**Full name: Chengdu F-7 Fishcan**
 
-### Lockheed Martin A-4AR Fightinghawk
-**Aliases:**
-- Fightinghawk
-- A4AR
-- A 4AR
-- Fighting Hawk
+### [Fitter](https://www.airfighters.com/photosearch.php?cra=2160)
 
+**Full name: Sukhoi Su-22 Fitter**
 
-### Yakovlev Yak-130
-**Aliases:**
-- Mitten
-- Yak 130
-- Yak130
+### [Wedgetail](https://www.airfighters.com/photosearch.php?cra=7400)
 
+**Full name: Boeing 737 AEW&C Wedgetail**
 
-### Sukhoi Su-22
-**Aliases:**
-- Fitter
-- Su 22
-- Su22
+### [Kunpeng](https://www.airfighters.com/photosearch.php?cra=7279)
 
+**Full name: Xian Y-20 Kunpeng**
 
-### Xian Y-20 Kunpeng
-**Aliases:**
-- Kunpeng
-- Y 20
-- Y20
-- Kungpen
+### [H-6](https://www.airfighters.com/photosearch.php?cra=5375)
 
+**Full name: Xian H-6**
 
-### Xian HY-6 Li Pang
-**Aliases:**
-- Li Pang
-- H Y6
-- HY6
-- H-6
-- H 6
-- H6
-- Lipang
+### [Z-9](https://www.airfighters.com/photosearch.php?cra=5517)
 
+**Full name: Harbin Z-9**
 
-### Sukhoi Su-35
-**Aliases:**
-- Flanker-E
-- Su 35
-- Su35
-- Flanker
+### [Osprey](https://www.airfighters.com/photosearch.php?cra=7596)
 
+**Full name: Bell Boeing V-22 Osprey**
 
-### Harbin Z-9
-**Aliases:**
-- Haitun
-- Z9
-- Z 9
+### [Typhoon](https://www.airfighters.com/photosearch.php?cra=2167)
 
+**Full name: Eurofighter Typhoon**
 
-### Sukhoi Su-34
-**Aliases:**
-- Fullback
-- Su 34
-- Su34
+### [Globemaster III](https://www.airfighters.com/photosearch.php?cra=2685)
 
+**Full name: Boeing C-17 Globemaster III**
 
-### Sukhoi Su-27
-**Aliases:**
-- Flanker
-- Su 27
-- Su 27
+### [Texan T1](https://www.airfighters.com/photosearch.php?cra=8545)
 
+**Full name: Beechcraft T-6 Texan II**
 
-### Saab 340
-**Aliases:**
-None
+### [Shadow R1](https://www.airfighters.com/photosearch.php?cra=1670)
 
+**Full name: Beechcraft Super King Air 350**
 
-### Fokker 100
-**Aliases:**
-None
+### [Voyager](https://www.airfighters.com/photosearch.php?cra=571)
 
+**Full name: Airbus A330 MRTT Voyager**
 
-### Eurocopter EC135
-**Aliases:**
-- EC 135
-- H135
-- H 135
+### [Phenom T1](https://www.airfighters.com/photosearch.php?cra=8006)
 
+**Full name: Embraer EMB-500 Phenom 100**
 
-### Dornier 328
-**Aliases:**
-None
+### [Puma HC2](https://www.airfighters.com/photosearch.php?cra=3145)
 
+**Full name: Aérospatiale SA 330 Puma**
 
-### McDonnell Douglas DC-10
-**Aliases:**
-- DC10
-- DC 10
+### [Lightning II](https://www.airfighters.com/photosearch.php?cra=2992)
 
+**Full name: Lockheed Martin F-35 Lightning II**
 
-### Dassault Falcon 900
-**Aliases:**
-- Envoy
-- Falcon
-- Challenger
-- BD1-100
-- BD1 100
-- BD1100
-
-
-### Antonov An-124
-**Aliases:**
-- Ruslan
-- Condor
-- An124
-- An 124
-
-
-### McDonnell Douglas CF-188 Hornet
-**Aliases:**
-- Hornet
-- CF 188
-- CF188
-- CF-18
-- CF 18
-- CF18
+### [Poseidon MRA1](https://www.airfighters.com/photosearch.php?cra=5111)
 
+**Full name: Boeing P-8 Poseidon**
 
-### Transall C-160
-**Aliases:**
-- C160
-- C 160
+### [Sentry](https://www.airfighters.com/photosearch.php?cra=665)
 
+**Full name: Boeing E-3 Sentry**
 
-### Sikorsky SH-60B Seahawk
-**Aliases:**
-- Seahawk
-- SH 60B
-- SH60B
-- SH-60
-- SH 60
-- SH60
-- Sea Hawk
+### [Rivet Joint](https://www.airfighters.com/photosearch.php?cra=2179)
 
+**Full name: Boeing RC-135W Rivet Joint**
 
-### General Dynamics F-16 Fighting Falcon
-**Aliases:**
-- Fighting Falcon
-- F16
-- F 16
+### [Hercules](https://www.airfighters.com/photosearch.php?cra=2999)
 
+**Full name: Lockheed Martin C-130 Hercules**
 
-### AgustaWestland AW119Kx Koala
-**Aliases:**
-- Koala
-- AW-119Kx
-- AW 119Kx
-- AW-119
-- AW 119
-- AW119
+### [Fulcrum](https://www.airfighters.com/photosearch.php?cra=1175)
 
+**Full name: Mikoyan MiG-29 Fulcrum**
 
-### Alenia C-27J Spartan
-**Aliases:**
-- Spartan
-- C 27J
-- C27J
-- C-27
-- C 27
-- C27
+### [Firebird](https://www.airfighters.com/photosearch.php?cra=5150)
 
+**Full name: Chengdu J-10 Firebird**
 
-### Bell Boeing V-22 Osprey
-**Aliases:**
-- Osprey
-- V 22
-- V22
+### [Backfire](https://www.airfighters.com/photosearch.php?cra=3755)
 
+**Full name: Tupolev Tu-22M Backfire**
 
-### Fairchild C-26 Metroliner
-**Aliases:**
-None
+### [Hokum](https://www.airfighters.com/photosearch.php?cra=3489)
 
+**Full name: Kamov Ka-52 Hokum**
 
-### PZL M28 Skytruck
-**Aliases:**
-- Skytruck
-- M 28
-- M28
-- Bryza
+### [Mil Mi-8](https://www.airfighters.com/photosearch.php?cra=2239)
 
+**Full name: Mil**
 
-### Eurofighter Typhoon
-**Aliases:**
-None
+### [Reaper](https://www.airfighters.com/photosearch.php?cra=2873)
 
+**Full name: General Atomics MQ-9 Reaper**
 
-### Boeing C-17 Globemaster III
-**Aliases:**
-- Globemaster III
-- C 17
-- C17
-- Globemaster
+### [Dragon Lady](https://www.airfighters.com/photosearch.php?cra=3017)
 
+**Full name: Lockheed U-2 Dragon Lady**
 
-### Raytheon Texan T1
-**Aliases:**
-- Texan
-- T-6
-- T 6
-- T6
+### [Thunderbolt II](https://www.airfighters.com/photosearch.php?cra=1470)
 
+**Full name: Fairchild Republic A-10 Thunderbolt II**
 
-### Beechcraft Super King Air
-**Aliases:**
-- King Air
-- Shadow R1
+### [Atlas](https://www.airfighters.com/photosearch.php?cra=4099)
 
+**Full name: Airbus A400M Atlas**
 
-### Grob G120 TP
-**Aliases:**
-- Prefect
+### [Galaxy](https://www.airfighters.com/photosearch.php?cra=1494)
 
+**Full name: Lockheed C-5 Galaxy**
 
-### Airbus A330 MRTT
-**Aliases:**
-- A330
-- Voyager
-- KC-30
+### [Spirit](https://www.airfighters.com/photosearch.php?cra=1625)
 
+**Full name: Northrop Grumman B-2 Spirit**
 
-### AgustaWestland AW109SP GrandNew
-**Aliases:**
-- GrandNew
-- AW-109SP
-- AW 109SP
-- AW-109
-- AW 109
-- AW109
+### [Bear](https://www.airfighters.com/photosearch.php?cra=3758)
 
+**Full name: Tupolev Tu-95 Bear**
 
-### Embraer Phenom 100
-**Aliases:**
-- Phenom
+### [Stratotanker](https://www.airfighters.com/photosearch.php?cra=1535)
 
+**Full name: Boeing KC-135 Stratotanker**
 
-### Airbus Helicopters H145
-**Aliases:**
-- Jupiter
-- H-145
-- H 145
+### [Sea Stallion](https://www.airfighters.com/photosearch.php?cra=1989)
 
+**Full name: Sikorsky CH-53 Sea Stallion**
 
-### de Havilland Canada DHC-1 Chipmunk
-**Aliases:**
-- Chipmunk
-- DHC 1
-- DHC1
+### [Felon](https://www.airfighters.com/photosearch.php?cra=6057)
 
+**Full name: Sukhoi Su-57 Felon**
 
-### Airbus Helicopters Puma HC2
-**Aliases:**
-- Puma
+### [Foxhound](https://www.airfighters.com/photosearch.php?cra=2136)
 
+**Full name: Mikoyan MiG-31 Foxhound**
 
-### McDonnell Douglas F-4 Phantom II
-**Aliases:**
-- Phantom
-- Phantom II
-- F4
-- F 4
+### [Mighty Dragon](https://www.airfighters.com/photosearch.php?cra=7971)
 
+**Full name: Chengdu J-20 Mighty Dragon**
 
-### de Havilland DH.100 Vampire
-**Aliases:**
-- Vampire
-- DH100
-- DH-100
-- DH 100
+### [Tomcat](https://www.airfighters.com/photosearch.php?cra=978)
 
+**Full name: Grumman F-14 Tomcat**
 
-### de Havilland DH.110 Sea Vixen
-**Aliases:**
-- Sea Vixen
-- DH110
-- DH-110
-- DH 110
+### [Stratofortress](https://www.airfighters.com/photosearch.php?cra=1571)
 
+**Full name: Boeing B-52 Stratofortress**
 
-### Vickers Valiant
-**Aliases:**
-None
+### [Eagle](https://www.airfighters.com/photosearch.php?cra=1133)
 
+**Full name: McDonnell Douglas F-15 Eagle**
 
-### Sopwith Camel
-**Aliases:**
-None
+### [Hornet](https://www.airfighters.com/photosearch.php?cra=1126)
 
+**Full name: McDonnell Douglas F/A-18 Hornet**
 
-### English Electric Lightning
-**Aliases:**
-None
+### [ Lancer](https://www.airfighters.com/photosearch.php?cra=1986)
 
+**Full name: Rockwell B-1 Lancer**
 
-### Gloster Javelin
-**Aliases:**
-None
+### [Candid](https://www.airfighters.com/photosearch.php?cra=2215)
 
+**Full name: Ilyushin Il-76 Candid**
 
-### English Electric Canberra
-**Aliases:**
-None
+### [Envoy IV CC1](https://airfighters.com/photosearch.php?cra=8788)
 
+**Full name: Dassault 900LX**
 
-### Blackburn Buccaneer
-**Aliases:**
-None
+### [Z-10]()
 
+**Full name: Changhe Z-10**
 
-### Blackburn B-101 Beverly
-**Aliases:**
-- Beverly
-- B 101
-- B101
+### [Flying Shark](https://www.jetphotos.com/showphotos.php?aircraft=Shenyang+J-15%3B)
 
+**Full name: Shenyang J-15 Flying Shark**
 
-### Short C.1 Belfast
-**Aliases:**
-- Belfast
-- C-1
-- C 1
-- C1
+### [KJ-500](https://airfighters.com/photosearch.php?cra=8417)
+
+**Full name: Shaanxi KJ-500**
+
+### [Y-9](https://airfighters.com/photosearch.php?cra=7289)
+
+**Full name: Shaanxi Y-9**
+
+### [Hidden Dragon](https://airfighters.com/photosearch.php?cra=8609)
+
+**Full name: Shenyang J-16 Hidden Dragon**
+
+### [Flanker](https://airfighters.com/photosearch.php?cra=1350)
+
+**Full name: Sukhoi Su-30 Flanker**
+
+### [340 AEW&C](https://airfighters.com/photosearch.php?cra=5683)
+
+**Full name: Saab 340 AEW&C**
+
+### [Blackjack](https://airfighters.com/photosearch.php?cra=3778)
+
+**Full name: Tupolev Tu-160 Blackjack**
+
+### [Fencer](https://airfighters.com/photosearch.php?cra=1342)
+
+**Full name: Sukhoi Su-24 Fencer**
 
 ## mRAST:
 
-### Beechcraft Super King Air
-**Aliases:**
-- King Air
-- Shadow R1
+### [Super King Air](https://www.airfighters.com/photosearch.php?cra=1670)
 
+**Full name: Beechcraft Super King AIr**
 
-### Bell 412
-**Aliases:**
-- Griffin
+### [Griffin](https://www.airfighters.com/photosearch.php?cra=1945)
 
+**Full name: Bell 412 Griffin**
 
-### BAe 146
-**Aliases:**
-- Avro RJ
+### [BAe 146](https://www.airfighters.com/photosearch.php?cra=2945)
 
+**Full name: BAe 146**
 
-### Boeing 727
-**Aliases:**
-None
+### [727](https://www.airfighters.com/photosearch.php?cra=678)
 
+**Full name: Boeing 727**
 
-### Boeing 787 Dreamliner
-**Aliases:**
-- Dreamliner
+### [787](https://www.airfighters.com/photosearch.php?cra=7530)
 
+**Full name: Boeing 787 Dreamliner**
 
-### Britten-Norman BN-2 Islander
-**Aliases:**
-- Islander
-- BN2
-- BN 2
+### [Islander](https://www.airfighters.com/photosearch.php?cra=750)
 
+**Full name: Britten Norman BN-2 Islander**
 
-### BAe 125
-**Aliases:**
-- Dominie
-- DH.125
-- DH-125
-- DH125
-- HS.125
-- HS125
-- HS-125
+### [BAe 125](https://www.airfighters.com/photosearch.php?cra=1537)
 
+**Full name: BAe 125**
 
-### Airbus A400M Atlas
-**Aliases:**
-- Atlas
+### [Voyager](https://www.airfighters.com/photosearch.php?cra=571)
 
+**Full name: Airbus A330 MRTT**
 
-### Airbus A330 MRTT
-**Aliases:**
-- A330
-- Voyager
-- KC-30
+### [Chinook](https://www.airfighters.com/photosearch.php?cra=4371)
 
+**Full name: Boeing CH-47 Chinook**
 
-### Boeing CH-47 Chinook
-**Aliases:**
-- Chinook
+### [Globemaster III](https://www.airfighters.com/photosearch.php?cra=2685)
 
+**Full name: Boeing C-17 Globemaster III**
 
-### Boeing C-17 Globemaster III
-**Aliases:**
-- Globemaster III
-- C17
-- C 17
-- Globemaster
+### [Sentry](https://www.airfighters.com/photosearch.php?cra=665)
 
+**Full name: Boeing E-3 Sentry**
 
-### Boeing E-3 Sentry
-**Aliases:**
-- Sentry
-- E3
-- E 3
+### [Apache](https://www.airfighters.com/photosearch.php?cra=699)
 
+**Full name: Boeing AH-64 Apache**
 
-### Boeing AH-64 Apache
-**Aliases:**
-- Apache
-- AH64
-- AH 64
+### [Hawk](https://www.airfighters.com/photosearch.php?cra=1878)
 
+**Full name: BAe Hawk**
 
-### BAE Systems Hawk
-**Aliases:**
-None
+### [Tutor](https://www.airfighters.com/photosearch.php?cra=2553)
 
+**Full name: Grob G 115E Tutor**
 
-### Grob G115
-**Aliases:**
-- Tutor
+### [Hercules](https://www.airfighters.com/photosearch.php?cra=2999)
 
+**Full name: Lockheed Martin C-130 Hercules**
 
-### Lockheed C-130 Hercules
-**Aliases:**
-- Hercules
+### [Lightning II](https://www.airfighters.com/photosearch.php?cra=2992)
 
+**Full name: Lockheed Martin F-35 Lightning II**
 
-### Lockheed Martin F-35 Lightning II
-**Aliases:**
-- F35
-- F 35
-- Lightning II
-- Lightning
+### [Tornado](https://www.airfighters.com/photosearch.php?cra=1477)
 
+**Full name: Panavia Tornado**
 
-### Panavia Tornado
-**Aliases:**
-None
+### [Sentinel](https://www.airfighters.com/photosearch.php?cra=1811)
 
+**Full name: Bombardier Sentinel R1**
 
-### Raytheon Sentinel
-**Aliases:**
-None
+### [Tucano](https://www.airfighters.com/photosearch.php?cra=1628)
 
+**Full name: Embraer EMB-312 Tucano**
 
-### Short Tucano
-**Aliases:**
-None
+### [Puma](https://www.airfighters.com/photosearch.php?cra=3145)
 
+**Full name: Aerospatiale SA 330 Puma**
 
-### Aerospatiale SA330 Puma
-**Aliases:**
-- Puma
+### [Super Puma](https://www.airfighters.com/photosearch.php?cra=1778)
 
+**Full name: Aerospatiale SA 532 Super Puma**
 
-### Aerospatiale SA332 Super Puma
-**Aliases:**
-- Super Puma
+### [Gazelle](https://www.airfighters.com/photosearch.php?cra=1784)
 
+**Full name: Aerospatiale SA 340 Gazelle**
 
-### Aerospatiale SA340 Gazelle
-**Aliases:**
-- Gazelle
+### [Lancaster](https://www.airfighters.com/photosearch.php?cra=610)
 
+**Full name: Avro Lancaster**
 
-### Avro Lancaster
-**Aliases:**
-None
+### [Hurricane](https://www.airfighters.com/photosearch.php?cra=2010)
 
+**Full name: Hawker Hurricane**
 
-### Hawker Hurricane
-**Aliases:**
-None
+### [Spitfire](https://www.airfighters.com/photosearch.php?cra=1461)
 
+**Full name: Supermarine Spitfire**
 
-### Supermarine Spitfire
-**Aliases:**
-None
+### [Merlin](https://www.airfighters.com/photosearch.php?cra=7571)
 
+**Full name: Agusta Westland AW101 Merlin**
 
-### General Dynamics F-16 Fighting Falcon
-**Aliases:**
-- Fighting Falcon
-- F16
-- F 16
+### [Dakota](https://www.airfighters.com/photosearch.php?cra=856)
 
+**Full name: Douglas C-47 Dakota**
 
-### Sukhoi Su-57
-**Aliases:**
-- Felon
-- Su57
-- Su 57
+### [A380](https://www.jetphotos.com/showphotos.php?aircraft=Airbus+A380%3B)
 
+**Full name: Airbus A380**
 
-### Avro Vulcan
-**Aliases:**
-None
+### [747-404 LCF](<https://www.jetphotos.com/aircraft/Boeing%20747-4J6(LCF)>)
 
+**Full name: Boeing 747-404 LCF Dreamlifter**
 
-### Lockheed U-2
-**Aliases:**
-- Dragon Lady
-- U2
-- U 2
+### [Harrier II](https://www.airfighters.com/photosearch.php?cra=734)
 
+**Full name: BAe Harrier II**
 
-### Lockheed C-5 Galaxy
-**Aliases:**
-- Galaxy
-- C5
-- C 5
+### [A300](https://www.airfighters.com/photosearch.php?cra=4856)
 
+**Full name: Airbus A300**
 
-### Lockheed SR-71 Blackbird
-**Aliases:**
-- Blackbird
-- SR71
-- SR 71
+### [A310](https://www.airfighters.com/photosearch.php?cra=565)
 
+**Full name: Airbus A310**
 
-### AgustaWestland AW101 Merlin
-**Aliases:**
-- Merlin
-- AW101
-- AW101
+### [A318](https://www.jetphotos.com/showphotos.php?aircraft=Airbus+A318%3B)
 
+**Full name: Airbus A318**
 
-### Douglas DC-3
-**Aliases:**
-- DC 3
-- DC3
-- Skytrain
-- C-47
-- C 47
-- C47
+### [A319](https://www.airfighters.com/photosearch.php?cra=568)
 
+**Full name: Airbus A319**
 
-### Airbus A380
-**Aliases:**
-None
+### [A320](https://www.airfighters.com/photosearch.php?cra=6454)
 
+**Full name: Airbus A320**
 
-### Boeing 747-400 LCF Dreamlifter
-**Aliases:**
-- Dreamlifter
-- 747 400 LCF
-- 747-400
-- 747 400
+### [A321](https://www.airfighters.com/photosearch.php?cra=7091)
 
+**Full name: Airbus A321**
+
+### [A330](https://www.airfighters.com/photosearch.php?cra=571)
+
+**Full name: Airbus A330**
+
+### [A340](https://www.airfighters.com/photosearch.php?cra=573)
+
+**Full name: Airbus A340**
+
+### [A350](https://www.airfighters.com/photosearch.php?cra=8423)
+
+**Full name: Airbus A350**
+
+### [737](https://www.airfighters.com/photosearch.php?cra=681)
+
+**Full name: Boeing 737**
+
+### [747](https://www.airfighters.com/photosearch.php?cra=689)
+
+**Full name: Boeing 747**
+
+### [757](https://www.airfighters.com/photosearch.php?cra=694)
+
+**Full name: Boeing 757**
+
+### [767](https://www.airfighters.com/photosearch.php?cra=697)
+
+**Full name: Boeing 767**
+
+### [777](https://www.airfighters.com/photosearch.php?cra=8223)
+
+**Full name: Boeing 777**
+
+### [Rivet Joint](https://www.airfighters.com/photosearch.php?cra=2179)
+
+**Full name: Boeing RC-135W Rivet Joint**
+
+### [Wedgetail](https://www.airfighters.com/photosearch.php?cra=7400)
+
+**Full name: Boeing 737 AEW&C Wedgetail**
+
+### [Poseidon](https://www.airfighters.com/photosearch.php?cra=5111)
+
+**Full name: Boeing P-8 Poseidon**
+
+### [KC-10](https://www.airfighters.com/photosearch.php?cra=1150)
+
+**Full name: McDonnell Douglas KC-10 Extender**
+
+### [MD-11](https://www.jetphotos.com/showphotos.php?aircraft=McDonnell+Douglas+MD-11%3B)
+
+**Full name: McDonnell Douglas MD-11**
+
+### [Global Express](https://airfighters.com/photosearch.php?cra=4719)
+
+**Full name: Bombardier Global Express**
+
+### [Falcon 20](https://airfighters.com/photosearch.php?cra=806)
+
+**Full name: Dassault Falcon 20**
+
+### [ERJ 135](https://www.airfighters.com/photosearch.php?cra=3988)
+
+**Full name: Embraer ERJ 135**
+
+### [ERJ 145](https://www.airfighters.com/photosearch.php?cra=5856)
+
+**Full name: Embraer ERJ 145**
+
+### [EMB 500](https://www.airfighters.com/photosearch.php?cra=8005)
+
+**Full name: Embraer EMB 500 Phenom 100**
+
+### [Typhoon](https://www.airfighters.com/photosearch.php?cra=2167)
+
+**Full name: Eurofighter Typhoon**
+
+### [Prefect T1](https://www.airfighters.com/photosearch.php?cra=8187)
+
+**Full name: Grob G 120TP Prefect T1**
+
+### [Vigilant T1](https://www.airfighters.com/photosearch.php?cra=2555)
+
+**Full name: Grob G 109 Vigilant T1**
+
+### [C150](https://www.jetphotos.com/showphotos.php?aircraft=Cessna+150%3B)
+
+**Full name: Cessna C150**
+
+### [AW-109](https://www.airfighters.com/photosearch.php?cra=7975)
+
+**Full name: Agusta Westland AW-109**
+
+### [AW-149](https://www.airfighters.com/photosearch.php?cra=7568)
+
+**Full name: Agusta Westland AW-149**
+
+### [Iroquois](https://www.airfighters.com/photosearch.php?cra=1949)
+
+**Full name: Bell UH-1 Iroquois**
+
+### [Dauphin](https://www.airfighters.com/photosearch.php?cra=3219)
+
+**Full name: Eurocopter AS-365 Dauphin**
+
+### [Ecureuil](https://www.airfighters.com/photosearch.php?cra=2352)
+
+**Full name: Eurocopter AS-350 Ecureuil**

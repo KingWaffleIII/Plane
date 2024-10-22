@@ -2,7 +2,7 @@ import { ChatInputCommandInteraction, SlashCommandBuilder } from "discord.js";
 
 import { User } from "../models.js";
 import { WaifuBaseData } from "./airrecQuiz.js";
-import waifus from "../waifus.json" assert { type: "json" };
+import waifus from "../waifus.json" with { type: "json" };
 
 const wait = (await import("node:timers/promises")).setTimeout;
 

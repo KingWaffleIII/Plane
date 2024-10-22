@@ -5,16 +5,19 @@ import {
 } from "discord.js";
 
 import { Aircraft, getImage } from "./airrec.js";
-import mrast from "../mrast.json" assert { type: "json" };
-import rast from "../rast.json" assert { type: "json" };
+import mrast from "../mrast.json" with { type: "json" };
+import rast from "../rast.json" with { type: "json" };
 
 function checkMatch(matchAgainst: string, aircraft: Aircraft): Aircraft | null {
-	if (aircraft.name.toLowerCase().includes(matchAgainst)) {
+	if (matchAgainst.toLowerCase().includes(aircraft.name.toLowerCase())) {
+		return aircraft;
+	}
+	if (matchAgainst.toLowerCase().includes(aircraft.model.toLowerCase())) {
 		return aircraft;
 	}
 	if (
 		aircraft.aliases.some((alias) =>
-			alias.toLowerCase().includes(matchAgainst)
+			matchAgainst.toLowerCase().includes(alias.toLowerCase())
 		)
 	) {
 		return aircraft;
@@ -72,8 +75,12 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 			.setTitle(matchedAircraft!.name)
 			.setDescription(matchedAircraft!.role)
 			.setImage(image)
-			.setTimestamp()
+
 			.addFields(
+				{
+					name: "Full name:",
+					value: matchedAircraft!.full,
+				},
 				{
 					name: "Alternative names (aliases for /airrec-quiz):",
 					value: matchedAircraft!.aliases.join(", ") || "None",

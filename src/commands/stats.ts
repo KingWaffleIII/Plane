@@ -5,7 +5,7 @@ import {
 } from "discord.js";
 
 import { Guild, User } from "../models.js";
-import waifus from "../waifus.json" assert { type: "json" };
+import waifus from "../waifus.json" with { type: "json" };
 
 export const data = new SlashCommandBuilder()
 	.setName("stats")
@@ -72,7 +72,6 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 			name: targetUser.username,
 			iconURL: targetUser.avatarURL() as string,
 		})
-		.setThumbnail(targetUser.avatarURL() as string)
 		.addFields(
 			{
 				name: `Airrec Quizzes (${quizTotal})`,
@@ -84,9 +83,8 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 			}
 		)
 		.setFooter({
-			text: "You can view specific waifu stats with /waifus. If you are the only player (and by thus, the winner) in an airrec quiz, it doesn't count towards any stats.",
-		})
-		.setTimestamp();
+			text: "You can view specific waifu stats with /waifus. If you are the only player (and thus, the winner) in an airrec quiz, it doesn't count towards any stats.",
+		});
 
 	await interaction.editReply({ embeds: [embed] });
 }

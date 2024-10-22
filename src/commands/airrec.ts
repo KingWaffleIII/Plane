@@ -13,18 +13,17 @@ import {
 	SlashCommandBuilder,
 } from "discord.js";
 
-import { User } from "../models.js";
-import mrast from "../mrast.json" assert { type: "json" };
-import rast from "../rast.json" assert { type: "json" };
+import mrast from "../mrast.json" with { type: "json" };
+import rast from "../rast.json" with { type: "json" };
 
 export interface Aircraft {
-	readonly name: string;
-	readonly role: string;
-	readonly manufacturer: string;
-	readonly model: string;
 	readonly aliases: string[];
 	readonly identification: string[];
 	readonly image: string;
+	readonly full: string;
+	readonly model: string; // only used for score checking
+	readonly name: string;
+	readonly role: string;
 	readonly wiki: string;
 }
 
@@ -62,14 +61,13 @@ export async function getImage(url: string): Promise<string | null> {
 	}
 }
 
-export function makeEmbedWithImage(img: string): EmbedBuilder {
+export function makeEmbedWithImage(img: string, spec: string): EmbedBuilder {
 	return new EmbedBuilder()
 		.setColor(0x0099ff)
 		.setTitle("What is the name of this aircraft?")
 		.setImage(img)
-		.setTimestamp()
 		.setFooter({
-			text: "Photo credit: see bottom of image.",
+			text: `Spec: ${spec} | Photo credit: see bottom of image.`,
 		});
 }
 
@@ -115,7 +113,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 			.setStyle(ButtonStyle.Primary)
 	);
 
-	const embed = makeEmbedWithImage(image);
+	const embed = makeEmbedWithImage(image, spec);
 	await interaction.editReply({
 		embeds: [embed],
 		components: [row],
@@ -126,11 +124,10 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 		.setTitle(aircraft.name)
 		.setDescription(aircraft.role)
 		.setImage(image)
-		.setTimestamp()
 		.addFields(
 			{
-				name: "Alternative names (aliases for /airrec-quiz):",
-				value: aircraft.aliases.join(", ") || "None",
+				name: "Full name:",
+				value: aircraft.full,
 			},
 			{
 				name: "Aircraft features to help you identify it:",
@@ -141,7 +138,6 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 						)
 						.join("") || "None",
 			},
-			// { name: "\u200B", value: "\u200B" },
 			{
 				name: "Wikipedia:",
 				value: aircraft.wiki,
@@ -154,7 +150,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 			}
 		)
 		.setFooter({
-			text: "Photo credit: see bottom of image.",
+			text: `Spec: ${spec} | Photo credit: see bottom of image.`,
 		});
 
 	const filter = (i: ButtonInteraction) =>
@@ -167,7 +163,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 
 	const doReveal = async () => {
 		await interaction.editReply({
-			content: `**The answer was ${aircraft.name}!**`,
+			content: `**The answer was the ${aircraft.name}!**`,
 			embeds: [answer],
 			components: [],
 		});

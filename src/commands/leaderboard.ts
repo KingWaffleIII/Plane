@@ -5,7 +5,7 @@ import {
 } from "discord.js";
 
 import { User } from "../models.js";
-import waifus from "../waifus.json" assert { type: "json" };
+import waifus from "../waifus.json" with { type: "json" };
 
 export const data = new SlashCommandBuilder()
 	.setName("leaderboard")
@@ -111,8 +111,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 		)
 		.setFooter({
 			text: `Airrec Quiz Wins | Dogfight Kills | Airrec Quiz Winstreak | Dogfight Winstreak | Unlocked Waifus`,
-		})
-		.setTimestamp();
+		});
 
 	await interaction.reply({ embeds: [embed] });
 }

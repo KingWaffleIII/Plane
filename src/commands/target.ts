@@ -1,7 +1,7 @@
 import { ChatInputCommandInteraction, SlashCommandBuilder } from "discord.js";
 
 import { User } from "../models.js";
-import waifus from "../waifus.json" assert { type: "json" };
+import waifus from "../waifus.json" with { type: "json" };
 
 export const data = new SlashCommandBuilder()
 	.setName("target")
@@ -16,7 +16,9 @@ export const data = new SlashCommandBuilder()
 export async function execute(interaction: ChatInputCommandInteraction) {
 	const name = interaction.options.getString("name")!;
 
-	await interaction.deferReply();
+	await interaction.deferReply({
+		ephemeral: true,
+	});
 
 	const user = await User.findByPk(interaction.user.id);
 	if (!user) {
