@@ -44,9 +44,10 @@ interface WaifuData extends WaifuBaseData {
 }
 
 // stop crashing if thread is deleted pre-emptively
-process.on("unhandledRejection", (_error: Error) => {
+process.on("unhandledRejection", (error: Error) => {
 	// assume it's because the thread was deleted
-	console.error("Thread was deleted before it could finish.");
+	console.error(error);
+	// console.error("Thread was deleted before it could finish.");
 });
 
 function checkAnswer(message: string, aircraft: Aircraft): number {
@@ -340,15 +341,16 @@ If you want to play, click the button below.
 
 		for (let i = 0; i < rounds; i++) {
 			const list = spec === "RAST" ? rast : mrast;
-			const aircraft: Aircraft =
-				list[Math.floor(Math.random() * list.length)];
-			const image = await getImage(aircraft.image);
-			if (!image) {
-				await thread.send({
-					content:
-						"Sorry, I encountered an issue in retrieving an image. Please try again later.",
-				});
-				return;
+			// eslint-disable-next-line no-constant-condition
+			let aircraft: Aircraft;
+			let image: string | null = null;
+			// eslint-disable-next-line no-constant-condition
+			while (true) {
+				aircraft = list[Math.floor(Math.random() * list.length)];
+				image = await getImage(aircraft);
+				if (image) {
+					break;
+				}
 			}
 
 			const embed = makeEmbedWithImage(image, spec);
@@ -356,6 +358,7 @@ If you want to play, click the button below.
 				content: `**Round ${i + 1} of ${rounds}:**`,
 				embeds: [embed],
 				components: [],
+				files: image.startsWith("http") ? [] : [image],
 			});
 
 			const answered: string[] = [];
@@ -389,7 +392,6 @@ If you want to play, click the button below.
 				.setColor(0x0099ff)
 				.setTitle(aircraft.name)
 				.setDescription(aircraft.role)
-				.setImage(image)
 				.setFooter({
 					text: `Spec: ${spec} | Photo credit: see bottom of image.`,
 				})
@@ -421,6 +423,12 @@ If you want to play, click the button below.
 					}
 				);
 
+			if (image.startsWith("http")) {
+				answer.setImage(image);
+			} else {
+				answer.setImage(`attachment://${image.split("/")[2]}`);
+			}
+
 			const sortedPlayers = Object.keys(players).sort(
 				(a, b) => players[b].score - players[a].score
 			);
@@ -445,6 +453,7 @@ If you want to play, click the button below.
 			await question.reply({
 				content: `**The answer was the ${aircraft.name}!**\nContinuing in 10 seconds...`,
 				embeds: [answer, leaderboard],
+				files: image.startsWith("http") ? [] : [image],
 			});
 
 			await wait(10000);

@@ -68,14 +68,21 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 			content: "No aircraft matched your search.",
 		});
 	} else {
-		const image = await getImage(matchedAircraft!.image);
+		const image = await getImage(matchedAircraft!);
+
+		if (!image) {
+			await interaction.editReply({
+				content:
+					"Sorry, I encountered an issue in retrieving an image. Please try again later.",
+			});
+			return;
+		}
 
 		const embed = new EmbedBuilder()
 			.setColor(0x0099ff)
 			.setTitle(matchedAircraft!.name)
 			.setDescription(matchedAircraft!.role)
-			.setImage(image)
-
+			.setImage(`attachment://${image.split("/")[2]}`)
 			.addFields(
 				{
 					name: "Full name:",
@@ -111,8 +118,15 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 				text: "Photo credit: https://www.airfighters.com",
 			});
 
+		// if (image.startsWith("http")) {
+		// 	embed.setImage(image);
+		// } else {
+		// 	embed.setImage(`attachment://${image}`);
+		// }
+
 		await interaction.editReply({
 			embeds: [embed],
+			files: image.startsWith("http") ? [] : [image],
 		});
 	}
 }
