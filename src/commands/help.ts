@@ -29,7 +29,7 @@ https://github.com/KingWaffleIII/plane/issues
 If you have any issues with the images given for \`/airrec\` and \`/airrec-quiz\`, please understand that these are randomly picked from a website. There is no way to control the quality of the images so if you find a bad image, just try again.
 \n
 __**Changelog**__
-https://github.com/KingWaffleIII/Plane/pulls?q=is%3Apr+is%3Aclosed
+https://github.com/KingWaffleIII/Plane/pulls?q=is%253Apr+author%253AKingWaffleIII
 See the latest pull request with the current version in its name to see the changelog.
 \n
 __**Contributing**__

@@ -1,6 +1,6 @@
 # Plane
 
-An extremely modular Discord bot designed to help RAF students with their RAFK (RAF Knowledge) and aircraft recognition,
+A Discord bot designed to help RAF students with their RAFK (RAF Knowledge) and aircraft recognition,
 especially for (m)RAST.
 
 ## Usage & Invite
@@ -110,16 +110,16 @@ than 25 waifus, they will only be able to trade the 25 waifus with the highest A
 Dogfighting is a duel between users. Once a dogfight request is accepted, users can select an aircraft waifu and begin
 the dogfight. The dogfight works like this:
 
-- the waifu with the faster SPD stat goes first
-- they can either attack, evade or equip a weapon
-- equipping a weapon is done by selecting a weapon waifu, which then adds its ATK stat to the aircraft waifu's ATK stat
-- if an aircraft attempts to evade, depending on the aircraft's SPD (calculation TBD), the evade can fail or succeed. If
-  it succeeds, the aircraft cannot be damaged that round (except HARM). If it fails, the aircraft will be stunned that
-  round. This encourages META as some weapons are only useful against aircraft with high SPD
-- when attacking, the waifu deals damage equal to her ATK stat (this is the combined stat of both the aircraft and
-  weapon waifu) with a 10% chance of dealing double damage (crit)
-- the opposing waifu then has their go
-- the waifu first to reach 0 HP loses
+-   the waifu with the faster SPD stat goes first
+-   they can either attack, evade or equip a weapon
+-   equipping a weapon is done by selecting a weapon waifu, which then adds its ATK stat to the aircraft waifu's ATK stat
+-   if an aircraft attempts to evade, depending on the aircraft's SPD (calculation TBD), the evade can fail or succeed. If
+    it succeeds, the aircraft cannot be damaged that round (except HARM). If it fails, the aircraft will be stunned that
+    round. This encourages META as some weapons are only useful against aircraft with high SPD
+-   when attacking, the waifu deals damage equal to her ATK stat (this is the combined stat of both the aircraft and
+    weapon waifu) with a 10% chance of dealing double damage (crit)
+-   the opposing waifu then has their go
+-   the waifu first to reach 0 HP loses
 
 Weapon waifus also have unique abilities to help win the dogfight.
 
@@ -130,29 +130,18 @@ than 25 waifus, they will only be able to fight with the 25 waifus (copies) with
 
 There are three builds that are currently considered the best:
 
-- Using a high SPD aircraft, equipped with a high ATK Hellfire - this allows you to consistently evade, whilst still
-  dealing passive DMG. If you have high ATK on your high SPD aircraft too, you will struggle to lose.
-- Using a high ATK aircraft with a high ATK Paveway II can deal up to 60 DMG in one turn with perfect ATK rolls.
-  However, with average rolls, it could potentially lead to a two-turn or three-turn KO.
-- Using a high ATK American aircraft, equipped with a high ATK Sparrow. This allows for a very high total ATK (a maximum
-  of 25).
+-   Using a high SPD aircraft, equipped with a high ATK Hellfire - this allows you to consistently evade, whilst still
+    dealing passive DMG. If you have high ATK on your high SPD aircraft too, you will struggle to lose.
+-   Using a high ATK aircraft with a high ATK Paveway II can deal up to 60 DMG in one turn with perfect ATK rolls.
+    However, with average rolls, it could potentially lead to a two-turn or three-turn KO.
+-   Using a high ATK American aircraft, equipped with a high ATK Sparrow. This allows for a very high total ATK (a maximum
+    of 25).
 
 ## Changelog
 
-See pull requests [here](https://github.com/KingWaffleIII/plane/pulls?q=is%3Apr+is%3Aclosed).
+See pull requests [here](https://github.com/KingWaffleIII/Plane/pulls?q=is%253Apr+author%253AKingWaffleIII).
 
 ## [Credits](https://github.com/KingWaffleIII/plane/blob/main/credits.md)
-
-## Versioning
-
-- vX.Y.Z
-    - X: Major version (rarely used)
-    - Y: Minor version (new features [and maybe bug fixes])
-    - Z: Patch version (bug fixes)
-
-## Roadmap
-
-https://github.com/KingWaffleIII/plane/issues
 
 ## Licence
 
