@@ -120,7 +120,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 		if (image.startsWith("http")) {
 			embed.setImage(image);
 		} else {
-			embed.setImage(`attachment://${image}`);
+			embed.setImage(`attachment://${image.split("/")[2]}`);
 		}
 
 		await interaction.editReply({
