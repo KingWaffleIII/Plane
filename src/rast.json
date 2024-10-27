@@ -360,7 +360,7 @@
 		"image": "https://www.airfighters.com/photosearch.php?cra=2239",
 		"model": "Mi-8",
 		"mrast": false,
-		"name": "Mil Mi-8",
+		"name": "Mi-8",
 		"role": "Transport helicopter.",
 		"wiki": "https://en.wikipedia.org/wiki/Mil_Mi-8"
 	},
@@ -589,7 +589,7 @@
 		"identification": [],
 		"image": "https://www.airfighters.com/photosearch.php?cra=1986",
 		"model": "B-1",
-		"name": " Lancer",
+		"name": "Lancer",
 		"role": "Supersonic strategic bomber aircraft.",
 		"waifuImage": "Lancer",
 		"wiki": "https://en.wikipedia.org/wiki/Rockwell_B-1_Lancer"
@@ -639,7 +639,7 @@
 		"image": "https://airfighters.com/photosearch.php?cra=8417",
 		"model": "KJ-500",
 		"name": "KJ-500",
-		"role": "",
+		"role": "Airborne early warning and control (AEW&C)",
 		"wiki": "https://en.wikipedia.org/wiki/Shaanxi_KJ-500"
 	},
 	{
