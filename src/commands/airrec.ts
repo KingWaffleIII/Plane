@@ -30,8 +30,10 @@ export interface Aircraft {
 
 export async function getImage(aircraft: Aircraft): Promise<string | null> {
 	try {
-		if (!fs.existsSync(`cached_images/${aircraft.name}`))
-			fs.mkdirSync(`cached_images/${aircraft.name}`, { recursive: true });
+		if (!fs.existsSync(`cached_images/${aircraft.name.replace(/ /g, "_")}`))
+			fs.mkdirSync(`cached_images/${aircraft.name.replace(/ /g, "_")}`, {
+				recursive: true,
+			});
 
 		let url = aircraft.image;
 		const response = await axios.get(url);
@@ -66,7 +68,7 @@ export async function getImage(aircraft: Aircraft): Promise<string | null> {
 		});
 		res.data.pipe(
 			fs.createWriteStream(
-				`cached_images/${aircraft.name}/${image.split("/").pop()}`
+				`cached_images/${aircraft.name.replace(/ /g, "_")}/${image.split("/").pop()}`
 			)
 		);
 
@@ -75,9 +77,11 @@ export async function getImage(aircraft: Aircraft): Promise<string | null> {
 		console.error(error);
 		// check cache
 		try {
-			const files = fs.readdirSync(`cached_images/${aircraft.name}`);
+			const files = fs.readdirSync(
+				`cached_images/${aircraft.name.replace(/ /g, "_")}`
+			);
 			if (files.length > 0) {
-				return `cached_images/${aircraft.name}/${files[Math.floor(Math.random() * files.length)]}`;
+				return `cached_images/${aircraft.name.replace(/ /g, "_")}/${files[Math.floor(Math.random() * files.length)]}`;
 			}
 			return null;
 		} catch (_error) {
