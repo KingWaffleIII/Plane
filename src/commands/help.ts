@@ -1,15 +1,19 @@
-import { ChatInputCommandInteraction, EmbedBuilder, SlashCommandBuilder } from "discord.js";
+import {
+	ChatInputCommandInteraction,
+	EmbedBuilder,
+	SlashCommandBuilder,
+} from "discord.js";
 
 export const data = new SlashCommandBuilder()
 	.setName("help")
 	.setDescription(
-		"Information about Plane and how to contact the developer.",
+		"Information about Plane and how to contact the developer."
 	);
 
 export async function execute(interaction: ChatInputCommandInteraction) {
 	const embed = new EmbedBuilder()
 		.setColor(0x0099ff)
-		.setTitle("Plane v1.7.0-DEV 'The Ranking'")
+		.setTitle("Plane v1.7.1-DEV 'The Ranking'")
 		.setURL("https://github.com/KingWaffleIII/plane")
 		.setAuthor({
 			name: "KingWaffleIII @ Planet Waffle",
@@ -25,7 +29,7 @@ https://github.com/KingWaffleIII/plane/issues
 If you have any issues with the images given for \`/airrec\` and \`/airrec-quiz\`, please understand that these are randomly picked from a website. There is no way to control the quality of the images so if you find a bad image, just try again.
 \n
 __**Changelog**__
-https://github.com/KingWaffleIII/Plane/pulls?q=is%3Apr+is%3Aclosed
+https://github.com/KingWaffleIII/Plane/pulls?q=is%253Apr+author%253AKingWaffleIII
 See the latest pull request with the current version in its name to see the changelog.
 \n
 __**Contributing**__
@@ -36,7 +40,7 @@ If you have any questions, suggestions or find an error, you can submit an issue
 \n
 __**Credits**__
 https://github.com/KingWaffleIII/plane/blob/main/credits.md
-			`,
+			`
 		)
 		.setThumbnail("https://i.imgur.com/YnUnoQL.png")
 		.setFooter({

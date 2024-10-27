@@ -12,6 +12,7 @@ import {
 	EmbedBuilder,
 	SlashCommandBuilder,
 } from "discord.js";
+import fs from "fs";
 
 import mrast from "../mrast.json" with { type: "json" };
 import rast from "../rast.json" with { type: "json" };
@@ -27,48 +28,81 @@ export interface Aircraft {
 	readonly wiki: string;
 }
 
-export async function getImage(url: string): Promise<string | null> {
+export async function getImage(aircraft: Aircraft): Promise<string | null> {
 	try {
+		if (!fs.existsSync(`cached_images/${aircraft.name.replace(/ /g, "_")}`))
+			fs.mkdirSync(`cached_images/${aircraft.name.replace(/ /g, "_")}`, {
+				recursive: true,
+			});
+
+		let url = aircraft.image;
 		const response = await axios.get(url);
 		const $ = cheerio.load(response.data);
 		const images: string[] = [];
+		let image: string;
 
 		if (url.match(/airfighters.com/)) {
 			// get every a element with class pgthumb
 			$("a.pgthumb").each((_i, element) => {
 				// get the src attribute of the child img element
-				const image = $(element).children("img").attr("src");
-				if (image) images.push(image);
+				const i = $(element).children("img").attr("src");
+				if (i) images.push(i);
 			});
 
-			const image = images[Math.floor(Math.random() * images.length)];
-			return `https://www.airfighters.com/${image.replace(
-				"400",
-				"9999"
-			)}`;
-		}
-		// jetphotos.com
-		$("img.result__photo").each((_i, element) => {
-			const image = $(element).attr("src");
-			if (image) images.push(image);
-		});
+			image = images[Math.floor(Math.random() * images.length)];
+			url = `https://www.airfighters.com/${image.replace("400", "9999")}`;
+		} else {
+			// jetphotos.com
+			$("img.result__photo").each((_i, element) => {
+				const i = $(element).attr("src");
+				if (i) images.push(i);
+			});
 
-		const image = images[Math.floor(Math.random() * images.length)];
-		return `http://${image.replace("//", "").replace("400", "full")}`;
+			image = images[Math.floor(Math.random() * images.length)];
+			url = `http://${image.replace("//", "").replace("400", "full")}`;
+		}
+
+		// download the image (not awaited)
+		const res = await axios.get(url, {
+			responseType: "stream",
+		});
+		res.data.pipe(
+			fs.createWriteStream(
+				`cached_images/${aircraft.name.replace(/ /g, "_")}/${image.split("/").pop()}`
+			)
+		);
+
+		return url;
 	} catch (error) {
 		console.error(error);
-		return null;
+		// check cache
+		try {
+			const files = fs.readdirSync(
+				`cached_images/${aircraft.name.replace(/ /g, "_")}`
+			);
+			if (files.length > 0) {
+				return `cached_images/${aircraft.name.replace(/ /g, "_")}/${files[Math.floor(Math.random() * files.length)]}`;
+			}
+			return null;
+		} catch (_error) {
+			return null;
+		}
 	}
 }
 
 export function makeEmbedWithImage(img: string, spec: string): EmbedBuilder {
-	return new EmbedBuilder()
+	const embed = new EmbedBuilder()
 		.setColor(0x0099ff)
 		.setTitle("What is the name of this aircraft?")
-		.setImage(img)
 		.setFooter({
 			text: `Spec: ${spec} | Photo credit: see bottom of image.`,
 		});
+	if (img.startsWith("http")) {
+		embed.setImage(img);
+	} else {
+		embed.setImage(`attachment://${img}`);
+	}
+	return embed;
 }
 
 export const data = new SlashCommandBuilder()
@@ -95,7 +129,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 
 	const aircraft = list[Math.floor(Math.random() * list.length)];
 
-	const image = await getImage(aircraft.image);
+	const image = await getImage(aircraft);
 
 	if (!image) {
 		await interaction.editReply({
@@ -117,13 +151,13 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 	await interaction.editReply({
 		embeds: [embed],
 		components: [row],
+		files: image.startsWith("http") ? [] : [image],
 	});
 
 	const answer = new EmbedBuilder()
 		.setColor(0x0099ff)
 		.setTitle(aircraft.name)
 		.setDescription(aircraft.role)
-		.setImage(image)
 		.addFields(
 			{
 				name: "Full name:",
@@ -153,6 +187,12 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 			text: `Spec: ${spec} | Photo credit: see bottom of image.`,
 		});
 
+	if (image.startsWith("http")) {
+		answer.setImage(image);
+	} else {
+		answer.setImage(`attachment://${image.split("/")[2]}`);
+	}
+
 	const filter = (i: ButtonInteraction) =>
 		i.customId === `reveal-airrec-${buttonId}`;
 	const collector = interaction.channel?.createMessageComponentCollector({
@@ -166,6 +206,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 			content: `**The answer was the ${aircraft.name}!**`,
 			embeds: [answer],
 			components: [],
+			files: image.startsWith("http") ? [] : [image],
 		});
 	};
 
