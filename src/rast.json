@@ -633,16 +633,6 @@
 		"wiki": "https://en.wikipedia.org/wiki/Changhe_Z-10"
 	},
 	{
-		"aliases": ["Flanker-X2", "J15", "J 15"],
-		"full": "Shenyang J-15 Flying Shark",
-		"identification": [],
-		"image": "https://www.jetphotos.com/showphotos.php?aircraft=McDonnell+Douglas+MD-11%3B",
-		"model": "J-15",
-		"name": "Flying Shark",
-		"role": "Carrier-based multirole fighter.",
-		"wiki": "https://en.wikipedia.org/wiki/Shenyang_J-15"
-	},
-	{
 		"aliases": ["KJ500", "KJ 500"],
 		"full": "Shaanxi KJ-500",
 		"identification": [],

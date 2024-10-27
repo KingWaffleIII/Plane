@@ -1,6 +1,6 @@
 {
 	"name": "plane",
-	"version": "1.7.1-DEV",
+	"version": "1.7.2",
 	"description": "An extremely modular Discord bot designed to help RAF students with their RAFK (RAF Knowledge) and aircraft recognition. ",
 	"main": "bot.js",
 	"type": "module",

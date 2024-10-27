@@ -82,7 +82,6 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 			.setColor(0x0099ff)
 			.setTitle(matchedAircraft!.name)
 			.setDescription(matchedAircraft!.role)
-			.setImage(`attachment://${image.split("/")[2]}`)
 			.addFields(
 				{
 					name: "Full name:",
@@ -118,11 +117,11 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 				text: "Photo credit: https://www.airfighters.com",
 			});
 
-		// if (image.startsWith("http")) {
-		// 	embed.setImage(image);
-		// } else {
-		// 	embed.setImage(`attachment://${image}`);
-		// }
+		if (image.startsWith("http")) {
+			embed.setImage(image);
+		} else {
+			embed.setImage(`attachment://${image}`);
+		}
 
 		await interaction.editReply({
 			embeds: [embed],
