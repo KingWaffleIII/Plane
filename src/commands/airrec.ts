@@ -100,7 +100,7 @@ export function makeEmbedWithImage(img: string, spec: string): EmbedBuilder {
 	if (img.startsWith("http")) {
 		embed.setImage(img);
 	} else {
-		embed.setImage(`attachment://${img}`);
+		embed.setImage(`attachment://${img.split("/")[2]}`);
 	}
 	return embed;
 }
