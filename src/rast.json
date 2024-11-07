@@ -623,12 +623,12 @@
 		"wiki": "https://en.wikipedia.org/wiki/Dassault_Falcon_900"
 	},
 	{
-		"aliases": ["Z10", "Z 10"],
-		"full": "Changhe Z-10",
+		"aliases": ["Z11", "Z 11"],
+		"full": "CAIC Z-11",
 		"identification": [],
-		"image": "",
-		"model": "Z-10",
-		"name": "Z-10",
+		"image": "https://airfighters.com/photosearch.php?cra=4024",
+		"model": "Z-11",
+		"name": "Z-11",
 		"role": "Attack helicopter.",
 		"wiki": "https://en.wikipedia.org/wiki/Changhe_Z-10"
 	},
@@ -701,5 +701,15 @@
 		"name": "Fencer",
 		"role": "All-weather tactical bomber/interdictor.",
 		"wiki": "https://en.wikipedia.org/wiki/Sukhoi_Su-24"
+	},
+	{
+		"aliases": ["A50", "A 50"],
+		"full": "Beriev A-50 Mainstay",
+		"identification": [],
+		"image": "https://airfighters.com/photosearch.php?cra=8658",
+		"model": "A-50",
+		"name": "Mainstay",
+		"role": "Airborne early warning and control (AEW&C) aircraft.",
+		"wiki": "https://en.wikipedia.org/wiki/Beriev_A-50"
 	}
 ]
